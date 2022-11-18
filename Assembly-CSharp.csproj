@@ -54,11 +54,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
-    <Compile Include="Assets\Scripts\CharacterController\Movement\CharacterBasicMovement.cs" />
+    <Compile Include="Assets\Scripts\CharacterBasicController\Movement\CharacterBasicMovement.cs" />
     <Compile Include="Assets\EditorSetting\SharderReplacer.cs" />
+    <Compile Include="Assets\Scripts\CharacterBasicController\ViewpointOperation\CharacterBasicViewpointOperation.cs" />
+    <Compile Include="Assets\Scripts\CharacterBasicController\Jump\CharacterBasicJump.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
-    <Compile Include="Assets\Scripts\CharacterController\ViewpointOperation\CharacterBasicViewpointOperation.cs" />
-    <Compile Include="Assets\Scripts\CharacterController\Jump\CharacterBasicJump.cs" />
+    <Compile Include="Assets\Scripts\CharacterBasicController\Animation\CharacterBasicAnimationControler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
