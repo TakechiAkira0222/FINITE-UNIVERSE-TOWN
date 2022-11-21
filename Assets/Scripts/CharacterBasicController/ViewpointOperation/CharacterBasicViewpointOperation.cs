@@ -27,7 +27,7 @@ namespace Takechi.CharacterController.ViewpointOperation
         private struct limitedToCamera
         {
             public const float minX = -90f;
-            public const float maxX = 90f;
+            public const float maxX = 35f;
             public const float Xsensityvity = 3f;
             public const float Ysensityvity = 3f;
         }

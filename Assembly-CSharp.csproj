@@ -59,7 +59,8 @@
     <Compile Include="Assets\Scripts\CharacterBasicController\ViewpointOperation\CharacterBasicViewpointOperation.cs" />
     <Compile Include="Assets\Scripts\CharacterBasicController\Jump\CharacterBasicJump.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
-    <Compile Include="Assets\Scripts\CharacterBasicController\Animation\CharacterBasicAnimationControler.cs" />
+    <Compile Include="Assets\Scripts\CharacterBasicController\BasicAnimation\CharacterBasicMovementAnimationControler.cs" />
+    <Compile Include="Assets\Scripts\CharacterBasicController\BasicAnimation\CharacterBasicDamageAnimationControler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

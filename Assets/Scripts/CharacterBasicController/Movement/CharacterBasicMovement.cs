@@ -14,6 +14,9 @@ namespace Takechi.CharacterController.Movement
         [SerializeField] private float      m_movementSpeed = 5;
         #endregion
 
+        private const float m_walkingSpeed = 1;
+        private const float m_runningSpeed = 2.3f;
+
         #region GetProperty
         public Vector3 MovementVector => m_movementVector;
         public Vector3 MovementVelocity => m_movementVelocity;
@@ -34,6 +37,8 @@ namespace Takechi.CharacterController.Movement
         void Update()
         {
             MovementControll();
+
+            MovementSpeedChange();
         }
 
         void FixedUpdate()
@@ -57,6 +62,19 @@ namespace Takechi.CharacterController.Movement
                  this.transform.right * m_movementVector.x;
 
             m_movementVelocity.Normalize();
+        }
+
+        void MovementSpeedChange()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                m_movementSpeed = m_runningSpeed;
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                m_movementSpeed = m_walkingSpeed;
+            }
         }
 
         #endregion
