@@ -8,7 +8,7 @@ namespace Takechi.CharacterController.Jump
     {
         [SerializeField] private Rigidbody m_rb;
 
-        private float m_upForce = 300f;
+        private float m_upForce = 200f;
         private bool  m_isGround;
 
         void Reset()

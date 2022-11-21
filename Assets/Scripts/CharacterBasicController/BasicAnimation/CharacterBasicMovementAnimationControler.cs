@@ -14,6 +14,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         //[SerializeField] protected CharacterBasicMovement m_characterBasicMovement;
         #endregion
 
+        #region UnityEvent
         void Reset()
         {
             m_animator = this.transform.GetComponent<Animator>();
@@ -47,5 +48,6 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
                 m_animator.SetTrigger("Jumping");
             }
         }
+        #endregion
     }
 }

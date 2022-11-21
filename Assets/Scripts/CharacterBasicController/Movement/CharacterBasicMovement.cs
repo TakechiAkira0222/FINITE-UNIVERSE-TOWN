@@ -14,8 +14,10 @@ namespace Takechi.CharacterController.Movement
         [SerializeField] private float      m_movementSpeed = 5;
         #endregion
 
+        #region private
         private const float m_walkingSpeed = 1;
         private const float m_runningSpeed = 2.3f;
+        #endregion
 
         #region GetProperty
         public Vector3 MovementVector => m_movementVector;
@@ -26,7 +28,7 @@ namespace Takechi.CharacterController.Movement
         #region UnityEvent
         void Reset()
         {
-            m_rb = this.transform.GetComponent<Rigidbody>();
+           // m_rb = this.transform.GetComponent<Rigidbody>();
         }
 
         void Start()
@@ -57,9 +59,9 @@ namespace Takechi.CharacterController.Movement
             m_movementVector = 
                 new Vector3( Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-            m_movementVelocity = 
-                 this.transform.forward * m_movementVector.z + 
-                 this.transform.right * m_movementVector.x;
+            m_movementVelocity =
+                 m_rb.gameObject.transform.forward * m_movementVector.z +
+                 m_rb.gameObject.transform.right * m_movementVector.x;
 
             m_movementVelocity.Normalize();
         }

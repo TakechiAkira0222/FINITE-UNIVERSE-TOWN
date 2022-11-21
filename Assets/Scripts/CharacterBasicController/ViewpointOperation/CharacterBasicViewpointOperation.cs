@@ -28,8 +28,8 @@ namespace Takechi.CharacterController.ViewpointOperation
         {
             public const float minX = -90f;
             public const float maxX = 35f;
-            public const float Xsensityvity = 3f;
-            public const float Ysensityvity = 3f;
+            public const float Xsensityvity = 2f;
+            public const float Ysensityvity = 2f;
         }
 
         #endregion
@@ -104,6 +104,7 @@ namespace Takechi.CharacterController.ViewpointOperation
 
         #endregion
 
+        #region RecursiveFunction 
         /// <summary>
         /// ClampRotation
         /// </summary>
@@ -111,7 +112,7 @@ namespace Takechi.CharacterController.ViewpointOperation
         /// <param name="minX"></param>
         /// <param name="maxX"></param>
         /// <returns>Å@êßå¿ÇÃÇ©Ç©Ç¡ÇΩÇSéüå≥êîÇÅAÇ©Ç¶ÇµÇ‹Ç∑ÅB</returns>
-        public Quaternion ClampRotation( Quaternion q, float minX ,float maxX)
+        private Quaternion ClampRotation( Quaternion q, float minX ,float maxX)
         {
             q.x /= q.w;
             q.y /= q.w;
@@ -126,5 +127,6 @@ namespace Takechi.CharacterController.ViewpointOperation
 
             return q;
         }
+        #endregion
     }
 }
