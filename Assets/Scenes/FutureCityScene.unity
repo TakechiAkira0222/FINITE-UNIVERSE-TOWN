@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.13296545, g: 0.19145328, b: 0.33962262, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 023808db2bfa00d44929aa2176d29c76, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: bdfc475e919710248bf14d75643fefd2, type: 2}
   m_HaloStrength: 1
   m_FlareStrength: 0
   m_FlareFadeSpeed: 5
@@ -841,6 +841,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 308209257342490622, guid: 9eb2b8af9d5236842b7cb096c5236265, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 771002715565279974, guid: 9eb2b8af9d5236842b7cb096c5236265, type: 3}
       propertyPath: m_Name
       value: OfficeWorkerPrefab
