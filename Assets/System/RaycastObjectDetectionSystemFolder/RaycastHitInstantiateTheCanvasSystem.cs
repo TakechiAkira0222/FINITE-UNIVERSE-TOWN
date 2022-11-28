@@ -44,7 +44,7 @@ namespace Takechi.RaycastObjectDetectionSystem
 
         void Awake()
         {
-            if( m_tagetObjectNameList.Count != m_instantiateCanvasList.Count)
+            if ( m_tagetObjectNameList.Count != m_instantiateCanvasList.Count)
             {
                 Debug.LogError(" At this rate, the variables inside the Dictionary will collapse.");
             }
@@ -66,13 +66,16 @@ namespace Takechi.RaycastObjectDetectionSystem
                 {
                     if ( Input.GetMouseButtonDown(0))
                     {
-                        Instantiate( m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName], m_parent);
+                        if (GameObject.Find( m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName].name +"(Clone)") == null)
+                        {
+                            Instantiate( m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName], m_parent);
+                        }
 
                         SetActiveUI(false);
 
                         Cursor.lockState = CursorLockMode.None;
 
-                        this.enabled = false;
+                        // this.enabled = false;
                     }
                     else
                     {
