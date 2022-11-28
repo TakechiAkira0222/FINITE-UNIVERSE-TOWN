@@ -3,31 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AddDebugView : MonoBehaviour
+namespace Takechi.DebugView
 {
-    [SerializeField]
-    Text m_addTextprefab;
-
-    [SerializeField]
-    Transform m_perentViweContent;
-
-    [SerializeField]
-    bool m_showDebug = true;
-
-    private void Awake()
+    public class AddDebugView : MonoBehaviour
     {
-        if (!m_showDebug) 
+        [SerializeField]
+        private Text m_addTextprefab;
+
+        [SerializeField]
+        private Transform m_perentViweContent;
+
+        [SerializeField]
+        private bool m_showDebug = true;
+
+        private void Awake()
         {
-            this.gameObject.SetActive(false);
-            return;
+            if (!m_showDebug)
+            {
+                this.gameObject.SetActive(false);
+                return;
+            }
+
+            Application.logMessageReceived += LoggedCb;
         }
 
-        Application.logMessageReceived += LoggedCb;
-    }
-
-    private void LoggedCb(string logstr, string stacktrace, LogType type)
-    {
-        Text text = Instantiate(m_addTextprefab, m_perentViweContent);
-        text.text = logstr +"<color=red>.</color>";
+        private void LoggedCb(string logstr, string stacktrace, LogType type)
+        {
+            Text text = Instantiate(m_addTextprefab, m_perentViweContent);
+            text.text = logstr + "<color=red>.</color>";
+        }
     }
 }

@@ -44,8 +44,8 @@ namespace Takechi.CharacterController.ViewpointOperation
 
         void Awake()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             m_viewpointOperationControll += CameraInput;
-            m_viewpointOperationControll += UpdateCursorLock;
         }
 
         void Start()
@@ -73,28 +73,6 @@ namespace Takechi.CharacterController.ViewpointOperation
 
             m_mainCamera.transform.localRotation = m_cameraRot;
             m_character.transform.localRotation = m_characterRot;
-        }
-
-        private void UpdateCursorLock()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                cursorLock = false;
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                cursorLock = true;
-            }
-
-
-            if ( cursorLock)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else if (!cursorLock)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
         }
 
         #endregion
