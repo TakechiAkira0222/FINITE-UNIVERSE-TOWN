@@ -12,6 +12,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         #region SerializeField
         [SerializeField] protected Animator m_animator;
         [SerializeField] protected bool     m_NotAttackAnimation = false;
+        [SerializeField] protected bool     m_NotDeathblowAnimation = false;
 
         //[SerializeField] protected CharacterBasicMovement m_characterBasicMovement;
         #endregion
@@ -55,7 +56,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
                 m_animator.SetTrigger( ReferencingTheAnimationParameterName.s_AttackParameterName);
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q) && !m_NotDeathblowAnimation)
             {
                 m_animator.SetTrigger( ReferencingTheAnimationParameterName.s_DeathblowParameterName);
             }

@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Resource\InputAssetsFolder\QuickOutline\Scripts\Outline.cs" />
-    <Compile Include="Assets\System\ServerAccessSystem\Sqript\ServerConnectionInTestEnvironment.cs" />
+    <Compile Include="Assets\System\UiControllerSystem\MouseCorsorContlloerSystem\MouseCursorController.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\MovementSqript\CharacterBasicMovement.cs" />
     <Compile Include="Assets\Resource\ModelResource\Spacecraft\Sqript\WithDoorController.cs" />
@@ -65,7 +65,8 @@
     <Compile Include="Assets\EditorSetting\SharderReplacer.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\ViewpointOperationSqript\CharacterBasicViewpointOperation.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\JumpSqript\CharacterBasicJump.cs" />
-    <Compile Include="Assets\System\UiControllerSystem\DebugTextViweSystem\Sqript\AddDebugView.cs" />
+    <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\AddDebugView.cs" />
+    <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\Item.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunInformationDisclosure.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCallbacks.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
@@ -78,20 +79,23 @@
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingTheAnimationParameterName.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationSqript\CharacterBasicDamageAnimationControler.cs" />
-    <Compile Include="Assets\System\ServerAccessSystem\Sqript\ServerConnectionInLoby.cs" />
-    <Compile Include="Assets\System\UiControllerSystem\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
-    <Compile Include="Assets\System\ManagementButtonSystem\ButtonDestoryManagement.cs" />
+    <Compile Include="Assets\System\ServerAccessSystem\LobbyOnlySystemFolder\Sqript\ServerConnectionInLoby.cs" />
+    <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
+    <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\ItemManager.cs" />
+    <Compile Include="Assets\System\UiControllerSystem\ManagementButtonSystem\ButtonObjectStateChangeManagement.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayAttribute.cs" />
     <Compile Include="Assets\System\RotateSkyBoxSystem\sqript\RotateSkyBox.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitInstantiateTheCanvasSystem.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiServerAccessPunCallbacks.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerAttackAnimationEventManager.cs" />
+    <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\ItemDataBase.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationSqript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\UiControllerSystem\MouseCorsorContlloerSystem\MouseCursorController.cs" />
-    <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\Item.cs" />
-    <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\ItemDataBase.cs" />
-    <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\ItemManager.cs" />
+    <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitSetActiveTheCanvasSystem.cs" />
+    <Compile Include="Assets\TakechiAsset\DeviceInfo\DeviceInfo.cs" />
+    <Compile Include="Assets\TakechiAsset\WindowsEditorDebug\WindowsNetworkDebugController.cs" />
+    <Compile Include="Assets\System\UiControllerSystem\Display\CanvasController.cs" />
+    <Compile Include="Assets\System\UiControllerSystem\ScriptEnabledOrDisabledContlloerSystem\ScriptEnabledOrDisabledContlloer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

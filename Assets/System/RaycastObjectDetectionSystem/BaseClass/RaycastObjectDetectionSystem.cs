@@ -33,8 +33,14 @@ namespace Takechi.RaycastObjectDetectionSystem
         #region protected
         protected GameObject LookingObject => m_lookingObject;
         protected bool IsLooking => m_isLooking;
+
         protected Action<GameObject> m_raycastHitAction = delegate { };
         protected Action<GameObject> m_raycastNotHitAction = delegate { };
+        /// <summary>
+        /// Hitしているobjectが前回フレームと違った時呼び出されます。
+        /// </summary>
+        /// <remarks> 当たったオブジェクトの代入前に呼び出され、前回フレームまで当たってたオブジェクトを引数に持ちます。 </remarks>>
+        protected Action<GameObject> m_raycastHitObjectChangeAction = delegate { };
         #endregion
 
         #region private
@@ -58,6 +64,9 @@ namespace Takechi.RaycastObjectDetectionSystem
                     Debug.DrawRay( ray.origin, ray.direction * rayProperty.m_distance, Color.green);
 
                     m_raycastHitAction( raycastHit.collider.gameObject);
+
+                    if ( m_lookingObject != raycastHit.collider.gameObject && m_lookingObject!= null) 
+                           m_raycastHitObjectChangeAction( m_lookingObject);
 
                     m_lookingObject = raycastHit.collider.gameObject;
 
