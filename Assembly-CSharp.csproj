@@ -57,12 +57,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Resource\InputAssetsFolder\QuickOutline\Scripts\Outline.cs" />
-    <Compile Include="Assets\System\UiControllerSystem\MouseCorsorContlloerSystem\MouseCursorController.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\MouseCorsorContlloerSystem\MouseCursorController.cs" />
+    <Compile Include="Assets\System\ServerAccessSystem\NetworkInstantiationAtStartup\script\NetworkInstantiationAtStartup.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\MovementSqript\CharacterBasicMovement.cs" />
     <Compile Include="Assets\Resource\ModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCustomProperties.cs" />
+    <Compile Include="Assets\TakechiAsset\SingletonMonoBehaviour\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\EditorSetting\SharderReplacer.cs" />
+    <Compile Include="Assets\TakechiPunCallbacks\Singleton\SingletonTakechiServerAccessPunCallbacks.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\ViewpointOperationSqript\CharacterBasicViewpointOperation.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\JumpSqript\CharacterBasicJump.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\AddDebugView.cs" />
@@ -73,29 +76,34 @@
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystem.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystemInNetwork.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\Display\CanvasController.cs" />
     <Compile Include="Assets\System\TimeLineSystem\TitleScceneOnlyFolder\TimeLineControllerSqript\TitleScceneTimeLineController.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\System\ServerAccessSystem\BaseClass\ServerConnection.cs" />
+    <Compile Include="Assets\TakechiAsset\DontDestroyOnLoadSetting\DontDestroyOnLoadSetting.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingTheAnimationParameterName.cs" />
+    <Compile Include="Assets\TakechiAsset\WindowsEditorDebug\WindowsNetworkDebugController.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationSqript\CharacterBasicDamageAnimationControler.cs" />
     <Compile Include="Assets\System\ServerAccessSystem\LobbyOnlySystemFolder\Sqript\ServerConnectionInLoby.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
     <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\ItemManager.cs" />
-    <Compile Include="Assets\System\UiControllerSystem\ManagementButtonSystem\ButtonObjectStateChangeManagement.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\ManagementButtonSystem\ButtonObjectStateChangeManagement.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayAttribute.cs" />
-    <Compile Include="Assets\System\RotateSkyBoxSystem\sqript\RotateSkyBox.cs" />
+    <Compile Include="Assets\TakechiAsset\DebugInfo\DeviceInfo\DeviceInfo.cs" />
+    <Compile Include="Assets\TakechiAsset\RotateSkyBoxSystem\sqript\RotateSkyBox.cs" />
+    <Compile Include="Assets\EditorSetting\WindowsMenuSceneChange.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\ScriptEnabledOrDisabledContlloerSystem\ScriptEnabledOrDisabledContlloer.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitInstantiateTheCanvasSystem.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiServerAccessPunCallbacks.cs" />
+    <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitSetActiveTheCanvasSystem.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerAttackAnimationEventManager.cs" />
     <Compile Include="Assets\System\ItemDatabaseSystem\Sqript\ItemDataBase.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationSqript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitSetActiveTheCanvasSystem.cs" />
-    <Compile Include="Assets\TakechiAsset\DeviceInfo\DeviceInfo.cs" />
-    <Compile Include="Assets\TakechiAsset\WindowsEditorDebug\WindowsNetworkDebugController.cs" />
-    <Compile Include="Assets\System\UiControllerSystem\Display\CanvasController.cs" />
-    <Compile Include="Assets\System\UiControllerSystem\ScriptEnabledOrDisabledContlloerSystem\ScriptEnabledOrDisabledContlloer.cs" />
+    <Compile Include="Assets\TakechiAsset\InputScriptInterface\Script\InputScriptInterface.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\ManagementButtonSystem\ButtonSceneStateChangeManagement.cs" />
+    <Compile Include="Assets\TakechiAsset\FadingCanvas\script\ToFade.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

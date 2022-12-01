@@ -9,6 +9,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 using TakechiEngine.PUN.ServerAccess;
+using Takechi.ServerAccess.Singleton;
 
 namespace Takechi.ServerAccess
 {
@@ -80,13 +81,13 @@ namespace Takechi.ServerAccess
             OnRoomCreationAction += ( name , roomOption , customRoomProperties) => 
             {
                 JoinOrCreateRoom( name, roomOption, customRoomProperties);
-                Debug.Log("<color=green> OnJoinedLobbyAction </color>");
+                Debug.Log("<color=green> OnRoomCreationAction </color>");
             };
 
             OnJoinedRoomAction += () => 
             {
+                SceneSyncChange(3);
                 Debug.Log("<color=green> OnJoinedRoomAction </color>");
-                SceneSyncChange(2);
             };
 
             Debug.Log("<color=yellow>ServerAccess.Awake </color> : " +
@@ -152,7 +153,6 @@ namespace Takechi.ServerAccess
 
             OnJoinedRoomAction();
         }
-
         public override void OnLeftRoom()
         {
             base.OnLeftRoom();

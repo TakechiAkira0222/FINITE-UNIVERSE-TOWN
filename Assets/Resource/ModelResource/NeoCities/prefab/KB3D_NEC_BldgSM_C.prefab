@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3073803204916548648}
   - component: {fileID: 7337317425871216262}
   - component: {fileID: 8156374847214059174}
-  - component: {fileID: 3069999947793058074}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_AC
   m_TagString: Untagged
@@ -88,20 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3069999947793058074
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1026022142581405237}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8256816156677705566, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &1146901411967380949
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +98,6 @@ GameObject:
   - component: {fileID: 5436674440875377394}
   - component: {fileID: 9073999960408379626}
   - component: {fileID: 5864500606703392984}
-  - component: {fileID: 4163940154540580526}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_NeonSignB
   m_TagString: Untagged
@@ -185,20 +169,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4163940154540580526
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146901411967380949}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6340282107109519937, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &1920812659397670821
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +180,6 @@ GameObject:
   - component: {fileID: 7582303141117507210}
   - component: {fileID: 6187032149528324635}
   - component: {fileID: 735787847520370577}
-  - component: {fileID: 7489821439311403229}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_Boxes
   m_TagString: Untagged
@@ -283,20 +252,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7489821439311403229
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920812659397670821}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4009531085877444133, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &2046040646534127894
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +263,7 @@ GameObject:
   - component: {fileID: 202010641468742551}
   - component: {fileID: 3639230531739161472}
   - component: {fileID: 5185600078027322667}
-  - component: {fileID: 2522488331155538060}
+  - component: {fileID: 3750711373622251693}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_NeonSignC
   m_TagString: Untagged
@@ -386,7 +341,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2522488331155538060
+--- !u!64 &3750711373622251693
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,7 +352,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7704781808804390343, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &3483538762320703366
@@ -454,7 +409,7 @@ GameObject:
   - component: {fileID: 971458328034233956}
   - component: {fileID: 2747603706423237227}
   - component: {fileID: 3435369244738204950}
-  - component: {fileID: 4850417143683138961}
+  - component: {fileID: 4402135290847104581}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_Fan
   m_TagString: Untagged
@@ -528,7 +483,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4850417143683138961
+--- !u!64 &4402135290847104581
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -539,7 +494,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -625037530543836476, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &4570975708016405910
@@ -553,7 +508,6 @@ GameObject:
   - component: {fileID: 4893699679081867195}
   - component: {fileID: 1813585661045016771}
   - component: {fileID: 131626443927215553}
-  - component: {fileID: 1821116193121186291}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_NeonSignA
   m_TagString: Untagged
@@ -628,20 +582,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1821116193121186291
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4570975708016405910}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1183864344933650986, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &4681373417461499243
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +593,7 @@ GameObject:
   - component: {fileID: 6086065071638693544}
   - component: {fileID: 7706524823530007249}
   - component: {fileID: 6270289106500530498}
-  - component: {fileID: 2117591597425916978}
+  - component: {fileID: 8378645923796272724}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_Pipes
   m_TagString: Untagged
@@ -726,7 +666,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2117591597425916978
+--- !u!64 &8378645923796272724
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -737,7 +677,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3001600267381852370, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &5170182012922938643
@@ -848,7 +788,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4605180195078749407, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &5382420470194792762
@@ -862,7 +802,7 @@ GameObject:
   - component: {fileID: 5609516136165814299}
   - component: {fileID: 5395461070974630063}
   - component: {fileID: 8955359911035866360}
-  - component: {fileID: 4194062598172023928}
+  - component: {fileID: 4991333938309154252}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_CratesA
   m_TagString: Untagged
@@ -935,7 +875,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4194062598172023928
+--- !u!64 &4991333938309154252
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -946,7 +886,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3619155831843971269, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &6428686644670794950
@@ -960,7 +900,6 @@ GameObject:
   - component: {fileID: 1489307191237299962}
   - component: {fileID: 7114882909919640286}
   - component: {fileID: 1829120039071381203}
-  - component: {fileID: 2523426732032973734}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_CratesB
   m_TagString: Untagged
@@ -1031,20 +970,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2523426732032973734
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428686644670794950}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6244410096952045855, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &6638543759776258412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +981,6 @@ GameObject:
   - component: {fileID: 8723734447303872375}
   - component: {fileID: 3902095600972708315}
   - component: {fileID: 3354989635435461748}
-  - component: {fileID: 221254895732598152}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_Shelf
   m_TagString: Untagged
@@ -1130,20 +1054,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &221254895732598152
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6638543759776258412}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 386164361549880580, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &7755561719629235973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1065,6 @@ GameObject:
   - component: {fileID: 2765480788728004658}
   - component: {fileID: 654264395832810640}
   - component: {fileID: 5182228255937690144}
-  - component: {fileID: 5439713344192207732}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_Containers
   m_TagString: Untagged
@@ -1228,20 +1137,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5439713344192207732
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7755561719629235973}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8678866979584840295, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}
 --- !u!1 &7936446995363370448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,7 +1148,6 @@ GameObject:
   - component: {fileID: 2490770347189573901}
   - component: {fileID: 1494752406343266800}
   - component: {fileID: 3652864598886455496}
-  - component: {fileID: 649241119904005602}
   m_Layer: 0
   m_Name: KB3D_NEC_BldgSM_C_Stool
   m_TagString: Untagged
@@ -1326,17 +1220,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &649241119904005602
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7936446995363370448}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4439223215832690995, guid: 929099e65f61cd14cbabb9e5252a200b, type: 3}

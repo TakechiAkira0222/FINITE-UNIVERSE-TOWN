@@ -2,8 +2,9 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace takechi.SharderReplacer
+namespace Takechi.SharderReplacer
 {
+#if UNITY_EDITOR
     public class SharderReplacer : EditorWindow
     {
         #region private
@@ -68,4 +69,5 @@ namespace takechi.SharderReplacer
         }
         #endregion
     }
+#endif
 }

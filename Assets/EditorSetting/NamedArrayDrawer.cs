@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(NamedArrayAttribute))]
 public class NamedArrayDrawer : PropertyDrawer
 {
@@ -18,3 +19,4 @@ public class NamedArrayDrawer : PropertyDrawer
         }
     }
 }
+#endif

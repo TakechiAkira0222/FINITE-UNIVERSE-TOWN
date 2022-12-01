@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.iOS.Xcode;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,13 +21,13 @@ namespace Takechi.RaycastObjectDetectionSystem
         /// <summary>
         /// 目標物の名前
         /// </summary>
-        [SerializeField, NamedArrayAttribute(new string[] { "Notsetting1", "Notsetting2" })]
+        [SerializeField, NamedArrayAttribute(new string[] { "TrainingGroundConsole", "desk2" })]
         private List<string> m_tagetObjectNameList = new List<string>();
 
         /// <summary>
         /// インスタンス化したいCanvas
         /// </summary>
-        [SerializeField, NamedArrayAttribute(new string[] { "Notsetting1", "Notsetting2" })]
+        [SerializeField, NamedArrayAttribute(new string[] { "TrainingGroundConsole", "desk2" })]
         private List<GameObject> m_instantiateCanvasList = new List<GameObject>();
 
         /// <summary>
