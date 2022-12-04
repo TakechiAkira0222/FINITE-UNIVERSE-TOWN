@@ -27,7 +27,7 @@ namespace Takechi.InputScript.Interface
         {
             foreach (MonoBehaviour mono in m_useInputClassName)
             {
-                mono.enabled = flag;
+               if( mono != null) mono.enabled = flag;
             }
         }
     }
