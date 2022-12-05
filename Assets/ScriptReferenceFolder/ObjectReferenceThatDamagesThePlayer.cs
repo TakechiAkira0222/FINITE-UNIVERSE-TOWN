@@ -12,7 +12,8 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
         public static readonly List<string> s_DamagesThePlayerObjectNameList =
             new List<string>()
             {
-                "Cube"
+                "Cube",
+                "Barrel"
             };
 
         /// <summary>
