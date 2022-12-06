@@ -9,6 +9,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
     public class OfficeWorkerAttackAnimationEventManager : MonoBehaviour
     {
         #region SerializeField
+        [SerializeField] private GameObject m_sword;
         [SerializeField] private GameObject m_swordEffectTrail;
         [SerializeField] private string     m_targetTagName = "PlayerCharacter";
         [SerializeField, Range( 1.0f, 2.5f)] private float m_withinRange = 1.3f;
@@ -16,14 +17,21 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         [SerializeField, Range( 5, 15)] private int        m_trackingFrame = 10;
 
         #endregion
+
+        private Collider m_swordCollider;
         #region UnityAnimatorEvent
+
+        private void Awake()
+        {
+            m_swordCollider = m_sword.GetComponent<Collider>();
+        }
 
         /// <summary>
         /// FastAttack Animation Start
         /// </summary>
         void OfficeWorkerFastAttackStart()
         {
-            m_swordEffectTrail.SetActive(true);
+            setSwordStatus(true);
 
             StartCoroutine(nameof(AttackTowardsTarget));
         }
@@ -33,7 +41,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackEnd()
         {
-            m_swordEffectTrail.SetActive(false);
+            setSwordStatus(false);
         }
 
         /// <summary>
@@ -41,7 +49,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackStart()
         {
-            m_swordEffectTrail.SetActive(true);
+            setSwordStatus(true);
 
             StartCoroutine(nameof(AttackTowardsTarget));
         }
@@ -51,7 +59,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackEnd()
         {
-            m_swordEffectTrail.SetActive(false);
+            setSwordStatus(false);
         }
 
         /// <summary>
@@ -59,7 +67,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackStart()
         {
-            m_swordEffectTrail.SetActive(true);
+            setSwordStatus(true);
 
             StartCoroutine(nameof(AttackTowardsTarget));
         }
@@ -69,10 +77,16 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackEnd()
         {
-            m_swordEffectTrail.SetActive(false);
+            setSwordStatus(false);
         }
 
         #endregion
+
+        void setSwordStatus(bool flag)
+        {
+            m_swordEffectTrail.SetActive(flag);
+            m_swordCollider.enabled = flag;
+        }
 
         /// <summary>
         /// çUåÇéûÇÃîÒìØä˙í«è]

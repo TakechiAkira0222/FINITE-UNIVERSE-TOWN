@@ -73,6 +73,7 @@
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\AddDebugView.cs" />
     <Compile Include="Assets\Database\ItemDatabase\Script\Item.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunInformationDisclosure.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCallbacks.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
@@ -81,12 +82,16 @@
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\Display\CanvasController.cs" />
     <Compile Include="Assets\System\TimeLineSystem\TitleScceneOnlyFolder\TimeLineControllerSqript\TitleScceneTimeLineController.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
     <Compile Include="Assets\System\ServerAccessSystem\BaseClass\ServerConnection.cs" />
+    <Compile Include="Assets\System\CharacterStatusManagmetSystem\CharacterStatusManagement.cs" />
     <Compile Include="Assets\TakechiAsset\DontDestroyOnLoadSetting\DontDestroyOnLoadSetting.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingTheAnimationParameterName.cs" />
     <Compile Include="Assets\TakechiAsset\WindowsEditorDebug\WindowsNetworkDebugController.cs" />
+    <Compile Include="Assets\System\CharacterDamageDeterminationSystem\DamageJudgmentScript\CharacterBasicDamageJudgment.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicDamageAnimationControler.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParametersDataBase.cs" />
     <Compile Include="Assets\System\ServerAccessSystem\ConnectToLobbySystem\Script\ConnectToLobbyManagment.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
     <Compile Include="Assets\TakechiAsset\InputScriptInterface\Script\InputScriptInterface.cs" />
@@ -102,14 +107,9 @@
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitSetActiveTheCanvasSystem.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerAttackAnimationEventManager.cs" />
     <Compile Include="Assets\Database\ItemDatabase\Script\ItemDataBase.cs" />
+    <Compile Include="Assets\System\ServerAccessSystem\ConnectToJoinRoomSystem\Script\ConnectToJoinRoomManagment.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
-    <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
-    <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParametersDataBase.cs" />
-    <Compile Include="Assets\System\CharacterStatusManagmetSystem\CharacterStatusManagement.cs" />
-    <Compile Include="Assets\System\ServerAccessSystem\ConnectToJoinRoomSystem\Script\ConnectToJoinRoomManagment.cs" />
-    <Compile Include="Assets\System\CharacterDamageDeterminationSystem\DamageJudgmentScript\CharacterBasicDamageJudgment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
