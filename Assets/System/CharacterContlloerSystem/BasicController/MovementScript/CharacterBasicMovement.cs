@@ -20,6 +20,7 @@ namespace Takechi.CharacterController.Movement
         #region private
         private float       m_movementCleanSpeed => m_characterStatusManagement.MovingSpeed;
         private float       m_movementSpeed = 5;
+        private float       m_pushPower = 2.0f;
         private const float m_walkingSpeed = 1;
         private const float m_runningSpeed = 3.5f;
         #endregion
@@ -63,6 +64,33 @@ namespace Takechi.CharacterController.Movement
                              m_movementVelocity.z * m_movementSpeed);
         }
 
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody body = hit.collider.attachedRigidbody;
+
+            // no rigidbody
+            if (body == null || body.isKinematic)
+            {
+                return;
+            }
+
+            // We dont want to push objects below us
+            if (hit.moveDirection.y < -0.3)
+            {
+                return;
+            }
+
+            // Calculate push direction from move direction,
+            // we only push objects to the sides never up and down
+            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+            // If you know how fast your character is trying to move,
+            // then you can also multiply the push velocity by that.
+
+            // Apply the push
+            body.velocity = pushDir * m_pushPower;
+        }
+
         #endregion
 
         #region SetProperty
@@ -96,6 +124,7 @@ namespace Takechi.CharacterController.Movement
                 SetMovementSpeed(ref m_movementSpeed, m_movementCleanSpeed, m_walkingSpeed);
         }
 
+      
         #endregion
     }
 }

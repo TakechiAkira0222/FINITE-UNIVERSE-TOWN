@@ -112,7 +112,6 @@ namespace Takechi.CharacterController.Parameters
             {
                 return m_rigidbody.mass += changeValue;
             }
-
         }
 
         #endregion

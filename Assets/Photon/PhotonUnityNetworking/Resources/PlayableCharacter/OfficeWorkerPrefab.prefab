@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_animator: {fileID: 6618518262682587725}
+  m_rb: {fileID: 2037446226172594413}
   m_NotAttackAnimation: 0
   m_NotDeathblowAnimation: 0
 --- !u!114 &4624134597785962266
@@ -342,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 5073625528955666879}
   m_rb: {fileID: 2037446226172594413}
-  m_knockBackFrame: 12
+  m_knockBackFrame: 16
   m_damageParameter: 5
 --- !u!114 &7478849082230085151
 MonoBehaviour:
@@ -387,13 +388,13 @@ Rigidbody:
   m_GameObject: {fileID: 464520793065001613}
   serializedVersion: 2
   m_Mass: 60
-  m_Drag: 2
+  m_Drag: 0.1
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2
 --- !u!136 &1952776157070901584
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -401,7 +402,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464520793065001613}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f95018ec1c45ac54a94cbd0b7a1c1703, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
