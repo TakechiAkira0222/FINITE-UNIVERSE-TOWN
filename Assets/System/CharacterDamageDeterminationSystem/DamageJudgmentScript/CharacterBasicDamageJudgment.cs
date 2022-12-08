@@ -27,14 +27,15 @@ namespace Takechi.CharacterController.DamageJudgment
 
         private void OnCollisionEnter(Collision collision)
         {
-            //if (!m_characterStatusManagement.PhotonView.IsMine) return;
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
 
             foreach ( string s in ObjectReferenceThatDamagesThePlayer.s_DamagesThePlayerObjectNameList)
             {
                 if ( collision.gameObject.name == s)
                 {
                     m_characterStatusManagement.updateMass( -m_damageParameter);
-                    StartCoroutine(nameof( knockBack));
+
+                    StartCoroutine(knockBack(collision));
                 }
             }
         }
@@ -43,14 +44,19 @@ namespace Takechi.CharacterController.DamageJudgment
         /// knockBack
         /// </summary>
         /// <returns></returns>
-        private IEnumerator knockBack()
+        private IEnumerator knockBack(Collision collision)
         {
             float knockBackFrame = m_characterStatusManagement.CleanMass - m_rb.mass;
-
-            for (int turn = 0; turn < knockBackFrame; turn++)
+            
+            foreach(ContactPoint contactPoint in collision.contacts)
             {
-                m_rb.AddForce(( -m_rb.transform.forward * Mathf.Abs( m_damageParameter) * 1000) / knockBackFrame, ForceMode.Impulse);
-                yield return new WaitForSeconds(Time.deltaTime);
+                var impulse = ( m_rb.transform.position - contactPoint.point).normalized;
+
+                for (int turn = 0; turn < knockBackFrame; turn++)
+                {
+                    m_rb.AddForce((impulse * Mathf.Abs(m_damageParameter) * 1000) / knockBackFrame, ForceMode.Impulse);
+                    yield return new WaitForSeconds(Time.deltaTime);
+                }
             }
         }
     }
