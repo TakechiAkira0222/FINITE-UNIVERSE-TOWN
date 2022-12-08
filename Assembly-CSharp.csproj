@@ -75,6 +75,7 @@
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunInformationDisclosure.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCallbacks.cs" />
+    <Compile Include="Assets\Resource\ModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystem.cs" />
@@ -110,8 +111,7 @@
     <Compile Include="Assets\System\ServerAccessSystem\ConnectToJoinRoomSystem\Script\ConnectToJoinRoomManagment.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\Resource\ModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
-    <Compile Include="Assets\System\MapReflectionCalculationSystem\MapReflectionCalculation.cs" />
+    <Compile Include="Assets\System\CharacterInstantiatedInNetworkSystem\CharacterBasicSettingWhenInstantiated.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

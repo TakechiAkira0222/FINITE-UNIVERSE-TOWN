@@ -6,6 +6,7 @@ using Photon.Pun;
 using Takechi.CharacterController.BasicAnimation.Movement;
 using Takechi.ScriptReference.AnimationParameter;
 using Takechi.ScriptReference.DamagesThePlayerObject;
+using Takechi.CharacterController.Parameters;
 
 namespace Takechi.CharacterController.BasicAnimation.Damage
 {
@@ -19,11 +20,15 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
 
         protected override void Update()
         {
+            if (!characterStatusManagement.PhotonView.IsMine) return;
+
             base.Update();
         }
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (!characterStatusManagement.PhotonView.IsMine) return;
+
             foreach (string s in ObjectReferenceThatDamagesThePlayer.s_DamagesThePlayerObjectNameList)
             {
                 if (collision.gameObject.name == s)
@@ -35,6 +40,8 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
 
         private void OnCollisionExit(Collision collision)
         {
+            if (!characterStatusManagement.PhotonView.IsMine) return;
+
             m_animator.SetFloat( ReferencingTheAnimationParameterName.s_DamageforceParameterName, 0f);
         }
 

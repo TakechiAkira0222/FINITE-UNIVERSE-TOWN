@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Takechi.ScriptReference.AnimationParameter;
+using Takechi.CharacterController.Parameters;
 
 namespace Takechi.CharacterController.BasicAnimation.Movement
 {
@@ -24,12 +25,20 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         #endregion
 
         #region SerializeField
+        [Header("=== CharacterStatusManagement ===")]
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+
+        [Header("=== ScriptSetting ===")]
         [SerializeField] protected Animator m_animator;
         [SerializeField] protected Rigidbody m_rb;
         [SerializeField] protected bool     m_NotAttackAnimation = false;
         [SerializeField] protected bool     m_NotDeathblowAnimation = false;
 
-        //[SerializeField] protected CharacterBasicMovement m_characterBasicMovement;
+        #endregion
+
+        #region protected
+        protected CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+
         #endregion
 
         #region private
@@ -79,8 +88,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         protected virtual void Update()
         {
-            //m_animator.SetFloat("movementVectorX", m_characterBasicMovement.MovementVector.x);
-            //m_animator.SetFloat("movementVectorZ", m_characterBasicMovement.MovementVector.z);
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
 
             m_animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorXParameterName, Input.GetAxisRaw("Horizontal"));
             m_animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorZParameterName, Input.GetAxisRaw("Vertical"));

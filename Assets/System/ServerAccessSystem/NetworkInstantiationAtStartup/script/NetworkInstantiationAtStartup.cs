@@ -24,7 +24,7 @@ namespace Takechi.NetworkInstantiation
 
         void Start()
         {
-            if (PhotonNetwork.InRoom && m_photonView.IsMine)
+            if (PhotonNetwork.InRoom)
             {
                 InstantiationSetting();
             }

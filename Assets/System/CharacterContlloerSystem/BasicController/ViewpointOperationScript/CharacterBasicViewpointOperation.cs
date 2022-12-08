@@ -1,15 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Parameters;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace Takechi.CharacterController.ViewpointOperation
 {
+    [RequireComponent(typeof(CharacterStatusManagement))]
     public class CharacterBasicViewpointOperation : MonoBehaviour
     {
         #region SerializeField
 
+        [Header("=== CharacterStatusManagement ===")]
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+
+        [Header("=== ScriptSetting ===")]
         [SerializeField] private Camera m_mainCamera;
         [SerializeField] private GameObject m_character;
 
@@ -19,6 +25,7 @@ namespace Takechi.CharacterController.ViewpointOperation
         private Quaternion m_cameraRot, m_characterRot;
 
         #endregion
+
         #region Struct
 
         private struct limitedToCamera
@@ -30,15 +37,17 @@ namespace Takechi.CharacterController.ViewpointOperation
         }
 
         #endregion
+
         #region EventAction
 
         protected Action m_viewpointOperationControll = delegate { };
 
         #endregion
+
         #region UnityEvent
         void Reset()
         {
-            
+            m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
         }
 
         void Awake()
@@ -54,10 +63,13 @@ namespace Takechi.CharacterController.ViewpointOperation
 
         protected  virtual void Update()
         {
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+
             m_viewpointOperationControll();
         }
 
         #endregion
+
         #region ViewpointOperationControll
         private void CameraInput()
         {
@@ -75,6 +87,7 @@ namespace Takechi.CharacterController.ViewpointOperation
         }
 
         #endregion
+
         #region RecursiveFunction 
         /// <summary>
         /// ClampRotation

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.Parameters;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Takechi.CharacterController.Jump
@@ -23,14 +24,19 @@ namespace Takechi.CharacterController.Jump
         #endregion
 
         #region SerializeField
-        [SerializeField] private Rigidbody m_rb;
+        [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+
+        [Header("=== ScriptSetting ===")]
+        [SerializeField] private Rigidbody m_rb;
         #endregion
 
         #region private
         private float m_upForce => m_characterStatusManagement.JumpPower;
+        private float m_cleanMass => m_characterStatusManagement.CleanMass;
+
         private RayProperty rayProperty =
-            new RayProperty(0.1f, Vector3.down);
+            new RayProperty( 0.1f, Vector3.down);
 
         /// <summary>
         /// ’…’n”»’è
@@ -58,6 +64,7 @@ namespace Takechi.CharacterController.Jump
                 }
             }
         }
+
         #endregion
 
         #region UnityEvent
@@ -69,7 +76,7 @@ namespace Takechi.CharacterController.Jump
 
         void Start()
         {
-            if (m_characterStatusManagement == null)
+            if ( m_characterStatusManagement == null)
             {
                 m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
                 Debug.LogWarning(" m_characterStatusManagement It wasn't set, so I set it.");
@@ -78,12 +85,13 @@ namespace Takechi.CharacterController.Jump
 
         void Update()
         {
-            if (!m_isGrounded)
-                return;
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+
+            if (!m_isGrounded) return;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                m_rb.AddForce(transform.up * m_upForce, ForceMode.Impulse);
+                m_rb.AddForce( transform.up * ( m_upForce * ( m_rb.mass / m_cleanMass)), ForceMode.Impulse);
             }
         }
         #endregion

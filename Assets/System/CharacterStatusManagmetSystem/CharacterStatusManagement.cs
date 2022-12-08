@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
@@ -12,7 +13,9 @@ namespace Takechi.CharacterController.Parameters
     public class CharacterStatusManagement : MonoBehaviour
     {
         [SerializeField] private PlayableCharacterParameters m_characterParameters;
-        [SerializeField] private Rigidbody m_rigidbody;
+        [SerializeField] private PhotonView m_photonView;
+        [SerializeField] private Rigidbody m_rb;
+        [SerializeField] private Collider m_collider;
 
         /// <summary>
         /// 移動スピード
@@ -29,9 +32,27 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private float m_jumpPower;
         public float JumpPower => m_jumpPower;
+        /// <summary>
+        /// 質量
+        /// </summary>
+        public float CleanMass => m_characterParameters.GetCleanMass();
+        /// <summary>
+        /// PhotonView
+        /// </summary>
+        public PhotonView PhotonView => m_photonView;
+        /// <summary>
+        /// Rigidbody
+        /// </summary>
+        public Rigidbody Rigidbody => m_rb;
+        /// <summary>
+        /// Collider
+        /// </summary>
+        public Collider Collider => m_collider;
 
         private void Awake()
         {
+            if (!m_photonView.IsMine) return;
+                
             settingCharacterParameters();
         }
 
@@ -39,17 +60,17 @@ namespace Takechi.CharacterController.Parameters
 
         private void settingCharacterParameters()
         {
-            m_movingSpeed = setSpeed(0);
-            m_attackPower = setAttackPower(0);
-            m_jumpPower = setJumpPower(0);
-            m_rigidbody.mass = setMass(0);
+            m_movingSpeed = m_characterParameters.GetSpeed();
+            m_attackPower = m_characterParameters.GetAttackPower();
+            m_jumpPower = m_characterParameters.GetJumpPower();
+            m_rb.mass = m_characterParameters.GetCleanMass();
 
             Debug.Log($"<color=green> settingCharacterParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" m_movingSpeed = {m_movingSpeed}\n" +
                       $" m_attackPower = {m_attackPower}\n" +
                       $" m_jumpPower = {m_jumpPower}\n" +
-                      $" m_mass = {m_rigidbody.mass}\n"
+                      $" m_mass = {m_rb.mass}\n"
                       );
         }
 
@@ -59,22 +80,22 @@ namespace Takechi.CharacterController.Parameters
 
         public float setSpeed(int changeValue)
         {
-            return m_characterParameters.GetSpeed() + changeValue;
+            return m_movingSpeed + changeValue;
         }
 
         public float setAttackPower(int changeValue)
         {
-            return m_characterParameters.GetAttackPower() + changeValue;
+            return m_attackPower + changeValue;
         }
 
         public float setJumpPower(int changeValue)
         {
-            return m_characterParameters.GetJumpPower() + changeValue;
+            return m_jumpPower + changeValue;
         }
 
-        public float setMass(int changeValue)
+        public float setCleanMass(int changeValue)
         {
-            return m_characterParameters.GetMass() + changeValue;
+            return m_rb.mass + changeValue;
         }
 
         #endregion
@@ -101,16 +122,16 @@ namespace Takechi.CharacterController.Parameters
 
         public float updateMass(float changeValue)
         {
-            Debug.Log($"{m_rigidbody.mass} : {changeValue}");
+            Debug.Log($"{m_rb.mass} : {changeValue}");
 
-            if ( m_rigidbody.mass + changeValue <= 1)
+            if (m_rb.mass + changeValue <= 1)
             {
-                m_rigidbody.mass = 1;
+                m_rb.mass = 1;
                 return 1;
             }
             else
             {
-                return m_rigidbody.mass += changeValue;
+                return m_rb.mass += changeValue;
             }
         }
 

@@ -50,8 +50,8 @@ namespace Takechi.CharacterController.Parameters
         /// 質量
         /// </summary>
         [SerializeField]
-        private int m_mass = 60;
-        private int mass => m_mass;
+        private int m_cleanMass = 60;
+        private int cleanMass => m_cleanMass;
 
         /// <summary>
         /// 移動スピード
@@ -141,8 +141,8 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// 質量
         /// </summary>
-        /// <returns></returns>
-        public float GetMass() { return mass; }
+        /// <returns> 干渉を受けていない質量を返します。</returns>
+        public float GetCleanMass() { return cleanMass; }
 
         #endregion
     }

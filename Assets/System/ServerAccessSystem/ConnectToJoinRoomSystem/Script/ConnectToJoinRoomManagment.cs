@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 using TakechiEngine.PUN.ServerAccess;
+using UnityEngine.SceneManagement;
 
 namespace Takechi.ServerAccess.ConnectToJoinRoom
 {
@@ -45,13 +46,13 @@ namespace Takechi.ServerAccess.ConnectToJoinRoom
         {
             OnRoomCreationAction += (name, roomOption, customRoomProperties) =>
             {
-                JoinOrCreateRoom(name, roomOption, customRoomProperties);
+                JoinOrCreateRoom(name, roomOption);
                 Debug.Log("<color=green> OnRoomCreationAction </color>");
             };
 
             OnJoinedRoomAction += () =>
             {
-                SceneSyncChange(3);
+                SceneManager.LoadScene(3);
                 Debug.Log("<color=green> OnJoinedRoomAction </color>");
             };
 
@@ -66,7 +67,13 @@ namespace Takechi.ServerAccess.ConnectToJoinRoom
         /// </summary>
         public void OnRoomCreation()
         {
-            OnRoomCreationAction("aaa", new RoomOptions(), m_customRoomProperties);
+            var roomOptions = new RoomOptions();
+
+            roomOptions.MaxPlayers = 2;
+            roomOptions.IsOpen = true; 
+            roomOptions.IsVisible = true; 
+
+            OnRoomCreationAction("aaa", roomOptions, m_customRoomProperties);
         }
 
         /// <summary>

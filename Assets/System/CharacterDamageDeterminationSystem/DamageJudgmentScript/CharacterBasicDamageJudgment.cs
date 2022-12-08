@@ -9,9 +9,11 @@ namespace Takechi.CharacterController.DamageJudgment
 {
     public class CharacterBasicDamageJudgment : MonoBehaviour
     {
+        [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+
+        [Header("=== ScriptSetting ===")]
         [SerializeField] private Rigidbody m_rb;
-        [SerializeField, Range(10 ,20)] private int   m_knockBackFrame = 15;
         [SerializeField] private float m_damageParameter = 5;
 
         void Start()
@@ -25,26 +27,30 @@ namespace Takechi.CharacterController.DamageJudgment
 
         private void OnCollisionEnter(Collision collision)
         {
+            //if (!m_characterStatusManagement.PhotonView.IsMine) return;
+
             foreach ( string s in ObjectReferenceThatDamagesThePlayer.s_DamagesThePlayerObjectNameList)
             {
-                if (collision.gameObject.name == s)
+                if ( collision.gameObject.name == s)
                 {
                     m_characterStatusManagement.updateMass( -m_damageParameter);
-                    StartCoroutine(nameof(knockBack));
+                    StartCoroutine(nameof( knockBack));
                 }
             }
         }
 
         /// <summary>
-        /// ƒmƒbƒNback
+        /// knockBack
         /// </summary>
         /// <returns></returns>
         private IEnumerator knockBack()
         {
-            for (int turn = 0; turn < m_knockBackFrame; turn++)
+            float knockBackFrame = m_characterStatusManagement.CleanMass - m_rb.mass;
+
+            for (int turn = 0; turn < knockBackFrame; turn++)
             {
-                m_rb.AddForce(( -m_rb.transform.forward * Mathf.Abs( m_damageParameter) * 1000) / m_knockBackFrame, ForceMode.Impulse);
-                yield return new WaitForSeconds(0.01f);
+                m_rb.AddForce(( -m_rb.transform.forward * Mathf.Abs( m_damageParameter) * 1000) / knockBackFrame, ForceMode.Impulse);
+                yield return new WaitForSeconds(Time.deltaTime);
             }
         }
     }

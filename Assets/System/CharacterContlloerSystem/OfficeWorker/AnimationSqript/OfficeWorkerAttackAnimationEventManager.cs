@@ -1,21 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Takechi.CharacterController.Parameters;
 using UnityEditor;
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.Rendering;
 
 namespace Takechi.CharacterController.AttackAnimationEvent
 {
     public class OfficeWorkerAttackAnimationEventManager : MonoBehaviour
     {
         #region SerializeField
+        [Header("=== CharacterStatusManagement ===")]
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+
+        [Header("=== ScriptSetting ===")]
+        [SerializeField] private PhotonView m_thisPhotonView;
         [SerializeField] private GameObject m_sword;
         [SerializeField] private GameObject m_swordEffectTrail;
         [SerializeField] private string     m_targetTagName = "PlayerCharacter";
         [SerializeField, Range( 1.0f, 2.5f)] private float m_withinRange = 1.3f;
         [SerializeField, Range( 2.5f, 8f)] private float   m_outOfRange = 5f;
         [SerializeField, Range( 5, 15)] private int        m_trackingFrame = 10;
-
         #endregion
 
         private Collider m_swordCollider;
@@ -24,6 +31,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private void Awake()
         {
             m_swordCollider = m_sword.GetComponent<Collider>();
+            Physics.IgnoreCollision( m_swordCollider, m_characterStatusManagement.Collider, false);
         }
 
         /// <summary>
@@ -31,9 +39,10 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackStart()
         {
-            setSwordStatus(true);
+            if(!m_characterStatusManagement.PhotonView.IsMine) return;
 
-            StartCoroutine(nameof(AttackTowardsTarget));
+            m_swordEffectTrail.SetActive(true);
+            m_thisPhotonView.RPC(nameof(RpcOfficeWorkerAttackStart), RpcTarget.OthersBuffered);
         }
 
         /// <summary>
@@ -41,7 +50,10 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackEnd()
         {
-            setSwordStatus(false);
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+
+            m_swordEffectTrail.SetActive(false);
+            m_thisPhotonView.RPC(nameof(RpcOfficeWorkerAttackEnd), RpcTarget.OthersBuffered);
         }
 
         /// <summary>
@@ -49,9 +61,10 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackStart()
         {
-            setSwordStatus(true);
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
 
-            StartCoroutine(nameof(AttackTowardsTarget));
+            m_swordEffectTrail.SetActive(true);
+            m_thisPhotonView.RPC(nameof(RpcOfficeWorkerAttackStart), RpcTarget.OthersBuffered);
         }
 
         /// <summary>
@@ -59,7 +72,10 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackEnd()
         {
-            setSwordStatus(false);
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+
+            m_swordEffectTrail.SetActive(false);
+            m_thisPhotonView.RPC(nameof(RpcOfficeWorkerAttackEnd), RpcTarget.OthersBuffered);
         }
 
         /// <summary>
@@ -67,9 +83,10 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackStart()
         {
-            setSwordStatus(true);
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
 
-            StartCoroutine(nameof(AttackTowardsTarget));
+            m_swordEffectTrail.SetActive(true);
+            m_thisPhotonView.RPC(nameof(RpcOfficeWorkerAttackStart), RpcTarget.OthersBuffered);
         }
 
         /// <summary>
@@ -77,7 +94,33 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackEnd()
         {
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+
+            m_swordEffectTrail.SetActive(false);
+            m_thisPhotonView.RPC(nameof(RpcOfficeWorkerAttackEnd), RpcTarget.OthersBuffered);
+        }
+
+        #endregion
+
+        #region PunRPCFanction
+
+        [PunRPC]
+        void RpcOfficeWorkerAttackStart()
+        {
+            setSwordStatus(true);
+            StartCoroutine(nameof(AttackTowardsTarget));
+        }
+
+        [PunRPC]
+        void RpcOfficeWorkerAttackEnd()
+        {
             setSwordStatus(false);
+        }
+
+        [PunRPC]
+        void RpcsetPhysicsIgnoreCollision()
+        {
+
         }
 
         #endregion

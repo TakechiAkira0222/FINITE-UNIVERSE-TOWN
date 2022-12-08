@@ -13,7 +13,8 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
             new List<string>()
             {
                 "Cube",
-                "Barrel"
+                "Barrel",
+                "Sword"
             };
 
         /// <summary>

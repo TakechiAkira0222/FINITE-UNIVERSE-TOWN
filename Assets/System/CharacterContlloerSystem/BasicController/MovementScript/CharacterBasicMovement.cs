@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,10 +12,15 @@ namespace Takechi.CharacterController.Movement
     {
 
         #region SerializeField
+
+        [Header("=== CharacterStatusManagement ===")]
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+
+        [Header("=== ScriptSetting ===")]
         [SerializeField] private Rigidbody  m_rb;
         [SerializeField] private Vector3    m_movementVector;
         [SerializeField] private Vector3    m_movementVelocity;
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+        
         #endregion
 
         #region private
@@ -51,6 +57,8 @@ namespace Takechi.CharacterController.Movement
 
         void Update()
         {
+            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+
             MovementControll();
 
             MovementSpeedChange();
