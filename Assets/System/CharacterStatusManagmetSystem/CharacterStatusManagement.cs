@@ -14,8 +14,8 @@ namespace Takechi.CharacterController.Parameters
     {
         [SerializeField] private PlayableCharacterParameters m_characterParameters;
         [SerializeField] private PhotonView m_photonView;
-        [SerializeField] private Rigidbody m_rb;
-        [SerializeField] private Collider m_collider;
+        [SerializeField] private Rigidbody  m_rb;
+        [SerializeField] private Collider   m_collider;
 
         /// <summary>
         /// 移動スピード

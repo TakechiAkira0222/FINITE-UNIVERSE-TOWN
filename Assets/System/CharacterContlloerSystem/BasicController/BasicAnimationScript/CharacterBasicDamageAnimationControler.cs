@@ -7,12 +7,31 @@ using Takechi.CharacterController.BasicAnimation.Movement;
 using Takechi.ScriptReference.AnimationParameter;
 using Takechi.ScriptReference.DamagesThePlayerObject;
 using Takechi.CharacterController.Parameters;
+using System;
 
 namespace Takechi.CharacterController.BasicAnimation.Damage
 {
     public class CharacterBasicDamageAnimationControler : CharacterBasicMovementAnimationControler
     {
+        #region protected Event Action 
+        protected event Action<Animator, float> m_damageAnimationAction = delegate { };
+
+        #endregion
+
         #region UnityEvent
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            m_damageAnimationAction = (animator, parameter) =>
+            {
+                animator.SetFloat(ReferencingTheAnimationParameterName.s_DamageforceParameterName, parameter);
+            };
+
+            Debug.Log(" m_damageAnimationAction function to set.");
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -33,7 +52,7 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
             {
                 if (collision.gameObject.name == s)
                 {
-                    m_animator.SetFloat(ReferencingTheAnimationParameterName.s_DamageforceParameterName, 20f);
+                    m_damageAnimationAction(m_networkRendererAnimator, 20f);
                 }
             }
         }
@@ -42,7 +61,7 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
         {
             if (!characterStatusManagement.PhotonView.IsMine) return;
 
-            m_animator.SetFloat( ReferencingTheAnimationParameterName.s_DamageforceParameterName, 0f);
+            m_damageAnimationAction(m_networkRendererAnimator, 0f);
         }
 
         private void OnTriggerEnter(Collider other)

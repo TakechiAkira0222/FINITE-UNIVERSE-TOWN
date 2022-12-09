@@ -56,13 +56,11 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\TakechiAsset\AnimationManagement\SquatAnimation\SquatAnimationController.cs" />
-    <Compile Include="Assets\TakechiAsset\AnimationManagement\IKAnimation\IKAnimationController.cs" />
-    <Compile Include="Assets\TakechiAsset\AnimationManagement\SyncAnimation\CoordinateSubstitution.cs" />
-    <Compile Include="Assets\TakechiAsset\AnimationManagement\FootIK\FootIK.cs" />
+    <Compile Include="Assets\TakechiAsset\SyncAnimationSystem\IKAnimationController\CharacterBasicIKAnimationController.cs" />
+    <Compile Include="Assets\TakechiAsset\SyncAnimationSystem\SyncAnimation\CoordinateSubstitution.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\TakechiAsset\AnimationManagement\Takechi.AnimationSystem.asmdef" />
+    <None Include="Assets\TakechiAsset\SyncAnimationSystem\Takechi.AnimationSystem.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
