@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
-using TakechiEngine.PUN.ServerAccess;
+using TakechiEngine.PUN.ServerConnect;
 
-namespace Takechi.ServerAccess.Singleton
+namespace Takechi.ServerConnect.Singleton
 {
-    public abstract class SingletonTakechiServerAccessPunCallbacks<T> : TakechiServerAccessPunCallbacks where T : TakechiServerAccessPunCallbacks
+    public abstract class SingletonTakechiServerConnectPunCallbacks<T> : TakechiServerConnectPunCallbacks where T : TakechiServerConnectPunCallbacks
     {
         private static T instance;
         public static T Instance

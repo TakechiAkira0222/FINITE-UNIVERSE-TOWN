@@ -8,6 +8,7 @@ namespace TakechiEngine.PUN.CustomProperties
 {
     public class TakechiPunCustomProperties : TakechiPunCallbacks
     {
+        #region setPropertiesFunction
         /// <summary>
         /// ニックネームを付ける
         /// </summary>
@@ -21,6 +22,8 @@ namespace TakechiEngine.PUN.CustomProperties
                 Debug.Log($" LocalPlayer.NickName : <color=blue>{nickName}</color> <color=green> to set.</color>");
             }
         }
+
+        #endregion
 
         #region UpdateCustomRoomProperties
         /// <summary>

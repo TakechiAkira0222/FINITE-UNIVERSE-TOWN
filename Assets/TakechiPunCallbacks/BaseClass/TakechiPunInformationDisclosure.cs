@@ -14,6 +14,7 @@ namespace TakechiEngine.PUN.Information
 {
     public class TakechiPunInformationDisclosure : TakechiPunCustomProperties
     {
+        #region InformationTitle
         /// <summary>
         /// 情報の表題のテンプレート の設定
         /// </summary>
@@ -23,6 +24,8 @@ namespace TakechiEngine.PUN.Information
         {
             return $" { titleName} \n" + " <color=blue>Info</color> \n";
         }
+        
+        #endregion
 
         #region RoomInformation
         /// <summary>

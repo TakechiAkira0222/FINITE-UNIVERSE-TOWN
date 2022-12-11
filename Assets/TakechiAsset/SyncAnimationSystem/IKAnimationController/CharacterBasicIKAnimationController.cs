@@ -15,7 +15,9 @@ namespace Takechi.AnimationSystem.IK
         [SerializeField] private Animator  m_animator;
         [SerializeField] private Transform m_lookingTarget;
         [SerializeField] private Transform m_leftHandIkTarget;
+        // [SerializeField] private Transform m_leftFootIkTarget;
         [SerializeField] private Transform m_rightHandIkTarget;
+        // [SerializeField] private Transform m_rightFootIkTarget;
         [SerializeField, Range(0, 1)] private float m_ikWeight = 0.5f;
 
         #endregion
@@ -28,8 +30,12 @@ namespace Takechi.AnimationSystem.IK
         private void OnAnimatorIK(int layerIndex)
         {
             LookAtWithAnimation( m_animator, m_ikWeight, m_lookingTarget);
+
             HandIKAnimationSettings( m_animator, AvatarIKGoal.RightHand, m_ikWeight, m_rightHandIkTarget);
             HandIKAnimationSettings( m_animator, AvatarIKGoal.LeftHand,  m_ikWeight, m_leftHandIkTarget);
+
+            //HandIKAnimationSettings( m_animator, AvatarIKGoal.RightFoot,  m_ikWeight, m_leftFootIkTarget);
+            //HandIKAnimationSettings( m_animator, AvatarIKGoal.LeftFoot,  m_ikWeight, m_leftFootIkTarget);
         }
 
         #region recursive function
@@ -65,9 +71,9 @@ namespace Takechi.AnimationSystem.IK
             if ( target != null)
             {
                 animator.SetIKPositionWeight( avatarIK, weight);
-                animator.SetIKRotationWeight( avatarIK, weight);
+                // animator.SetIKRotationWeight( avatarIK, weight);
                 animator.SetIKPosition( avatarIK, target.position);
-                animator.SetIKRotation( avatarIK, target.rotation);
+                // animator.SetIKRotation( avatarIK, target.rotation);
             }
             else
             {
