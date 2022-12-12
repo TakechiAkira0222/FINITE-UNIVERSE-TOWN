@@ -1054,7 +1054,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 26efea9d6bc54d5438ba6409851f0385, type: 3}
-    m_Threshold: 1.5
+    m_Threshold: 2
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -1063,7 +1063,7 @@ BlendTree:
   m_BlendParameter: Dash
   m_BlendParameterY: Blend
   m_MinThreshold: 0
-  m_MaxThreshold: 1.5
+  m_MaxThreshold: 2
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -2916,7 +2916,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 7c59823efa8038549aefffcc73c7c87c, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 0.5
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -3026,7 +3026,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 9b364dbbd4222df41abd6cef0fd398a4, type: 3}
-    m_Threshold: 1.5
+    m_Threshold: 2
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -3035,7 +3035,7 @@ BlendTree:
   m_BlendParameter: Dash
   m_BlendParameterY: Blend
   m_MinThreshold: 0
-  m_MaxThreshold: 1.5
+  m_MaxThreshold: 2
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -3313,7 +3313,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FastAttack
-  m_Speed: 1.8
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -587069218721818606}
@@ -3669,7 +3669,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SecondAttack
-  m_Speed: 1.8
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 207751638686678425}

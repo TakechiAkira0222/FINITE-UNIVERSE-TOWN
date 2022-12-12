@@ -23,6 +23,9 @@ namespace Takechi.NetworkInstantiation.Character
         /// </summary>
         [SerializeField] private List<GameObject> m_showOtherThanYourselfEnvironment;
 
+        [Header("=== Debug ===")]
+        [SerializeField] private KeyCode m_debugKey;
+
         private void Reset()
         {
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
@@ -54,6 +57,20 @@ namespace Takechi.NetworkInstantiation.Character
                     obj.SetActive(true);
                 }
             }
+        }
+
+        void Update()
+        {
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(m_debugKey))
+            {
+                foreach (GameObject obj in m_showOtherThanYourselfEnvironment)
+                {
+                   obj.SetActive(obj.activeSelf == false ? true : false);
+                }
+            }
+#endif
+
         }
     }
 }

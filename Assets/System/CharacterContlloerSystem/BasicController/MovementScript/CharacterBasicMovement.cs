@@ -60,7 +60,6 @@ namespace Takechi.CharacterController.Movement
             if (!m_characterStatusManagement.PhotonView.IsMine) return;
 
             MovementControll();
-
             MovementSpeedChange();
         }
 

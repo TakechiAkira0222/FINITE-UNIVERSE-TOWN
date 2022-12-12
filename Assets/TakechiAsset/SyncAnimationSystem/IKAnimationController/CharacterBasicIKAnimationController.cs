@@ -13,13 +13,19 @@ namespace Takechi.AnimationSystem.IK
         #region SerializeField 
 
         [SerializeField] private Animator  m_animator;
-        [SerializeField] private Transform m_lookingTarget;
-        [SerializeField] private Transform m_leftHandIkTarget;
-        // [SerializeField] private Transform m_leftFootIkTarget;
-        [SerializeField] private Transform m_rightHandIkTarget;
-        // [SerializeField] private Transform m_rightFootIkTarget;
-        [SerializeField, Range(0, 1)] private float m_ikWeight = 0.5f;
 
+        // Target
+        [SerializeField] private Transform m_lookingIkTarget;
+        [SerializeField] private Transform m_leftHandIkTarget;
+        [SerializeField] private Transform m_rightHandIkTarget;
+
+        // Weight
+        [SerializeField, Range(0, 1)] private float m_lookingIkWeight = 0.5f;
+        [SerializeField, Range(0, 1)] private float m_rightHandIkWeight = 0.5f;
+        [SerializeField, Range(0, 1)] private float m_leftHandIkWeight = 0.5f;
+
+        // [SerializeField] private Transform m_leftFootIkTarget;
+        // [SerializeField] private Transform m_rightFootIkTarget;
         #endregion
 
         private void Reset()
@@ -29,10 +35,10 @@ namespace Takechi.AnimationSystem.IK
 
         private void OnAnimatorIK(int layerIndex)
         {
-            LookAtWithAnimation( m_animator, m_ikWeight, m_lookingTarget);
+            LookAtWithAnimation( m_animator, m_lookingIkWeight, m_lookingIkTarget);
 
-            HandIKAnimationSettings( m_animator, AvatarIKGoal.RightHand, m_ikWeight, m_rightHandIkTarget);
-            HandIKAnimationSettings( m_animator, AvatarIKGoal.LeftHand,  m_ikWeight, m_leftHandIkTarget);
+            HandIKAnimationSettings( m_animator, AvatarIKGoal.RightHand, m_rightHandIkWeight, m_rightHandIkTarget);
+            HandIKAnimationSettings( m_animator, AvatarIKGoal.LeftHand, m_leftHandIkWeight, m_leftHandIkTarget);
 
             //HandIKAnimationSettings( m_animator, AvatarIKGoal.RightFoot,  m_ikWeight, m_leftFootIkTarget);
             //HandIKAnimationSettings( m_animator, AvatarIKGoal.LeftFoot,  m_ikWeight, m_leftFootIkTarget);
@@ -71,9 +77,10 @@ namespace Takechi.AnimationSystem.IK
             if ( target != null)
             {
                 animator.SetIKPositionWeight( avatarIK, weight);
-                // animator.SetIKRotationWeight( avatarIK, weight);
+                //animator.SetIKRotationWeight( avatarIK, weight);
+
                 animator.SetIKPosition( avatarIK, target.position);
-                // animator.SetIKRotation( avatarIK, target.rotation);
+                //animator.SetIKRotation( avatarIK, target.rotation);
             }
             else
             {

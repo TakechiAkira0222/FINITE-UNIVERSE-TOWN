@@ -386,6 +386,7 @@ MonoBehaviour:
   - {fileID: 7190481225848696807}
   m_showOtherThanYourselfEnvironment:
   - {fileID: 7658016869392991290}
+  m_debugKey: 283
 --- !u!114 &771002715565279968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,10 +1495,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9141903994428671086}
     m_Modifications:
+    - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].SynchronizeType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[3].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_lookingTarget
       value: 
       objectReference: {fileID: 2587260779058030225}
+    - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_lookingIkTarget
+      value: 
+      objectReference: {fileID: 6250809112987327557}
+    - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_lookingIkWeight
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_leftFootIkTarget
       value: 
@@ -1507,6 +1528,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5774387754573364181}
     - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_leftHandIkWeight
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_rightFootIkTarget
       value: 
       objectReference: {fileID: 0}
@@ -1514,6 +1539,10 @@ PrefabInstance:
       propertyPath: m_rightHandIkTarget
       value: 
       objectReference: {fileID: 4049085704988381803}
+    - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_rightHandIkWeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6445985825358779925, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_Name
       value: OfficeWorkerNetworkModelPrefab
