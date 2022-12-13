@@ -23,6 +23,11 @@ namespace Takechi.CharacterController.Parameters
         private float m_movingSpeed;
         public float MovingSpeed => m_movingSpeed;
         /// <summary>
+        /// ‰¡ˆÚ“®‚ÌˆÚ“®—Ê Š„‡
+        /// </summary>
+        private float m_lateralMovementRatio;
+        public float LateralMovementRatio => m_lateralMovementRatio;
+        /// <summary>
         /// UŒ‚—Í
         /// </summary>
         private float m_attackPower;
@@ -61,6 +66,7 @@ namespace Takechi.CharacterController.Parameters
         private void settingCharacterParameters()
         {
             m_movingSpeed = m_characterParameters.GetSpeed();
+            m_lateralMovementRatio = m_characterParameters.GetLateralMovementRatio();
             m_attackPower = m_characterParameters.GetAttackPower();
             m_jumpPower = m_characterParameters.GetJumpPower();
             m_rb.mass = m_characterParameters.GetCleanMass();
@@ -81,6 +87,11 @@ namespace Takechi.CharacterController.Parameters
         public float setSpeed(int changeValue)
         {
             return m_movingSpeed + changeValue;
+        }
+
+        public float setlateralMovementRatio(int changeValue)
+        {
+            return m_lateralMovementRatio + changeValue;
         }
 
         public float setAttackPower(int changeValue)

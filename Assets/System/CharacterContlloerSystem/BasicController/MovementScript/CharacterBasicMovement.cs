@@ -25,10 +25,18 @@ namespace Takechi.CharacterController.Movement
 
         #region private
         private float       m_movementCleanSpeed => m_characterStatusManagement.MovingSpeed;
+        private float       m_lateralMovementRate => m_characterStatusManagement.LateralMovementRatio;
+
         private float       m_movementSpeed = 5;
-        private float       m_pushPower = 2.0f;
+        private float       m_pushPower = 25.0f;
+
+        #endregion
+
+        #region private const 
+
         private const float m_walkingSpeed = 1;
         private const float m_runningSpeed = 3.5f;
+
         #endregion
 
         #region GetProperty
@@ -66,7 +74,7 @@ namespace Takechi.CharacterController.Movement
         void FixedUpdate()
         {
             m_rb.velocity = 
-                new Vector3( m_movementVelocity.x * m_movementSpeed,
+                new Vector3( m_movementVelocity.x * m_movementSpeed * m_lateralMovementRate,
                              m_rb.velocity.y,
                              m_movementVelocity.z * m_movementSpeed);
         }

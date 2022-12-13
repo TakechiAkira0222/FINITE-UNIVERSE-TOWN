@@ -61,6 +61,13 @@ namespace Takechi.CharacterController.Parameters
         private float movingSpeed => m_movingSpeed;
 
         /// <summary>
+        /// 横移動の移動量 割合
+        /// </summary>
+        [SerializeField]
+        private float m_lateralMovementRatio = 0.8f;
+        private float lateralMovementRatio => m_lateralMovementRatio;
+
+        /// <summary>
         /// 攻撃力
         /// </summary>
         [SerializeField]
@@ -128,6 +135,10 @@ namespace Takechi.CharacterController.Parameters
         /// 移動スピード
         /// </summary>
         public float GetSpeed() { return movingSpeed; }
+        /// <summary>
+        /// 横移動の移動量 割合
+        /// </summary>
+        public float GetLateralMovementRatio() { return lateralMovementRatio; }
         /// <summary>
         /// 攻撃力
         /// </summary>
