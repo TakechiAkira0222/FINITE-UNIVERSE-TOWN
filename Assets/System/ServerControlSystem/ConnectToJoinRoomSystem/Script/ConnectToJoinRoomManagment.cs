@@ -20,12 +20,6 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
             new ExitGames.Client.Photon.Hashtable();
 
         /// <summary>
-        /// プレイヤーのカスタムプロパティー
-        /// </summary>
-        private ExitGames.Client.Photon.Hashtable m_customPlayerProperties =
-           new ExitGames.Client.Photon.Hashtable();
-
-        /// <summary>
         /// ルームリスト
         /// </summary>
         private List<RoomInfo> m_roomInfoList = new List<RoomInfo>();
@@ -78,7 +72,12 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
 
             roomOptions.MaxPlayers = 2;
             roomOptions.IsOpen = true; 
-            roomOptions.IsVisible = true; 
+            roomOptions.IsVisible = true;
+
+            m_customRoomProperties = new ExitGames.Client.Photon.Hashtable
+            {
+                {" not set", 1},
+            };
 
             OnRoomCreationAction("aaa", roomOptions, m_customRoomProperties);
         }

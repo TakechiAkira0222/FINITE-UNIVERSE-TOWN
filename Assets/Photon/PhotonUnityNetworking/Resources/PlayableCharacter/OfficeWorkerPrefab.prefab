@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 5073625528955666879}
+  m_thisPhotnView: {fileID: 2873905185444241462}
   m_networkRendererAnimator: {fileID: 958558028545424994}
   m_handOnlyAnimator: {fileID: 3014455638564392100}
   m_rb: {fileID: 2037446226172594413}
@@ -144,7 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 5073625528955666879}
   m_rb: {fileID: 2037446226172594413}
-  m_damageParameter: 5
 --- !u!114 &2873905185444241462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +658,10 @@ PrefabInstance:
       propertyPath: m_sword
       value: 
       objectReference: {fileID: 3017449322883736188}
+    - target: {fileID: 6018737882793698759, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_myAvatarRb
+      value: 
+      objectReference: {fileID: 2037446226172594413}
     - target: {fileID: 6018737882793698759, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_swordEffectTrail
       value: 
@@ -1508,8 +1512,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[2].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[3].SynchronizeType
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[5].SynchronizeType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4453461732280915481, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_lookingTarget

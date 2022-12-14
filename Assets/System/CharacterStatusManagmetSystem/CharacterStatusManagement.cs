@@ -2,6 +2,8 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
+using Takechi.ScriptReference.CustomPropertyKey;
+using TakechiEngine.PUN.CustomProperties;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,12 +12,18 @@ namespace Takechi.CharacterController.Parameters
     /// <summary>
     /// パラメータの中間管理を行うクラス
     /// </summary>
-    public class CharacterStatusManagement : MonoBehaviour
+    public class CharacterStatusManagement : TakechiPunCustomProperties
     {
         [SerializeField] private PlayableCharacterParameters m_characterParameters;
         [SerializeField] private PhotonView m_photonView;
         [SerializeField] private Rigidbody  m_rb;
         [SerializeField] private Collider   m_collider;
+
+        /// <summary>
+        /// プレイヤーのカスタムプロパティー
+        /// </summary>
+        private ExitGames.Client.Photon.Hashtable m_customPlayerProperties =
+            new ExitGames.Client.Photon.Hashtable();
 
         /// <summary>
         /// 移動スピード
@@ -59,10 +67,15 @@ namespace Takechi.CharacterController.Parameters
             if (!m_photonView.IsMine) return;
                 
             settingCharacterParameters();
+
+            settingLocalPlayerCustomProperties();
         }
 
-        #region AwakeSetting
+        #region AwakeSettingFunction
 
+        /// <summary>
+        /// CharacterStatus を、データベースの変数で設定します。
+        /// </summary>
         private void settingCharacterParameters()
         {
             m_movingSpeed = m_characterParameters.GetSpeed();
@@ -78,6 +91,27 @@ namespace Takechi.CharacterController.Parameters
                       $" m_jumpPower = {m_jumpPower}\n" +
                       $" m_mass = {m_rb.mass}\n"
                       );
+        }
+
+        /// <summary>
+        /// LocalPlayerCustomPropertiesを、データベースの変数で設定します。
+        /// </summary>
+        private void settingLocalPlayerCustomProperties()
+        {
+            m_customPlayerProperties =
+               new ExitGames.Client.Photon.Hashtable
+               {
+                    { CustomPropertyKeyReference.s_CharacterStatusAttackPower , m_characterParameters.GetAttackPower()},
+                    { CustomPropertyKeyReference.s_CharacterStatusMass , m_characterParameters.GetCleanMass()},
+               };
+
+            setLocalPlayerCustomProperties( m_customPlayerProperties );
+
+            Debug.Log($"<color=green> setLocalPlayerCustomProrerties </color>\n" +
+                   $"<color=blue> info</color>\n" +
+                   $" {CustomPropertyKeyReference.s_CharacterStatusAttackPower} = {m_customPlayerProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower]}\n" +
+                   $" {CustomPropertyKeyReference.s_CharacterStatusMass} = {m_customPlayerProperties[CustomPropertyKeyReference.s_CharacterStatusMass]}\n"
+                   );
         }
 
         #endregion
@@ -112,6 +146,27 @@ namespace Takechi.CharacterController.Parameters
         #endregion
 
         #region UpdateFunction
+
+        /// <summary>
+        /// LocalPlayerCustomPropertiesを、status の変数で更新します。
+        /// </summary>
+        public void updateLocalPlayerCustomProrerties()
+        {
+            m_customPlayerProperties =
+              new ExitGames.Client.Photon.Hashtable
+              {
+                    {CustomPropertyKeyReference.s_CharacterStatusAttackPower, m_attackPower},
+                    {CustomPropertyKeyReference.s_CharacterStatusMass , m_rb.mass},
+              };
+
+            setLocalPlayerCustomProperties(m_customPlayerProperties);
+
+            Debug.Log($"<color=green> updateLocalPlayerCustomProrerties </color>\n" +
+                      $"<color=blue> info</color>\n" +
+                      $" {CustomPropertyKeyReference.s_CharacterStatusAttackPower} = {m_customPlayerProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower]}\n" +
+                      $" {CustomPropertyKeyReference.s_CharacterStatusMass} = {m_customPlayerProperties[CustomPropertyKeyReference.s_CharacterStatusMass]}\n"
+                    );
+        }
 
         public float updateSpeed(int changeValue)
         {
