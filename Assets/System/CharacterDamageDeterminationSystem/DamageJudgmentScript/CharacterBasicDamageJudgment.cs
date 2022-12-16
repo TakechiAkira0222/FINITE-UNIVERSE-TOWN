@@ -14,8 +14,7 @@ namespace Takechi.CharacterController.DamageJudgment
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
-        [Header("=== ScriptSetting ===")]
-        [SerializeField] private Rigidbody m_rb;
+        private Rigidbody m_rb => m_characterStatusManagement.GetMyRigidbody();
 
         void Start()
         {
@@ -28,7 +27,7 @@ namespace Takechi.CharacterController.DamageJudgment
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             if (collision.gameObject.tag == ObjectReferenceThatDamagesThePlayer.s_PlayerCharacterWeaponTagName)
             {
@@ -38,8 +37,8 @@ namespace Takechi.CharacterController.DamageJudgment
                 float power = 
                     (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower];
 
-                m_characterStatusManagement.updateMass(-power);
-                m_characterStatusManagement.updateLocalPlayerCustomProrerties();
+                m_characterStatusManagement.UpdateMass(-power);
+                m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
 
                 StartCoroutine(knockBack(collision, power));
             }
@@ -50,8 +49,8 @@ namespace Takechi.CharacterController.DamageJudgment
                 {
                     float power = ObjectReferenceThatDamagesThePlayer.s_DamageObjectPowerDictionary[s];
 
-                    m_characterStatusManagement.updateMass(-power);
-                    m_characterStatusManagement.updateLocalPlayerCustomProrerties();
+                    m_characterStatusManagement.UpdateMass(-power);
+                    m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
 
                     StartCoroutine(knockBack(collision, power));
                 }
@@ -64,11 +63,11 @@ namespace Takechi.CharacterController.DamageJudgment
         /// <returns></returns>
         private IEnumerator knockBack(Collision collision, float power)
         {
-            float knockBackFrame = m_characterStatusManagement.CleanMass - m_rb.mass;
+            float knockBackFrame = m_characterStatusManagement.GetCleanMass() - m_rb.mass;
             
             foreach(ContactPoint contactPoint in collision.contacts)
             {
-                var impulse = ( m_rb.transform.position - contactPoint.point).normalized;
+                var impulse = (m_rb.transform.position - contactPoint.point).normalized;
 
                 for (int turn = 0; turn < knockBackFrame; turn++)
                 {

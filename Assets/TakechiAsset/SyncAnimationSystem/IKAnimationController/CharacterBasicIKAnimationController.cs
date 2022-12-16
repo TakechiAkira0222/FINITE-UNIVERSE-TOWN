@@ -24,8 +24,6 @@ namespace Takechi.AnimationSystem.IK
         [SerializeField, Range(0, 1)] private float m_rightHandIkWeight = 0.5f;
         [SerializeField, Range(0, 1)] private float m_leftHandIkWeight = 0.5f;
 
-        // [SerializeField] private Transform m_leftFootIkTarget;
-        // [SerializeField] private Transform m_rightFootIkTarget;
         #endregion
 
         private void Reset()
@@ -39,9 +37,6 @@ namespace Takechi.AnimationSystem.IK
 
             HandIKAnimationSettings( m_animator, AvatarIKGoal.RightHand, m_rightHandIkWeight, m_rightHandIkTarget);
             HandIKAnimationSettings( m_animator, AvatarIKGoal.LeftHand, m_leftHandIkWeight, m_leftHandIkTarget);
-
-            //HandIKAnimationSettings( m_animator, AvatarIKGoal.RightFoot,  m_ikWeight, m_leftFootIkTarget);
-            //HandIKAnimationSettings( m_animator, AvatarIKGoal.LeftFoot,  m_ikWeight, m_leftFootIkTarget);
         }
 
         #region recursive function
@@ -77,10 +72,7 @@ namespace Takechi.AnimationSystem.IK
             if ( target != null)
             {
                 animator.SetIKPositionWeight( avatarIK, weight);
-                //animator.SetIKRotationWeight( avatarIK, weight);
-
                 animator.SetIKPosition( avatarIK, target.position);
-                //animator.SetIKRotation( avatarIK, target.rotation);
             }
             else
             {

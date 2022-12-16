@@ -13,38 +13,23 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 {
     public class CharacterBasicMovementAnimationControler : MonoBehaviour
     {
-        #region PropertyClass
-        public class RayProperty
-        {
-            public float m_distance;
-            public Vector3 m_direction;
-
-            public RayProperty(float distance, Vector3 direction)
-            {
-                m_distance = distance;
-                m_direction = direction;
-            }
-        }
-        #endregion
-
         #region SerializeField
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
         [Header("=== ScriptSetting ===")]
-        [SerializeField] protected PhotonView m_thisPhotnView;
-        [SerializeField] protected Animator m_networkRendererAnimator;
-        [SerializeField] protected Animator m_handOnlyAnimator;
-
-        [SerializeField] protected Rigidbody m_rb;
-        [SerializeField] protected bool m_NotAttackAnimation = false;
-        [SerializeField] protected bool m_NotDeathblowAnimation = false;
-
+        [SerializeField] private PhotonView m_thisPhotnView;
+        [SerializeField] private Animator   m_networkRendererAnimator;
+        [SerializeField] private Animator   m_handOnlyAnimator;
+        [SerializeField] private bool       m_NotAttackAnimation = false;
+        [SerializeField] private bool       m_NotDeathblowAnimation = false;
         #endregion
 
         #region protected
         protected CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
-
+        protected PhotonView thisPhotnView => m_thisPhotnView;
+        protected Animator   networkRendererAnimator => m_networkRendererAnimator;
+        protected Rigidbody  rb => m_characterStatusManagement.GetMyRigidbody();
         #endregion
 
         # region protected Event Action 
@@ -56,45 +41,10 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         #endregion
 
-        #region private
-
-        private RayProperty rayProperty =
-            new RayProperty(0.1f, Vector3.down);
-
-        /// <summary>
-        /// ’…’n”»’è
-        /// </summary>
-        private bool m_isGrounded
-        {
-            get
-            {
-                Ray ray =
-                    new Ray(m_rb.gameObject.transform.position + new Vector3(0, 0.1f),
-                             rayProperty.m_direction * rayProperty.m_distance);
-
-                RaycastHit raycastHit;
-
-
-                if (Physics.Raycast(ray, out raycastHit, rayProperty.m_distance))
-                {
-                    Debug.DrawRay(ray.origin, ray.direction * rayProperty.m_distance, Color.green);
-                    return true;
-                }
-                else
-                {
-                    Debug.DrawRay(ray.origin, ray.direction * rayProperty.m_distance, Color.red);
-                    return false;
-                }
-            }
-        }
-
-        #endregion
-
         #region UnityEvent
         void Reset()
         {
             m_thisPhotnView           = this.GetComponent<PhotonView>();
-            m_rb                      = this.transform.GetComponent<Rigidbody>();
             m_networkRendererAnimator = this.transform.GetComponent<Animator>();
         }
 
@@ -106,35 +56,35 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
                 animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorZParameterName, Input.GetAxisRaw("Vertical"));
             };
 
-            Debug.Log(" m_movementAnimatoinAction function <color=green>to set.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to set.</color>");
 
             m_dashAnimationAction = (animator, parameter) =>
             {
                 animator.SetFloat(ReferencingTheAnimationParameterName.s_DashParameterName, parameter);
             };
 
-            Debug.Log(" m_dashAnimationAction function <color=green>to set.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_dashAnimationAction function <color=green>to set.</color>");
 
             m_attackAnimationAction = (animator) =>
             {
                 animator.SetTrigger(ReferencingTheAnimationParameterName.s_AttackParameterName);
             };
 
-            Debug.Log(" m_attackAnimationAction function <color=green>to set.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_attackAnimationAction function <color=green>to set.</color>");
 
             m_jumpingAnimationAction = (animator) =>
             {
                 animator.SetTrigger(ReferencingTheAnimationParameterName.s_JumpingParameterName);
             };
 
-            Debug.Log(" m_jumpingAnimationAction function <color=green>to set.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_jumpingAnimationAction function <color=green>to set.</color>");
 
             m_deathblowAnimationAction = (animator) =>
             {
                 animator.SetTrigger(ReferencingTheAnimationParameterName.s_DeathblowParameterName);
             };
 
-            Debug.Log(" m_deathblowAnimationAction function <color=green>to set.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_deathblowAnimationAction function <color=green>to set.</color>");
         }
 
         protected virtual void Start()
@@ -144,7 +94,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         protected virtual void Update()
         {
-            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             m_movementAnimatoinAction(m_handOnlyAnimator);
             m_movementAnimatoinAction(m_networkRendererAnimator);
@@ -161,7 +111,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
                 m_dashAnimationAction(m_handOnlyAnimator, 0);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && m_isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && m_characterStatusManagement.GetIsGrounded())
             {
                 m_thisPhotnView.RPC(nameof(RPC_JumpingAnimationTrigger), RpcTarget.AllBufferedViaServer);
             }

@@ -85,7 +85,6 @@ MonoBehaviour:
   m_thisPhotnView: {fileID: 1313025848165213947}
   m_networkRendererAnimator: {fileID: 9091700575471875538}
   m_handOnlyAnimator: {fileID: 5155853695562101985}
-  m_rb: {fileID: 4099101904665015661}
   m_NotAttackAnimation: 1
   m_NotDeathblowAnimation: 1
 --- !u!114 &1313025848165213947
@@ -175,8 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
   m_photonView: {fileID: 8720368388159889675}
-  m_rb: {fileID: 4099101904665015661}
+  m_avater: {fileID: 2510430004827467533}
   m_collider: {fileID: 4592895826187353296}
+  m_rb: {fileID: 4099101904665015661}
+  m_mainCamera: {fileID: 6319637725813677971}
 --- !u!114 &3321333361694504800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 5373476987320903130}
-  m_rb: {fileID: 4099101904665015661}
   m_movementVector: {x: 0, y: 0, z: 0}
   m_movementVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &3321333361694504801
@@ -206,8 +206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 5373476987320903130}
-  m_mainCamera: {fileID: 6319637725813677971}
-  m_character: {fileID: 2510430004827467533}
 --- !u!114 &3321333361694504828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 5373476987320903130}
-  m_rb: {fileID: 4099101904665015661}
 --- !u!114 &8720368388159889675
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,19 +14,23 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
         [Header("=== ScriptSetting ===")]
-        [SerializeField] private Rigidbody  m_myAvatarRb;
         [SerializeField] private PhotonView m_thisPhotonView;
-        [SerializeField] private GameObject m_sword;
+        [SerializeField] private GameObject m_swordObject;
         [SerializeField] private GameObject m_swordEffectTrail;
         [SerializeField] private string m_targetTagName = "PlayerCharacter";
-        [SerializeField, Range(1.0f, 2.5f)] private float m_withinRange = 1.3f;
-        [SerializeField, Range(2.5f, 8f)] private float m_outOfRange = 5f;
-        [SerializeField, Range(5, 15)] private int m_trackingFrame = 10;
+        [SerializeField, Range( 1.0f, 2.5f)] private float m_withinRange = 1.3f;
+        [SerializeField, Range( 2.5f, 8f)] private float m_outOfRange = 5f;
+        [SerializeField, Range( 5, 15)] private int m_trackingFrame = 10;
 
         #endregion
 
         #region private
-        private Collider m_swordCollider;
+        private CharacterStatusManagement m_statusManagement => m_characterStatusManagement;
+        private GameObject m_sword => m_swordObject;
+        private GameObject m_swordEffect => m_swordEffectTrail;
+        private string     m_targetTag => m_targetTagName;
+        private Rigidbody  m_myAvatarRb => m_statusManagement.GetMyRigidbody();
+        private Collider   m_swordCollider => m_sword.GetComponent<Collider>();
 
         #endregion
 
@@ -34,8 +38,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         private void Awake()
         {
-            m_swordCollider = m_sword.GetComponent<Collider>();
-            Physics.IgnoreCollision(m_swordCollider, m_characterStatusManagement.Collider, false);
+            Physics.IgnoreCollision(m_swordCollider, m_statusManagement.GetMyCollider(), false);
         }
 
         /// <summary>
@@ -43,7 +46,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackStart()
         {
-            if (m_characterStatusManagement.PhotonView.IsMine)
+            if (m_statusManagement.GetMyPhotonView().IsMine)
             {
                 StartCoroutine(nameof(AttackTowardsTarget));
             }
@@ -58,7 +61,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackEnd()
         {
-            if (m_characterStatusManagement.PhotonView.IsMine) return;
+            if (m_statusManagement.GetMyPhotonView().IsMine) return;
 
             setSwordStatus(false);
         }
@@ -68,7 +71,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackStart()
         {
-            if (m_characterStatusManagement.PhotonView.IsMine)
+            if (m_statusManagement.GetMyPhotonView().IsMine)
             {
                 StartCoroutine(nameof(AttackTowardsTarget));
             }
@@ -83,7 +86,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackEnd()
         {
-            if (m_characterStatusManagement.PhotonView.IsMine) return;
+            if (m_statusManagement.GetMyPhotonView().IsMine) return;
 
             setSwordStatus(false);
         }
@@ -93,7 +96,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackStart()
         {
-            if (m_characterStatusManagement.PhotonView.IsMine)
+            if (m_statusManagement.GetMyPhotonView().IsMine)
             {
                 StartCoroutine(nameof(AttackTowardsTarget));
             }
@@ -108,7 +111,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackEnd()
         {
-            if (m_characterStatusManagement.PhotonView.IsMine) return;
+            if (m_statusManagement.GetMyPhotonView().IsMine) return;
 
             setSwordStatus(false);
         }
@@ -118,7 +121,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         #region set Function
         void setSwordStatus(bool flag)
         {
-            m_swordEffectTrail.SetActive(flag);
+            m_swordEffect.SetActive(flag);
             m_swordCollider.enabled = flag;
         }
 
@@ -131,7 +134,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <returns></returns>
         private IEnumerator AttackTowardsTarget()
         {
-            GameObject nearObj = serchTag(m_myAvatarRb.gameObject, m_targetTagName);
+            GameObject nearObj = serchTag(m_myAvatarRb.gameObject, m_targetTag);
 
             Vector3 tagetDir = Vector3.Normalize(nearObj.transform.position - m_myAvatarRb.gameObject.transform.position);
 

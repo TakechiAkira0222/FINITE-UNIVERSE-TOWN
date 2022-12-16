@@ -10,6 +10,35 @@ namespace Takechi.CharacterController.Parameters
     [CreateAssetMenu(fileName = "PlayableCharacterParameters", menuName = "PlayableCharacterParameters")]
     public class PlayableCharacterParameters : ScriptableObject
     {
+        #region SerializeField
+        [SerializeField, Tooltip("特徴の種類")]
+        private TypeOfCharacterParameters m_typeOfParameters;
+        [SerializeField, Tooltip("アイコン")]
+        private Sprite m_icon;
+        [SerializeField, Tooltip("名前")]
+        private string m_characterName = "nullname";
+        [SerializeField, Tooltip("情報")]
+        private string m_information = "特徴や経歴";
+        [SerializeField, Tooltip("質量")]
+        private int m_cleanMass = 60;
+        [SerializeField, Tooltip("移動スピード")]
+        private float m_movingSpeed = 2.5f;
+        [SerializeField, Tooltip("横移動の移動量 割合")]
+        private float m_lateralMovementRatio = 0.8f;
+        [SerializeField, Tooltip("攻撃力")]
+        private float m_attackPower = 30;
+        [SerializeField, Tooltip("ジャンプ力 ")]
+        private float m_jumpPower = 300;
+        [SerializeField, Tooltip("アビリティー１の回復時間")]
+        private float m_ability1_RecoveryTime_Seconds = 30;
+        [SerializeField, Tooltip("アビリティー2の回復時間")]
+        private float m_ability2_RecoveryTime_Seconds = 30;
+        [SerializeField, Tooltip("アビリティー3の回復時間")]
+        private float m_ability3_RecoveryTime_Seconds = 30;
+        [SerializeField, Tooltip("必殺技回復時間")]
+        private float m_specialMoveRecoveryTime_Seconds = 60;
+        #endregion
+
         public enum TypeOfCharacterParameters
         {
             AttackType,
@@ -18,142 +47,51 @@ namespace Takechi.CharacterController.Parameters
             HealerType,
         }
 
-        /// <summary>
-        /// 特徴の種類
-        /// </summary>
-        [SerializeField]
-        private TypeOfCharacterParameters m_typeOfParameters;
-        private TypeOfCharacterParameters typeOfParameters => m_typeOfParameters;
-
-        /// <summary>
-        /// アイコン
-        /// </summary>
-        [SerializeField]
-        private Sprite m_icon;
-        private Sprite icon => m_icon;
-
-        /// <summary>
-        /// 名前
-        /// </summary>
-        [SerializeField]
-        private string m_characterName = "nullname";
-        private string characterName => m_characterName;
-
-        /// <summary>
-        /// 情報
-        /// </summary>
-        [SerializeField]
-        private string m_information = "特徴や経歴";
-        private string information => m_information;
-
-        /// <summary>
-        /// 質量
-        /// </summary>
-        [SerializeField]
-        private int m_cleanMass = 60;
-        private int cleanMass => m_cleanMass;
-
-        /// <summary>
-        /// 移動スピード
-        /// </summary>
-        [SerializeField]
-        private float m_movingSpeed = 2.5f;
-        private float movingSpeed => m_movingSpeed;
-
-        /// <summary>
-        /// 横移動の移動量 割合
-        /// </summary>
-        [SerializeField]
-        private float m_lateralMovementRatio = 0.8f;
-        private float lateralMovementRatio => m_lateralMovementRatio;
-
-        /// <summary>
-        /// 攻撃力
-        /// </summary>
-        [SerializeField]
-        private float m_attackPower = 30;
-        private float attackPower => m_attackPower;
-
-        /// <summary>
-        /// ジャンプ力 
-        /// </summary>
-        [SerializeField]
-        private float m_jumpPower = 300;
-        private float jumpPower => m_jumpPower;
-
-        /// <summary>
-        /// アビリティー１の回復時間
-        /// </summary>
-        [SerializeField]
-        private float m_ability1_RecoveryTime_Seconds = 30;
-        private float ability1_RecoveryTime_Seconds => m_ability1_RecoveryTime_Seconds;
-
-        /// <summary>
-        /// アビリティー2の回復時間
-        /// </summary>
-        [SerializeField]
-        private float m_ability2_RecoveryTime_Seconds = 30;
-        private float ability2_RecoveryTime_Seconds => m_ability2_RecoveryTime_Seconds;
-
-        /// <summary>
-        /// アビリティー3の回復時間
-        /// </summary>
-        [SerializeField]
-        private float m_ability3_RecoveryTime_Seconds = 30;
-        private float ability3_RecoveryTime_Seconds => m_ability3_RecoveryTime_Seconds;
-
-        /// <summary>
-        /// 必殺技回復時間
-        /// </summary>
-        [SerializeField]
-        private float m_specialMoveRecoveryTime_Seconds = 60;
-        private float specialMoveRecoveryTime_Seconds => m_specialMoveRecoveryTime_Seconds;
-
         #region GetFunction
 
         /// <summary>
         /// 特徴の種類
         /// </summary>
         /// <returns></returns>
-        public TypeOfCharacterParameters GetTypeOfParameters() { return typeOfParameters; }
+        public TypeOfCharacterParameters GetTypeOfParameters() { return m_typeOfParameters; }
         /// <summary>
         /// アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetIcon() { return icon; }
+        public Sprite GetIcon() { return m_icon; }
         /// <summary>
         /// 名前
         /// </summary>
         /// <returns></returns>
-        public string GetCharacterName() { return characterName; }
+        public string GetCharacterName() { return m_characterName; }
         /// <summary>
         /// 情報
         /// </summary>
         /// <returns></returns>
-        public string GetInformation() { return information; }
+        public string GetInformation() { return m_information; }
         /// <summary>
         /// 移動スピード
         /// </summary>
-        public float GetSpeed() { return movingSpeed; }
+        public float GetSpeed() { return m_movingSpeed; }
         /// <summary>
         /// 横移動の移動量 割合
         /// </summary>
-        public float GetLateralMovementRatio() { return lateralMovementRatio; }
+        public float GetLateralMovementRatio() { return m_lateralMovementRatio; }
         /// <summary>
         /// 攻撃力
         /// </summary>
         /// <returns></returns>
-        public float GetAttackPower() { return attackPower; }
+        public float GetAttackPower() { return m_attackPower; }
         /// <summary>
         /// ジャンプ力
         /// </summary>
         /// <returns></returns>
-        public float GetJumpPower() { return jumpPower; }
+        public float GetJumpPower() { return m_jumpPower; }
         /// <summary>
         /// 質量
         /// </summary>
         /// <returns> 干渉を受けていない質量を返します。</returns>
-        public float GetCleanMass() { return cleanMass; }
+        public float GetCleanMass() { return m_cleanMass; }
 
         #endregion
     }

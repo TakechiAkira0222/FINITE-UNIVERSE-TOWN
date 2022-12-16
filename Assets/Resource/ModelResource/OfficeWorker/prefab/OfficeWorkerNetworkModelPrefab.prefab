@@ -2190,6 +2190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a67df115cfd1b4eb4a8b118b965806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterStatus: {fileID: 0}
+  m_model: {fileID: 621388348578804858}
 --- !u!114 &4453461732280915481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2203,10 +2205,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_animator: {fileID: 8040152249114627618}
-  m_lookingTarget: {fileID: 0}
+  m_lookingIkTarget: {fileID: 0}
   m_leftHandIkTarget: {fileID: 0}
   m_rightHandIkTarget: {fileID: 0}
-  m_ikWeight: 1
+  m_lookingIkWeight: 0.5
+  m_rightHandIkWeight: 0.5
+  m_leftHandIkWeight: 0.5
 --- !u!114 &3686473613501710828
 MonoBehaviour:
   m_ObjectHideFlags: 0

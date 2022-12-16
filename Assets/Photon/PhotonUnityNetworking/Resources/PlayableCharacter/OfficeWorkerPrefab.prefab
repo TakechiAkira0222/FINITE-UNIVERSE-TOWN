@@ -91,8 +91,6 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -1813307833978500757, guid: bd12ac9b9cdd4204e8a04fd7b30165c3, type: 2}
-    value: {fileID: 7658016869392991290}
   - key: {fileID: -6775589968434385302, guid: bd12ac9b9cdd4204e8a04fd7b30165c3, type: 2}
     value: {fileID: 3663181739943255320}
   - key: {fileID: -1759029272478294311, guid: bd12ac9b9cdd4204e8a04fd7b30165c3, type: 2}
@@ -124,11 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceea9902e1aaf0a459b4571e93018c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 5073625528955666879}
+  m_characterStatusManagement: {fileID: 2039010258180462384}
   m_thisPhotnView: {fileID: 2873905185444241462}
   m_networkRendererAnimator: {fileID: 958558028545424994}
   m_handOnlyAnimator: {fileID: 3014455638564392100}
-  m_rb: {fileID: 2037446226172594413}
   m_NotAttackAnimation: 0
   m_NotDeathblowAnimation: 0
 --- !u!114 &4624134597785962266
@@ -143,8 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b84c70cbb3b194f8fd94219be71150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 5073625528955666879}
-  m_rb: {fileID: 2037446226172594413}
+  m_characterStatusManagement: {fileID: 2039010258180462384}
 --- !u!114 &2873905185444241462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +208,7 @@ GameObject:
   - component: {fileID: 771002715565279975}
   - component: {fileID: 5236288481415311350}
   - component: {fileID: 6805313547298386280}
-  - component: {fileID: 5073625528955666879}
+  - component: {fileID: 2039010258180462384}
   - component: {fileID: 8179961699206036224}
   - component: {fileID: 771002715565279968}
   - component: {fileID: 771002715565279969}
@@ -350,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_keyCode: 282
   m_debugCanvas: {fileID: 5641858479900614812}
---- !u!114 &5073625528955666879
+--- !u!114 &2039010258180462384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,13 +355,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 771002715565279974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 470ea4469864c574295d024428c6d9c3, type: 3}
+  m_Script: {fileID: 11500000, guid: dd127ffb54fdf584ebc0d44c896fd495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
   m_photonView: {fileID: 2465221268226511880}
-  m_rb: {fileID: 2037446226172594413}
+  m_avater: {fileID: 464520793065001613}
   m_collider: {fileID: 1952776157070901584}
+  m_rb: {fileID: 2037446226172594413}
+  m_mainCamera: {fileID: 5552820265289443309}
+  m_officeWorkerSpecificParameters: {fileID: 11400000, guid: fd95e28672d37c6448e1f4995b743c0a, type: 2}
 --- !u!114 &8179961699206036224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69830e38dd584ad499d0ed7b9a590163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 5073625528955666879}
+  m_characterStatusManagement: {fileID: 2039010258180462384}
   m_showOnlyMyEnvironment:
   - {fileID: 5552820265289443297}
   - {fileID: 3761353672740237151}
@@ -399,8 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6caf6d99e3580e949b919f108a74a554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 5073625528955666879}
-  m_rb: {fileID: 2037446226172594413}
+  m_characterStatusManagement: {fileID: 2039010258180462384}
   m_movementVector: {x: 0, y: 0, z: 0}
   m_movementVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &771002715565279969
@@ -415,9 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8ecaf5144b73644985c413ae778806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 5073625528955666879}
-  m_mainCamera: {fileID: 5552820265289443309}
-  m_character: {fileID: 464520793065001613}
+  m_characterStatusManagement: {fileID: 2039010258180462384}
 --- !u!114 &771002715565279996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,8 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152b0975baa0410488640f2d960f72f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 5073625528955666879}
-  m_rb: {fileID: 2037446226172594413}
+  m_characterStatusManagement: {fileID: 2039010258180462384}
 --- !u!114 &2465221268226511880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +648,11 @@ PrefabInstance:
     - target: {fileID: 1462956121723582944, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_characterStatusManagement
       value: 
-      objectReference: {fileID: 5073625528955666879}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462956121723582944, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_officeWorkerStatusManagement
+      value: 
+      objectReference: {fileID: 2039010258180462384}
     - target: {fileID: 6018737882793698759, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_sword
       value: 
@@ -663,13 +662,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2037446226172594413}
     - target: {fileID: 6018737882793698759, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_swordObject
+      value: 
+      objectReference: {fileID: 3017449322883736188}
+    - target: {fileID: 6018737882793698759, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_swordEffectTrail
       value: 
       objectReference: {fileID: 5600064855182701186}
     - target: {fileID: 6018737882793698759, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_characterStatusManagement
       value: 
-      objectReference: {fileID: 5073625528955666879}
+      objectReference: {fileID: 2039010258180462384}
     - target: {fileID: 6064910895561636209, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1503,6 +1506,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9141903994428671086}
     m_Modifications:
+    - target: {fileID: 602084668503009744, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_characterStatus
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 602084668503009744, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_characterStatusManagement
+      value: 
+      objectReference: {fileID: 2039010258180462384}
     - target: {fileID: 4126840091476003194, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
       value: 2

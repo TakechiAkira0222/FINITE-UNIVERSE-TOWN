@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Photon.Pun;
 using Takechi.CharacterController.BasicAnimation.Movement;
+
+using Takechi.ScriptReference.CustomPropertyKey;
 using Takechi.ScriptReference.AnimationParameter;
 using Takechi.ScriptReference.DamagesThePlayerObject;
-using Takechi.CharacterController.Parameters;
+
 using System;
-using Takechi.ScriptReference.CustomPropertyKey;
+using Photon.Pun;
 
 namespace Takechi.CharacterController.BasicAnimation.Damage
 {
@@ -25,7 +26,7 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
         {
             base.Awake();
 
-            m_damageAnimationAction = (animator, parameter) =>
+            m_damageAnimationAction = ( animator, parameter) =>
             {
                 animator.SetFloat(ReferencingTheAnimationParameterName.s_DamageforceParameterName, parameter);
             };
@@ -40,14 +41,14 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
 
         protected override void Update()
         {
-            if (!characterStatusManagement.PhotonView.IsMine) return;
+            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             base.Update();
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!characterStatusManagement.PhotonView.IsMine) return;
+            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             if (collision.gameObject.tag == ObjectReferenceThatDamagesThePlayer.s_PlayerCharacterWeaponTagName)
             {
@@ -57,7 +58,7 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
                 float power = 
                     (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower];
 
-                m_thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+                thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
             }
 
             foreach (string s in ObjectReferenceThatDamagesThePlayer.s_DamagesThePlayerObjectNameList)
@@ -66,16 +67,16 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
                 {
                     float power = ObjectReferenceThatDamagesThePlayer.s_DamageObjectPowerDictionary[s];
 
-                    m_thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+                    thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
                 }
             }
         }
 
         private void OnCollisionExit(Collision collision)
         {
-            if (!characterStatusManagement.PhotonView.IsMine) return;
+            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
 
-            m_thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, 0f);
+            thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, 0f);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -95,7 +96,7 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
         [PunRPC]
         protected void RPC_DamageAnimationSetFloat(float power)
         {
-            m_damageAnimationAction(m_networkRendererAnimator, power);
+            m_damageAnimationAction(networkRendererAnimator, power);
         }
 
         #endregion

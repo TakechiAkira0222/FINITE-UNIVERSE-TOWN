@@ -15,13 +15,12 @@ namespace Takechi.CharacterController.ViewpointOperation
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
-        [Header("=== ScriptSetting ===")]
-        [SerializeField] private Camera m_mainCamera;
-        [SerializeField] private GameObject m_character;
-
         #endregion
+
         #region private
 
+        private GameObject m_avater => m_characterStatusManagement.GetMyAvater();
+        private Camera m_mainCamera => m_characterStatusManagement.GetMyMainCamera();
         private Quaternion m_cameraRot, m_characterRot;
 
         #endregion
@@ -58,12 +57,12 @@ namespace Takechi.CharacterController.ViewpointOperation
         void Start()
         {
             m_cameraRot = m_mainCamera.transform.localRotation;
-            m_characterRot = m_character.transform.localRotation;
+            m_characterRot = m_avater.transform.localRotation;
         }
 
         protected  virtual void Update()
         {
-            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             m_viewpointOperationControll();
         }
@@ -83,7 +82,7 @@ namespace Takechi.CharacterController.ViewpointOperation
                 ClampRotation( m_cameraRot, limitedToCamera.minX, limitedToCamera.maxX);
 
             m_mainCamera.transform.localRotation = m_cameraRot;
-            m_character.transform.localRotation = m_characterRot;
+            m_avater.transform.localRotation = m_characterRot;
         }
 
         #endregion

@@ -4,6 +4,7 @@ using Takechi.CharacterController.Jump;
 using Takechi.CharacterController.Movement;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.ViewpointOperation;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -12,14 +13,15 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
     public class OfficeWorkerHandOnlyDeathblowAnimationEventManager : MonoBehaviour
     {
         #region SerializeField
-        [Header("=== CharacterStatusManagement ===")]
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+        [Header("=== OfficeWorkerStatusManagement ===")]
+        [SerializeField] private OfficeWorkerStatusManagement m_officeWorkerStatusManagement;
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PlayableDirector m_playableDirector;
         [SerializeField] private CharacterBasicMovement m_basicMovement;
         [SerializeField] private CharacterBasicJump m_basicJump;
         [SerializeField] private CharacterBasicViewpointOperation m_basicViewpoint;
+        [SerializeField] private GameObject m_handOnlyModel;
 
         #endregion
 
@@ -27,7 +29,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
         private void Awake()
         {
-            m_playableDirector.played += Director_Played;
+            m_playableDirector.played +=  Director_Played;
             m_playableDirector.stopped += Director_Stopped;
         }
 
@@ -37,6 +39,11 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         void OfficeWorkerDeathblowStart()
         {
             m_playableDirector.Play();
+
+            if (m_officeWorkerStatusManagement.photonView.IsMine)
+            {
+                m_handOnlyModel.gameObject.SetActive(false);
+            }
         }
 
         // <summary>
@@ -44,7 +51,14 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         // </summary>
         void OfficeWorkerDeathblowEnd()
         {
+            if (m_officeWorkerStatusManagement.photonView.IsMine)
+            {
+                m_handOnlyModel.gameObject.SetActive(true);
 
+                ActivationStatusManagement();
+
+                Invoke(nameof( ExitStatusManagement) , m_officeWorkerStatusManagement.GetSpecialMoveDuration_Seconds());
+            }
         }
 
         #endregion
@@ -62,5 +76,27 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             m_basicMovement.enabled = false;
             m_basicViewpoint.enabled = false;
         }
+
+
+        #region recursive function
+        private void ActivationStatusManagement()
+        {
+            m_officeWorkerStatusManagement.UpdateAttackPower(m_officeWorkerStatusManagement.GetAttackPowerIncrease());
+            m_officeWorkerStatusManagement.UpdateMovingSpeed(m_officeWorkerStatusManagement.GetMoveingSpeedIncrease());
+            m_officeWorkerStatusManagement.UpdateJumpPower(m_officeWorkerStatusManagement.GetJumpPowerIncrease());
+
+            m_officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
+        }
+
+        private void ExitStatusManagement()
+        {
+            m_officeWorkerStatusManagement.UpdateAttackPower(-m_officeWorkerStatusManagement.GetAttackPowerIncrease());
+            m_officeWorkerStatusManagement.UpdateMovingSpeed(-m_officeWorkerStatusManagement.GetMoveingSpeedIncrease());
+            m_officeWorkerStatusManagement.UpdateJumpPower(-m_officeWorkerStatusManagement.GetJumpPowerIncrease());
+
+            m_officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
+        }
+
+        #endregion
     }
 }

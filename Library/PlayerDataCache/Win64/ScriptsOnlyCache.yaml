@@ -13,7 +13,9 @@ ScriptsOnlyBuild:
     - Takechi.CharacterController.Jump.CharacterBasicJump
     - Takechi.CharacterController.Movement.CharacterBasicMovement
     - Takechi.CharacterController.Parameters.CharacterStatusManagement
+    - Takechi.CharacterController.Parameters.OfficeWorkerStatusManagement
     - Takechi.CharacterController.Parameters.PlayableCharacterParameters
+    - Takechi.CharacterController.SpecificParameters.OfficeWorker.OfficeWorkerSpecificParameters
     - Takechi.CharacterController.ViewpointOperation.CharacterBasicViewpointOperation
     - Takechi.DebugView.AddDebugView
     - Takechi.DebugView.DebugTextViewController
@@ -89,10 +91,6 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.Universal.XRSystemData
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
-    Unity.Timeline.Editor.dll:
-    - TimelinePreferences
-    - UnityEditor.Timeline.SequenceHierarchy
-    - UnityEditor.Timeline.TimelineWindow
     Unity.Timeline.dll:
     - UnityEngine.Timeline.ActivationPlayableAsset
     - UnityEngine.Timeline.ActivationTrack
@@ -315,8 +313,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5208}
     - Class: 114
-      Script: {instanceID: 5698}
-    - Class: 114
       Script: {instanceID: 5962}
     - Class: 114
       Script: {instanceID: 5994}
@@ -335,19 +331,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6804}
     - Class: 114
-      Script: {instanceID: 6834}
+      Script: {instanceID: 6806}
     - Class: 114
-      Script: {instanceID: 6990}
+      Script: {instanceID: 6836}
     - Class: 114
-      Script: {instanceID: 7352}
+      Script: {instanceID: 6992}
     - Class: 114
-      Script: {instanceID: 7414}
+      Script: {instanceID: 7354}
     - Class: 114
-      Script: {instanceID: 7726}
+      Script: {instanceID: 7416}
     - Class: 114
-      Script: {instanceID: 7816}
+      Script: {instanceID: 7728}
     - Class: 114
-      Script: {instanceID: 7878}
+      Script: {instanceID: 7818}
+    - Class: 114
+      Script: {instanceID: 7880}
+    - Class: 114
+      Script: {instanceID: 7982}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -500,21 +500,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6804}
     - Class: 114
-      Script: {instanceID: 6834}
+      Script: {instanceID: 6836}
     - Class: 114
-      Script: {instanceID: 6990}
+      Script: {instanceID: 6992}
     - Class: 114
-      Script: {instanceID: 7056}
+      Script: {instanceID: 7058}
     - Class: 114
-      Script: {instanceID: 7118}
+      Script: {instanceID: 7120}
     - Class: 114
-      Script: {instanceID: 7658}
+      Script: {instanceID: 7660}
     - Class: 114
-      Script: {instanceID: 7878}
+      Script: {instanceID: 7880}
     - Class: 114
-      Script: {instanceID: 8034}
+      Script: {instanceID: 8038}
     - Class: 114
-      Script: {instanceID: 8116}
+      Script: {instanceID: 8122}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -745,31 +745,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6804}
     - Class: 114
-      Script: {instanceID: 6834}
+      Script: {instanceID: 6806}
     - Class: 114
-      Script: {instanceID: 6990}
+      Script: {instanceID: 6836}
     - Class: 114
-      Script: {instanceID: 7056}
+      Script: {instanceID: 6992}
     - Class: 114
-      Script: {instanceID: 7118}
+      Script: {instanceID: 7058}
     - Class: 114
-      Script: {instanceID: 7414}
+      Script: {instanceID: 7120}
     - Class: 114
-      Script: {instanceID: 7658}
+      Script: {instanceID: 7416}
     - Class: 114
-      Script: {instanceID: 7726}
+      Script: {instanceID: 7660}
     - Class: 114
-      Script: {instanceID: 7734}
+      Script: {instanceID: 7728}
     - Class: 114
-      Script: {instanceID: 7816}
+      Script: {instanceID: 7736}
     - Class: 114
-      Script: {instanceID: 7878}
+      Script: {instanceID: 7818}
     - Class: 114
-      Script: {instanceID: 7922}
+      Script: {instanceID: 7880}
     - Class: 114
-      Script: {instanceID: 7972}
+      Script: {instanceID: 7924}
     - Class: 114
-      Script: {instanceID: 8116}
+      Script: {instanceID: 7974}
+    - Class: 114
+      Script: {instanceID: 7982}
+    - Class: 114
+      Script: {instanceID: 8122}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -916,8 +920,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5208}
     - Class: 114
-      Script: {instanceID: 5698}
-    - Class: 114
       Script: {instanceID: 5962}
     - Class: 114
       Script: {instanceID: 5994}
@@ -936,17 +938,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6804}
     - Class: 114
-      Script: {instanceID: 6834}
+      Script: {instanceID: 6806}
     - Class: 114
-      Script: {instanceID: 7352}
+      Script: {instanceID: 6836}
     - Class: 114
-      Script: {instanceID: 7414}
+      Script: {instanceID: 7354}
     - Class: 114
-      Script: {instanceID: 7726}
+      Script: {instanceID: 7416}
     - Class: 114
-      Script: {instanceID: 7816}
+      Script: {instanceID: 7728}
     - Class: 114
-      Script: {instanceID: 7878}
+      Script: {instanceID: 7818}
+    - Class: 114
+      Script: {instanceID: 7880}
+    - Class: 114
+      Script: {instanceID: 7982}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1138,7 +1144,7 @@ ScriptsOnlyBuild:
     className: OnPointerOverTooltip
   - hash:
       serializedVersion: 2
-      Hash: 371696ba6c9ccdd1ec00743122fe61d2
+      Hash: a9e0b2a81f4e9a62f880f728f6fb4fb0
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.Movement
     className: CharacterBasicMovement
@@ -1318,7 +1324,7 @@ ScriptsOnlyBuild:
     className: ConnectAndJoinRandom
   - hash:
       serializedVersion: 2
-      Hash: 08dc8671449c0ee3d6507f0805be99fe
+      Hash: 03f380796f1ae0b44eb8f989359655d5
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.Jump
     className: CharacterBasicJump
@@ -1492,7 +1498,7 @@ ScriptsOnlyBuild:
     className: CinemachineMixingCamera
   - hash:
       serializedVersion: 2
-      Hash: d2bb55928bd0e72483a6e57d4c730704
+      Hash: 804f3d4361739b9474f9e53035fc198d
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.DeathblowAnimationEvent
     className: OfficeWorkerHandOnlyDeathblowAnimationEventManager
@@ -2116,7 +2122,7 @@ ScriptsOnlyBuild:
     className: PunPlayerScores
   - hash:
       serializedVersion: 2
-      Hash: cfb5a16e6fa1d63f630959c815d16328
+      Hash: bf6ce89d4dfccc60f50ed52e906aee20
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.Parameters
     className: CharacterStatusManagement
@@ -2194,13 +2200,13 @@ ScriptsOnlyBuild:
     className: WindowsNetworkDebugController
   - hash:
       serializedVersion: 2
-      Hash: e169b2f7ffd154fba23beba1ae75e3b5
+      Hash: 03f380796f1ae0b44eb8f989359655d5
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.DamageJudgment
     className: CharacterBasicDamageJudgment
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 0409d9d98e227c13eeec303098dabe37
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.DeathblowAnimationEvent
     className: OfficeWorkerNetworkRendererDeathblowAnimationEventManager
@@ -2444,6 +2450,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 8c5c1e3cde371d9b81fc9269cb31708d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Takechi.CharacterController.Parameters
+    className: OfficeWorkerStatusManagement
   - hash:
       serializedVersion: 2
       Hash: 077d7a1ce695b2d9c1a625d4b1041035
@@ -2770,6 +2782,12 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerFoldout
   - hash:
       serializedVersion: 2
+      Hash: 2ead97f59a8196ac1ec7156e220ce1a3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Takechi.CharacterController.SpecificParameters.OfficeWorker
+    className: OfficeWorkerSpecificParameters
+  - hash:
+      serializedVersion: 2
       Hash: e1e615eaf73e560828f53edc8952e615
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -2786,6 +2804,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalEmitter
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Takechi.ScriptReference.CustomPropertyKey
+    className: CustomPropertyKeyReference
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -2829,4 +2853,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/CharacterSelectionSceneFolder/CharacterSelectionScene.unity
   - Assets/Scenes/FutureCitySceneFolder/FutureCityScene.unity
   - Assets/Scenes/TrainingGroundSceneFolder/TrainingGroundScene.unity
-  playerPath: D:/D/T_TestEXE/T_Project.exe
+  playerPath: D:/Desktop/T_PROJECT_EXE/T_Project.exe

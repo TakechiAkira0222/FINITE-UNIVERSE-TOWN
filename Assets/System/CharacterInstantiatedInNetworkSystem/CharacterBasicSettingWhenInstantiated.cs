@@ -12,7 +12,6 @@ namespace Takechi.NetworkInstantiation.Character
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
         [Header("=== ScriptSetting ===")]
-
         /// <summary>
         /// Ž©•ª‚Ì‚Ý•\Ž¦
         /// </summary>
@@ -33,7 +32,7 @@ namespace Takechi.NetworkInstantiation.Character
 
         void Start()
         {
-            if (m_characterStatusManagement.PhotonView.IsMine)
+            if (m_characterStatusManagement.GetMyPhotonView().IsMine)
             {
                 foreach (GameObject obj in m_showOnlyMyEnvironment)
                 {
@@ -70,7 +69,6 @@ namespace Takechi.NetworkInstantiation.Character
                 }
             }
 #endif
-
         }
     }
 }

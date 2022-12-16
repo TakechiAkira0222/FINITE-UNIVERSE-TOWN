@@ -10,22 +10,20 @@ namespace Takechi.CharacterController.Movement
     [RequireComponent(typeof(CharacterStatusManagement))]
     public class CharacterBasicMovement : MonoBehaviour
     {
-
         #region SerializeField
 
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
         [Header("=== ScriptSetting ===")]
-        [SerializeField] private Rigidbody  m_rb;
         [SerializeField] private Vector3    m_movementVector;
         [SerializeField] private Vector3    m_movementVelocity;
         
         #endregion
 
         #region private
-        private float       m_movementCleanSpeed => m_characterStatusManagement.MovingSpeed;
-        private float       m_lateralMovementRate => m_characterStatusManagement.LateralMovementRatio;
+        private float       m_movementCleanSpeed => m_characterStatusManagement.GetMovingSpeed();
+        private float       m_lateralMovementRate => m_characterStatusManagement.GetLateralMovementRatio();
 
         private float       m_movementSpeed = 5;
 
@@ -39,16 +37,17 @@ namespace Takechi.CharacterController.Movement
         #endregion
 
         #region GetProperty
+
         public Vector3 MovementVector => m_movementVector;
         public Vector3 MovementVelocity => m_movementVelocity;
 
         #endregion
 
         #region UnityEvent
+
         void Reset()
         {
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
-            m_rb = this.transform.GetComponent<Rigidbody>();
         }
 
         void Start()
@@ -64,7 +63,7 @@ namespace Takechi.CharacterController.Movement
 
         void Update()
         {
-            if (!m_characterStatusManagement.PhotonView.IsMine) return;
+            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             MovementControll();
             MovementSpeedChange();
@@ -72,10 +71,12 @@ namespace Takechi.CharacterController.Movement
 
         void FixedUpdate()
         {
-            m_rb.velocity = 
+            Vector3 velocityValue =
                 new Vector3( m_movementVelocity.x * m_movementSpeed * m_lateralMovementRate,
-                             m_rb.velocity.y,
+                             m_characterStatusManagement.GetMyRigidbody().velocity.y,
                              m_movementVelocity.z * m_movementSpeed);
+
+            m_characterStatusManagement.SetVelocity(velocityValue);
         }
 
         #endregion
@@ -90,14 +91,15 @@ namespace Takechi.CharacterController.Movement
         #endregion
 
         #region ControllFinctoin
+
         void MovementControll()
         {
             m_movementVector = 
                 new Vector3( Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
             m_movementVelocity =
-                 m_rb.gameObject.transform.forward * m_movementVector.z +
-                 m_rb.gameObject.transform.right * m_movementVector.x;
+                  m_characterStatusManagement.GetMyRigidbody().gameObject.transform.forward * m_movementVector.z +
+                  m_characterStatusManagement.GetMyRigidbody().gameObject.transform.right * m_movementVector.x;
 
             m_movementVelocity.Normalize();
         }
