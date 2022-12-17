@@ -21,28 +21,63 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// this photonViwe
         /// </summary>
-        [SerializeField] protected PhotonView m_photonView;
+        [SerializeField] private PhotonView m_thisPhotonView;
         /// <summary>
         /// main avater
         /// </summary>
-        [SerializeField] protected GameObject m_avater;
+        [SerializeField] private GameObject m_avater;
         /// <summary>
         /// main colloder
         /// </summary>
-        [SerializeField] protected Collider m_collider;
+        [SerializeField] private Collider m_mainCollider;
         /// <summary>
         /// main rb
         /// </summary>
-        [SerializeField] protected Rigidbody m_rb;
+        [SerializeField] private Rigidbody m_rb;
         /// <summary>
         /// main camera
         /// </summary>
-        [SerializeField] protected Camera m_mainCamera;
+        [SerializeField] private Camera m_mainCamera;
+        /// <summary>
+        /// hand only animetor
+        /// </summary>
+        [SerializeField] private Animator m_handOnlyAnimator;
+        /// <summary>
+        /// network model animator
+        /// </summary>
+        [SerializeField] private Animator m_networkModelAnimator;
 
         #endregion
 
         #region protected member variable
-
+        /// <summary>
+        /// this photonViwe
+        /// </summary>
+        protected PhotonView thisPhotonView => m_thisPhotonView;
+        /// <summary>
+        /// main avater
+        /// </summary>
+        protected GameObject avater => m_avater;
+        /// <summary>
+        /// main colloder
+        /// </summary>
+        protected Collider mainCollider => m_mainCollider;
+        /// <summary>
+        /// main rb
+        /// </summary>
+        protected Rigidbody rb => m_rb;
+        /// <summary>
+        /// main camera
+        /// </summary>
+        protected Camera mainCamera => m_mainCamera;
+        /// <summary>
+        /// hand only animetor
+        /// </summary>
+        protected Animator handOnlyAnimator => m_handOnlyAnimator;
+        /// <summary>
+        /// network model animator
+        /// </summary>
+        protected Animator networkModelAnimator => m_networkModelAnimator;
         /// <summary>
         /// local player custom properties
         /// </summary>
@@ -65,7 +100,7 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         protected float m_jumpPower;
         /// <summary>
-        /// éøó 
+        /// ä±è¬ÇéÛÇØÇƒÇ¢Ç»Ç¢éøó 
         /// </summary>
         protected float m_cleanMass => m_characterParameters.GetCleanMass();
 
@@ -73,7 +108,7 @@ namespace Takechi.CharacterController.Parameters
 
         protected virtual void Awake()
         {
-            if (!m_photonView.IsMine) return;
+            if (!thisPhotonView.IsMine) return;
 
             setupCharacterParameters();
 
@@ -87,11 +122,11 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private void setupCharacterParameters()
         {
-            SetMovingSpeed(m_characterParameters.GetSpeed());
-            SetLateralMovementRatio(m_characterParameters.GetLateralMovementRatio());
-            SetAttackPower(m_characterParameters.GetAttackPower());
-            SetJumpPower(m_characterParameters.GetJumpPower());
-            SetMass(m_characterParameters.GetCleanMass());
+            SetMovingSpeed( m_characterParameters.GetSpeed());
+            SetLateralMovementRatio( m_characterParameters.GetLateralMovementRatio());
+            SetAttackPower( m_characterParameters.GetAttackPower());
+            SetJumpPower( m_characterParameters.GetJumpPower());
+            SetMass( m_characterParameters.GetCleanMass());
 
             Debug.Log($"<color=green> settingCharacterParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
@@ -133,8 +168,8 @@ namespace Takechi.CharacterController.Parameters
         public void SetLateralMovementRatio(float changeValue){ m_lateralMovementRatio = changeValue;}
         public void SetAttackPower(float changeValue) { m_attackPower = changeValue; }
         public void SetJumpPower(float changeValue) { m_jumpPower = changeValue; }
-        public void SetMass(float changeValue) { m_rb.mass = changeValue; }
-        public void SetVelocity(Vector3 velocityValue) { m_rb.velocity = velocityValue; }
+        public void SetMass(float changeValue) { rb.mass = changeValue; }
+        public void SetVelocity(Vector3 velocityValue) { rb.velocity = velocityValue; }
 
         #endregion
 
@@ -143,7 +178,7 @@ namespace Takechi.CharacterController.Parameters
         public bool  GetIsGrounded()
         {
             Ray ray =
-                   new Ray( m_rb.gameObject.transform.position + new Vector3( 0, 0.1f),
+                   new Ray( rb.gameObject.transform.position + new Vector3( 0, 0.1f),
                             Vector3.down * 0.1f);
 
             RaycastHit raycastHit;
@@ -164,11 +199,13 @@ namespace Takechi.CharacterController.Parameters
         public float GetAttackPower() { return m_attackPower; }
         public float GetJumpPower() { return m_jumpPower; }
         public float GetCleanMass() { return m_characterParameters.GetCleanMass(); }
-        public PhotonView GetMyPhotonView() { return m_photonView; }
-        public Rigidbody  GetMyRigidbody() { return m_rb; }
-        public Collider   GetMyCollider() { return m_collider; }
-        public GameObject GetMyAvater() { return m_avater; }
-        public Camera     GetMyMainCamera() { return m_mainCamera; }
+        public PhotonView GetMyPhotonView() { return thisPhotonView; }
+        public Rigidbody  GetMyRigidbody() { return rb; }
+        public Collider   GetMyCollider() { return mainCollider; }
+        public GameObject GetMyAvater() { return avater; }
+        public Camera     GetMyMainCamera() { return mainCamera; }
+        public Animator GetHandOnlyAnimater() { return handOnlyAnimator; }
+        public Animator GetNetworkModelAnimator() { return networkModelAnimator; }
 
         #endregion
 
@@ -216,16 +253,16 @@ namespace Takechi.CharacterController.Parameters
 
         public float UpdateMass(float changeValue)
         {
-            if (m_rb.mass + changeValue <= 1)
+            if (rb.mass + changeValue <= 1)
             {
-                m_rb.mass = 1;
-                Debug.Log($"{m_rb.mass} : {1}");
+                rb.mass = 1;
+                Debug.Log($"{rb.mass} : {1}");
                 return 1;
             }
             else
             {
-                Debug.Log($"{m_rb.mass} : {m_rb.mass + changeValue}");
-                return m_rb.mass += changeValue;
+                Debug.Log($"{rb.mass} : {rb.mass + changeValue}");
+                return rb.mass += changeValue;
             }
         }
 
@@ -250,7 +287,7 @@ namespace Takechi.CharacterController.Parameters
                       $" m_movingSpeed = {m_movingSpeed}\n" +
                       $" m_attackPower = {m_attackPower}\n" +
                       $" m_jumpPower = {m_jumpPower}\n" +
-                      $" m_mass = {m_rb.mass}\n"
+                      $" m_mass = {rb.mass}\n"
                       );
         }
 

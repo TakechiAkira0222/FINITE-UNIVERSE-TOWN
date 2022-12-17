@@ -19,8 +19,6 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PhotonView m_thisPhotnView;
-        [SerializeField] private Animator   m_networkRendererAnimator;
-        [SerializeField] private Animator   m_handOnlyAnimator;
         [SerializeField] private bool       m_NotAttackAnimation = false;
         [SerializeField] private bool       m_NotDeathblowAnimation = false;
         #endregion
@@ -28,7 +26,8 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         #region protected
         protected CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
         protected PhotonView thisPhotnView => m_thisPhotnView;
-        protected Animator   networkRendererAnimator => m_networkRendererAnimator;
+        protected Animator   networkModelAnimator => m_characterStatusManagement.GetNetworkModelAnimator();
+        protected Animator   handOnlyAnimator => m_characterStatusManagement.GetHandOnlyAnimater();
         protected Rigidbody  rb => m_characterStatusManagement.GetMyRigidbody();
         #endregion
 
@@ -44,8 +43,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         #region UnityEvent
         void Reset()
         {
-            m_thisPhotnView           = this.GetComponent<PhotonView>();
-            m_networkRendererAnimator = this.transform.GetComponent<Animator>();
+            m_thisPhotnView = this.GetComponent<PhotonView>();
         }
 
         protected virtual void Awake()
@@ -96,19 +94,19 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         {
             if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
 
-            m_movementAnimatoinAction(m_handOnlyAnimator);
-            m_movementAnimatoinAction(m_networkRendererAnimator);
+            m_movementAnimatoinAction(handOnlyAnimator);
+            m_movementAnimatoinAction(networkModelAnimator);
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                m_dashAnimationAction(m_networkRendererAnimator, 1);
-                m_dashAnimationAction(m_handOnlyAnimator, 1);
+                m_dashAnimationAction(networkModelAnimator, 1);
+                m_dashAnimationAction(handOnlyAnimator, 1);
             }
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                m_dashAnimationAction(m_networkRendererAnimator, 0);
-                m_dashAnimationAction(m_handOnlyAnimator, 0);
+                m_dashAnimationAction(networkModelAnimator, 0);
+                m_dashAnimationAction(handOnlyAnimator, 0);
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && m_characterStatusManagement.GetIsGrounded())
@@ -133,22 +131,22 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         [PunRPC]
         protected void RPC_AttackAnimationTrigger()
         {
-            m_attackAnimationAction(m_networkRendererAnimator);
-            m_attackAnimationAction(m_handOnlyAnimator);
+            m_attackAnimationAction(networkModelAnimator);
+            m_attackAnimationAction(handOnlyAnimator);
         }
 
         [PunRPC]
         protected void RPC_JumpingAnimationTrigger()
         {
-            m_jumpingAnimationAction(m_networkRendererAnimator);
-            m_jumpingAnimationAction(m_handOnlyAnimator);
+            m_jumpingAnimationAction(networkModelAnimator);
+            m_jumpingAnimationAction(handOnlyAnimator);
         }
 
         [PunRPC]
         protected void RPC_DeathblowAnimationTrigger()
         {
-            m_deathblowAnimationAction(m_networkRendererAnimator);
-            m_deathblowAnimationAction(m_handOnlyAnimator);
+            m_deathblowAnimationAction(networkModelAnimator);
+            m_deathblowAnimationAction(handOnlyAnimator);
         }
 
         #endregion

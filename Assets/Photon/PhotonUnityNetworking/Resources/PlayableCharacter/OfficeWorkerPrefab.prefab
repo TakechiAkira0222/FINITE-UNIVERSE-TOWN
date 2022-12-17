@@ -124,8 +124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 2039010258180462384}
   m_thisPhotnView: {fileID: 2873905185444241462}
-  m_networkRendererAnimator: {fileID: 958558028545424994}
-  m_handOnlyAnimator: {fileID: 3014455638564392100}
   m_NotAttackAnimation: 0
   m_NotDeathblowAnimation: 0
 --- !u!114 &4624134597785962266
@@ -209,6 +207,7 @@ GameObject:
   - component: {fileID: 5236288481415311350}
   - component: {fileID: 6805313547298386280}
   - component: {fileID: 2039010258180462384}
+  - component: {fileID: 6726275407936802093}
   - component: {fileID: 8179961699206036224}
   - component: {fileID: 771002715565279968}
   - component: {fileID: 771002715565279969}
@@ -359,12 +358,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
-  m_photonView: {fileID: 2465221268226511880}
+  m_thisPhotonView: {fileID: 2465221268226511880}
   m_avater: {fileID: 464520793065001613}
-  m_collider: {fileID: 1952776157070901584}
+  m_mainCollider: {fileID: 1952776157070901584}
   m_rb: {fileID: 2037446226172594413}
   m_mainCamera: {fileID: 5552820265289443309}
+  m_handOnlyAnimator: {fileID: 3014455638564392100}
+  m_networkModelAnimator: {fileID: 958558028545424994}
   m_officeWorkerSpecificParameters: {fileID: 11400000, guid: fd95e28672d37c6448e1f4995b743c0a, type: 2}
+--- !u!114 &6726275407936802093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771002715565279974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc51eb14f3ad32499a4d0694227ab9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterStatusManagement: {fileID: 2039010258180462384}
 --- !u!114 &8179961699206036224
 MonoBehaviour:
   m_ObjectHideFlags: 0

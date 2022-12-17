@@ -96,7 +96,7 @@ namespace Takechi.CharacterController.BasicAnimation.Damage
         [PunRPC]
         protected void RPC_DamageAnimationSetFloat(float power)
         {
-            m_damageAnimationAction(networkRendererAnimator, power);
+            m_damageAnimationAction(networkModelAnimator, power);
         }
 
         #endregion

@@ -33,7 +33,7 @@ namespace Takechi.CharacterController.Parameters
         {
             base.Awake();
 
-            if (!base.m_photonView.IsMine) return;
+            if (!base.thisPhotonView.IsMine) return;
 
             setupOfficeWorkerSpecificParameters();
         }
@@ -55,7 +55,7 @@ namespace Takechi.CharacterController.Parameters
                       $" NickName : { PhotonNetwork.LocalPlayer.NickName} \n" +
                       $" m_moveingSpeedIncrease = { m_movingSpeed}\n" +
                       $" m_jumpPowerIncrease    = { m_attackPower}\n" +
-                      $" m_attackPowerIncrease  = { m_rb.mass}\n"
+                      $" m_attackPowerIncrease  = { rb.mass}\n"
                       );
         }
 
