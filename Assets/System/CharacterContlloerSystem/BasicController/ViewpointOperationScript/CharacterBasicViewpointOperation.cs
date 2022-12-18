@@ -1,6 +1,8 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -14,14 +16,18 @@ namespace Takechi.CharacterController.ViewpointOperation
 
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+        [Header("=== CharacterKeyInputStateManagement ===")]
+        [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
 
         #endregion
 
         #region private
+        private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
+        private GameObject avater => characterStatusManagement.GetMyAvater();
+        private Camera mainCamera => characterStatusManagement.GetMyMainCamera();
 
-        private GameObject m_avater => m_characterStatusManagement.GetMyAvater();
-        private Camera m_mainCamera => m_characterStatusManagement.GetMyMainCamera();
-        private Quaternion m_cameraRot, m_characterRot;
+        private Quaternion cameraRot, characterRot;
 
         #endregion
 
@@ -37,52 +43,46 @@ namespace Takechi.CharacterController.ViewpointOperation
 
         #endregion
 
-        #region EventAction
-
-        protected Action m_viewpointOperationControll = delegate { };
-
-        #endregion
-
         #region UnityEvent
         void Reset()
         {
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
         }
 
-        void Awake()
-        {
-            m_viewpointOperationControll += CameraInput;
-        }
-
         void Start()
         {
-            m_cameraRot = m_mainCamera.transform.localRotation;
-            m_characterRot = m_avater.transform.localRotation;
+            cameraRot = mainCamera.transform.localRotation;
+            characterRot = avater.transform.localRotation;
         }
 
-        protected  virtual void Update()
+        private void OnEnable()
         {
-            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
+            characterKeyInputStateManagement.InputToViewpoint += (characterStatusManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToViewpoint function <color=green>to add.</color>");
+        }
 
-            m_viewpointOperationControll();
+        private void OnDisable()
+        {
+            characterKeyInputStateManagement.InputToViewpoint -= (characterStatusManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToViewpoint function <color=green>to remove.</color>");
         }
 
         #endregion
 
         #region ViewpointOperationControll
-        private void CameraInput()
+        private void CameraControll(float mouseX, float mouseY) 
         {
-            float xRot = Input.GetAxis("Mouse X") * limitedToCamera.Ysensityvity;
-            float yRot = Input.GetAxis("Mouse Y") * limitedToCamera.Xsensityvity;
+            float xRot = mouseX * limitedToCamera.Ysensityvity;
+            float yRot = mouseY * limitedToCamera.Xsensityvity;
 
-            m_cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-            m_characterRot *= Quaternion.Euler(0, xRot, 0);
+            cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+            characterRot *= Quaternion.Euler(0, xRot, 0);
 
-            m_cameraRot =
-                ClampRotation( m_cameraRot, limitedToCamera.minX, limitedToCamera.maxX);
+            cameraRot =
+                ClampRotation( cameraRot, limitedToCamera.minX, limitedToCamera.maxX);
 
-            m_mainCamera.transform.localRotation = m_cameraRot;
-            m_avater.transform.localRotation = m_characterRot;
+            mainCamera.transform.localRotation = cameraRot;
+            avater.transform.localRotation = characterRot;
         }
 
         #endregion

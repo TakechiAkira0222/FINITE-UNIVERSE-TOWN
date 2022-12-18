@@ -36,7 +36,7 @@ namespace Takechi.CharacterController.Parameters
         [SerializeField, Tooltip("アビリティー3の回復時間")]
         private float m_ability3_RecoveryTime_Seconds = 30;
         [SerializeField, Tooltip("必殺技回復時間")]
-        private float m_specialMoveRecoveryTime_Seconds = 60;
+        private float m_deathblow_RecoveryTime_Seconds = 60;
         #endregion
 
         public enum TypeOfCharacterParameters
@@ -92,6 +92,26 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         /// <returns> 干渉を受けていない質量を返します。</returns>
         public float GetCleanMass() { return m_cleanMass; }
+        /// <summary>
+        /// アビリティー1の回復時間
+        /// </summary>
+        /// <returns></returns>
+        public float GetAbility1_RecoveryTime_Seconds() { return m_ability1_RecoveryTime_Seconds; }
+        /// <summary>
+        /// アビリティー2の回復時間
+        /// </summary>
+        /// <returns></returns>
+        public float GetAbility2_RecoveryTime_Seconds() { return m_ability2_RecoveryTime_Seconds; }
+        /// <summary>
+        /// アビリティー3の回復時間
+        /// </summary>
+        /// <returns></returns>
+        public float GetAbility3_RecoveryTime_Seconds() { return m_ability3_RecoveryTime_Seconds; }
+        /// <summary>
+        /// 必殺技回復時間
+        /// </summary>
+        /// <returns></returns>
+        public float GetDeathblow_RecoveryTime_Seconds() { return m_deathblow_RecoveryTime_Seconds; }
 
         #endregion
     }

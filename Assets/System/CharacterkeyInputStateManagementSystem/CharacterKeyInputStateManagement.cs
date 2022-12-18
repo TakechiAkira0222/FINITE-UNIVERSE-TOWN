@@ -4,22 +4,28 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Takechi.CharacterController.Parameters;
+using Takechi.ScriptReference.AnimationParameter;
 using UnityEngine;
+using UnityEngine.SearchService;
 
 namespace Takechi.CharacterController.KeyInputStete
 {
     [RequireComponent(typeof(CharacterStatusManagement))]
     public class CharacterKeyInputStateManagement : MonoBehaviour
     {
+        [Header("=== CharacterKeyInputStateManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
         private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        private bool m_operation = true;
 
-        public event Action<CharacterStatusManagement> GetKeyDownLeftShift = delegate { };
-        public event Action<CharacterStatusManagement> GetKeyUpLeftShift   = delegate { };
-        public event Action<CharacterStatusManagement> GetKeyDownSpace   = delegate { };
-        public event Action<CharacterStatusManagement> GetMouseButtonDown = delegate { };
-        public event Action<CharacterStatusManagement> GetKeyDownKeyCodeQ = delegate { };
+        public event Action<CharacterStatusManagement> InputToStartDash = delegate { };
+        public event Action<CharacterStatusManagement> InputToStopDash   = delegate { };
+        public event Action<CharacterStatusManagement> InputToJump = delegate { };
+        public event Action<CharacterStatusManagement> InputToNormalAttack = delegate { };
+        public event Action<CharacterStatusManagement> InputToDeathblow = delegate { };
+        public event Action<CharacterStatusManagement, float ,float> InputToMovement = delegate { };
+        public event Action<CharacterStatusManagement, float ,float> InputToViewpoint = delegate { };
 
         void Reset()
         {
@@ -29,12 +35,25 @@ namespace Takechi.CharacterController.KeyInputStete
         void Update()
         {
             if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!m_operation) return;
 
-            if (Input.GetKeyDown(KeyCode.LeftShift)) { GetKeyDownLeftShift(characterStatusManagement); }
-            if (Input.GetKeyUp(KeyCode.LeftShift)) { GetKeyUpLeftShift(characterStatusManagement); }
-            if (Input.GetKeyDown(KeyCode.Space) && characterStatusManagement.GetIsGrounded()) { GetKeyDownSpace(characterStatusManagement);}
-            if (Input.GetMouseButtonDown(0)) { GetMouseButtonDown(characterStatusManagement); }
-            if (Input.GetKeyDown(KeyCode.Q)) { GetKeyDownKeyCodeQ(characterStatusManagement); }
+            if (Input.GetKey(KeyCode.LeftShift)) { InputToStartDash(characterStatusManagement); }
+            else { InputToStopDash(characterStatusManagement); }
+
+            if (Input.GetKeyDown(KeyCode.Space) && characterStatusManagement.GetIsGrounded()) { InputToJump(characterStatusManagement);}
+            if (Input.GetMouseButtonDown(0)) { InputToNormalAttack(characterStatusManagement); }
+            if (Input.GetKeyDown(KeyCode.Q) && characterStatusManagement.GetCanUseDeathblow()) { InputToDeathblow(characterStatusManagement); }
+
+            InputToMovement(characterStatusManagement, Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            InputToViewpoint(characterStatusManagement, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
+
+        public void StopInput() 
+        { 
+            m_operation = false;
+            InputToMovement(characterStatusManagement, 0, 0);
+            InputToViewpoint(characterStatusManagement, 0, 0);
+        }
+        public void StartInput() { m_operation = true; }
     }
 }

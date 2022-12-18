@@ -156,6 +156,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6bc396ef6f62d4696a205c4964c199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &702360284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5660571831084721840, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
+  m_PrefabInstance: {fileID: 2640404583997774196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc51eb14f3ad32499a4d0694227ab9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &806644125
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,39 +310,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d5937ecfa84acd46bc2193cb78041c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1886408002 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3321333361694504828, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
-  m_PrefabInstance: {fileID: 2640404583997774196}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 152b0975baa0410488640f2d960f72f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1886408003 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3321333361694504801, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
-  m_PrefabInstance: {fileID: 2640404583997774196}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e8ecaf5144b73644985c413ae778806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1886408004 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3321333361694504800, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
-  m_PrefabInstance: {fileID: 2640404583997774196}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6caf6d99e3580e949b919f108a74a554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2640404583997774196
@@ -732,25 +710,29 @@ PrefabInstance:
       value: InputScriptInterfaceInstance
       objectReference: {fileID: 0}
     - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
+      propertyPath: m_useInputClassName.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
       propertyPath: m_useInputClassName.Array.data[0]
-      value: 
-      objectReference: {fileID: 1886408004}
-    - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
-      propertyPath: m_useInputClassName.Array.data[1]
-      value: 
-      objectReference: {fileID: 1886408003}
-    - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
-      propertyPath: m_useInputClassName.Array.data[2]
-      value: 
-      objectReference: {fileID: 1886408002}
-    - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
-      propertyPath: m_useInputClassName.Array.data[3]
       value: 
       objectReference: {fileID: 169667285}
     - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
-      propertyPath: m_useInputClassName.Array.data[4]
+      propertyPath: m_useInputClassName.Array.data[1]
       value: 
       objectReference: {fileID: 169667284}
+    - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
+      propertyPath: m_useInputClassName.Array.data[2]
+      value: 
+      objectReference: {fileID: 702360284}
+    - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
+      propertyPath: m_useInputClassName.Array.data[3]
+      value: 
+      objectReference: {fileID: 442553690}
+    - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
+      propertyPath: m_useInputClassName.Array.data[4]
+      value: 
+      objectReference: {fileID: 442553690}
     - target: {fileID: 7685415145331128146, guid: 821bb20fd8d2b1e41974d61e338ed8f7, type: 3}
       propertyPath: m_useInputClassName.Array.data[5]
       value: 

@@ -18,19 +18,23 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         [SerializeField] private GameObject m_swordObject;
         [SerializeField] private GameObject m_swordEffectTrail;
         [SerializeField] private string m_targetTagName = "PlayerCharacter";
-        [SerializeField, Range( 1.0f, 2.5f)] private float m_withinRange = 1.3f;
-        [SerializeField, Range( 2.5f, 8f)] private float m_outOfRange = 5f;
-        [SerializeField, Range( 5, 15)] private int m_trackingFrame = 10;
+        [SerializeField, Range(1.0f, 2.5f)] private float m_withinRange = 1.3f;
+        [SerializeField, Range(2.5f, 8f)] private float m_outOfRange = 5f;
+        [SerializeField, Range(5, 15)] private int m_trackingFrame = 10;
 
         #endregion
 
         #region private
-        private CharacterStatusManagement m_statusManagement => m_characterStatusManagement;
-        private GameObject m_sword => m_swordObject;
-        private GameObject m_swordEffect => m_swordEffectTrail;
-        private string     m_targetTag => m_targetTagName;
-        private Rigidbody  m_myAvatarRb => m_statusManagement.GetMyRigidbody();
-        private Collider   m_swordCollider => m_sword.GetComponent<Collider>();
+        private PhotonView thisPhotonView => m_thisPhotonView;
+        private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        private GameObject swordObject => m_swordObject;
+        private GameObject swordEffectTrail => m_swordEffectTrail;
+        private string     targetTagName => m_targetTagName;
+        private Rigidbody  rb => characterStatusManagement.GetMyRigidbody();
+        private Collider   swordCollider => swordObject.GetComponent<Collider>();
+        private float withinRange => m_withinRange;
+        private float outOfRange =>  m_outOfRange;
+        private float trackingFrame => m_trackingFrame;
 
         #endregion
 
@@ -38,7 +42,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         private void Awake()
         {
-            Physics.IgnoreCollision(m_swordCollider, m_statusManagement.GetMyCollider(), false);
+            Physics.IgnoreCollision(swordCollider, characterStatusManagement.GetMyCollider(), false);
         }
 
         /// <summary>
@@ -46,7 +50,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackStart()
         {
-            if (m_statusManagement.GetMyPhotonView().IsMine)
+            if (characterStatusManagement.GetMyPhotonView().IsMine)
             {
                 StartCoroutine(nameof(AttackTowardsTarget));
             }
@@ -61,7 +65,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackEnd()
         {
-            if (m_statusManagement.GetMyPhotonView().IsMine) return;
+            if (characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             setSwordStatus(false);
         }
@@ -71,7 +75,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackStart()
         {
-            if (m_statusManagement.GetMyPhotonView().IsMine)
+            if (characterStatusManagement.GetMyPhotonView().IsMine)
             {
                 StartCoroutine(nameof(AttackTowardsTarget));
             }
@@ -86,7 +90,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackEnd()
         {
-            if (m_statusManagement.GetMyPhotonView().IsMine) return;
+            if (characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             setSwordStatus(false);
         }
@@ -96,7 +100,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackStart()
         {
-            if (m_statusManagement.GetMyPhotonView().IsMine)
+            if (characterStatusManagement.GetMyPhotonView().IsMine)
             {
                 StartCoroutine(nameof(AttackTowardsTarget));
             }
@@ -111,7 +115,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackEnd()
         {
-            if (m_statusManagement.GetMyPhotonView().IsMine) return;
+            if (characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             setSwordStatus(false);
         }
@@ -121,8 +125,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         #region set Function
         void setSwordStatus(bool flag)
         {
-            m_swordEffect.SetActive(flag);
-            m_swordCollider.enabled = flag;
+            swordEffectTrail.SetActive(flag);
+            swordCollider.enabled = flag;
         }
 
         #endregion
@@ -134,17 +138,17 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <returns></returns>
         private IEnumerator AttackTowardsTarget()
         {
-            GameObject nearObj = serchTag(m_myAvatarRb.gameObject, m_targetTag);
+            GameObject nearObj = serchTag(rb.gameObject, targetTagName);
 
-            Vector3 tagetDir = Vector3.Normalize(nearObj.transform.position - m_myAvatarRb.gameObject.transform.position);
+            Vector3 tagetDir = Vector3.Normalize(nearObj.transform.position - rb.gameObject.transform.position);
 
-            float dis = Vector3.Distance(nearObj.transform.position, m_myAvatarRb.gameObject.transform.position);
+            float dis = Vector3.Distance(nearObj.transform.position, rb.gameObject.transform.position);
 
-            if (dis > m_withinRange && dis < m_outOfRange)
+            if (dis > withinRange && dis < outOfRange)
             {
-                for (int turn = 0; turn < m_trackingFrame; turn++)
+                for (int turn = 0; turn < trackingFrame; turn++)
                 {
-                    m_myAvatarRb.gameObject.transform.position += tagetDir / m_trackingFrame;
+                    rb.gameObject.transform.position += tagetDir / trackingFrame;
                     yield return new WaitForSeconds(0.01f);
                 }
             }

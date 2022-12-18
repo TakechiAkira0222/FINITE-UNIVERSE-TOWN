@@ -10,6 +10,7 @@ namespace Takechi.CharacterController.Parameters
 {
     public class OfficeWorkerStatusManagement : CharacterStatusManagement
     {
+        [Header("=== OfficeWorkerStatus Setting===")]
         [SerializeField] private OfficeWorkerSpecificParameters m_officeWorkerSpecificParameters;
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// 必殺技の継続時間
         /// </summary>
-        private float m_specialMoveDuration_Seconds;
+        private float m_deathblowMoveDuration_Seconds;
 
         protected override void Awake()
         {
@@ -35,7 +36,7 @@ namespace Takechi.CharacterController.Parameters
 
             if (!base.thisPhotonView.IsMine) return;
 
-            setupOfficeWorkerSpecificParameters();
+            SetupOfficeWorkerSpecificParameters();
         }
 
         #region set up function
@@ -43,7 +44,7 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// SpecificStatus を、データベースの変数で設定します。
         /// </summary>
-        private void setupOfficeWorkerSpecificParameters()
+        private void SetupOfficeWorkerSpecificParameters()
         {
             SetMoveingSpeedIncrease(m_officeWorkerSpecificParameters.GetMoveingSpeedIncrease());
             SetJumpPowerIncrease(m_officeWorkerSpecificParameters.GetJumpPowerIncrease());
@@ -53,9 +54,9 @@ namespace Takechi.CharacterController.Parameters
             Debug.Log($"<color=green> setupOfficeWorkerSpecificParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" NickName : { PhotonNetwork.LocalPlayer.NickName} \n" +
-                      $" m_moveingSpeedIncrease = { m_movingSpeed}\n" +
-                      $" m_jumpPowerIncrease    = { m_attackPower}\n" +
-                      $" m_attackPowerIncrease  = { rb.mass}\n"
+                      $" m_moveingSpeedIncrease = { m_moveingSpeedIncrease}\n" +
+                      $" m_jumpPowerIncrease    = { m_jumpPowerIncrease}\n" +
+                      $" m_attackPowerIncrease  = { m_attackPowerIncrease}\n"
                       );
         }
 
@@ -83,18 +84,17 @@ namespace Takechi.CharacterController.Parameters
 
         public void SetSpecialMoveDuration_Seconds(float changeValue)
         {
-            Debug.Log($" SpecialMoveDuration_Seconds {m_specialMoveDuration_Seconds} = {changeValue}");
-            m_specialMoveDuration_Seconds = changeValue;
+            Debug.Log($" SpecialMoveDuration_Seconds {m_deathblowMoveDuration_Seconds} = {changeValue}");
+            m_deathblowMoveDuration_Seconds = changeValue;
         }
 
         #endregion
 
         #region GetFunction
-
         public float GetAttackPowerIncrease() { return m_attackPowerIncrease; }
         public float GetMoveingSpeedIncrease() { return m_moveingSpeedIncrease; }
         public float GetJumpPowerIncrease() { return m_jumpPowerIncrease; }
-        public float GetSpecialMoveDuration_Seconds() { return m_specialMoveDuration_Seconds; }
+        public float GetDeathblowMoveDuration_Seconds() { return m_deathblowMoveDuration_Seconds; }
 
         #endregion
     }

@@ -2,6 +2,7 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
 
@@ -14,18 +15,19 @@ namespace Takechi.CharacterController.Movement
 
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
-
-        [Header("=== ScriptSetting ===")]
-        [SerializeField] private Vector3    m_movementVector;
-        [SerializeField] private Vector3    m_movementVelocity;
-        
+        [Header("=== CharacterKeyInputStateManagement ===")]
+        [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
         #endregion
 
         #region private
-        private float       m_movementCleanSpeed => m_characterStatusManagement.GetMovingSpeed();
-        private float       m_lateralMovementRate => m_characterStatusManagement.GetLateralMovementRatio();
+        private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
+        private float       movementStatusSpeed => m_characterStatusManagement.GetMovingSpeed();
+        private float       lateralMovementRate => m_characterStatusManagement.GetLateralMovementRatio();
 
-        private float       m_movementSpeed = 5;
+        private float       m_movementSpeed;
+        private Vector3     m_movementVector;
+        private Vector3     m_movementVelocity;
 
         #endregion
 
@@ -36,13 +38,6 @@ namespace Takechi.CharacterController.Movement
 
         #endregion
 
-        #region GetProperty
-
-        public Vector3 MovementVector => m_movementVector;
-        public Vector3 MovementVelocity => m_movementVelocity;
-
-        #endregion
-
         #region UnityEvent
 
         void Reset()
@@ -50,52 +45,71 @@ namespace Takechi.CharacterController.Movement
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
         }
 
-        void Start()
+        private void Awake()
         {
-            if( m_characterStatusManagement == null)
+            if (m_characterStatusManagement == null)
             {
                 m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
                 Debug.LogWarning(" m_characterStatusManagement It wasn't set, so I set it.");
             }
 
-            SetMovementSpeed(ref m_movementSpeed, m_movementCleanSpeed, m_walkingSpeed);
+            SetMovementSpeed( movementStatusSpeed, m_walkingSpeed);
         }
 
-        void Update()
+        private void OnEnable()
         {
-            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
+            characterKeyInputStateManagement.InputToStartDash += (characterStatusManagement) => { SetMovementSpeed(movementStatusSpeed, m_runningSpeed); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToStartDash function <color=green>to add.</color>");
 
-            MovementControll();
-            MovementSpeedChange();
+            characterKeyInputStateManagement.InputToStopDash += (characterStatusManagement) => { SetMovementSpeed( movementStatusSpeed, m_walkingSpeed); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToStopDash function <color=green>to add.</color>");
+
+            characterKeyInputStateManagement.InputToMovement += (characterStatusManagement, h, v) => { MovementControll(h, v); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToMovement function <color=green>to add.</color>");
+        }
+
+        private void OnDisable()
+        {
+            characterKeyInputStateManagement.InputToStartDash -= (characterStatusManagement) => { SetMovementSpeed( movementStatusSpeed, m_runningSpeed); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to remove.</color>");
+
+            characterKeyInputStateManagement.InputToStopDash -= (characterStatusManagement) => { SetMovementSpeed( movementStatusSpeed, m_walkingSpeed); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to remove.</color>");
+
+            characterKeyInputStateManagement.InputToMovement -= (characterStatusManagement, h, v) => { MovementControll(h, v); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to remove.</color>");
         }
 
         void FixedUpdate()
         {
             Vector3 velocityValue =
-                new Vector3( m_movementVelocity.x * m_movementSpeed * m_lateralMovementRate,
+                new Vector3( m_movementVelocity.x * m_movementSpeed * lateralMovementRate,
                              m_characterStatusManagement.GetMyRigidbody().velocity.y,
                              m_movementVelocity.z * m_movementSpeed);
 
+            m_movementVelocity = Vector3.zero;
+
             m_characterStatusManagement.SetVelocity(velocityValue);
+
         }
 
         #endregion
 
         #region SetProperty
 
-        void SetMovementSpeed(ref float movementSpeed, float cleanSpeed, float force)
+        void SetMovementSpeed(float cleanSpeed, float force)
         {
-            movementSpeed = cleanSpeed + force;
+            m_movementSpeed = cleanSpeed + force;
         }
 
         #endregion
 
         #region ControllFinctoin
 
-        void MovementControll()
+        void MovementControll(float horizontalVec, float verticalVec)
         {
             m_movementVector = 
-                new Vector3( Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+                new Vector3(horizontalVec, 0, verticalVec);
 
             m_movementVelocity =
                   m_characterStatusManagement.GetMyRigidbody().gameObject.transform.forward * m_movementVector.z +
@@ -104,16 +118,6 @@ namespace Takechi.CharacterController.Movement
             m_movementVelocity.Normalize();
         }
 
-        void MovementSpeedChange()
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-                SetMovementSpeed(ref m_movementSpeed, m_movementCleanSpeed, m_runningSpeed);
-
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-                SetMovementSpeed(ref m_movementSpeed, m_movementCleanSpeed, m_walkingSpeed);
-        }
-
-      
         #endregion
     }
 }

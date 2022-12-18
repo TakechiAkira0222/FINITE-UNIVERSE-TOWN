@@ -1,5 +1,7 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,40 +13,53 @@ namespace Takechi.CharacterController.Jump
     {
         #region SerializeField
 
-        [Header("=== CharacterStatusManagement ===")]
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
-       
+        [Header("=== CharacterKeyInputStateManagement ===")]
+        [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
+
         #endregion
 
         #region private
-        private float m_upForce => m_characterStatusManagement.GetJumpPower();
-        private float m_cleanMass => m_characterStatusManagement.GetCleanMass();
-        private Rigidbody m_rb => m_characterStatusManagement.GetMyRigidbody();
+        private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
 
         #endregion
 
         #region UnityEvent
 
-        void Start()
+        private void OnEnable()
         {
-            if ( m_characterStatusManagement == null)
+            characterKeyInputStateManagement.InputToJump += (characterStatusManagement) =>
             {
-                m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
-                Debug.LogWarning(" m_characterStatusManagement It wasn't set, so I set it.");
-            }
+                if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+
+                if (!characterStatusManagement.GetIsGrounded()) return;
+
+                float upForce = characterStatusManagement.GetJumpPower();
+                float cleanMass = characterStatusManagement.GetCleanMass();
+                Rigidbody rb = characterStatusManagement.GetMyRigidbody();
+
+                rb.AddForce(transform.up * (upForce * (rb.mass / cleanMass)), ForceMode.Impulse);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToJump function <color=green>to add.</color>");
+        }
+        private void OnDisable()
+        {
+            characterKeyInputStateManagement.InputToJump -= (characterStatusManagement) =>
+            {
+                if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+
+                if (!characterStatusManagement.GetIsGrounded()) return;
+
+                float upForce = characterStatusManagement.GetJumpPower();
+                float cleanMass = characterStatusManagement.GetCleanMass();
+                Rigidbody rb = characterStatusManagement.GetMyRigidbody();
+
+                rb.AddForce(transform.up * (upForce * (rb.mass / cleanMass)), ForceMode.Impulse);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToJump function <color=green>to remove.</color>");
         }
 
-        void Update()
-        {
-            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
-
-            if (!m_characterStatusManagement.GetIsGrounded()) return;
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                m_rb.AddForce( transform.up * ( m_upForce * ( m_rb.mass / m_cleanMass)), ForceMode.Impulse);
-            }
-        }
         #endregion
     }
 }

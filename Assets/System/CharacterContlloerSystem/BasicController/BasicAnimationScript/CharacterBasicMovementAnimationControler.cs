@@ -4,10 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Takechi.ScriptReference.AnimationParameter;
+using Takechi.ScriptReference.CustomPropertyKey;
+using Takechi.ScriptReference.DamagesThePlayerObject;
+
 using Takechi.CharacterController.Parameters;
+using Takechi.CharacterController.KeyInputStete;
+
 using System;
+
 using Photon.Pun;
-using System.Threading;
+
 
 namespace Takechi.CharacterController.BasicAnimation.Movement
 {
@@ -16,27 +22,31 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         #region SerializeField
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+        [Header("=== CharacterKeyInputStateManagement ===")]
+        [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PhotonView m_thisPhotnView;
-        [SerializeField] private bool       m_NotAttackAnimation = false;
-        [SerializeField] private bool       m_NotDeathblowAnimation = false;
+        [SerializeField] private bool       m_notAttackAnimation = false;
+        [SerializeField] private bool       m_notDeathblowAnimation = false;
         #endregion
 
         #region protected
         protected CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        protected CharacterKeyInputStateManagement KeyInputStateManagement => m_characterKeyInputStateManagement;
         protected PhotonView thisPhotnView => m_thisPhotnView;
-        protected Animator   networkModelAnimator => m_characterStatusManagement.GetNetworkModelAnimator();
-        protected Animator   handOnlyAnimator => m_characterStatusManagement.GetHandOnlyAnimater();
+        protected bool notAttackAnimation => m_notAttackAnimation;
+        protected bool notDeathblowAnimation => m_notDeathblowAnimation;
         protected Rigidbody  rb => m_characterStatusManagement.GetMyRigidbody();
         #endregion
 
         # region protected Event Action 
-        protected event Action<Animator> m_movementAnimatoinAction = delegate { };
+        protected event Action<Animator, float, float> m_movementAnimatoinAction = delegate { };
         protected event Action<Animator, float> m_dashAnimationAction = delegate { };
         protected event Action<Animator> m_jumpingAnimationAction = delegate { };
         protected event Action<Animator> m_attackAnimationAction = delegate { };
         protected event Action<Animator> m_deathblowAnimationAction = delegate { };
+        protected event Action<Animator, float> m_damageAnimationAction = delegate { };
 
         #endregion
 
@@ -48,10 +58,10 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         protected virtual void Awake()
         {
-            m_movementAnimatoinAction = (animator) =>
+            m_movementAnimatoinAction = (animator, horivec, vertVec) =>
             {
-                animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorXParameterName, Input.GetAxisRaw("Horizontal"));
-                animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorZParameterName, Input.GetAxisRaw("Vertical"));
+                animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorXParameterName, horivec);
+                animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorZParameterName, vertVec);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to set.</color>");
@@ -83,47 +93,150 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_deathblowAnimationAction function <color=green>to set.</color>");
+
+            m_damageAnimationAction = (animator, parameter) =>
+            {
+                animator.SetFloat(ReferencingTheAnimationParameterName.s_DamageforceParameterName, parameter);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_damageAnimationAction function <color=green> to set.</color>");
         }
 
-        protected virtual void Start()
+        private void OnEnable()
         {
-
-        }
-
-        protected virtual void Update()
-        {
-            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
-
-            m_movementAnimatoinAction(handOnlyAnimator);
-            m_movementAnimatoinAction(networkModelAnimator);
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            m_characterKeyInputStateManagement.InputToMovement += (characterStatusManagement, horiVec, vertVec) =>
             {
-                m_dashAnimationAction(networkModelAnimator, 1);
-                m_dashAnimationAction(handOnlyAnimator, 1);
-            }
+                m_movementAnimatoinAction(characterStatusManagement.GetHandOnlyModelAnimator(), horiVec, vertVec);
+                m_movementAnimatoinAction(characterStatusManagement.GetNetworkModelAnimator(), horiVec, vertVec);
+            };
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                m_dashAnimationAction(networkModelAnimator, 0);
-                m_dashAnimationAction(handOnlyAnimator, 0);
-            }
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToMovement function <color=green>to add.</color>");
 
-            if (Input.GetKeyDown(KeyCode.Space) && m_characterStatusManagement.GetIsGrounded())
+            m_characterKeyInputStateManagement.InputToStartDash += (characterStatusManagement) =>
             {
+                m_dashAnimationAction(characterStatusManagement.GetHandOnlyModelAnimator(), 1);
+                m_dashAnimationAction(characterStatusManagement.GetNetworkModelAnimator(), 1);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToStartDash function <color=green>to add.</color>");
+
+            m_characterKeyInputStateManagement.InputToStopDash += (characterStatusManagement) =>
+            {
+                m_dashAnimationAction(characterStatusManagement.GetHandOnlyModelAnimator(), 0);
+                m_dashAnimationAction(characterStatusManagement.GetNetworkModelAnimator(), 0);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToStopDash function <color=green>to add.</color>");
+
+            m_characterKeyInputStateManagement.InputToJump += (characterStatusManagement) =>
+            {
+                if (!characterStatusManagement.GetIsGrounded()) return;
                 m_thisPhotnView.RPC(nameof(RPC_JumpingAnimationTrigger), RpcTarget.AllBufferedViaServer);
-            }
+            };
 
-            if (Input.GetMouseButtonDown(0) && !m_NotAttackAnimation)
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToJump function <color=green>to add.</color>");
+
+            m_characterKeyInputStateManagement.InputToNormalAttack += (characterStatusManagement) =>
             {
+                if (notAttackAnimation) return;
                 m_thisPhotnView.RPC(nameof(RPC_AttackAnimationTrigger), RpcTarget.AllBufferedViaServer);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToNormalAttack function <color=green>to add.</color>");
+
+            m_characterKeyInputStateManagement.InputToDeathblow += (characterStatusManagement) =>
+            {
+                if (notAttackAnimation) return;
+                m_thisPhotnView.RPC(nameof(RPC_DeathblowAnimationTrigger), RpcTarget.AllBufferedViaServer);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToDeathblow function <color=green>to add.</color>");
+        }
+
+        private void OnDisable()
+        {
+            m_characterKeyInputStateManagement.InputToMovement -= (characterStatusManagement, horiVec, vertVec) =>
+            {
+                m_movementAnimatoinAction(characterStatusManagement.GetHandOnlyModelAnimator(), horiVec, vertVec);
+                m_movementAnimatoinAction(characterStatusManagement.GetNetworkModelAnimator(), horiVec, vertVec);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToMovement function <color=green>to remove.</color>");
+
+            m_characterKeyInputStateManagement.InputToStartDash -= (characterStatusManagement) =>
+            {
+                m_dashAnimationAction(characterStatusManagement.GetHandOnlyModelAnimator(), 1);
+                m_dashAnimationAction(characterStatusManagement.GetNetworkModelAnimator(), 1);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToStartDash function <color=green>to remove.</color>");
+
+            m_characterKeyInputStateManagement.InputToStopDash -= (characterStatusManagement) =>
+            {
+                m_dashAnimationAction(characterStatusManagement.GetHandOnlyModelAnimator(), 0);
+                m_dashAnimationAction(characterStatusManagement.GetNetworkModelAnimator(), 0);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToStopDash function <color=green>to remove.</color>");
+
+            m_characterKeyInputStateManagement.InputToJump -= (characterStatusManagement) =>
+            {
+                if (!characterStatusManagement.GetIsGrounded()) return;
+                m_thisPhotnView.RPC(nameof(RPC_JumpingAnimationTrigger), RpcTarget.AllBufferedViaServer);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToJump function <color=green>to remove.</color>");
+
+            m_characterKeyInputStateManagement.InputToNormalAttack -= (characterStatusManagement) =>
+            {
+                if (notAttackAnimation) return;
+                m_thisPhotnView.RPC(nameof(RPC_AttackAnimationTrigger), RpcTarget.AllBufferedViaServer);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToNormalAttack function <color=green>to remove.</color>");
+
+            m_characterKeyInputStateManagement.InputToDeathblow -= (characterStatusManagement) =>
+            {
+                if (notAttackAnimation) return;
+                m_thisPhotnView.RPC(nameof(RPC_DeathblowAnimationTrigger), RpcTarget.AllBufferedViaServer);
+            };
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToDeathblow function <color=green>to remove.</color>");
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+
+            if (collision.gameObject.tag == ObjectReferenceThatDamagesThePlayer.s_PlayerCharacterWeaponTagName)
+            {
+                int number =
+                    collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+
+                float power =
+                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower];
+
+                thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
             }
 
-            if (Input.GetKeyDown(KeyCode.Q) && !m_NotDeathblowAnimation)
+            foreach (string s in ObjectReferenceThatDamagesThePlayer.s_DamagesThePlayerObjectNameList)
             {
-                m_thisPhotnView.RPC(nameof(RPC_DeathblowAnimationTrigger), RpcTarget.AllBufferedViaServer);
+                if (collision.gameObject.name == s)
+                {
+                    float power = ObjectReferenceThatDamagesThePlayer.s_DamageObjectPowerDictionary[s];
+
+                    thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+                }
             }
         }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+
+            thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, 0f);
+        }
+
         #endregion
 
         #region PunRPCFanction
@@ -131,22 +244,28 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         [PunRPC]
         protected void RPC_AttackAnimationTrigger()
         {
-            m_attackAnimationAction(networkModelAnimator);
-            m_attackAnimationAction(handOnlyAnimator);
+            m_attackAnimationAction(characterStatusManagement.GetHandOnlyModelAnimator());
+            m_attackAnimationAction(characterStatusManagement.GetNetworkModelAnimator());
         }
 
         [PunRPC]
         protected void RPC_JumpingAnimationTrigger()
         {
-            m_jumpingAnimationAction(networkModelAnimator);
-            m_jumpingAnimationAction(handOnlyAnimator);
+            m_jumpingAnimationAction(characterStatusManagement.GetHandOnlyModelAnimator());
+            m_jumpingAnimationAction(characterStatusManagement.GetNetworkModelAnimator());
         }
 
         [PunRPC]
         protected void RPC_DeathblowAnimationTrigger()
         {
-            m_deathblowAnimationAction(networkModelAnimator);
-            m_deathblowAnimationAction(handOnlyAnimator);
+            m_deathblowAnimationAction(characterStatusManagement.GetHandOnlyModelAnimator());
+            m_deathblowAnimationAction(characterStatusManagement.GetNetworkModelAnimator());
+        }
+
+        [PunRPC]
+        protected void RPC_DamageAnimationSetFloat(float power)
+        {
+            m_damageAnimationAction(characterStatusManagement.GetNetworkModelAnimator(), power);
         }
 
         #endregion

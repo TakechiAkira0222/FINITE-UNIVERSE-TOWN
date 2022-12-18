@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using Takechi.ScriptReference.CustomPropertyKey;
 using TakechiEngine.PUN.CustomProperties;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 namespace Takechi.CharacterController.Parameters
@@ -14,6 +15,8 @@ namespace Takechi.CharacterController.Parameters
     public class CharacterStatusManagement : TakechiPunCustomProperties
     {
         #region SerializeField
+
+        [Header("=== CharacterStatus Setting===")]
         /// <summary>
         /// マスターデータ
         /// </summary>
@@ -41,11 +44,19 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// hand only animetor
         /// </summary>
-        [SerializeField] private Animator m_handOnlyAnimator;
+        [SerializeField] private Animator m_handOnlyModelAnimator;
+        /// <summary>
+        /// hand only model object
+        /// </summary>
+        [SerializeField] private GameObject m_handOnlyModelObject;
         /// <summary>
         /// network model animator
         /// </summary>
         [SerializeField] private Animator m_networkModelAnimator;
+        /// <summary>
+        /// hand only model object
+        /// </summary>
+        [SerializeField] private GameObject m_networkModelObject;
 
         #endregion
 
@@ -73,11 +84,19 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// hand only animetor
         /// </summary>
-        protected Animator handOnlyAnimator => m_handOnlyAnimator;
+        protected Animator handOnlyModelAnimator => m_handOnlyModelAnimator;
+        /// <summary>
+        /// hand only Model object
+        /// </summary>
+        protected GameObject handOnlyModelObject => m_handOnlyModelObject;
         /// <summary>
         /// network model animator
         /// </summary>
         protected Animator networkModelAnimator => m_networkModelAnimator;
+        /// <summary>
+        /// network model object
+        /// </summary>
+        protected GameObject networkModelObject => m_networkModelObject;
         /// <summary>
         /// local player custom properties
         /// </summary>
@@ -86,23 +105,51 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// 移動スピード
         /// </summary>
-        protected float m_movingSpeed;
+        protected float movingSpeed;
         /// <summary>
         /// 横移動の移動量 割合
         /// </summary>
-        protected float m_lateralMovementRatio;
+        protected float lateralMovementRatio;
         /// <summary>
         /// 攻撃力
         /// </summary>
-        protected float m_attackPower;
+        protected float attackPower;
         /// <summary>
         /// ジャンプ力
         /// </summary>
-        protected float m_jumpPower;
+        protected float jumpPower;
         /// <summary>
-        /// 干渉を受けていない質量
+        /// 必殺技 使用可能
         /// </summary>
-        protected float m_cleanMass => m_characterParameters.GetCleanMass();
+        protected bool  canUseDeathblow = false;
+        /// <summary>
+        /// アビリティ1 使用可能
+        /// </summary>
+        protected bool  canUseAbility1 = false;
+        /// <summary>
+        /// アビリティ2 使用可能
+        /// </summary>
+        protected bool  canUseAbility2 = false;
+        /// <summary>
+        /// アビリティ3 使用可能
+        /// </summary>
+        protected bool  canUseAbility3 = false;
+        /// <summary>
+        /// 必殺技 使用可能 TimeCount
+        /// </summary>
+        protected float canUseDeathblow_TimeCount_Seconds;
+        /// <summary>
+        /// アビリティ1 使用可能 TimeCount
+        /// </summary>
+        protected float canUseAbility1_TimeCount_Seconds;
+        /// <summary>
+        /// アビリティ2 使用可能 TimeCount
+        /// </summary>
+        protected float canUseAbility2_TimeCount_Seconds;
+        /// <summary>
+        /// アビリティ3 使用可能 TimeCount
+        /// </summary>
+        protected float canUseAbility3_TimeCount_Seconds;
 
         #endregion
 
@@ -127,17 +174,24 @@ namespace Takechi.CharacterController.Parameters
             SetAttackPower( m_characterParameters.GetAttackPower());
             SetJumpPower( m_characterParameters.GetJumpPower());
             SetMass( m_characterParameters.GetCleanMass());
+            SetCanUseDeathblow(false);
+            SetCanUseAbility1(false); 
+            SetCanUseAbility2(false);
+            SetCanUseAbility3(false);
 
             Debug.Log($"<color=green> settingCharacterParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
-                      $" m_movingSpeed = {m_movingSpeed}\n" +
-                      $" m_attackPower = {m_attackPower}\n" +
-                      $" m_jumpPower = {m_jumpPower}\n" +
-                      $" m_mass = {m_rb.mass}\n"
+                      $" movingSpeed = {movingSpeed}\n" +
+                      $" attackPower = {attackPower}\n" +
+                      $" jumpPower = {jumpPower}\n" +
+                      $" mass = {m_rb.mass}\n"+
+                      $" canUseDeathblow = {canUseDeathblow}\n"+
+                      $" canUseAbility1 = {canUseAbility1}\n"+
+                      $" canUseAbility2 = {canUseAbility2}\n"+
+                      $" canUseAbility3 = {canUseAbility3}\n"
                       );
         }
-
         /// <summary>
         /// LocalPlayerCustomPropertiesを、データベースの変数で設定します。
         /// </summary>
@@ -164,12 +218,21 @@ namespace Takechi.CharacterController.Parameters
 
         #region SetFunction
 
-        public void SetMovingSpeed(float changeValue) { m_movingSpeed = changeValue; }
-        public void SetLateralMovementRatio(float changeValue){ m_lateralMovementRatio = changeValue;}
-        public void SetAttackPower(float changeValue) { m_attackPower = changeValue; }
-        public void SetJumpPower(float changeValue) { m_jumpPower = changeValue; }
+        public void SetCanUseDeathblow(bool flag) { canUseDeathblow = flag; }
+        public void SetCanUseAbility1(bool flag) { canUseAbility1 = flag; }
+        public void SetCanUseAbility2(bool flag) { canUseAbility2 = flag; }
+        public void SetCanUseAbility3(bool flag) { canUseAbility3 = flag; }
+        public void SetCanUseDeathblow_TimeCount_Seconds(float changeValue) { canUseDeathblow_TimeCount_Seconds = changeValue; }
+        public void SetCanUsecanUseAbility1_TimeCount_Seconds(float changeValue) { canUseAbility1_TimeCount_Seconds = changeValue; }
+        public void SetCanUsecanUseAbility2_TimeCount_Seconds(float changeValue) { canUseAbility2_TimeCount_Seconds = changeValue; }
+        public void SetCanUsecanUseAbility3_TimeCount_Seconds(float changeValue) { canUseAbility3_TimeCount_Seconds = changeValue; }
+        public void SetMovingSpeed(float changeValue) { movingSpeed = changeValue; }
+        public void SetLateralMovementRatio(float changeValue){ lateralMovementRatio = changeValue;}
+        public void SetAttackPower(float changeValue) { attackPower = changeValue; }
+        public void SetJumpPower(float changeValue) { jumpPower = changeValue; }
         public void SetMass(float changeValue) { rb.mass = changeValue; }
         public void SetVelocity(Vector3 velocityValue) { rb.velocity = velocityValue; }
+        public void SetIsKinematic(bool flag) { rb.isKinematic = flag; }
 
         #endregion
 
@@ -194,18 +257,32 @@ namespace Takechi.CharacterController.Parameters
                 return false;
             }
         }
-        public float GetMovingSpeed() { return m_movingSpeed; }
-        public float GetLateralMovementRatio() { return m_lateralMovementRatio; }
-        public float GetAttackPower() { return m_attackPower; }
-        public float GetJumpPower() { return m_jumpPower; }
+        public bool  GetCanUseDeathblow() { return canUseDeathblow; }
+        public float GetCanUseDeathblow_TimeCount_Seconds() { return canUseDeathblow_TimeCount_Seconds; }
+        public float GetCanUseDeathblow_RecoveryTime_Seconds() {return m_characterParameters.GetDeathblow_RecoveryTime_Seconds(); }
+        public bool  GetCanUseAbility1() { return canUseAbility1; }
+        public float GetCanUseAbility1_TimeCount_Seconds() { return canUseAbility1_TimeCount_Seconds; }
+        public float GetCanUseAbility1_RecoveryTime_Seconds() {return m_characterParameters.GetAbility1_RecoveryTime_Seconds(); }
+        public bool  GetCanUseAbility2() { return canUseAbility2; }
+        public float GetCanUseAbility2_TimeCount_Seconds() { return canUseAbility2_TimeCount_Seconds; }
+        public float GetCanUseAbility2_RecoveryTime_Seconds() {return m_characterParameters.GetAbility2_RecoveryTime_Seconds(); }
+        public bool  GetCanUseAbility3() { return canUseAbility3; }
+        public float GetCanUseAbility3_TimeCount_Seconds() { return canUseAbility3_TimeCount_Seconds; }
+        public float GetCanUseAbility3_RecoveryTime_Seconds() {return m_characterParameters.GetAbility3_RecoveryTime_Seconds(); }
+        public float GetMovingSpeed() { return movingSpeed; }
+        public float GetLateralMovementRatio() { return lateralMovementRatio; }
+        public float GetAttackPower() { return attackPower; }
+        public float GetJumpPower() { return jumpPower; }
         public float GetCleanMass() { return m_characterParameters.GetCleanMass(); }
         public PhotonView GetMyPhotonView() { return thisPhotonView; }
         public Rigidbody  GetMyRigidbody() { return rb; }
         public Collider   GetMyCollider() { return mainCollider; }
         public GameObject GetMyAvater() { return avater; }
         public Camera     GetMyMainCamera() { return mainCamera; }
-        public Animator GetHandOnlyAnimater() { return handOnlyAnimator; }
-        public Animator GetNetworkModelAnimator() { return networkModelAnimator; }
+        public Animator   GetHandOnlyModelAnimator() { return handOnlyModelAnimator; }
+        public GameObject GetHandOnlyModelObject() { return handOnlyModelObject; }
+        public Animator   GetNetworkModelAnimator() { return networkModelAnimator; }
+        public GameObject GetNetworkModelObject() { return networkModelObject; }
 
         #endregion
 
@@ -219,7 +296,7 @@ namespace Takechi.CharacterController.Parameters
             m_localPlayerCustomProperties =
               new ExitGames.Client.Photon.Hashtable
               {
-                    {CustomPropertyKeyReference.s_CharacterStatusAttackPower, m_attackPower},
+                    {CustomPropertyKeyReference.s_CharacterStatusAttackPower, attackPower},
                     {CustomPropertyKeyReference.s_CharacterStatusMass , m_rb.mass},
               };
 
@@ -232,39 +309,38 @@ namespace Takechi.CharacterController.Parameters
                       $" {CustomPropertyKeyReference.s_CharacterStatusMass} = {m_localPlayerCustomProperties[CustomPropertyKeyReference.s_CharacterStatusMass]}\n"
                     );
         }
-
-        public float UpdateMovingSpeed(float changeValue)
+        public void UpdateMovingSpeed(float changeValue)
         {
-            Debug.Log($" UpdateSpeed {m_movingSpeed} : { m_movingSpeed + changeValue}");
-            return m_movingSpeed += changeValue;
+            Debug.Log($" UpdateSpeed {movingSpeed} -> { movingSpeed + changeValue}");
+            movingSpeed += changeValue;
         }
-
-        public float UpdateAttackPower(float changeValue)
+        public void UpdateAttackPower(float changeValue)
         {
-            Debug.Log($" UpdateAttackPower {m_attackPower} : { m_attackPower + changeValue}");
-            return m_attackPower += changeValue;
+            Debug.Log($" UpdateAttackPower {attackPower} -> { attackPower + changeValue}");
+            attackPower += changeValue;
         }
-
-        public float UpdateJumpPower(float changeValue)
+        public void UpdateJumpPower(float changeValue)
         {
-            Debug.Log($" UpdateJumpPower {m_jumpPower} : { m_jumpPower + changeValue}");
-            return m_jumpPower += changeValue;
+            Debug.Log($" UpdateJumpPower {jumpPower} -> { jumpPower + changeValue}");
+            jumpPower += changeValue;
         }
-
-        public float UpdateMass(float changeValue)
+        public void UpdateMass(float changeValue)
         {
             if (rb.mass + changeValue <= 1)
             {
                 rb.mass = 1;
-                Debug.Log($"{rb.mass} : {1}");
-                return 1;
+                Debug.Log($"{rb.mass} -> {1}");
             }
             else
             {
-                Debug.Log($"{rb.mass} : {rb.mass + changeValue}");
-                return rb.mass += changeValue;
+                rb.mass += changeValue;
+                Debug.Log($"{rb.mass} ->: {rb.mass + changeValue}");
             }
         }
+        public void UpdateCanUseDeathblow_TimeCount_Seconds(float changeValue) { canUseDeathblow_TimeCount_Seconds += changeValue; }
+        public void UpdateCanUseAbility1_TimeCount_Seconds(float changeValue) { canUseAbility1_TimeCount_Seconds += changeValue; }
+        public void UpdateCanUseAbility2_TimeCount_Seconds(float changeValue) { canUseAbility2_TimeCount_Seconds += changeValue; }
+        public void UpdateCanUseAbility3_TimeCount_Seconds(float changeValue) { canUseAbility3_TimeCount_Seconds += changeValue; }
 
         #endregion
 
@@ -284,9 +360,9 @@ namespace Takechi.CharacterController.Parameters
             Debug.Log($"<color=green> settingCharacterParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
-                      $" m_movingSpeed = {m_movingSpeed}\n" +
-                      $" m_attackPower = {m_attackPower}\n" +
-                      $" m_jumpPower = {m_jumpPower}\n" +
+                      $" m_movingSpeed = {movingSpeed}\n" +
+                      $" m_attackPower = {attackPower}\n" +
+                      $" m_jumpPower = {jumpPower}\n" +
                       $" m_mass = {rb.mass}\n"
                       );
         }

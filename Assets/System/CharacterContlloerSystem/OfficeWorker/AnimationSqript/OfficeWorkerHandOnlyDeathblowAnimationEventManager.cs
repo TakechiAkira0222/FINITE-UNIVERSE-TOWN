@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.Jump;
+using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Movement;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.ViewpointOperation;
 using UnityEditor;
+using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -15,15 +17,16 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         #region SerializeField
         [Header("=== OfficeWorkerStatusManagement ===")]
         [SerializeField] private OfficeWorkerStatusManagement m_officeWorkerStatusManagement;
+        [Header("=== CharacterKeyInputStateManagement ===")]
+        [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PlayableDirector m_playableDirector;
-        [SerializeField] private CharacterBasicMovement m_basicMovement;
-        [SerializeField] private CharacterBasicJump m_basicJump;
-        [SerializeField] private CharacterBasicViewpointOperation m_basicViewpoint;
-        [SerializeField] private GameObject m_handOnlyModel;
 
         #endregion
+
+        private OfficeWorkerStatusManagement officeWorkerStatusManagement => m_officeWorkerStatusManagement;
+        private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
 
         #region UnityAnimatorEvent
 
@@ -40,10 +43,10 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         {
             m_playableDirector.Play();
 
-            if (m_officeWorkerStatusManagement.photonView.IsMine)
-            {
-                m_handOnlyModel.gameObject.SetActive(false);
-            }
+            if (!officeWorkerStatusManagement.photonView.IsMine) return;
+
+            officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(false);
+            officeWorkerStatusManagement.SetIsKinematic(true);
         }
 
         // <summary>
@@ -51,50 +54,45 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         // </summary>
         void OfficeWorkerDeathblowEnd()
         {
-            if (m_officeWorkerStatusManagement.photonView.IsMine)
-            {
-                m_handOnlyModel.gameObject.SetActive(true);
+            if (!officeWorkerStatusManagement.photonView.IsMine) return;
 
-                ActivationStatusManagement();
+            officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(true);
+            officeWorkerStatusManagement.SetIsKinematic(false);
 
-                Invoke(nameof( ExitStatusManagement) , m_officeWorkerStatusManagement.GetSpecialMoveDuration_Seconds());
-            }
+            ActivationStatusManagement();
+
+            Invoke(nameof( ExitStatusManagement), officeWorkerStatusManagement.GetDeathblowMoveDuration_Seconds());
         }
 
         #endregion
 
         private void Director_Stopped(PlayableDirector obj)
         {
-            m_basicJump.enabled = true;
-            m_basicMovement.enabled = true;
-            m_basicViewpoint.enabled = true;
+            m_characterKeyInputStateManagement.StartInput();
         }
 
         private void Director_Played(PlayableDirector obj)
         {
-            m_basicJump.enabled = false;
-            m_basicMovement.enabled = false;
-            m_basicViewpoint.enabled = false;
+            m_characterKeyInputStateManagement.StopInput();
         }
-
 
         #region recursive function
         private void ActivationStatusManagement()
         {
-            m_officeWorkerStatusManagement.UpdateAttackPower(m_officeWorkerStatusManagement.GetAttackPowerIncrease());
-            m_officeWorkerStatusManagement.UpdateMovingSpeed(m_officeWorkerStatusManagement.GetMoveingSpeedIncrease());
-            m_officeWorkerStatusManagement.UpdateJumpPower(m_officeWorkerStatusManagement.GetJumpPowerIncrease());
+            officeWorkerStatusManagement.UpdateAttackPower(officeWorkerStatusManagement.GetAttackPowerIncrease());
+            officeWorkerStatusManagement.UpdateMovingSpeed(officeWorkerStatusManagement.GetMoveingSpeedIncrease());
+            officeWorkerStatusManagement.UpdateJumpPower(officeWorkerStatusManagement.GetJumpPowerIncrease());
 
-            m_officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
+            officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
         }
 
         private void ExitStatusManagement()
         {
-            m_officeWorkerStatusManagement.UpdateAttackPower(-m_officeWorkerStatusManagement.GetAttackPowerIncrease());
-            m_officeWorkerStatusManagement.UpdateMovingSpeed(-m_officeWorkerStatusManagement.GetMoveingSpeedIncrease());
-            m_officeWorkerStatusManagement.UpdateJumpPower(-m_officeWorkerStatusManagement.GetJumpPowerIncrease());
+            officeWorkerStatusManagement.UpdateAttackPower(-officeWorkerStatusManagement.GetAttackPowerIncrease());
+            officeWorkerStatusManagement.UpdateMovingSpeed(-officeWorkerStatusManagement.GetMoveingSpeedIncrease());
+            officeWorkerStatusManagement.UpdateJumpPower(-officeWorkerStatusManagement.GetJumpPowerIncrease());
 
-            m_officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
+            officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
         }
 
         #endregion
