@@ -2422,12 +2422,12 @@ Transform:
   m_GameObject: {fileID: 6872832776683955147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -139870.95, z: 0}
-  m_LocalScale: {x: 85027.94, y: 85027.94, z: 85027.94}
+  m_LocalScale: {x: 935.3075, y: 935.3075, z: 935.3075}
   m_Children:
   - {fileID: 161922511813248605}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.83, y: 0, z: 0}
 --- !u!95 &2822235881943087835
 Animator:
   serializedVersion: 3
@@ -2460,9 +2460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 0}
-  m_myAvatarRb: {fileID: 0}
   m_thisPhotonView: {fileID: 6809657440400546484}
-  m_sword: {fileID: 0}
+  m_swordObject: {fileID: 0}
   m_swordEffectTrail: {fileID: 0}
   m_targetTagName: PlayerCharacter
   m_withinRange: 1.3
@@ -2480,12 +2479,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79d32a6bd74c26499b02483351ef807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 0}
+  m_officeWorkerStatusManagement: {fileID: 0}
+  m_characterKeyInputStateManagement: {fileID: 0}
   m_playableDirector: {fileID: 0}
-  m_basicMovement: {fileID: 0}
-  m_basicJump: {fileID: 0}
-  m_basicViewpoint: {fileID: 0}
-  m_handOnlyModel: {fileID: 7869582305709939096}
 --- !u!114 &6809657440400546484
 MonoBehaviour:
   m_ObjectHideFlags: 0

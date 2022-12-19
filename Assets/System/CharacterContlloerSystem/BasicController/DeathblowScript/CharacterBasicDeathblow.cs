@@ -33,9 +33,10 @@ namespace Takechi.CharacterController.Deathblow
             characterKeyInputStateManagement.InputToDeathblow += (characterStatusManagement) => 
             {
                 characterStatusManagement.SetCanUseDeathblow(false);
-                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterStatusManagement.<color=yellow>SetCanUseDeathblow</color>(<color=blue>false</color>) <color=green>to set.</color>");
+                characterStatusManagement.SetCanUseDeathblow_TimeCount_Seconds(0);
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterStatusManagement.<color=yellow>SetCanUseDeathblow</color>(<color=blue>false</color>) <color=green>to set.</color>");
             };
-            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToDeathblow function <color=green>to add.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToDeathblow function <color=green>to add.</color>");
         }
 
         protected virtual void OnDisable()
@@ -43,9 +44,10 @@ namespace Takechi.CharacterController.Deathblow
             characterKeyInputStateManagement.InputToDeathblow -= (characterStatusManagement) => 
             {
                 characterStatusManagement.SetCanUseDeathblow(false);
-                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterStatusManagement.<color=yellow>SetCanUseDeathblow</color>(<color=blue>false</color>) <color=green>to set.</color>");
+                characterStatusManagement.SetCanUseDeathblow_TimeCount_Seconds(0);
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterStatusManagement.<color=yellow>SetCanUseDeathblow</color>(<color=blue>false</color>) <color=green>to set.</color>");
             };
-            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to remove.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToDeathblow function <color=green>to remove.</color>");
         }
 
         private void AvailabilityTimeControl()
@@ -54,11 +56,10 @@ namespace Takechi.CharacterController.Deathblow
             {
                 characterStatusManagement.UpdateCanUseDeathblow_TimeCount_Seconds(Time.deltaTime);
 
-                if (characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds() <= characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds())
+                if ( characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds() <= characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds())
                 {
-                    characterStatusManagement.SetCanUseDeathblow_TimeCount_Seconds(0);
                     characterStatusManagement.SetCanUseDeathblow(true);
-                    Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterStatusManagement.<color=yellow>SetCanUseDeathblow</color>(<color=blue>true</color>) <color=green>to set.</color>");
+                    Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterStatusManagement.<color=yellow>SetCanUseDeathblow</color>(<color=blue>true</color>) <color=green>to set.</color>");
                 }
             }
         }
