@@ -1,28 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Takechi.ManagmentButton.SrateChange
 {
     public class ButtonObjectStateChangeManagement : MonoBehaviour
     {
-        [SerializeField] private GameObject m_setStateObject;
-
-        private void Reset()
+        public void OnDestroyManagement(GameObject obj)
         {
-            m_setStateObject = this.gameObject;
+            Destroy(obj);
+            Debug.Log($"<color=yellow>Destroy</color>({obj.name})");
         }
 
-        public void OnDestroyManagement()
+        public void OnSetActiveManagemnt_ture(GameObject obj)
         {
-            Destroy(m_setStateObject);
-            Debug.Log($"<color=yellow>Destroy</color>({m_setStateObject.name})");
+            obj.SetActive(true);
+            Debug.Log($"{obj.name}.<color=yellow>SetActive</color>(<color=blue>true</color>)");
         }
 
-        public void OnSetActiveManagemnt(bool flag)
+        public void OnSetActiveManagemnt_false(GameObject obj)
         {
-            m_setStateObject.SetActive(flag);
-            Debug.Log($"{m_setStateObject.name}.<color=yellow>SetActive</color>(<color=blue>{flag}</color>)");
+            obj.SetActive(false);
+            Debug.Log($"{obj.name}.<color=yellow>SetActive</color>(<color=blue>false</color>)");
+        }
+
+        public void OnIntaractableManagemnt_ture(Button button)
+        {
+            button.interactable = true;
+            Debug.Log($"{button.name}.<color=yellow>Intaractable</color>(<color=blue>true</color>)");
+        }
+
+        public void OnIntaractableManagemnt_false(Button button)
+        {
+            button.interactable = false;
+            Debug.Log($"{button.name}.<color=yellow>Intaractable</color>(<color=blue>false</color>)");
         }
     }
 }

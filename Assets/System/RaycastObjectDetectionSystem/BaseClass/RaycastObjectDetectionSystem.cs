@@ -59,7 +59,7 @@ namespace Takechi.RaycastObjectDetectionSystem
 
                 RaycastHit raycastHit;
 
-                if (Physics.Raycast(ray, out raycastHit, rayProperty.m_distance))
+                if (Physics.Raycast(ray, out raycastHit, rayProperty.m_distance, m_layerMask))
                 {
                     Debug.DrawRay( ray.origin, ray.direction * rayProperty.m_distance, Color.green);
 

@@ -75,7 +75,6 @@ namespace Takechi.RaycastObjectDetectionSystem
                     SetActiveUI(false);
                 }
             };
-
         }
 
         void Update()

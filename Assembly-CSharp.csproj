@@ -63,6 +63,7 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\MovementScript\CharacterBasicMovement.cs" />
     <Compile Include="Assets\Resource\ModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
+    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiController.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCustomProperties.cs" />
     <Compile Include="Assets\TakechiAsset\FadingCanvas\script\ToFade.cs" />
     <Compile Include="Assets\TakechiAsset\SingletonMonoBehaviour\SingletonMonoBehaviour.cs" />
@@ -77,15 +78,15 @@
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunInformationDisclosure.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCallbacks.cs" />
-    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerHandOnlyAttackAnimationEventManager.cs" />
-    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerHandOnlyDeathblowAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyAttackAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterInstantiatedInNetworkSystem\CharacterBasicSettingWhenInstantiated.cs" />
     <Compile Include="Assets\Resource\ModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystem.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystemInNetwork.cs" />
-    <Compile Include="Assets\TakechiAsset\UiControllerSystem\Display\CanvasController.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\Display\CanvasSetActiveController.cs" />
     <Compile Include="Assets\System\TimeLineSystem\TitleScceneOnlyFolder\TimeLineControllerSqript\TitleScceneTimeLineController.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingTheAnimationParameterName.cs" />
     <Compile Include="Assets\TakechiAsset\WindowsEditorDebug\WindowsNetworkDebugController.cs" />
     <Compile Include="Assets\System\CharacterDamageDeterminationSystem\DamageJudgmentScript\CharacterBasicDamageJudgment.cs" />
-    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerNetworkRendererDeathblowAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerNetworkRendererDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParametersDataBase.cs" />
     <Compile Include="Assets\System\ServerControlSystem\ConnectToLobbySystem\Script\ConnectToLobbyManagment.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
@@ -112,14 +113,17 @@
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitInstantiateTheCanvasSystem.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiServerConnectPunCallbacks.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitSetActiveTheCanvasSystem.cs" />
-    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationSqript\OfficeWorkerNetworkRendererAttackAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerNetworkRendererAttackAnimationEventManager.cs" />
     <Compile Include="Assets\Database\ItemDatabase\Script\ItemDataBase.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSpecificParametersDataBase\OfficeWorker\Script\OfficeWorkerSpecificParameters.cs" />
     <Compile Include="Assets\System\ServerControlSystem\ConnectToJoinRoomSystem\Script\ConnectToJoinRoomManagment.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiController.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity1.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity3.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\Display\CanvasIntaractableController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

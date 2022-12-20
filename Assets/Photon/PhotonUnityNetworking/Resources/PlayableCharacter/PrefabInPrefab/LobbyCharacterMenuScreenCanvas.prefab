@@ -53,7 +53,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 0.1
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -288,14 +288,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1268426122134834493}
     m_Modifications:
     - target: {fileID: 81885948310210209, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 81885948310210209, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 81885948310210209, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
@@ -443,14 +435,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3493050397058125773, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3493050397058125773, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Takechi.ServerAccess.ConnectToJoinRoom.ConnectToJoinRoomManagment, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 3786402786646437306, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -471,24 +455,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5816864608725587916, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.0020662488
-      objectReference: {fileID: 0}
     - target: {fileID: 6516956754046140950, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6516956754046140950, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934739016646052813, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934739016646052813, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}
-      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8934739016646052813, guid: 28af67aba351a8b46b9435cbc3af22d9, type: 3}

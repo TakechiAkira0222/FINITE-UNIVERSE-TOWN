@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using Takechi.ScriptReference.CustomPropertyKey;
 using TakechiEngine.PUN.CustomProperties;
-using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 namespace Takechi.CharacterController.Parameters

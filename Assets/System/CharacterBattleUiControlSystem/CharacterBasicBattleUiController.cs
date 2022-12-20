@@ -31,17 +31,20 @@ namespace Takechi.UI.BattleUi
         private void Awake()
         {
             setValue(deathblowSlider, 0);
+            Debug.Log($" deathblowSlider.value <color=blue>to set</color>.");
             setValue(ability1Slider, 0);
+            Debug.Log($" ability1Slider.value <color=blue>to set</color>.");
             setValue(ability2Slider, 0);
+            Debug.Log($" ability2Slider.value <color=blue>to set</color>.");
             setValue(ability3Slider, 0);
+            Debug.Log($" ability3Slider.value <color=blue>to set</color>.");
         }
         private void Update()
         {
-            Debug.Log(m_characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds() / m_characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds());
-            setValue(deathblowSlider, m_characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds() / m_characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds());
-            setValue(ability1Slider,  m_characterStatusManagement.GetCanUseAbility1_TimeCount_Seconds() / m_characterStatusManagement.GetCanUseAbility1_RecoveryTime_Seconds());
-            setValue(ability2Slider,  m_characterStatusManagement.GetCanUseAbility2_TimeCount_Seconds() / m_characterStatusManagement.GetCanUseAbility2_RecoveryTime_Seconds());
-            setValue(ability3Slider,  m_characterStatusManagement.GetCanUseAbility3_TimeCount_Seconds() / m_characterStatusManagement.GetCanUseAbility3_RecoveryTime_Seconds());
+            updateValue(deathblowSlider, m_characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds());
+            updateValue(ability1Slider,  m_characterStatusManagement.GetCanUseAbility1_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseAbility1_RecoveryTime_Seconds());
+            updateValue(ability2Slider,  m_characterStatusManagement.GetCanUseAbility2_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseAbility2_RecoveryTime_Seconds());
+            updateValue(ability3Slider,  m_characterStatusManagement.GetCanUseAbility3_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseAbility3_RecoveryTime_Seconds());
         }
 
         void setValue( Slider slider, float value)
@@ -49,7 +52,7 @@ namespace Takechi.UI.BattleUi
             slider.value = value;
         }
 
-        void UpdateValue( Slider slider, float max ,float value)
+        void updateValue( Slider slider, float value, float max)
         {
             slider.value =  value / max;
         }

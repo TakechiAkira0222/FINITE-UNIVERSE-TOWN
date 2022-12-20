@@ -104,6 +104,8 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         private void OnEnable()
         {
+            if (!PhotonNetwork.InRoom) return;
+
             m_characterKeyInputStateManagement.InputToMovement += (characterStatusManagement, horiVec, vertVec) =>
             {
                 m_movementAnimatoinAction(characterStatusManagement.GetHandOnlyModelAnimator(), horiVec, vertVec);
@@ -155,6 +157,8 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         private void OnDisable()
         {
+            if (!PhotonNetwork.InRoom) return;
+
             m_characterKeyInputStateManagement.InputToMovement -= (characterStatusManagement, horiVec, vertVec) =>
             {
                 m_movementAnimatoinAction(characterStatusManagement.GetHandOnlyModelAnimator(), horiVec, vertVec);
@@ -224,7 +228,6 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
                 if (collision.gameObject.name == s)
                 {
                     float power = ObjectReferenceThatDamagesThePlayer.s_DamageObjectPowerDictionary[s];
-
                     thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
                 }
             }
@@ -232,6 +235,8 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         private void OnCollisionExit(Collision collision)
         {
+            if (!PhotonNetwork.InRoom) return;
+
             if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
 
             thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, 0f);
