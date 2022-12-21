@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using Takechi.CharacterController.KeyInputStete;
 using UnityEngine;
 
 namespace Takechi.RaycastObjectDetectionSystem
@@ -26,22 +26,34 @@ namespace Takechi.RaycastObjectDetectionSystem
         #endregion
 
         #region SsrializeFileld
+
+
         [SerializeField] private float m_distance = 1;
+
         [SerializeField] private LayerMask m_layerMask;
+
         #endregion
 
         #region protected
-        protected GameObject LookingObject => m_lookingObject;
-        protected bool IsLooking => m_isLooking;
+
+        protected GameObject lookingObject => m_lookingObject;
+
+        protected bool isLooking => m_isLooking;
+
+        #endregion
+
+        #region Event Action
 
         protected Action<GameObject> m_raycastHitAction = delegate { };
         protected Action<GameObject> m_raycastNotHitAction = delegate { };
+
         /// <summary>
         /// Hitしているobjectが前回フレームと違った時呼び出されます。
         /// </summary>
         /// <remarks> 当たったオブジェクトの代入前に呼び出され、前回フレームまで当たってたオブジェクトを引数に持ちます。 </remarks>>
         protected Action<GameObject> m_raycastHitObjectChangeAction = delegate { };
-        #endregion
+
+        #endregion 
 
         #region private
 

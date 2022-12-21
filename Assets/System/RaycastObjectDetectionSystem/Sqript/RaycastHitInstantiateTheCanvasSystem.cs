@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using Takechi.CharacterController.KeyInputStete;
+using Takechi.CharacterController.Parameters;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +13,6 @@ namespace Takechi.RaycastObjectDetectionSystem
     /// </summary>
     public class RaycastHitInstantiateTheCanvasSystem : RaycastObjectDetectionSystem
     {
-        /// <summary>
-        /// インスタンス化する親
-        /// </summary>
-        [SerializeField]
-        private Transform  m_parent;
-
         /// <summary>
         /// 目標物の名前
         /// </summary>
@@ -31,10 +26,22 @@ namespace Takechi.RaycastObjectDetectionSystem
         private List<GameObject> m_instantiateCanvasList = new List<GameObject>();
 
         /// <summary>
-        /// 選択前に表示されるUI
+        /// Focus時に表示されるUI
         /// </summary>
         [SerializeField]
-        private GameObject m_displayedUiImage;
+        private List<GameObject> m_uiDisplayedOnFocusList;
+
+        /// <summary>
+        /// Focus時に非表示になるUI
+        /// </summary>
+        [SerializeField]
+        private List<GameObject> m_uiHiddenOnFocusList;
+
+        /// <summary>
+        /// インスタンス化する親
+        /// </summary>
+        [SerializeField]
+        private Transform  m_parent;
 
         /// <summary>
         /// 光線に当たったオブジェクトごとのインスタンス化するcanvasを返す辞書
@@ -42,55 +49,42 @@ namespace Takechi.RaycastObjectDetectionSystem
         private Dictionary<string, GameObject> m_theCanvasSuitableForTheHitObjectDictionary = 
             new Dictionary<string, GameObject>();
 
-        void Awake()
+        private void OnEnable()
         {
-            if ( m_tagetObjectNameList.Count == 0)
+            if (m_tagetObjectNameList.Count == 0)
                 return;
 
-            if ( m_tagetObjectNameList.Count != m_instantiateCanvasList.Count)
+            if (m_tagetObjectNameList.Count != m_instantiateCanvasList.Count)
             {
                 Debug.LogError(" At this rate, the variables inside the Dictionary will collapse.");
                 return;
             }
 
-            SetDictionary();
-
-            m_raycastHitAction += (lookingObject) => 
-            {
-                if (lookingObject.GetComponent<Outline>() != null)
-                {
-                    lookingObject.GetComponent<Outline>().OutlineColor = Color.green;
-                    SetActiveUI(true);
-                }
-            };
-
-            m_raycastNotHitAction += (lookingObject) => 
-            {
-                if (lookingObject.GetComponent<Outline>() != null)
-                {
-                    lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
-                    SetActiveUI(false);
-                }
-            };
-
-            m_raycastHitObjectChangeAction += (lookingObject) =>
-            {
-                if (lookingObject.GetComponent<Outline>() != null)
-                {
-                    lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
-                    SetActiveUI(false);
-                }
-            };
+            settingRaycastAction();
         }
 
-        void Update()
-        { 
-            if (!IsLooking)
+        private void OnDisable()
+        {
+            if (m_tagetObjectNameList.Count == 0)
+                return;
+
+            if (m_tagetObjectNameList.Count != m_instantiateCanvasList.Count)
+            {
+                Debug.LogError(" At this rate, the variables inside the Dictionary will collapse.");
+                return;
+            }
+
+            removeRaycastAction();
+        }
+
+        private void Update()
+        {
+            if (!isLooking)
                 return;
 
             foreach (string tagetObjectName in m_tagetObjectNameList)
             {
-                if (LookingObject.name == tagetObjectName)
+                if (lookingObject.name == tagetObjectName)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -104,6 +98,82 @@ namespace Takechi.RaycastObjectDetectionSystem
             }
         }
 
+        #region Fanction
+
+        void settingRaycastAction()
+        {
+            SetDictionary();
+
+            m_raycastHitAction += (lookingObject) =>
+            {
+                if (lookingObject.GetComponent<Outline>() != null)
+                {
+                    lookingObject.GetComponent<Outline>().OutlineColor = Color.green;
+                    SetActiveUI(true);
+                }
+            };
+
+            Debug.Log($" m_raycastHitAction(loolingobject) to add.");
+
+            m_raycastNotHitAction += (lookingObject) =>
+            {
+                if (lookingObject.GetComponent<Outline>() != null)
+                {
+                    lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
+                    SetActiveUI(false);
+                }
+            };
+
+            Debug.Log($" m_raycastNotHitAction(loolingobject) to add.");
+
+            m_raycastHitObjectChangeAction += (lookingObject) =>
+            {
+                if (lookingObject.GetComponent<Outline>() != null)
+                {
+                    lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
+                    SetActiveUI(false);
+                }
+            };
+
+            Debug.Log($"  m_raycastHitObjectChangeAction(loolingobject) to add.");
+        }
+
+        void removeRaycastAction()
+        {
+            m_raycastHitAction -= (lookingObject) =>
+            {
+                if (lookingObject.GetComponent<Outline>() != null)
+                {
+                    lookingObject.GetComponent<Outline>().OutlineColor = Color.green;
+                    SetActiveUI(true);
+                }
+            };
+
+            Debug.Log($" m_raycastHitAction(loolingobject) to remove.");
+
+            m_raycastNotHitAction -= (lookingObject) =>
+            {
+                if (lookingObject.GetComponent<Outline>() != null)
+                {
+                    lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
+                    SetActiveUI(false);
+                }
+            };
+
+            Debug.Log($" m_raycastNotHitAction(loolingobject) to remove.");
+
+            m_raycastHitObjectChangeAction -= (lookingObject) =>
+            {
+                if (lookingObject.GetComponent<Outline>() != null)
+                {
+                    lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
+                    SetActiveUI(false);
+                }
+            };
+
+            Debug.Log($"  m_raycastHitObjectChangeAction(loolingobject) to remove.");
+        }
+
         void SetDictionary()
         {
             for ( int i = 0; i < m_tagetObjectNameList.Count; i++)
@@ -115,7 +185,17 @@ namespace Takechi.RaycastObjectDetectionSystem
 
         void SetActiveUI(bool flag)
         {
-            m_displayedUiImage.SetActive(flag);
+            foreach (GameObject o in m_uiDisplayedOnFocusList)
+            {
+                o.SetActive(flag);
+            }
+
+            foreach (GameObject o in m_uiHiddenOnFocusList)
+            {
+                o.SetActive(!flag);
+            }
         }
+
+        #endregion
     }
 }

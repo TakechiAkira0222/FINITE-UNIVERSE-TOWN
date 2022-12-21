@@ -486,10 +486,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6319637725813677968}
+  - component: {fileID: 2912269823492826470}
   - component: {fileID: 6319637725813677971}
   - component: {fileID: 6319637725813677970}
   - component: {fileID: 6319637725813677969}
-  - component: {fileID: 2912269823492826470}
   - component: {fileID: 5009683911209582888}
   - component: {fileID: 6212951701074859055}
   m_Layer: 0
@@ -513,6 +513,25 @@ Transform:
   m_Father: {fileID: 2998559958926718391}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2912269823492826470
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319637725813677983}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!20 &6319637725813677971
 Camera:
   m_ObjectHideFlags: 0
@@ -597,25 +616,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!95 &2912269823492826470
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6319637725813677983}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5009683911209582888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +638,10 @@ MonoBehaviour:
   m_setActiveCanvasList:
   - {fileID: 6657997156756189775}
   - {fileID: 653514175704113566}
-  m_displayedUiImage: {fileID: 1270421252}
+  m_uiDisplayedOnFocusList:
+  - {fileID: 1270421252}
+  m_uiHiddenOnFocusList:
+  - {fileID: 5722399021775016049}
 --- !u!114 &6212951701074859055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,14 +658,17 @@ MonoBehaviour:
   m_layerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_parent: {fileID: 4648862063314145763}
   m_tagetObjectNameList:
   - TrainingGroundConsole
   - desk2
   m_instantiateCanvasList:
   - {fileID: 4710552828073771443, guid: 0f08fe3e0ea224e4b87a23bb3f1c460b, type: 3}
   - {fileID: 6562509321090544667, guid: ae8c4826539bb544998176e57088fcf5, type: 3}
-  m_displayedUiImage: {fileID: 1270421252}
+  m_uiDisplayedOnFocusList:
+  - {fileID: 1270421252}
+  m_uiHiddenOnFocusList:
+  - {fileID: 5722399021775016049}
+  m_parent: {fileID: 4648862063314145763}
 --- !u!1001 &1276891852313607152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1057,6 +1063,11 @@ PrefabInstance:
       objectReference: {fileID: 6319637725813677971}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25134349b7876524fb9bf49324597e99, type: 3}
+--- !u!1 &5722399021775016049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 925590650025248178, guid: 25134349b7876524fb9bf49324597e99, type: 3}
+  m_PrefabInstance: {fileID: 4878049709808997827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3143148572764280941 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7506626076210679214, guid: 25134349b7876524fb9bf49324597e99, type: 3}
@@ -1356,14 +1367,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1268426122134834493, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
   m_PrefabInstance: {fileID: 5845190438244146398}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6657997156756189775 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 971577537594273425, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
-  m_PrefabInstance: {fileID: 5845190438244146398}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3372819544020456181 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9210107792060894763, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+  m_PrefabInstance: {fileID: 5845190438244146398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6657997156756189775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 971577537594273425, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
   m_PrefabInstance: {fileID: 5845190438244146398}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1270421252 stripped

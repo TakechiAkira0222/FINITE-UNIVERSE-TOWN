@@ -79,6 +79,7 @@
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCallbacks.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyAttackAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterInstantiatedInNetworkSystem\CharacterBasicSettingWhenInstantiated.cs" />
     <Compile Include="Assets\Resource\ModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
@@ -102,8 +103,11 @@
     <Compile Include="Assets\System\ServerControlSystem\ConnectToLobbySystem\Script\ConnectToLobbyManagment.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
     <Compile Include="Assets\TakechiAsset\InputScriptInterface\Script\InputScriptInterface.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity3.cs" />
     <Compile Include="Assets\Database\ItemDatabase\ManagmentScript\ItemManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity1.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ManagementButtonSystem\ButtonObjectStateChangeManagement.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\Display\CanvasIntaractableController.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayAttribute.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\OfficeWorkerStatusManagement.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DeviceInfo\DeviceInfo.cs" />
@@ -120,10 +124,6 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity1.cs" />
-    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
-    <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity3.cs" />
-    <Compile Include="Assets\TakechiAsset\UiControllerSystem\Display\CanvasIntaractableController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
