@@ -58,7 +58,6 @@ namespace Takechi.CharacterController.KeyInputStete
             if (Input.GetKeyDown(m_ability2) && characterStatusManagement.GetCanUseAbility2()) { InputToAblity2(characterStatusManagement); }
             if (Input.GetKeyDown(m_ability3) && characterStatusManagement.GetCanUseAbility3()) { InputToAblity3(characterStatusManagement); }
 
-
             InputToMovement(characterStatusManagement, Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             InputToViewpoint(characterStatusManagement, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
