@@ -16,17 +16,21 @@ namespace Takechi.UI.MapSelection
         private List<Transform> m_slidePosition =
             new List<Transform>(4);
 
-        private int m_selectionIndex = 0;
+        /// <summary>
+        /// MapëIëÇÃéwêîÅ@Get
+        /// </summary>
+        /// <returns></returns>
+        public int GetMapSelectionIndex() { return GetSelectionIndex(); }
 
-        private void OnEnable() { StartCoroutine( uiCursorRotation( m_uiCursor)); }
-
-        public int GetSelectionIndex() { return m_selectionIndex; }
+        private void OnEnable() 
+        {
+            StartCoroutine( uiCursorRotation( m_uiCursor));
+        }
 
         public void OnSelect(int Index)
         {
-            m_selectionIndex = Index;
-            StartCoroutine( slideCursor( m_uiCursor, m_slidePosition, Index));
-            Debug.Log($" On Select( int {Index}) selectionIndex : <color=blue>{m_selectionIndex}</color> <color=green>to set.</color>");
+            setSelectionIndex(Index);
+            StartCoroutine(slideCursor(m_uiCursor, m_slidePosition));
             Debug.Log($" <color=yellow>StartCoroutine</color>( <color=blue>nameof</color>(slideCursor))");
         }
     }
