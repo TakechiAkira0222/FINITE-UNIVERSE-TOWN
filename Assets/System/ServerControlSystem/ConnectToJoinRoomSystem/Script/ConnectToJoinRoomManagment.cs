@@ -8,7 +8,6 @@ using UnityEngine.UI;
 using TakechiEngine.PUN.ServerConnect;
 using UnityEngine.SceneManagement;
 
-
 using Takechi.UI.GameTypeSelection;
 using Takechi.UI.RoomPropertySetting;
 using Takechi.UI.MapSelection;
@@ -21,16 +20,6 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
         [SerializeField] private GameTypeSelectionManagement   m_gameTypeSelection;
         [SerializeField] private RoomPropertySettingManagement m_roomPropertySetting;
         [SerializeField] private MapSelectionManagement        m_mapSelection;
-
-        #region CustomProperties
-       
-
-        /// <summary>
-        /// ルームリスト
-        /// </summary>
-        private List<RoomInfo> m_roomInfoList = new List<RoomInfo>();
-
-        #endregion
 
         #region Event Action
 
@@ -146,49 +135,26 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
             OnJoinedRoomAction();
         }
 
-        public override void OnLeftRoom()
-        {
-            base.OnLeftRoom();
-        }
+        //public override void OnLeftRoom()
+        //{
+        //    base.OnLeftRoom();
+        //}
 
-        public override void OnPlayerEnteredRoom(Player newPlayer)
-        {
-            base.OnPlayerEnteredRoom(newPlayer);
-        }
+        //public override void OnPlayerEnteredRoom(Player newPlayer)
+        //{
+        //    base.OnPlayerEnteredRoom(newPlayer);
+        //}
 
-        public override void OnPlayerLeftRoom(Player otherPlayer)
-        {
-            base.OnPlayerLeftRoom(otherPlayer);
-        }
+        //public override void OnPlayerLeftRoom(Player otherPlayer)
+        //{
+        //    base.OnPlayerLeftRoom(otherPlayer);
+        //}
 
-        public override void OnRoomListUpdate(List<RoomInfo> roomList)
-        {
-            base.OnRoomListUpdate(roomList);
-        }
+        //public override void OnMasterClientSwitched(Player newMasterClient)
+        //{
+        //    base.OnMasterClientSwitched(newMasterClient);
+        //}
 
-        public override void OnMasterClientSwitched(Player newMasterClient)
-        {
-            base.OnMasterClientSwitched(newMasterClient);
-        }
-
-        #endregion
-
-        #region private finction
-
-        /// <summary>
-        /// リストの中にあるオブジェクトを消去とリストの初期化をする。
-        /// </summary>
-        /// <typeparam name="T"> 消去したいリストの型 </typeparam>
-        /// <param name="values">　消去したい オブジェクトリスト </param>
-        private void ErasingWithinAnElementOfList<T>(List<T> values) where T : MonoBehaviour
-        {
-            foreach (var v in values)
-            {
-                Destroy(v.gameObject);
-            }
-
-            values.Clear();
-        }
         #endregion
     }
 }

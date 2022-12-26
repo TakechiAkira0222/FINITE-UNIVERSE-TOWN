@@ -537,13 +537,14 @@ GameObject:
   - component: {fileID: 3695510022358967230}
   - component: {fileID: 6421963695691179722}
   - component: {fileID: 5859139286912369864}
+  - component: {fileID: 185103976711790604}
   m_Layer: 0
   m_Name: RoomSearchMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3695510022358967230
 Transform:
   m_ObjectHideFlags: 0
@@ -571,9 +572,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f8ff3081c6a944a8d5effd38140be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_displaySettings:
+  m_displaySettings: []
+  m_hideSetting:
   - {fileID: 480878186964647766}
-  m_hideSetting: []
 --- !u!114 &5859139286912369864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,6 +589,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interference: []
   m_notInterference: []
+--- !u!114 &185103976711790604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187075156589694943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe280b50350f5c448583f7e3c71283e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_content: {fileID: 0}
+  m_instansObject: {fileID: 0}
 --- !u!1 &411924077439497872
 GameObject:
   m_ObjectHideFlags: 0
@@ -4062,8 +4077,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9118784686476993449}
   m_HandleRect: {fileID: 2893339955446615884}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999976
+  m_Value: 0
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
