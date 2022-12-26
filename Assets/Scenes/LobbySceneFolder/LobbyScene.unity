@@ -178,6 +178,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc51eb14f3ad32499a4d0694227ab9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &729804993 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7399154514576646582, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
+  m_PrefabInstance: {fileID: 2640404583997774196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2874e2a5b7fa44e8c3623e912546d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &806644125
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +323,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8318bd706d820714b8547d5ceb73b2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1596260521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 730456305132316319, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
+  m_PrefabInstance: {fileID: 2640404583997774196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acfa6f85cb3a1444acef59898569aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2121098893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4040098982549529204, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
+  m_PrefabInstance: {fileID: 2640404583997774196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5219393b461cd6b41ba0f91947ff8e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2640404583997774196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -327,6 +360,10 @@ PrefabInstance:
       propertyPath: m_serializeSettingClassName.Array.data[0]
       value: 
       objectReference: {fileID: 1353286531}
+    - target: {fileID: 1562537738523658068, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2490651568892869148, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: sceneViewId
       value: 2
@@ -335,6 +372,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 478897998}
+    - target: {fileID: 2728254563063452101, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRoomCreation
+      objectReference: {fileID: 0}
     - target: {fileID: 3321333361694504806, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: m_Name
       value: LobbyCharacterPrefab
@@ -456,6 +497,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ServerAccessInstance
       objectReference: {fileID: 0}
+    - target: {fileID: 5606879375601066768, guid: 48d74ba9c3f29c247bef7731195e63b0, type: 3}
+      propertyPath: m_mapSelection
+      value: 
+      objectReference: {fileID: 1596260521}
+    - target: {fileID: 5606879375601066768, guid: 48d74ba9c3f29c247bef7731195e63b0, type: 3}
+      propertyPath: m_gameTypeSelection
+      value: 
+      objectReference: {fileID: 729804993}
+    - target: {fileID: 5606879375601066768, guid: 48d74ba9c3f29c247bef7731195e63b0, type: 3}
+      propertyPath: m_roomPropertySetting
+      value: 
+      objectReference: {fileID: 2121098893}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48d74ba9c3f29c247bef7731195e63b0, type: 3}
 --- !u!1001 &6302069938939585303

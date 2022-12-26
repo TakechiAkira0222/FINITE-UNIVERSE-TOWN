@@ -8,16 +8,22 @@ using UnityEngine.UI;
 using TakechiEngine.PUN.ServerConnect;
 using UnityEngine.SceneManagement;
 
+
+using Takechi.UI.GameTypeSelection;
+using Takechi.UI.RoomPropertySetting;
+using Takechi.UI.MapSelection;
+using Takechi.ScriptReference.CustomPropertyKey;
+
 namespace Takechi.ServerConnect.ConnectToJoinRoom
 {
     public class ConnectToJoinRoomManagment : TakechiServerConnectPunCallbacks
     {
+        [SerializeField] private GameTypeSelectionManagement   m_gameTypeSelection;
+        [SerializeField] private RoomPropertySettingManagement m_roomPropertySetting;
+        [SerializeField] private MapSelectionManagement        m_mapSelection;
+
         #region CustomProperties
-        /// <summary>
-        /// 部屋のカスタムプロパティー
-        /// </summary>
-        private ExitGames.Client.Photon.Hashtable m_customRoomProperties =
-            new ExitGames.Client.Photon.Hashtable();
+       
 
         /// <summary>
         /// ルームリスト
@@ -45,7 +51,7 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
         {
             OnRoomCreationAction += (name, roomOption, customRoomProperties) =>
             {
-                JoinOrCreateRoom(name, roomOption);
+                CreateRoom(name, roomOption);
                 Debug.Log("<color=green> OnRoomCreationAction </color>");
             };
 
@@ -70,16 +76,21 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
         {
             var roomOptions = new RoomOptions();
 
-            roomOptions.MaxPlayers = 2;
-            roomOptions.IsOpen = true; 
+            roomOptions.MaxPlayers = (byte)((m_gameTypeSelection.GetGameTypeSelectionIndex() + 1) * 2);
+
+            roomOptions.IsOpen = true;
             roomOptions.IsVisible = true;
 
-            m_customRoomProperties = new ExitGames.Client.Photon.Hashtable
+            /// <summary>
+            /// 部屋のカスタムプロパティー
+            /// </summary>
+            var customRoomProperties = new ExitGames.Client.Photon.Hashtable
             {
-                {" not set", 1},
+                { CustomPropertyKeyReference.s_RoomStatusGameType, m_gameTypeSelection.GetGameTypeSelectionIndex()},
+                { CustomPropertyKeyReference.s_RoomSatusMap, m_mapSelection.GetMapSelectionIndex() },
             };
 
-            OnRoomCreationAction("aaa", roomOptions, m_customRoomProperties);
+            OnRoomCreationAction( CheckForEnteredCharacters(m_roomPropertySetting.GetRoomName()), roomOptions, customRoomProperties); ;
         }
 
         /// <summary>
@@ -96,7 +107,7 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
         /// </summary>
         public void OnNameSearchJoinRoom(Text roomNameText)
         {
-            JoinRoom(roomNameText.text);
+            JoinRoom( roomNameText.text);
             Debug.Log("OnNameSearchJoinRoom :<color=green> clear </color>");
         }
 

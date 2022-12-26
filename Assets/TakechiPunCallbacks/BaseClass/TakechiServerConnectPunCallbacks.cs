@@ -89,14 +89,15 @@ namespace TakechiEngine.PUN.ServerConnect
 
         #endregion 
 
-        #region RoomCreateAndJoin
+        #region RoomCreate
         /// <summary>
         /// 部屋を作成して入室する ※カスタムプロパティの設定可能
         /// </summary>
+        /// <remarks> 部屋の作成　主は、そのままその部屋の入室します。</remarks>>
         /// <param name="roomName"></param>
         /// <param name="roomOptions"></param>
         /// <param name="customRoomProperties"> プロパティーの保管されている　ExitGames.Client.Photon.Hashtable </param>
-        protected void CreateAndJoinRoom(string roomName, RoomOptions roomOptions, ExitGames.Client.Photon.Hashtable customRoomProperties)
+        protected void CreateRoom(string roomName, RoomOptions roomOptions, ExitGames.Client.Photon.Hashtable customRoomProperties)
         {
             roomOptions.CustomRoomProperties = customRoomProperties;
 
@@ -109,9 +110,10 @@ namespace TakechiEngine.PUN.ServerConnect
         /// <summary>
         /// 部屋を作成して入室する ※カスタムプロパティの設定可能
         /// </summary>
+        /// <remarks> 部屋の作成　主は、そのままその部屋の入室します。</remarks>>
         /// <param name="roomName"></param>
         /// <param name="roomOptions"></param>
-        protected void CreateAndJoinRoom(string roomName, RoomOptions roomOptions)
+        protected void CreateRoom( string roomName, RoomOptions roomOptions)
         {
             if (PhotonNetwork.InLobby)
             {
@@ -123,10 +125,10 @@ namespace TakechiEngine.PUN.ServerConnect
 
         #region RoomCreateOrJoin
         /// <summary>
-        /// 特定の部屋に入室する ※カスタムプロパティの設定可能
+        /// 存在しなければ作成して入室する 
         /// </summary>
         /// <remarks> 
-        /// 存在しなければ作成して入室する
+        /// ※カスタムプロパティの設定可能
         /// </remarks>>
         /// <param name="roomName"></param>
         /// <param name="roomOptions"></param>
@@ -141,11 +143,8 @@ namespace TakechiEngine.PUN.ServerConnect
             }
         }
         /// <summary>
-        /// 特定の部屋に入室する
-        /// </summary>
-        /// <remarks> 
         /// 存在しなければ作成して入室する
-        /// </remarks>>
+        /// </summary>
         /// <param name="roomName"></param>
         /// <param name="roomOptions"></param>
         protected void JoinOrCreateRoom( string roomName, RoomOptions roomOptions)
