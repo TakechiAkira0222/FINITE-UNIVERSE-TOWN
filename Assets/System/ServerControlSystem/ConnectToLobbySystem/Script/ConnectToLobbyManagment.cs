@@ -8,11 +8,11 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
-using TakechiEngine.PUN.ServerConnect;
+using TakechiEngine.PUN.ServerConnect.ToLobby;
 
-namespace Takechi.ServerConnect.ConnectToLobby
+namespace Takechi.ServerConnect.ToLobby
 {
-    public class ConnectToLobbyManagment : TakechiServerConnectPunCallbacks  
+    public class ConnectToLobbyManagment : TakechiConnectToLobbyPunCallbacks
     {
         #region CustomProperties
 
@@ -46,8 +46,8 @@ namespace Takechi.ServerConnect.ConnectToLobby
             OnConnectedAction += () => { Debug.Log("<color=green> OnConnectedAction </color>");};
 
             OnConnectedToMasterAction += () => 
-            { 
-                JoinLobby();
+            {
+                PhotonNetwork.JoinLobby();
                 Debug.Log("<color=green> OnConnectedToMasterAction </color>");
             };
 

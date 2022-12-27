@@ -1,3 +1,4 @@
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using TakechiEngine.PUN.ServerConnect;
 
 namespace Takechi.ServerConnect.ErrorWhenConnecting
 {
-    public class ErrorManagementWhenConnecting : TakechiServerConnectPunCallbacks
+    public class ErrorManagementWhenConnecting : MonoBehaviourPunCallbacks
     {
         #region Error
 

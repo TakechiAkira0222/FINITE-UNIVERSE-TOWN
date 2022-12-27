@@ -1,14 +1,16 @@
 using Photon.Pun;
 using Photon.Realtime;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TakechiEngine.PUN;
+
 using UnityEngine;
+using TakechiEngine.PUN.ServerConnect.Joined;
 
 namespace Takechi.ServerConnect.NetworkInstantiation
 {
-    public class NetworkInstantiationAtStartup : TakechiPunCallbacks
+    public class NetworkInstantiationAtStartup : TakechiJoinedPunCallbacks
     {
         [SerializeField] private int m_syncTimeFlame = 1000;
         [SerializeField] private PhotonView m_photonView;
@@ -45,11 +47,6 @@ namespace Takechi.ServerConnect.NetworkInstantiation
             {
                 PhotonNetwork.Instantiate( path + prfab.name, m_location.position, m_quaternion);
             }
-        }
-
-        public override void OnDisconnected(DisconnectCause cause)
-        {
-            base.OnDisconnected(cause);
         }
     }
 }

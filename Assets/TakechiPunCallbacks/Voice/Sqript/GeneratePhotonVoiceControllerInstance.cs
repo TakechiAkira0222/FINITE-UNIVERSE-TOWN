@@ -27,7 +27,7 @@ namespace Takechi.PhotonVoiceController
 
         void setInstantiate()
         {
-            if (GameObject.Find(m_instanceObject.name + "(Clone)") != null)
+            if (GameObject.Find( m_instanceObject.name + "(Clone)") != null)
                 return;
 
             Instantiate(m_instanceObject, this.transform.position, Quaternion.identity);

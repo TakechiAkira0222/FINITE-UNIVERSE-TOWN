@@ -49,6 +49,11 @@ namespace Takechi.RaycastObjectDetectionSystem
         private Dictionary<string, GameObject> m_theCanvasSuitableForTheHitObjectDictionary = 
             new Dictionary<string, GameObject>();
 
+        private void Awake()
+        {
+            SetDictionary();
+        }
+
         private void OnEnable()
         {
             if (m_tagetObjectNameList.Count == 0)
@@ -102,8 +107,6 @@ namespace Takechi.RaycastObjectDetectionSystem
 
         void settingRaycastAction()
         {
-            SetDictionary();
-
             m_raycastHitAction += (lookingObject) =>
             {
                 if (lookingObject.GetComponent<Outline>() != null)

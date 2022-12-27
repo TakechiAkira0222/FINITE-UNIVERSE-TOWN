@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Photon.Realtime;
+
 using UnityEngine;
 using UnityEngine.UI;
-using TakechiEngine.PUN.ServerConnect;
 using UnityEngine.SceneManagement;
 
 using Takechi.UI.GameTypeSelection;
@@ -13,9 +13,11 @@ using Takechi.UI.RoomPropertySetting;
 using Takechi.UI.MapSelection;
 using Takechi.ScriptReference.CustomPropertyKey;
 
-namespace Takechi.ServerConnect.ConnectToJoinRoom
+using TakechiEngine.PUN.ServerConnect.ToJoinRoom;
+
+namespace Takechi.ServerConnect.ToJoinRoom 
 {
-    public class ConnectToJoinRoomManagment : TakechiServerConnectPunCallbacks
+    public class ConnectToJoinRoomManagment : TakechiConnectToJoinRoomPunCallbaks
     {
         [SerializeField] private GameTypeSelectionManagement   m_gameTypeSelection;
         [SerializeField] private RoomPropertySettingManagement m_roomPropertySetting;
@@ -65,7 +67,7 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
         {
             var roomOptions = new RoomOptions();
 
-            roomOptions.MaxPlayers = (byte)((m_gameTypeSelection.GetGameTypeSelectionIndex() + 1) * 2);
+            roomOptions.MaxPlayers = (byte)(( m_gameTypeSelection.GetGameTypeSelectionIndex() + 1) * 2);
 
             roomOptions.IsOpen = true;
             roomOptions.IsVisible = true;
@@ -134,26 +136,6 @@ namespace Takechi.ServerConnect.ConnectToJoinRoom
 
             OnJoinedRoomAction();
         }
-
-        //public override void OnLeftRoom()
-        //{
-        //    base.OnLeftRoom();
-        //}
-
-        //public override void OnPlayerEnteredRoom(Player newPlayer)
-        //{
-        //    base.OnPlayerEnteredRoom(newPlayer);
-        //}
-
-        //public override void OnPlayerLeftRoom(Player otherPlayer)
-        //{
-        //    base.OnPlayerLeftRoom(otherPlayer);
-        //}
-
-        //public override void OnMasterClientSwitched(Player newMasterClient)
-        //{
-        //    base.OnMasterClientSwitched(newMasterClient);
-        //}
 
         #endregion
     }

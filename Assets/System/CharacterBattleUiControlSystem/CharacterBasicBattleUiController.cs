@@ -41,10 +41,10 @@ namespace Takechi.UI.BattleUi
         }
         private void Update()
         {
-            updateValue(deathblowSlider, m_characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds());
-            updateValue(ability1Slider,  m_characterStatusManagement.GetCanUseAbility1_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseAbility1_RecoveryTime_Seconds());
-            updateValue(ability2Slider,  m_characterStatusManagement.GetCanUseAbility2_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseAbility2_RecoveryTime_Seconds());
-            updateValue(ability3Slider,  m_characterStatusManagement.GetCanUseAbility3_TimeCount_Seconds() , m_characterStatusManagement.GetCanUseAbility3_RecoveryTime_Seconds());
+            updateValue(deathblowSlider, characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds() , characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds());
+            updateValue(ability1Slider,  characterStatusManagement.GetCanUseAbility1_TimeCount_Seconds() ,  characterStatusManagement.GetCanUseAbility1_RecoveryTime_Seconds());
+            updateValue(ability2Slider,  characterStatusManagement.GetCanUseAbility2_TimeCount_Seconds() ,  characterStatusManagement.GetCanUseAbility2_RecoveryTime_Seconds());
+            updateValue(ability3Slider,  characterStatusManagement.GetCanUseAbility3_TimeCount_Seconds() ,  characterStatusManagement.GetCanUseAbility3_RecoveryTime_Seconds());
         }
 
         void setValue( Slider slider, float value)
