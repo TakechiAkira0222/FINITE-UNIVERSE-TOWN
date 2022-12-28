@@ -5,6 +5,7 @@ using UnityEngine;
 
 using Photon.Realtime;
 using TakechiEngine.PUN.Information;
+using Photon.Pun;
 
 namespace TakechiEngine.PUN.ServerConnect.Joined
 {
@@ -17,7 +18,23 @@ namespace TakechiEngine.PUN.ServerConnect.Joined
         /// 用語集
         /// https://doc.photonengine.com/ja-jp/pun/current/reference/glossary
         ////////////////////////////////////////////////////////////////////
-        
+
+        #region LeaveRoom
+
+        /// <summary>
+        /// 部屋から退室する
+        /// </summary>
+        protected void LeaveRoom()
+        {
+            if (PhotonNetwork.InRoom)
+            {
+                PhotonNetwork.LeaveRoom();
+                Debug.Log(" OnLeaveRoom :<color=green> clear </color>", this.gameObject);
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// マスタークライアントが変わった時
         /// </summary>

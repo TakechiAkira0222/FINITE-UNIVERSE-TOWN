@@ -15,6 +15,8 @@ using Takechi.ScriptReference.CustomPropertyKey;
 
 using TakechiEngine.PUN.ServerConnect.ToJoinRoom;
 using UnityEngine.Rendering;
+using Takechi.UI.RoomJoinedMenu;
+using Photon.Pun;
 
 namespace Takechi.ServerConnect.ToJoinRoom 
 {
@@ -23,6 +25,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
         [SerializeField] private GameTypeSelectionManagement   m_gameTypeSelection;
         [SerializeField] private RoomPropertySettingManagement m_roomPropertySetting;
         [SerializeField] private MapSelectionManagement        m_mapSelection;
+        [SerializeField] private RoomJoinedMenuManagement      m_roomJoinedMune;
 
         #region Event Action
 
@@ -73,7 +76,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
             OnJoinedRoomAction += () =>
             {
-                SceneManager.LoadScene(2);
+                m_roomJoinedMune.gameObject.SetActive(true);
                 Debug.Log("<color=green> OnJoinedRoomAction </color>");
             };
 
@@ -134,15 +137,6 @@ namespace Takechi.ServerConnect.ToJoinRoom
             Debug.Log($" OnNameReferenceJoinRoom :<color=green> clear </color>:<color=blue> RoomName : {button.gameObject.name} </color>");
         }
 
-        /// <summary>
-        /// ïîâÆÇ©ÇÁëﬁèoÇ∑ÇÈÅB
-        /// </summary>
-        public void OnLeaveRoom()
-        {
-            LeaveRoom();
-            Debug.Log(" Base.OnLeaveRoom :<color=green> clear </color>");
-        }
-
         #endregion
 
         #region MonoBehaviourPunCallbacks
@@ -162,6 +156,11 @@ namespace Takechi.ServerConnect.ToJoinRoom
         {
             base.OnRoomListUpdate( changedRoomList);
             OnRoomListUpdateAction(changedRoomList);
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            base.OnJoinRandomFailed(returnCode, message);
         }
 
         #endregion

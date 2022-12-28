@@ -2,8 +2,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TakechiEngine.PUN
 {
@@ -58,17 +58,35 @@ namespace TakechiEngine.PUN
         /// クライアントの場合表示する。
         /// </summary>
         /// <param name="obj"> 管理したいオブジェクト </param>
-        protected void ShowClientsOnly(GameObject obj)
+        protected void OnlyClientsDisplay(GameObject obj)
         {
             if (PhotonNetwork.IsMasterClient)
             {
                 obj.SetActive(true);
-                Debug.Log($" ShowClientsOnly {obj.name}.SetActive :<color=blue> true </color>");
+                Debug.Log($" OnlyClientsDisplay {obj.name}.SetActive :<color=blue> true </color>");
             }
             else
             {
                 obj.SetActive(false);
-                Debug.Log($" ShowClientsOnly {obj.name}.SetActive :<color=blue> false </color>");
+                Debug.Log($" OnlyClientsDisplay {obj.name}.SetActive :<color=blue> false </color>");
+            }
+        }
+
+        /// <summary>
+        /// クライアントのみ干渉可能にする。
+        /// </summary>
+        /// <param name="button"> 管理したいButton </param>
+        protected void OnlyClientsCanInterfere(Button button)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                button.interactable = true;
+                Debug.Log($" OnlyClientsCanInterfere {button.name}.interactable :<color=blue> true </color>");
+            }
+            else
+            {
+                button.interactable = false;
+                Debug.Log($" OnlyClientsCanInterfere {button.name}.interactable :<color=blue> false </color>");
             }
         }
 

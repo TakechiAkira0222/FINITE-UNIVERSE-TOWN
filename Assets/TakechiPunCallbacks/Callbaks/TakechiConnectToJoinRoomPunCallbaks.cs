@@ -116,22 +116,6 @@ namespace TakechiEngine.PUN.ServerConnect.ToJoinRoom
 
         #endregion
 
-        #region LeaveRoom
-
-        /// <summary>
-        /// •”‰®‚©‚ç‘ÞŽº‚·‚é
-        /// </summary>
-        protected void LeaveRoom()
-        {
-            if (PhotonNetwork.InRoom)
-            {
-                PhotonNetwork.LeaveRoom();
-                Debug.Log(" OnLeaveRoom :<color=green> clear </color>", this.gameObject);
-            }
-        }
-
-        #endregion
-
         #region active caollbaks
 
         /// <summary>

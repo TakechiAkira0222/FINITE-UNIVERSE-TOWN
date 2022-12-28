@@ -47,7 +47,7 @@ namespace Takechi.ServerConnect.ToLobby
 
             OnConnectedToMasterAction += () => 
             {
-                PhotonNetwork.JoinLobby();
+                JoinLobby();
                 Debug.Log("<color=green> OnConnectedToMasterAction </color>");
             };
 

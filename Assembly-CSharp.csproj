@@ -61,7 +61,7 @@
     <Compile Include="Assets\System\ServerControlSystem\NetworkInstantiationAtStartup\script\NetworkInstantiationAtStartup.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\MovementScript\CharacterBasicMovement.cs" />
-    <Compile Include="Assets\System\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
     <Compile Include="Assets\Resource\ModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
     <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiController.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Assets\TakechiAsset\InputScriptInterface\Script\InputScriptInterface.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity3.cs" />
     <Compile Include="Assets\Database\ItemDatabase\ManagmentScript\ItemManager.cs" />
-    <Compile Include="Assets\System\RoomCreationMenuManagementSystem\MapSelectionManagement\MapSelectionManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\MapSelectionManagement\MapSelectionManagement.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity1.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\CursorManagementSystem\CursorMnagement.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ManagementButtonSystem\ButtonObjectStateChangeManagement.cs" />
@@ -114,11 +114,11 @@
     <Compile Include="Assets\EditorSetting\NamedArrayAttribute.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\OfficeWorkerStatusManagement.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DeviceInfo\DeviceInfo.cs" />
-    <Compile Include="Assets\System\RoomJoinMenuManagementSystem\RoomSearchMenu\script\RoomSearchMenuManagment.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinMenuManagementSystem\RoomSearchMenu\script\RoomSearchMenuManagment.cs" />
     <Compile Include="Assets\TakechiAsset\RotateSkyBoxSystem\sqript\RotateSkyBox.cs" />
     <Compile Include="Assets\EditorSetting\WindowsMenuSceneChange.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ScriptEnabledOrDisabledContlloerSystem\ScriptEnabledOrDisabledContlloer.cs" />
-    <Compile Include="Assets\System\RoomCreationMenuManagementSystem\GameTypeSelectionManagement\GameTypeSelectionManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\GameTypeSelectionManagement\GameTypeSelectionManagement.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitInstantiateTheCanvasSystem.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitSetActiveTheCanvasSystem.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerNetworkRendererAttackAnimationEventManager.cs" />
@@ -129,6 +129,8 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\System\CharacterSelectionManagementSystem\Script\CharacterSelectionManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinedMenuManagementSystem\Script\RoomJoinedMenuManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
