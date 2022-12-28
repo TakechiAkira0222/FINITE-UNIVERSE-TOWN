@@ -14,6 +14,7 @@ using Takechi.UI.MapSelection;
 using Takechi.ScriptReference.CustomPropertyKey;
 
 using TakechiEngine.PUN.ServerConnect.ToJoinRoom;
+using UnityEngine.Rendering;
 
 namespace Takechi.ServerConnect.ToJoinRoom 
 {
@@ -29,31 +30,55 @@ namespace Takechi.ServerConnect.ToJoinRoom
         /// 部屋に入室した時の処理。
         /// </summary>
         public event Action OnJoinedRoomAction = delegate { };
+
         /// <summary>
         /// 部屋を作成するときの処理。
         /// </summary>
-        public event Action<string, RoomOptions, ExitGames.Client.Photon.Hashtable> OnRoomCreationAction = delegate { };
+        public event Action< string, RoomOptions, ExitGames.Client.Photon.Hashtable> OnRoomCreationAction = delegate { };
+
+        /// <summary>
+        /// 部屋のリスト更新された時の処理
+        /// </summary>
+        public event Action<List<RoomInfo>>  OnRoomListUpdateAction = delegate { };
 
         #endregion
+
+        /// <summary>
+        /// 存在している部屋 リスト
+        /// </summary>
+        private List<RoomInfo> m_roomInfoList = 
+            new List<RoomInfo>();
+
+        /// <summary>
+        /// 存在している部屋 辞書
+        /// </summary>
+        private Dictionary<string, RoomInfo> m_roomInfoDictionary =
+            new Dictionary<string, RoomInfo>();
 
         #region Unity Event
 
         void Awake()
         {
-            OnRoomCreationAction += (name, roomOption, customRoomProperties) =>
+            OnRoomCreationAction += ( name, roomOption, customRoomProperties) =>
             {
-                CreateRoom(name, roomOption);
+                CreateRoom( name, roomOption);
                 Debug.Log("<color=green> OnRoomCreationAction </color>");
+            };
+
+            OnRoomListUpdateAction += ( changedRoomList) =>
+            {
+                UpdateRoomInfo( changedRoomList);
+                Debug.Log("<color=green> OnJoinedRoomAction </color>");
             };
 
             OnJoinedRoomAction += () =>
             {
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(2);
                 Debug.Log("<color=green> OnJoinedRoomAction </color>");
             };
 
             Debug.Log("<color=yellow>ServerAccess.Awake </color> : " +
-              " OnRoomCreationAction, OnJoinedRoomAction : <color=green>to set</color>");
+              " OnRoomCreationAction, OnJoinedRoomAction, OnRoomListUpdateAction : <color=green>to set</color>");
         }
 
         #endregion
@@ -69,19 +94,16 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
             roomOptions.MaxPlayers = (byte)(( m_gameTypeSelection.GetGameTypeSelectionIndex() + 1) * 2);
 
-            roomOptions.IsOpen = true;
+              roomOptions.IsOpen  = true;
             roomOptions.IsVisible = true;
 
-            /// <summary>
-            /// 部屋のカスタムプロパティー
-            /// </summary>
             var customRoomProperties = new ExitGames.Client.Photon.Hashtable
             {
                 { CustomPropertyKeyReference.s_RoomStatusGameType, m_gameTypeSelection.GetGameTypeSelectionIndex()},
-                { CustomPropertyKeyReference.s_RoomSatusMap, m_mapSelection.GetMapSelectionIndex() },
+                { CustomPropertyKeyReference.s_RoomSatusMap, m_mapSelection.GetMapSelectionIndex()},
             };
 
-            OnRoomCreationAction( CheckForEnteredCharacters(m_roomPropertySetting.GetRoomName()), roomOptions, customRoomProperties); ;
+            OnRoomCreationAction( CheckForEnteredCharacters( m_roomPropertySetting.GetRoomName()), roomOptions, customRoomProperties); ;
         }
 
         /// <summary>
@@ -109,7 +131,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
         public void OnNameReferenceJoinRoom(Button button)
         {
             JoinRoom(button.gameObject.name);
-            Debug.Log($"OnOwnNameReferenceJoinRoom :<color=green> clear </color>:<color=blue> RoomName : {button.gameObject.name} </color>");
+            Debug.Log($" OnNameReferenceJoinRoom :<color=green> clear </color>:<color=blue> RoomName : {button.gameObject.name} </color>");
         }
 
         /// <summary>
@@ -133,10 +155,36 @@ namespace Takechi.ServerConnect.ToJoinRoom
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
-
             OnJoinedRoomAction();
         }
 
+        public override void OnRoomListUpdate( List<RoomInfo> changedRoomList)
+        {
+            base.OnRoomListUpdate( changedRoomList);
+            OnRoomListUpdateAction(changedRoomList);
+        }
+
         #endregion
+
+        public List<RoomInfo> GetRoomInfoList() { return m_roomInfoList; }
+
+        public Dictionary< string, RoomInfo> GetRoomInfoDictionary() { return m_roomInfoDictionary; }
+
+        private void UpdateRoomInfo(List<RoomInfo> changedRoomList)
+        {
+            foreach ( RoomInfo info in changedRoomList)
+            {
+                if ( !m_roomInfoList.Contains(info))
+                {
+                    m_roomInfoList.Add(info);
+                    m_roomInfoDictionary.Add(info.Name, info);
+                }
+                else
+                {
+                    m_roomInfoList.Remove(info);
+                    m_roomInfoDictionary.Remove(info.Name);
+                }
+            }
+        }
     }
 }

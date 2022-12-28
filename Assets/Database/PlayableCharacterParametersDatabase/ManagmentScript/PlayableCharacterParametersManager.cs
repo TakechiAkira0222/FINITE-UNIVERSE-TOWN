@@ -17,45 +17,34 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// キャラクターパラメーターを番号取得
         /// </summary>
-        private Dictionary<PlayableCharacterParameters, int> m_numOfParameters =
-            new Dictionary<PlayableCharacterParameters, int>();
+        private Dictionary< int, PlayableCharacterParameters> m_numOfParameters =
+            new Dictionary< int, PlayableCharacterParameters>();
 
         /// <summary>
         /// キャラクターパラメーターを番号取得
         /// </summary>
-        private Dictionary<PlayableCharacterParameters, string> m_nameOfParameters =
-            new Dictionary<PlayableCharacterParameters, string>();
-
-        [SerializeField] private string m_characterName = "";
-        [NonSerialized]  public PlayableCharacterParameters CharacterNameOfParameters;
+        private Dictionary< string ,PlayableCharacterParameters> m_nameOfParameters =
+            new Dictionary< string, PlayableCharacterParameters>();
 
         void Awake()
         {
-            SetParameters( m_characterName);
+            setParameters();
         }
 
-        void Start()
+        private void setParameters()
         {
             for (int i = 0; i < m_parametersDataBase.GetParametersLists().Count; i++)
             {
-                m_numOfParameters.Add(m_parametersDataBase.GetParametersLists()[i], i);
-                m_nameOfParameters.Add(m_parametersDataBase.GetParametersLists()[i], m_parametersDataBase.GetParametersLists()[i].GetCharacterName());
+                m_numOfParameters.Add( i, m_parametersDataBase.GetParametersLists()[i]);
+                m_nameOfParameters.Add( m_parametersDataBase.GetParametersLists()[i].GetCharacterName(), m_parametersDataBase.GetParametersLists()[i]);
 
-                Debug.Log(m_parametersDataBase.GetParametersLists()[i].GetCharacterName() + ": " + m_parametersDataBase.GetParametersLists()[i].GetInformation());
+                Debug.Log($"{ m_numOfParameters[i].GetCharacterName()} : <color=blue>List to set.</color> ");
+                Debug.Log($"{ m_nameOfParameters[ m_parametersDataBase.GetParametersLists()[i].GetCharacterName()].GetCharacterName()} : <color=blue>List to set.</color> ");
             }
-
-            Debug.Log(GetParameters(this.gameObject.name).GetAttackPower());
         }
 
-        private void SetParameters(string searchName)
-        {
-            CharacterNameOfParameters = m_parametersDataBase.GetParametersLists().Find(parameters => parameters.GetCharacterName() == searchName);
-            Debug.Log($"<color=green> set CharacterParameters : {searchName}");
-        }
+        public PlayableCharacterParameters GetParameters(string searchName) { return m_nameOfParameters[searchName]; }
 
-        private PlayableCharacterParameters GetParameters(string searchName)
-        {
-            return m_parametersDataBase.GetParametersLists().Find(parameters => parameters.GetCharacterName() == searchName);
-        }
+        public PlayableCharacterParameters GetParameters(int searchNum) { return m_numOfParameters[searchNum]; }
     }
 }

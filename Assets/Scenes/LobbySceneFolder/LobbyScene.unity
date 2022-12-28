@@ -334,50 +334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acfa6f85cb3a1444acef59898569aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1735422374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1735422376}
-  - component: {fileID: 1735422375}
-  m_Layer: 0
-  m_Name: VoiceLogger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1735422375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735422374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a86f533fd9917dd4da8601e9eb542c96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LogLevel: 2
---- !u!4 &1735422376
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735422374}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2121098893 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4040098982549529204, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
@@ -396,29 +352,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 653514175704113566, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 724599412280630643, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
-      propertyPath: m_connectToJoinRoomManagment
-      value: 
-      objectReference: {fileID: 478897998}
     - target: {fileID: 1313025848165213947, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: sceneViewId
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1346616245394866780, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: m_serializeSettingClassName.Array.data[0]
       value: 
       objectReference: {fileID: 1353286531}
-    - target: {fileID: 1560003592048814215, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
-      propertyPath: m_connectToJoinRoomManagment
-      value: 
-      objectReference: {fileID: 478897998}
     - target: {fileID: 2490651568892869148, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: sceneViewId
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2728254563063452101, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -476,13 +420,9 @@ PrefabInstance:
       propertyPath: m_connectToJoinRoomManagment
       value: 
       objectReference: {fileID: 478897998}
-    - target: {fileID: 4267276457791440913, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
-      propertyPath: m_ShowMaskGraphic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4478581711363544206, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: sceneViewId
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5787564490949066980, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: m_serializeSettingClassName.Array.data[0]
@@ -490,7 +430,7 @@ PrefabInstance:
       objectReference: {fileID: 1353286531}
     - target: {fileID: 8720368388159889675, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}
       propertyPath: sceneViewId
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59deb15d877a4b94583a11bf0cba46de, type: 3}

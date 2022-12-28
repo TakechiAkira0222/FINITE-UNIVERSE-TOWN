@@ -9,82 +9,68 @@ using UnityEngine.UI;
 using TakechiEngine.PUN.ServerConnect;
 using Takechi.ServerConnect.ToJoinRoom;
 using UnityEngine.Rendering;
+using System.Net.NetworkInformation;
+using UnityEngine.PlayerLoop;
 
 namespace Takechi.UI.RoomSerach
 {
     public class RoomSearchMenuManagment : MonoBehaviourPunCallbacks
     {
+        [SerializeField] private ConnectToJoinRoomManagment m_connectToJoinRoomManagment;
+        
+        [Header(" System Setting")]
         [SerializeField] private GameObject m_content;
         [SerializeField] private Button     m_instansObject;
-        [SerializeField] private ConnectToJoinRoomManagment m_connectToJoinRoomManagment;
+        [SerializeField] private int        m_updateRate = 60;
 
-        private ConnectToJoinRoomManagment connectToJoinRoomManagment => m_connectToJoinRoomManagment;
-        private List<RoomInfo> m_roomInfoList = new List<RoomInfo>();
-        private Dictionary<string, RoomInfo> m_roomInfoDictionary = new Dictionary<string, RoomInfo>();
+        private ConnectToJoinRoomManagment connectToJoinRoomManagment =>
+            m_connectToJoinRoomManagment;
+
+        private List<RoomInfo> m_roomInfoList =>
+            m_connectToJoinRoomManagment.GetRoomInfoList();
+
+        private Dictionary<string, RoomInfo> m_roomInfoDictionary =>
+            m_connectToJoinRoomManagment.GetRoomInfoDictionary();
 
         public override void OnEnable()
         {
             base.OnEnable();
 
-            RoomInfoButtonInstantiation( m_roomInfoList, m_content.transform);
+            RoomInfoButtonInstantiation( m_roomInfoList);
+
+            StartCoroutine(nameof( AutomaticUpdating));
+
+            Debug.Log("<color=yellow> RoomSearchMenuManagment.OnEnable </color> : " +
+                "connectToJoinRoomManagment.OnRoomListUpdateAction : <color=green>to add</color>");
         }
+
         public override void OnDisable()
         {
             base.OnDisable();
 
             DestroyChildObjects( m_content);
+
+            Debug.Log("<color=yellow> RoomSearchMenuManagment.OnDisable </color> : " +
+                "connectToJoinRoomManagment.OnRoomListUpdateAction : <color=green>to remove</color>");
         }
 
-        public override void OnRoomListUpdate( List<RoomInfo> changedRoomList)
+        private void RoomInfoButtonInstantiation( List<RoomInfo> list)
         {
-            base.OnRoomListUpdate(changedRoomList);
-
-            // DestroyChildObjects( m_content);
-
-            UpdateRoomInfo( changedRoomList);
-
-            RoomInfoButtonInstantiation( m_roomInfoList, m_content.transform);
-        }
-
-        private void RoomInfoButtonInstantiation(List<RoomInfo> list, Transform parent)
-        {
-            foreach (RoomInfo info in list)
+            foreach ( RoomInfo info in list)
             {
-                Button button = Instantiate( m_instansObject, parent);
+                Button button = Instantiate( m_instansObject, m_content.transform);
 
                 button.name = info.Name;
+                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = info.Name;
                 button.onClick.AddListener(() => connectToJoinRoomManagment.OnNameReferenceJoinRoom((button)));
             }
         }
 
-        private void DestroyChildObjects(GameObject parent) 
+        private void DestroyChildObjects( GameObject parent)
         { 
-            foreach (Transform n in parent.transform) 
+            foreach ( Transform n in parent.transform) 
             { 
                GameObject.Destroy( n.gameObject); 
-            } 
-        }
-
-        private void UpdateRoomInfo( List<RoomInfo> changedRoomList)
-        {
-            foreach( RoomInfo info in changedRoomList)
-            {
-                if (!m_roomInfoList.Contains(info)) 
-                { 
-                    m_roomInfoList.Add(info);
-
-                    Debug.Log("add : " + info.Name);
-
-                    m_roomInfoDictionary.Add(info.Name, info);
-                }
-                else 
-                { 
-                    m_roomInfoList.Remove(info);
-
-                    Debug.Log("Remove : " + info.Name);
-
-                    m_roomInfoDictionary.Remove(info.Name);
-                }
             }
         }
 
@@ -106,6 +92,23 @@ namespace Takechi.UI.RoomSerach
             {
                 Debug.Log("ë∂ç›ÇµÇ‹ÇπÇÒÅB");
             }
+        }
+
+        private IEnumerator AutomaticUpdating()
+        {
+            while (this.gameObject.activeSelf)
+            {
+                OnRoomInfoListUpdate();
+                yield return new WaitForSeconds(Time.deltaTime * m_updateRate);
+            }
+        }
+
+        public void OnRoomInfoListUpdate()
+        {
+            DestroyChildObjects( m_content);
+            RoomInfoButtonInstantiation( m_roomInfoList);
+
+            Debug.Log(" Room Info <color=green>ListUpdate</color> ");
         }
     }
 }

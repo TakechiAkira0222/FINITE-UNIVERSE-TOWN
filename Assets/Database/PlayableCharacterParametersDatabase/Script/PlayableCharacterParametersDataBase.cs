@@ -17,9 +17,6 @@ namespace Takechi.CharacterController.Parameters
         /// ParametersList‚ð•Ô‚·(get only)
         /// </summary>
         /// <returns></returns>
-        public List<PlayableCharacterParameters> GetParametersLists()
-        {
-            return parametersLists;
-        }
+        public List<PlayableCharacterParameters> GetParametersLists() { return parametersLists; }
     }
 }
