@@ -106,7 +106,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
                 { CustomPropertyKeyReference.s_RoomSatusMap, m_mapSelection.GetMapSelectionIndex()},
             };
 
-            OnRoomCreationAction( CheckForEnteredCharacters( m_roomPropertySetting.GetRoomName()), roomOptions, customRoomProperties); ;
+            OnRoomCreationAction( CheckForEnteredCharacters( m_roomPropertySetting.GetRoomName()), roomOptions, customRoomProperties);
         }
 
         /// <summary>
@@ -177,11 +177,17 @@ namespace Takechi.ServerConnect.ToJoinRoom
                 {
                     m_roomInfoList.Add(info);
                     m_roomInfoDictionary.Add(info.Name, info);
+                    Debug.Log($"{info} : add");
                 }
-                else
+                
+                if( m_roomInfoList.Contains(info))
                 {
-                    m_roomInfoList.Remove(info);
-                    m_roomInfoDictionary.Remove(info.Name);
+                    if (info.PlayerCount <= 0)
+                    {
+                        m_roomInfoList.Remove(info);
+                        m_roomInfoDictionary.Remove(info.Name);
+                        Debug.Log($"{info} : remove");
+                    }
                 }
             }
         }
