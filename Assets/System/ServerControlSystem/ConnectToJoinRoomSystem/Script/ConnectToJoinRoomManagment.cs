@@ -64,7 +64,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
         {
             OnRoomCreationAction += ( name, roomOption, customRoomProperties) =>
             {
-                CreateRoom( name, roomOption);
+                CreateRoom( name, roomOption, customRoomProperties);
                 Debug.Log("<color=green> OnRoomCreationAction </color>");
             };
 
@@ -77,6 +77,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
             OnJoinedRoomAction += () =>
             {
                 m_roomJoinedMune.gameObject.SetActive(true);
+                RoomInfoAndJoinedPlayerInfoDisplay(CustomPropertyKeyReference.s_RoomStatusKeys);
                 Debug.Log("<color=green> OnJoinedRoomAction </color>");
             };
 
@@ -154,7 +155,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
         public override void OnRoomListUpdate( List<RoomInfo> changedRoomList)
         {
-            base.OnRoomListUpdate( changedRoomList);
+            base.OnRoomListUpdate(changedRoomList);
             OnRoomListUpdateAction(changedRoomList);
         }
 
@@ -169,7 +170,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
         public Dictionary< string, RoomInfo> GetRoomInfoDictionary() { return m_roomInfoDictionary; }
 
-        private void UpdateRoomInfo(List<RoomInfo> changedRoomList)
+        private void UpdateRoomInfo( List<RoomInfo> changedRoomList)
         {
             foreach ( RoomInfo info in changedRoomList)
             {
@@ -182,7 +183,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
                 
                 if( m_roomInfoList.Contains(info))
                 {
-                    if (info.PlayerCount <= 0)
+                    if ( info.PlayerCount <= 0)
                     {
                         m_roomInfoList.Remove(info);
                         m_roomInfoDictionary.Remove(info.Name);

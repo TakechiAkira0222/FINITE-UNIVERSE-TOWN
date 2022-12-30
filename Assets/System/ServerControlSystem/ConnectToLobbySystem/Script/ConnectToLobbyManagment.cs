@@ -9,6 +9,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 using TakechiEngine.PUN.ServerConnect.ToLobby;
+using Takechi.ScriptReference.CustomPropertyKey;
 
 namespace Takechi.ServerConnect.ToLobby
 {
@@ -69,7 +70,9 @@ namespace Takechi.ServerConnect.ToLobby
             m_customPlayerProperties =
                 new ExitGames.Client.Photon.Hashtable
                 {
-
+                     { CustomPropertyKeyReference.s_CharacterStatusAttackPower, 0},
+                     { CustomPropertyKeyReference.s_CharacterStatusMass, 0},
+                     { CustomPropertyKeyReference.s_CharacterStatusTeam, "Null"},
                 };
 
             Debug.Log(" CustomPlayerProperties : <color=green>Initial setting completed</color>");

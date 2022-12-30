@@ -45,7 +45,7 @@ namespace TakechiEngine.PUN.ServerConnect.Joined
         /// <param name="newMasterClient"></param>
         public override void OnMasterClientSwitched(Player newMasterClient)
         {
-            PlayerInformationDisplay(newMasterClient, "OnMasterClientSwitched", "newMasterClient");
+            PlayerInformationDisplay(newMasterClient, "OnMasterClientSwitched");
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace TakechiEngine.PUN.ServerConnect.Joined
         /// </param>
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            PlayerInformationDisplay(newPlayer, "OnPlayerEnteredRoom", "newPlayer");
+            PlayerInformationDisplay(newPlayer, "OnPlayerEnteredRoom");
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace TakechiEngine.PUN.ServerConnect.Joined
         /// </param>
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
-            PlayerInformationDisplay(otherPlayer, "OnPlayerLeftRoom", "otherPlayerr");
+            PlayerInformationDisplay(otherPlayer, "OnPlayerLeftRoom");
         }
     }
 }

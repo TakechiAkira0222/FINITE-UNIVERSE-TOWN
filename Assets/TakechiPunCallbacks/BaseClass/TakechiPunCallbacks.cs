@@ -42,12 +42,10 @@ namespace TakechiEngine.PUN
         /// <param name ="sceneNumber"> 移行したいシーンの番号 </param>
         protected void SceneSyncChange(int sceneNumber)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.LoadLevel(sceneNumber);
+            if (PhotonNetwork.IsMasterClient) return;
 
-                Debug.Log($"<color=green> SceneSyncChange SceneNumber</color> : {sceneNumber}");
-            }
+            PhotonNetwork.LoadLevel(sceneNumber);
+            Debug.Log($"<color=green> SceneSyncChange SceneNumber</color> : {sceneNumber}");
         }
 
         #endregion
@@ -119,7 +117,7 @@ namespace TakechiEngine.PUN
         /// <param name="photonView">　自身のニックネームが入ったPhotonView </param>
         protected void ConfirmationOfNicknames(PhotonView photonView)
         {
-            if (PhotonNetwork.InRoom)
+            if (PhotonNetwork.InRoom) 
             {
                 List<string> nickNameList = new List<string>(PhotonNetwork.PlayerList.Length);
 

@@ -10,7 +10,7 @@ namespace Takechi.ServerConnect.ErrorWhenConnecting
 {
     public class ErrorManagementWhenConnecting : MonoBehaviourPunCallbacks
     {
-        #region Error
+        #region ErrorCallbacks
 
         /// <summary>
         /// ƒ‰ƒ“ƒ_ƒ€‚È•”‰®‚Ö‚Ì“üŽº‚ÉŽ¸”s‚µ‚½Žž

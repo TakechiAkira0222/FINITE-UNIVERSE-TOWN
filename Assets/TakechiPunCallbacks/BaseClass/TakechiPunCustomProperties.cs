@@ -25,7 +25,7 @@ namespace TakechiEngine.PUN.CustomProperties
 
         #endregion
 
-        #region UpdateCustomRoomProperties
+        #region setCustomRoomProperties
         /// <summary>
         /// CurrentRoomCustomProperties to set.
         /// </summary>

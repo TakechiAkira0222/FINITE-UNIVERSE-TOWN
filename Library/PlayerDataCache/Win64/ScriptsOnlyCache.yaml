@@ -48,6 +48,7 @@ ScriptsOnlyBuild:
     - Takechi.UI.RoomJoinedMenu.RoomJoinedMenuManagement
     - Takechi.UI.RoomPropertySetting.RoomPropertySettingManagement
     - Takechi.UI.RoomSerach.RoomSearchMenuManagment
+    - Takechi.UI.UserNickname.UserNicknameManagement
     - TitleScceneTimeLineController
     PhotonUnityNetworking.Editor.dll:
     - Photon.Pun.PunSceneSettings
@@ -581,6 +582,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8062}
     - Class: 114
       Script: {instanceID: 8148}
+    - Class: 114
+      Script: {instanceID: 74388}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -864,6 +867,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8006}
     - Class: 114
       Script: {instanceID: 8148}
+    - Class: 114
+      Script: {instanceID: 74388}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -3034,6 +3039,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.PhotonVoiceController
     className: GeneratePhotonVoiceControllerInstance
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Takechi.UI.UserNickname
+    className: UserNicknameManagement
   platform: 19
   scenePathNames:
   - Assets/Scenes/TitleScneneFolder/TitleScnene.unity

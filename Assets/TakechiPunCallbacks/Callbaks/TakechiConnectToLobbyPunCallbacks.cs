@@ -113,7 +113,7 @@ namespace TakechiEngine.PUN.ServerConnect.ToLobby
 
             foreach (RoomInfo roomInfo in roomList)
             {
-                Debug.Log(InformationTitleTemplate("OnRoomListUpdate") + WhatRoomInformationIsDisplayedInTheDebugLog(roomInfo), this);
+                
             }
         }
 
