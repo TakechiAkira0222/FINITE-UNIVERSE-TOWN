@@ -11,7 +11,7 @@ namespace Takechi.ExternalData
 {
     public class Read : Save
     {
-        protected virtual DataClass SetAndLoadData<DataClass>(DataClass saveData , string saveFilePath)
+        protected virtual DataClass LoadData<DataClass>(DataClass saveData , string saveFilePath)
         {
             //セーブファイルがあるか
             if (File.Exists(saveFilePath))
@@ -50,7 +50,7 @@ namespace Takechi.ExternalData
             }
             else
             {
-                Debug.Log("セーブファイルがありません");
+                Debug.Log(" no save file ");
                 return saveData;
             }
         }

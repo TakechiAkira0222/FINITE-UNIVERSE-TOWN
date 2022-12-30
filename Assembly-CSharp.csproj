@@ -64,6 +64,7 @@
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
     <Compile Include="Assets\Resource\ModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
+    <Compile Include="Assets\System\ChangePlayerSettingsMuneSelectedSystem\Script\UserNickNameManagement.cs" />
     <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiController.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCustomProperties.cs" />
     <Compile Include="Assets\TakechiAsset\FadingCanvas\script\ToFade.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Callbaks\TakechiConnectToLobbyPunCallbacks.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCallbacks.cs" />
+    <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\baseClass\Read.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyAttackAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyDeathblowAnimationEventManager.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\Resource\ModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
+    <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\ExternalDataManagement.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystem.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Callbaks\TakechiConnectToJoinRoomPunCallbaks.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystemInNetwork.cs" />
@@ -122,6 +125,7 @@
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ScriptEnabledOrDisabledContlloerSystem\ScriptEnabledOrDisabledContlloer.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\GameTypeSelectionManagement\GameTypeSelectionManagement.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitInstantiateTheCanvasSystem.cs" />
+    <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\baseClass\Save.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitSetActiveTheCanvasSystem.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerNetworkRendererAttackAnimationEventManager.cs" />
     <Compile Include="Assets\Database\ItemDatabase\Script\ItemDataBase.cs" />
@@ -131,10 +135,6 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\ChangePlayerSettingsMuneSelectedSystem\Script\UserNicknameManagement.cs" />
-    <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\baseClass\Save.cs" />
-    <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\baseClass\Read.cs" />
-    <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\ExternalDataManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

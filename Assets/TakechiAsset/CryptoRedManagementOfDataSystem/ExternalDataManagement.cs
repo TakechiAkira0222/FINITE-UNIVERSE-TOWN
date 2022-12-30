@@ -11,9 +11,9 @@ namespace Takechi.ExternalData
             base.DataSave(dataClass , saveFilePath);
         }
 
-        protected override DataClass SetAndLoadData<DataClass>(DataClass dataClass , string saveFilePath)
+        protected override DataClass LoadData<DataClass>(DataClass dataClass , string saveFilePath)
         {
-            return base.SetAndLoadData(dataClass , saveFilePath);
+            return base.LoadData(dataClass , saveFilePath);
         }
     }
 }

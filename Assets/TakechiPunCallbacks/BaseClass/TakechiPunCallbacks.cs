@@ -111,6 +111,37 @@ namespace TakechiEngine.PUN
         /// <summary>
         /// ニックネームが同じ人をくべつする。
         /// </summary>
+        /// <param name="nickName"> 確認したいニックネーム </param>
+        /// <returns> 確認後のニックネーム </returns>
+        protected string ConfirmationOfNicknames(string nickName)
+        {
+            if (PhotonNetwork.InRoom)
+            {
+                List<string> nickNameList = new List<string>(PhotonNetwork.PlayerList.Length);
+
+                foreach (Player player in PhotonNetwork.PlayerList)
+                {
+                    nickNameList.Add(player.NickName);
+                }
+
+                nickNameList.Remove(nickName);
+
+                foreach (string nameList in nickNameList)
+                {
+                    if (nickName == nameList)
+                    {
+                        nickName = nickName + "(1)";
+                        Debug.Log($" {nickName} = {nickName + "(1)"}<color=green> The same name existed, so I changed it.</color>");
+                    }
+                }
+            }
+
+            return nickName;
+        }
+
+        /// <summary>
+        /// ニックネームが同じ人をくべつする。
+        /// </summary>
         /// <remarks>
         /// 部屋の中にいるプレイヤーリストの中に自分と同じ名前があった場合自身の名前を変更します。
         /// </remarks>>

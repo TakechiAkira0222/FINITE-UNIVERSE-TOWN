@@ -67,17 +67,7 @@ namespace Takechi.ServerConnect.ToLobby
             PhotonNetwork.AutomaticallySyncScene = true;
             Debug.Log($" PhotonNetwork.AutomaticallySyncScene : <color=green>{PhotonNetwork.AutomaticallySyncScene} </color>");
 
-            m_customPlayerProperties =
-                new ExitGames.Client.Photon.Hashtable
-                {
-                     { CustomPropertyKeyReference.s_CharacterStatusAttackPower, 0},
-                     { CustomPropertyKeyReference.s_CharacterStatusMass, 0},
-                     { CustomPropertyKeyReference.s_CharacterStatusTeam, "Null"},
-                };
-
-            Debug.Log(" CustomPlayerProperties : <color=green>Initial setting completed</color>");
-
-            Connect("");
+            Connect("prototype");
         }
 
         #endregion

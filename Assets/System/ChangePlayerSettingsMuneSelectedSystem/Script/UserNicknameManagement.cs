@@ -11,40 +11,64 @@ using System.Data;
 using UnityEditor;
 using UnityEngine.Playables;
 using Takechi.ExternalData;
+using UnityEngine.UI;
+using ExitGames.Client.Photon;
 
 namespace Takechi.UI.UserNickname
 {
-    public class SaveData
+    public class NickNameData
     {
-        public string nickname;
+        public string nickName;
     }
 
-    public class UserNicknameManagement : ExternalDataManagement
+    public class UserNickNameManagement : ExternalDataManagement
     {
-        private SaveData m_saveData = new SaveData();
-        private string m_nickname = "NoName";
-        private string m_cleanpath => Application.persistentDataPath + "/saveData.bytes";
+        [SerializeField] private InputField m_userNameInputField;
+        [SerializeField] private Text       m_displayUserNameText;
 
-        public string GetNickName() { return m_nickname; }
-        public void SetNickname(string setName) { m_nickname = setName; }
+        private string m_cleanpath => Application.persistentDataPath + "/nickNameData.bytes";
 
-        private void Update()
+        private NickNameData m_nickNameData = new NickNameData();
+
+        private void OnEnable()
         {
+            GetNickNameData();
 
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                m_saveData.nickname = GetNickName();
-                OnDataSave();
-            }
+            m_displayUserNameText.text = m_nickNameData.nickName;
+            m_userNameInputField.text  = m_nickNameData.nickName;
 
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                Debug.Log(OnDataLoad().nickname);
-            }
+            Debug.Log(" displayUserNameText <color=green>to set</color>.");
+            Debug.Log(" userNameInputField <color=green>to set</color>.");
         }
 
-        public void OnDataSave() { DataSave( m_saveData, m_cleanpath); }
+        public NickNameData GetNickNameData()
+        {
+            OnDataLoad();
+            Debug.Log(" UserNickNameManagement.<color=yellow>OnDataLoad</color>()");
 
-        private SaveData OnDataLoad() { return SetAndLoadData(m_saveData, m_cleanpath); }
+            if ( m_nickNameData == null)
+            {
+                m_nickNameData.nickName = "Player";
+
+                OnDataSave();
+
+                Debug.Log("I <color=green>created the username</color> file because it doesn't exist.");
+            }
+
+            return m_nickNameData;
+        }
+
+        public void OnChangeDisplayText()
+        {
+            m_displayUserNameText.text = m_userNameInputField.text;
+            m_nickNameData.nickName = m_userNameInputField.text;
+
+            Debug.Log(" displayUserNameText <color=green>to set</color>.");
+            Debug.Log(" nickNameData.nickName <color=green>to set</color>.");
+        }
+
+        public void OnDataSave() { DataSave( m_nickNameData, m_cleanpath); }
+
+        private void OnDataLoad() { m_nickNameData = LoadData( m_nickNameData, m_cleanpath); }
     }
 }

@@ -17,6 +17,7 @@ using TakechiEngine.PUN.ServerConnect.ToJoinRoom;
 using UnityEngine.Rendering;
 using Takechi.UI.RoomJoinedMenu;
 using Photon.Pun;
+using Takechi.UI.UserNickname;
 
 namespace Takechi.ServerConnect.ToJoinRoom 
 {
@@ -26,6 +27,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
         [SerializeField] private RoomPropertySettingManagement m_roomPropertySetting;
         [SerializeField] private MapSelectionManagement        m_mapSelection;
         [SerializeField] private RoomJoinedMenuManagement      m_roomJoinedMune;
+        [SerializeField] private UserNickNameManagement        m_userNickNameManagement;
 
         #region Event Action
 
@@ -76,8 +78,12 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
             OnJoinedRoomAction += () =>
             {
+                SetMyNickName(ConfirmationOfNicknames(m_userNickNameManagement.GetNickNameData().nickName));
+
                 m_roomJoinedMune.gameObject.SetActive(true);
+
                 RoomInfoAndJoinedPlayerInfoDisplay(CustomPropertyKeyReference.s_RoomStatusKeys);
+
                 Debug.Log("<color=green> OnJoinedRoomAction </color>");
             };
 
@@ -94,6 +100,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
         /// </summary>
         public void OnRoomCreation()
         {
+
             var roomOptions = new RoomOptions();
 
             roomOptions.MaxPlayers = (byte)(( m_gameTypeSelection.GetGameTypeSelectionIndex() + 1) * 2);
