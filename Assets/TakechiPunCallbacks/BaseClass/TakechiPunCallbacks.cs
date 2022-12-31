@@ -42,7 +42,7 @@ namespace TakechiEngine.PUN
         /// <param name ="sceneNumber"> ˆÚs‚µ‚½‚¢ƒV[ƒ“‚Ì”Ô† </param>
         protected void SceneSyncChange(int sceneNumber)
         {
-            if (PhotonNetwork.IsMasterClient) return;
+            if ( !PhotonNetwork.IsMasterClient) return;
 
             PhotonNetwork.LoadLevel(sceneNumber);
             Debug.Log($"<color=green> SceneSyncChange SceneNumber</color> : {sceneNumber}");
