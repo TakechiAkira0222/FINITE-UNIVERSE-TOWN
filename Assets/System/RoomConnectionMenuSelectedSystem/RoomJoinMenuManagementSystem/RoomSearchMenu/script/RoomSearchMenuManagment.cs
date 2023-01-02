@@ -33,6 +33,7 @@ namespace Takechi.UI.RoomSerach
         private Dictionary<string, RoomInfo> m_roomInfoDictionary =>
             m_connectToJoinRoomManagment.GetRoomInfoDictionary();
 
+        #region Unity Event
         public override void OnEnable()
         {
             base.OnEnable();
@@ -55,6 +56,44 @@ namespace Takechi.UI.RoomSerach
                 "connectToJoinRoomManagment.OnRoomListUpdateAction : <color=green>to remove</color>");
         }
 
+        #endregion
+
+        #region event system function
+
+        public void OnRoomInfoListUpdate()
+        {
+            RoomInfoListUpdate();
+        }
+
+        public void OnSearch(Text text)
+        {
+            RoomInfo roomInfo;
+
+            if (TryGetRoomInfo(text.text, out roomInfo))
+            {
+                Debug.Log(roomInfo.Name);
+            }
+            else
+            {
+                Debug.Log("存在しません。");
+            }
+        }
+
+        #endregion
+
+        #region IEnumerator
+        private IEnumerator AutomaticUpdating()
+        {
+            while (this.gameObject.activeSelf)
+            {
+                RoomInfoListUpdate();
+                yield return new WaitForSeconds(Time.deltaTime * m_updateRate);
+            }
+        }
+
+        #endregion
+
+        #region private function
         private void RoomInfoButtonInstantiation( List<RoomInfo> list)
         {
             foreach ( RoomInfo info in list)
@@ -74,17 +113,8 @@ namespace Takechi.UI.RoomSerach
                GameObject.Destroy( n.gameObject); 
             }
         }
-       
-        private IEnumerator AutomaticUpdating()
-        {
-            while (this.gameObject.activeSelf)
-            {
-                OnRoomInfoListUpdate();
-                yield return new WaitForSeconds(Time.deltaTime * m_updateRate);
-            }
-        }
 
-        public void OnRoomInfoListUpdate()
+        private void RoomInfoListUpdate()
         {
             DestroyChildObjects( m_content);
             RoomInfoButtonInstantiation( m_roomInfoList);
@@ -101,24 +131,12 @@ namespace Takechi.UI.RoomSerach
         }
 
         // 指定したルーム名のルーム情報があれば取得する
-        public bool TryGetRoomInfo(string roomName, out RoomInfo roomInfo)
+        private bool TryGetRoomInfo(string roomName, out RoomInfo roomInfo)
         {
             return m_roomInfoDictionary.TryGetValue(roomName, out roomInfo);
         }
 
-        public void OnSearch(Text text)
-        {
-            RoomInfo roomInfo;
-
-            if (TryGetRoomInfo(text.text, out roomInfo))
-            {
-                Debug.Log(roomInfo.Name);
-            }
-            else
-            {
-                Debug.Log("存在しません。");
-            }
-        }
-
+        #endregion
+      
     }
 }

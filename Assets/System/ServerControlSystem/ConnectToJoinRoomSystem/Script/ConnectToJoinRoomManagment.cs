@@ -102,7 +102,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
         {
             var roomOptions = new RoomOptions();
 
-            roomOptions.MaxPlayers = (byte)(( m_gameTypeSelection.GetGameTypeSelectionIndex() + 1) * 2);
+            roomOptions.MaxPlayers = (byte)(( m_roomPropertySetting.GetParticipantsIndex() + 1) * 2);
 
               roomOptions.IsOpen  = true;
             roomOptions.IsVisible = true;

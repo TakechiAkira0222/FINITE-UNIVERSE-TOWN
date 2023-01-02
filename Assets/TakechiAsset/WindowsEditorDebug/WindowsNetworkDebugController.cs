@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
+using Takechi.ScriptReference;
 using TakechiEngine.PUN.Information;
+using Takechi.ScriptReference.CustomPropertyKey;
 
 namespace Takechi.EditorDebug.Windows.NetworkDebug
 {
@@ -16,9 +18,10 @@ namespace Takechi.EditorDebug.Windows.NetworkDebug
         {
             if(PhotonNetwork.IsMasterClient && PhotonNetwork.InRoom)
             {
-                if (Input.GetKeyDown(m_informationButton))
+                if (Input.GetKeyDown( m_informationButton))
                 {
-                    RoomInformationDisplay();
+                    RoomInfoAndJoinedPlayerInfoDisplay
+                        ( CustomPropertyKeyReference.s_RoomStatusKeys, CustomPropertyKeyReference.s_CharacterStatusKeys);
                 }
             }
             else

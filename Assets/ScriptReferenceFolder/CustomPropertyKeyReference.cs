@@ -22,10 +22,21 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         public static readonly string s_CharacterStatusTeam = "team";
 
         /// <summary>
+        /// PlayerStatus selectedCharacter Key Name
+        /// </summary>
+        public static readonly string s_CharacterStatusSelectedCharacter = "selectedCharacter";
+
+        /// <summary>
         /// PlayerStatus Keys
         /// </summary>
         public static readonly string[] s_CharacterStatusKeys =
-            new string[] { s_CharacterStatusAttackPower, s_CharacterStatusMass , s_CharacterStatusTeam};
+            new string[] 
+            { 
+                s_CharacterStatusAttackPower,
+                s_CharacterStatusMass ,
+                s_CharacterStatusTeam,
+                s_CharacterStatusSelectedCharacter
+            };
 
         /// <summary>
         /// RoomStatus GameType Key Name
@@ -41,6 +52,10 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         /// RoomStatus Keys
         /// </summary>
         public static readonly string[] s_RoomStatusKeys =
-            new string[] { s_RoomStatusGameType, s_RoomSatusMap };
+            new string[] 
+            { 
+                s_RoomStatusGameType,
+                s_RoomSatusMap 
+            };
     }
 }

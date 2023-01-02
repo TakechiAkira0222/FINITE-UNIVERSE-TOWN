@@ -19,19 +19,27 @@ namespace Takechi.UI.RoomJoinedMenu
     /// </summary>
     public class RoomJoinedMenuManagement : TakechiJoinedPunCallbacks
     {
-        [SerializeField] private Button m_gameStartButton;
+        #region SerializeField
 
+        [SerializeField] private Button m_gameStartButton;
         [SerializeField] private Text m_instansText;
         [SerializeField] private Text m_roomInfometionText;
+        [SerializeField] private GameObject m_teamAContent;
+        [SerializeField] private GameObject m_teamBContent;
+        #endregion
 
         private const string teamAName = "TeamA";
         private const string teamBName = "TeamB";
 
-        [SerializeField] private GameObject m_teamAContent;
-        [SerializeField] private GameObject m_teamBContent;
-
         private List<Player> m_teamA_memberList = new List<Player>();
         private List<Player> m_teamB_memberList = new List<Player>();
+
+        #region update variable
+
+        private void updateRoomInfometionText() { m_roomInfometionText.text = WhatTheTextDisplays(); }
+        #endregion
+
+        #region Unity Event
 
         public override void OnEnable()
         {
@@ -41,7 +49,7 @@ namespace Takechi.UI.RoomJoinedMenu
 
             RandomTeamSetting();
 
-            m_roomInfometionText.text = WhatTheTextDisplays();
+            updateRoomInfometionText();
 
             OnlyClientsDisplay( m_gameStartButton.gameObject);
         }
@@ -52,6 +60,22 @@ namespace Takechi.UI.RoomJoinedMenu
 
             RefreshTheListYouAreViewing();
         }
+
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            base.OnPlayerEnteredRoom(newPlayer);
+
+            updateRoomInfometionText();
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            base.OnPlayerLeftRoom(otherPlayer);
+
+            updateRoomInfometionText();
+        }
+
+        #endregion
 
         #region PunCallbacks
 
@@ -81,7 +105,6 @@ namespace Takechi.UI.RoomJoinedMenu
                 if (!MaximumOfMembers( m_teamA_memberList))
                 {
                     setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamName);
-                    PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " ChangeTeamPlayerInfometion ", CustomPropertyKeyReference.s_CharacterStatusKeys);
                 }
                 else
                 {
@@ -93,16 +116,19 @@ namespace Takechi.UI.RoomJoinedMenu
                 if (!MaximumOfMembers( m_teamB_memberList))
                 {
                     setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamName);
-                    PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " ChangeTeamPlayerInfometion ", CustomPropertyKeyReference.s_CharacterStatusKeys);
                 }
                 else
                 {
                     Debug.LogWarning(" The change has been canceled because the new team member is full. ");
                 }
             }
+
+            PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " ChangeTeamPlayerInfometion ", CustomPropertyKeyReference.s_CharacterStatusKeys);
         }
 
         #endregion
+
+        #region Update IEnumerator 
 
         private IEnumerator ListUpdate()
         {
@@ -128,6 +154,8 @@ namespace Takechi.UI.RoomJoinedMenu
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
+
+        #endregion
 
         #region private finction
 
@@ -158,34 +186,35 @@ namespace Takechi.UI.RoomJoinedMenu
             InstantiateTheText(m_instansText, m_teamB_memberList, m_teamBContent.transform);
         }
 
+        /// <summary>
+        /// ÉâÉìÉ_ÉÄÇ…ì¸é∫ÇµÇƒïîâÆÇÃèÛãµÇå©ÇƒÅAê›íËÇ∑ÇÈÅB
+        /// </summary>
         private void RandomTeamSetting()
         {
-            if ( returnsTheProbabilityOf1In2())
+            if (returnsTheProbabilityOf1In2())
             {
-                if (!MaximumOfMembers( m_teamA_memberList))
+                if (!MaximumOfMembers(m_teamA_memberList))
                 {
                     setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamAName);
-                    PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CustomPropertyKeyReference.s_CharacterStatusKeys);
                 }
                 else
                 {
                     setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamBName);
-                    PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CustomPropertyKeyReference.s_CharacterStatusKeys);
                 }
             }
             else
             {
-                if (!MaximumOfMembers( m_teamB_memberList))
+                if (!MaximumOfMembers(m_teamB_memberList))
                 {
                     setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamBName);
-                    PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CustomPropertyKeyReference.s_CharacterStatusKeys);
                 }
                 else
                 {
                     setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamAName);
-                    PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CustomPropertyKeyReference.s_CharacterStatusKeys);
                 }
             }
+
+            PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CustomPropertyKeyReference.s_CharacterStatusKeys);
         }
 
         /// <summary>
@@ -194,10 +223,7 @@ namespace Takechi.UI.RoomJoinedMenu
         /// <param name="parent"></param>
         private void DestroyChildObjects(GameObject parent)
         {
-            foreach ( Transform n in parent.transform)
-            {
-                GameObject.Destroy(n.gameObject);
-            }
+            foreach (Transform n in parent.transform) { GameObject.Destroy(n.gameObject); }
         }
 
         /// <summary>
@@ -208,10 +234,7 @@ namespace Takechi.UI.RoomJoinedMenu
         /// <param name="p"></param>
         private void InstantiateTheText(Text instansText, List<Player> players, Transform p)
         {
-            foreach (Player n in players)
-            {
-                Instantiate(instansText, p).text = n.NickName;
-            }
+            foreach (Player n in players) { Instantiate(instansText, p).text = n.NickName; }
         }
 
         /// <summary>
