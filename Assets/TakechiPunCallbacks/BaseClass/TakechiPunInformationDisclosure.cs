@@ -83,7 +83,7 @@ namespace TakechiEngine.PUN.Information
         /// <param name="customRoomPropertieKeyNames"> 部屋のカスタムプロパティーKeyを取得して中身を表示します。</param>
         public void RoomInformationDisplay(RoomInfo roomInfo, string[] customRoomPropertieKeyNames)
         {
-            if (PhotonNetwork.InRoom)
+            if ( PhotonNetwork.InRoom)
             {
                 Debug.Log(InformationTitleTemplate("RoomInformation") + RoomInformationDisplayContents(roomInfo, customRoomPropertieKeyNames), this);
             }

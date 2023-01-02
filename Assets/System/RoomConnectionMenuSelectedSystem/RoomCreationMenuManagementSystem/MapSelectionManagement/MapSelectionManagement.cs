@@ -7,6 +7,9 @@ using Takechi.UI.CanvasMune.CursorMnagement;
 
 namespace Takechi.UI.MapSelection
 {
+    /// <summary>
+    /// マップ選択メニューを、管理する。
+    /// </summary>
     public class MapSelectionManagement : CursorMnagement
     {
         [SerializeField] 

@@ -25,7 +25,7 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         /// PlayerStatus Keys
         /// </summary>
         public static readonly string[] s_CharacterStatusKeys =
-            new string[] { s_CharacterStatusAttackPower, s_CharacterStatusMass };
+            new string[] { s_CharacterStatusAttackPower, s_CharacterStatusMass , s_CharacterStatusTeam};
 
         /// <summary>
         /// RoomStatus GameType Key Name

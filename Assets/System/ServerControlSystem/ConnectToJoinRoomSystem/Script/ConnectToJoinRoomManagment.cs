@@ -2,22 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Photon.Pun;
 using Photon.Realtime;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 using Takechi.UI.GameTypeSelection;
 using Takechi.UI.RoomPropertySetting;
 using Takechi.UI.MapSelection;
+using Takechi.UI.RoomJoinedMenu;
+using Takechi.UI.UserNickname;
 using Takechi.ScriptReference.CustomPropertyKey;
 
 using TakechiEngine.PUN.ServerConnect.ToJoinRoom;
-using UnityEngine.Rendering;
-using Takechi.UI.RoomJoinedMenu;
-using Photon.Pun;
-using Takechi.UI.UserNickname;
 
 namespace Takechi.ServerConnect.ToJoinRoom 
 {
@@ -32,11 +32,6 @@ namespace Takechi.ServerConnect.ToJoinRoom
         #region Event Action
 
         /// <summary>
-        /// 部屋に入室した時の処理。
-        /// </summary>
-        public event Action OnJoinedRoomAction = delegate { };
-
-        /// <summary>
         /// 部屋を作成するときの処理。
         /// </summary>
         public event Action< string, RoomOptions, ExitGames.Client.Photon.Hashtable> OnRoomCreationAction = delegate { };
@@ -45,6 +40,11 @@ namespace Takechi.ServerConnect.ToJoinRoom
         /// 部屋のリスト更新された時の処理
         /// </summary>
         public event Action<List<RoomInfo>>  OnRoomListUpdateAction = delegate { };
+
+        /// <summary>
+        /// 部屋に入室した時の処理。
+        /// </summary>
+        public event Action OnJoinedRoomAction = delegate { };
 
         #endregion
 
@@ -80,9 +80,9 @@ namespace Takechi.ServerConnect.ToJoinRoom
             {
                 SetMyNickName(ConfirmationOfNicknames(m_userNickNameManagement.GetNickNameData().nickName));
 
-                m_roomJoinedMune.gameObject.SetActive(true);
+                RoomInfoAndJoinedPlayerInfoDisplay( CustomPropertyKeyReference.s_RoomStatusKeys, CustomPropertyKeyReference.s_CharacterStatusKeys);
 
-                RoomInfoAndJoinedPlayerInfoDisplay(CustomPropertyKeyReference.s_RoomStatusKeys);
+                m_roomJoinedMune.gameObject.SetActive(true);
 
                 Debug.Log("<color=green> OnJoinedRoomAction </color>");
             };
@@ -100,7 +100,6 @@ namespace Takechi.ServerConnect.ToJoinRoom
         /// </summary>
         public void OnRoomCreation()
         {
-
             var roomOptions = new RoomOptions();
 
             roomOptions.MaxPlayers = (byte)(( m_gameTypeSelection.GetGameTypeSelectionIndex() + 1) * 2);

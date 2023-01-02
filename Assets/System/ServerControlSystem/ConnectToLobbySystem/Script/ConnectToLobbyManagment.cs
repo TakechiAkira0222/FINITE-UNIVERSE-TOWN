@@ -15,16 +15,6 @@ namespace Takechi.ServerConnect.ToLobby
 {
     public class ConnectToLobbyManagment : TakechiConnectToLobbyPunCallbacks
     {
-        #region CustomProperties
-
-        /// <summary>
-        /// プレイヤーのカスタムプロパティー
-        /// </summary>
-        private ExitGames.Client.Photon.Hashtable m_customPlayerProperties =
-           new ExitGames.Client.Photon.Hashtable();
-
-        #endregion
-
         #region PublicAction
         /// <summary>
         /// Photonに接続した時の処理。

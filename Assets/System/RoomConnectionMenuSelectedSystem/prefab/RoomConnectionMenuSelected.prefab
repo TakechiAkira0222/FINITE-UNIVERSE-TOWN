@@ -661,7 +661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &550296022869349571
 Transform:
   m_ObjectHideFlags: 0
@@ -1818,7 +1818,7 @@ GameObject:
   - component: {fileID: 1488513001549364616}
   - component: {fileID: 2698111715083489051}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ChangeTeamButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1925,7 +1925,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1488513001549364616}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9210884986116602042}
+        m_TargetAssemblyTypeName: Takechi.UI.RoomJoinedMenu.RoomJoinedMenuManagement,
+          Assembly-CSharp
+        m_MethodName: OnChangeTeam
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TeamA
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1960960395432510247
 GameObject:
   m_ObjectHideFlags: 0
@@ -3143,7 +3156,7 @@ RectTransform:
   m_Children:
   - {fileID: 8821977500446758047}
   m_Father: {fileID: 2000364306803474430}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3324,6 +3337,85 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Select Game Type
+--- !u!1 &3575600077221653706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4766695524864893630}
+  - component: {fileID: 7059567653579128361}
+  - component: {fileID: 4906742417459284948}
+  m_Layer: 0
+  m_Name: RoomInfometionText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4766695524864893630
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3575600077221653706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2000364306803474430}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -425, y: -300}
+  m_SizeDelta: {x: 508.8, y: 125.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7059567653579128361
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3575600077221653706}
+  m_CullTransparentMesh: 1
+--- !u!114 &4906742417459284948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3575600077221653706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 15
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
 --- !u!1 &3634329361734059269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3832,6 +3924,7 @@ Transform:
   - {fileID: 8057182076264492468}
   - {fileID: 3597223892817478747}
   - {fileID: 6468798769164877598}
+  - {fileID: 4766695524864893630}
   - {fileID: 425695088708322127}
   m_Father: {fileID: 3481310343188011198}
   m_RootOrder: 5
@@ -3867,6 +3960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameStartButton: {fileID: 4454705071935847876}
   m_instansText: {fileID: 6537442630887858322, guid: 761522b02143505448ca1e2348037154, type: 3}
+  m_roomInfometionText: {fileID: 4906742417459284948}
   m_teamAContent: {fileID: 1616720406563302945}
   m_teamBContent: {fileID: 1960960395432510247}
 --- !u!1 &5245274810322410198
@@ -6968,7 +7062,7 @@ GameObject:
   - component: {fileID: 6781978764840435551}
   - component: {fileID: 8694431058996696487}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ChangeTeamButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7075,7 +7169,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6781978764840435551}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9210884986116602042}
+        m_TargetAssemblyTypeName: Takechi.UI.RoomJoinedMenu.RoomJoinedMenuManagement,
+          Assembly-CSharp
+        m_MethodName: OnChangeTeam
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TeamB
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9040312270009038935
 GameObject:
   m_ObjectHideFlags: 0

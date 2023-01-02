@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Takechi.UI.GameTypeSelection
 {
+    /// <summary>
+    /// ゲーム種類の選択メニューを管理する。
+    /// </summary>
     public class GameTypeSelectionManagement : CursorMnagement
     {
         [SerializeField]

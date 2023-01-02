@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 using Photon.Pun;
 using Photon.Realtime;
+
 using UnityEngine;
 using UnityEngine.UI;
-
-using TakechiEngine.PUN.ServerConnect;
-using Takechi.ServerConnect.ToJoinRoom;
-using UnityEngine.Rendering;
-using System.Net.NetworkInformation;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Rendering;
+
+using Takechi.ServerConnect.ToJoinRoom;
+using Takechi.ScriptReference.CustomPropertyKey;
 
 namespace Takechi.UI.RoomSerach
 {
@@ -61,7 +62,7 @@ namespace Takechi.UI.RoomSerach
                 Button button = Instantiate( m_instansObject, m_content.transform);
 
                 button.name = info.Name;
-                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = info.Name;
+                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = WhatTheTextDisplays(info);
                 button.onClick.AddListener(() => connectToJoinRoomManagment.OnNameReferenceJoinRoom((button)));
             }
         }
@@ -73,27 +74,7 @@ namespace Takechi.UI.RoomSerach
                GameObject.Destroy( n.gameObject); 
             }
         }
-
-        // 指定したルーム名のルーム情報があれば取得する
-        public bool TryGetRoomInfo( string roomName, out RoomInfo roomInfo)
-        {
-            return m_roomInfoDictionary.TryGetValue( roomName, out roomInfo);
-        }
-
-        public void OnSearch(Text text)
-        {
-            RoomInfo roomInfo;
-
-            if ( TryGetRoomInfo( text.text, out roomInfo))
-            {
-                Debug.Log( roomInfo.Name);
-            }
-            else
-            {
-                Debug.Log("存在しません。");
-            }
-        }
-
+       
         private IEnumerator AutomaticUpdating()
         {
             while (this.gameObject.activeSelf)
@@ -110,5 +91,34 @@ namespace Takechi.UI.RoomSerach
 
             Debug.Log(" Room Info <color=green>ListUpdate</color> ");
         }
+
+        private string WhatTheTextDisplays(RoomInfo roomInfo)
+        {
+            return ($"{roomInfo.Name} \n " +
+                    $"{roomInfo.PlayerCount}/{roomInfo.MaxPlayers}\n" +
+                    $"{roomInfo.CustomProperties[CustomPropertyKeyReference.s_RoomSatusMap]}\n" +
+                    $"{roomInfo.CustomProperties[CustomPropertyKeyReference.s_RoomStatusGameType]}");
+        }
+
+        // 指定したルーム名のルーム情報があれば取得する
+        public bool TryGetRoomInfo(string roomName, out RoomInfo roomInfo)
+        {
+            return m_roomInfoDictionary.TryGetValue(roomName, out roomInfo);
+        }
+
+        public void OnSearch(Text text)
+        {
+            RoomInfo roomInfo;
+
+            if (TryGetRoomInfo(text.text, out roomInfo))
+            {
+                Debug.Log(roomInfo.Name);
+            }
+            else
+            {
+                Debug.Log("存在しません。");
+            }
+        }
+
     }
 }

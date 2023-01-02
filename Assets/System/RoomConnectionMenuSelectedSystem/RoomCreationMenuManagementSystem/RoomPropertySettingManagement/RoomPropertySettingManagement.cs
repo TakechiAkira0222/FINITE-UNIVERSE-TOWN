@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace Takechi.UI.RoomPropertySetting
 {
+    /// <summary>
+    /// 部屋のプロパティー設定メニューを、管理する。
+    /// </summary>
     public class RoomPropertySettingManagement : CursorMnagement
     {
         [SerializeField] private InputField m_nameSettingField;

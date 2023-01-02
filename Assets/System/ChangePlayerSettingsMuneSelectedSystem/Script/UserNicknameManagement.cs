@@ -21,6 +21,9 @@ namespace Takechi.UI.UserNickname
         public string nickName;
     }
 
+    /// <summary>
+    /// userのニックネームを管理する。
+    /// </summary>
     public class UserNickNameManagement : ExternalDataManagement
     {
         [SerializeField] private InputField m_userNameInputField;
