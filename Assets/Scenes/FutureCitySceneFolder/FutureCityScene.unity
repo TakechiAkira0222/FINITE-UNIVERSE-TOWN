@@ -253,6 +253,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkInstantiationAtStartupInstance
       objectReference: {fileID: 0}
+    - target: {fileID: 1745063627368873266, guid: 7d5eb9b8717c85e488f372db189d4ffd, type: 3}
+      propertyPath: m_quaternion.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745063627368873266, guid: 7d5eb9b8717c85e488f372db189d4ffd, type: 3}
+      propertyPath: m_quaternion.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745063627368873266, guid: 7d5eb9b8717c85e488f372db189d4ffd, type: 3}
+      propertyPath: m_respawnPointA
+      value: 
+      objectReference: {fileID: 7611581406680156333}
+    - target: {fileID: 1745063627368873266, guid: 7d5eb9b8717c85e488f372db189d4ffd, type: 3}
+      propertyPath: m_respawnPointB
+      value: 
+      objectReference: {fileID: 7611581406680156334}
     - target: {fileID: 1745063627368873267, guid: 7d5eb9b8717c85e488f372db189d4ffd, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -328,6 +344,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7611581406594092499, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 7611581407111361442, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
       propertyPath: m_Name
       value: FutureCityMap
@@ -376,8 +396,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7611581407176338539, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
+--- !u!4 &7611581406680156333 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7611581406594092499, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
+  m_PrefabInstance: {fileID: 7611581406680156332}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7611581406680156334 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7611581407176338539, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
+  m_PrefabInstance: {fileID: 7611581406680156332}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7619287310109310136
 MonoBehaviour:
   m_ObjectHideFlags: 0

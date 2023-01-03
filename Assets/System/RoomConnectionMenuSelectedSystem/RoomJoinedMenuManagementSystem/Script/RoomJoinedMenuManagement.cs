@@ -30,11 +30,15 @@ namespace Takechi.UI.RoomJoinedMenu
     {
         #region SerializeField
 
+        [Header(" ui setting ")]
+        [SerializeField] private Text   m_roomInfometionText;
         [SerializeField] private Button m_gameStartButton;
-        [SerializeField] private Text m_instansText;
-        [SerializeField] private Text m_roomInfometionText;
+
+        [Header(" memberList setting ")]
+        [SerializeField] private Text       m_instansText;
         [SerializeField] private GameObject m_teamAContent;
         [SerializeField] private GameObject m_teamBContent;
+
         #endregion
 
         private List<Player> m_teamA_memberList = new List<Player>(4);

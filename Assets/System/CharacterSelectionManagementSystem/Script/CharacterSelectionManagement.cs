@@ -23,17 +23,21 @@ namespace Takechi.CharacterSelection
     {
         [SerializeField] private PlayableCharacterParametersManager m_parametersManager;
 
-        [SerializeField] private Text m_infometionText;
-        [SerializeField] private Text m_gameStartTimeCuntText;
-        [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
-
+        [Header(" memberList setting")]
         [SerializeField] private Image m_instansImage;
         [SerializeField] private GameObject m_teamAContent;
         [SerializeField] private GameObject m_teamBContent;
-        [SerializeField] private List <GameObject> m_characterPrefabList = new List<GameObject>();
 
         private List<Player> m_teamA_memberList = new List<Player>();
         private List<Player> m_teamB_memberList = new List<Player>();
+
+        [Header(" ui setting")]
+        [SerializeField] private Text   m_gameStartTimeCuntText;
+        [SerializeField] private int    m_nearTimeToStartTheGame_seconds = 5;
+        [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
+        [SerializeField] private Text   m_infometionText;
+        [SerializeField] private List <GameObject> m_characterPrefabList = new List<GameObject>();
+        [SerializeField] private List <Image> m_characterSelectionButtonList = new List<Image>();
 
         private bool m_isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
 
@@ -55,8 +59,13 @@ namespace Takechi.CharacterSelection
             m_characterPrefabList[index].SetActive(true);
         }
 
-        #endregion
+        private void setCharacterSelectionButtonColor(int index)
+        {
+            foreach (Image n in m_characterSelectionButtonList) { n.color = new Color(Color.black.r, Color.black.g, Color.black.b, 0.5f); }
+            m_characterSelectionButtonList[index].color = new Color( Color.red.r, Color.red.g, Color.red.b, 0.9f);
+        }
 
+        #endregion
 
         #region private async
         /// <summary>
@@ -68,8 +77,11 @@ namespace Takechi.CharacterSelection
             await Task.Delay(s);
 
             setDisplayCharacterPrefab(0);
+            setCharacterSelectionButtonColor(0);
             StartCoroutine(nameof(TimeUpdate));
             StartCoroutine(nameof(ListUpdate));
+
+            RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
         }
 
         #endregion
@@ -81,9 +93,7 @@ namespace Takechi.CharacterSelection
 
             setInformationText(0);
             setLocalPlayerCustomProperties(CharacterStatusKey.selectedCharacterKey, 0);
-            
 
-            RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
             StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
         }
 
@@ -106,6 +116,13 @@ namespace Takechi.CharacterSelection
                 {
                     m_gameStartTimeCunt_seconds -= Time.deltaTime;
                     m_gameStartTimeCuntText.text = Mathf.Ceil(m_gameStartTimeCunt_seconds).ToString();
+
+                    if ( Mathf.Ceil(m_gameStartTimeCunt_seconds) == m_nearTimeToStartTheGame_seconds)
+                    {
+                        Debug.Log("<color=green>nearTimeToStartTheGame</color> ");
+                        m_gameStartTimeCuntText.color = new Color( 1, 0, 0);
+                    }
+
                     yield return null;
                 }
                 else
@@ -173,6 +190,7 @@ namespace Takechi.CharacterSelection
             setInformationText(num);
             setLocalPlayerCustomProperties( CharacterStatusKey.selectedCharacterKey, num);
             setDisplayCharacterPrefab((int)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.selectedCharacterKey]);
+            setCharacterSelectionButtonColor((int)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.selectedCharacterKey]);
 
             RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
         }

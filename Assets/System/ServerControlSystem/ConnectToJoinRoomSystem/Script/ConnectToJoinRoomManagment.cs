@@ -15,9 +15,8 @@ using Takechi.UI.RoomPropertySetting;
 using Takechi.UI.MapSelection;
 using Takechi.UI.RoomJoinedMenu;
 using Takechi.UI.UserNickname;
-using Takechi.ScriptReference.CustomPropertyKey;
-
 using TakechiEngine.PUN.ServerConnect.ToJoinRoom;
+
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.ServerConnect.ToJoinRoom 
