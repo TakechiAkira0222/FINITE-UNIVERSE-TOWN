@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.Parameters;
@@ -6,6 +7,7 @@ using Takechi.ScriptReference.AnimationParameter;
 using Takechi.ScriptReference.CustomPropertyKey;
 using Takechi.ScriptReference.DamagesThePlayerObject;
 using UnityEngine;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.DamageJudgment
 {
@@ -35,7 +37,7 @@ namespace Takechi.CharacterController.DamageJudgment
                     collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
                 float power = 
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower];
+                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
 
                 m_characterStatusManagement.UpdateMass(-power);
                 m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();

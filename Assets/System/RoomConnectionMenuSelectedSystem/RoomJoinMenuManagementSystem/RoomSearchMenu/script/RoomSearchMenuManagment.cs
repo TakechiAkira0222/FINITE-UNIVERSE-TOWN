@@ -12,6 +12,7 @@ using UnityEngine.Rendering;
 
 using Takechi.ServerConnect.ToJoinRoom;
 using Takechi.ScriptReference.CustomPropertyKey;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.UI.RoomSerach
 {
@@ -126,8 +127,8 @@ namespace Takechi.UI.RoomSerach
         {
             return ($"{roomInfo.Name} \n " +
                     $"{roomInfo.PlayerCount}/{roomInfo.MaxPlayers}\n" +
-                    $"{roomInfo.CustomProperties[CustomPropertyKeyReference.s_RoomSatusMap]}\n" +
-                    $"{roomInfo.CustomProperties[CustomPropertyKeyReference.s_RoomStatusGameType]}");
+                    $"{roomInfo.CustomProperties[RoomStatusKey.mapKey]}\n" +
+                    $"{roomInfo.CustomProperties[RoomStatusKey.gameTypeKey]}");
         }
 
         // w’è‚µ‚½ƒ‹[ƒ€–¼‚Ìƒ‹[ƒ€î•ñ‚ª‚ ‚ê‚Îæ“¾‚·‚é

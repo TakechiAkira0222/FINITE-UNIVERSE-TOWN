@@ -5,6 +5,7 @@ using System.Security.Principal;
 using Takechi.ScriptReference.CustomPropertyKey;
 using TakechiEngine.PUN.CustomProperties;
 using UnityEngine;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.Parameters
 {
@@ -199,8 +200,8 @@ namespace Takechi.CharacterController.Parameters
             m_localPlayerCustomProperties =
                new ExitGames.Client.Photon.Hashtable
                {
-                    { CustomPropertyKeyReference.s_CharacterStatusAttackPower , m_characterParameters.GetAttackPower()},
-                    { CustomPropertyKeyReference.s_CharacterStatusMass , m_characterParameters.GetCleanMass()},
+                    { CharacterStatusKey.attackPowerKey , m_characterParameters.GetAttackPower()},
+                    { CharacterStatusKey.massKey , m_characterParameters.GetCleanMass()},
                };
 
             setLocalPlayerCustomProperties(m_localPlayerCustomProperties);
@@ -208,8 +209,8 @@ namespace Takechi.CharacterController.Parameters
             Debug.Log($"<color=green> setLocalPlayerCustomProrerties </color>\n" +
                    $"<color=blue> info</color>\n" +
                    $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
-                   $" {CustomPropertyKeyReference.s_CharacterStatusAttackPower} = {m_localPlayerCustomProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower]}\n" +
-                   $" {CustomPropertyKeyReference.s_CharacterStatusMass} = {m_localPlayerCustomProperties[CustomPropertyKeyReference.s_CharacterStatusMass]}\n"
+                   $" {CharacterStatusKey.attackPowerKey} = {m_localPlayerCustomProperties[CharacterStatusKey.attackPowerKey]}\n" +
+                   $" {CharacterStatusKey.massKey} = {m_localPlayerCustomProperties[CharacterStatusKey.massKey]}\n"
                    );
         }
 
@@ -295,8 +296,8 @@ namespace Takechi.CharacterController.Parameters
             m_localPlayerCustomProperties =
               new ExitGames.Client.Photon.Hashtable
               {
-                    {CustomPropertyKeyReference.s_CharacterStatusAttackPower, attackPower},
-                    {CustomPropertyKeyReference.s_CharacterStatusMass , m_rb.mass},
+                    {CharacterStatusKey.attackPowerKey, attackPower},
+                    {CharacterStatusKey.massKey , m_rb.mass},
               };
 
             setLocalPlayerCustomProperties(m_localPlayerCustomProperties);
@@ -304,8 +305,8 @@ namespace Takechi.CharacterController.Parameters
             Debug.Log($"<color=green> updateLocalPlayerCustomProrerties </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
-                      $" {CustomPropertyKeyReference.s_CharacterStatusAttackPower} = {m_localPlayerCustomProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower]}\n" +
-                      $" {CustomPropertyKeyReference.s_CharacterStatusMass} = {m_localPlayerCustomProperties[CustomPropertyKeyReference.s_CharacterStatusMass]}\n"
+                      $" {CharacterStatusKey.attackPowerKey} = {m_localPlayerCustomProperties[CharacterStatusKey.attackPowerKey]}\n" +
+                      $" {CharacterStatusKey.massKey} = {m_localPlayerCustomProperties[CharacterStatusKey.massKey]}\n"
                     );
         }
         public void UpdateMovingSpeed(float changeValue)

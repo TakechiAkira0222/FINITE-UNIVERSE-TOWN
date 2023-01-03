@@ -1,4 +1,3 @@
-using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,16 +7,26 @@ using UnityEngine.UI;
 using UnityEngine.Rendering;
 
 using Photon.Pun;
+using Photon.Realtime;
+
 using TakechiEngine.PUN.ServerConnect.Joined;
-using Takechi.ScriptReference.CustomPropertyKey;
+
 using Takechi.ServerConnect.ToJoinRoom;
+using Takechi.ScriptReference.CustomPropertyKey;
+using Takechi.UI.CanvasMune.DisplayListUpdate;
+
+using System.Threading.Tasks;
+
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
+using System.Diagnostics.SymbolStore;
 
 namespace Takechi.UI.RoomJoinedMenu
 {
     /// <summary>
     /// ルーム接続後に表示されるメニューを、管理する。
     /// </summary>
-    public class RoomJoinedMenuManagement : TakechiJoinedPunCallbacks
+    public class RoomJoinedMenuManagement : DisplayListUpdateManagement
     {
         #region SerializeField
 
@@ -28,28 +37,47 @@ namespace Takechi.UI.RoomJoinedMenu
         [SerializeField] private GameObject m_teamBContent;
         #endregion
 
-        private const string teamAName = "TeamA";
-        private const string teamBName = "TeamB";
-
-        private List<Player> m_teamA_memberList = new List<Player>();
-        private List<Player> m_teamB_memberList = new List<Player>();
+        private List<Player> m_teamA_memberList = new List<Player>(4);
+        private List<Player> m_teamB_memberList = new List<Player>(4);
 
         #region update variable
-
         private void updateRoomInfometionText() { m_roomInfometionText.text = WhatTheTextDisplays(); }
+
+        #endregion
+
+        #region reset variable
+        private void resetRoomInfometionText() { m_roomInfometionText.text = "\r\n\r\nconnecting..."; }
+
+        #endregion
+
+        #region private async
+
+        /// <summary>
+        /// 同期時間経過後に、実行されます。
+        /// </summary>
+        /// <param name="s"></param>
+        private async void StartAfterSync(int s)
+        {
+            await Task.Delay(s);
+
+            JoinTheTeamEvenly();
+
+            StartCoroutine(nameof(ListUpdate));
+
+            updateRoomInfometionText();
+        }
+
         #endregion
 
         #region Unity Event
 
         public override void OnEnable()
         {
+            if (!PhotonNetwork.LocalPlayer.IsLocal) return;
+
             base.OnEnable();
 
-            StartCoroutine(nameof(ListUpdate));
-
-            RandomTeamSetting();
-
-            updateRoomInfometionText();
+            StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
 
             OnlyClientsDisplay( m_gameStartButton.gameObject);
         }
@@ -58,7 +86,9 @@ namespace Takechi.UI.RoomJoinedMenu
         {
             base.OnDisable();
 
-            RefreshTheListYouAreViewing();
+            DestroyChildObjects( m_teamAContent);
+            DestroyChildObjects( m_teamBContent);
+            resetRoomInfometionText();
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -81,6 +111,8 @@ namespace Takechi.UI.RoomJoinedMenu
 
         public override void OnMasterClientSwitched(Player newMasterClient)
         {
+            if (!PhotonNetwork.LocalPlayer.IsLocal) return;
+
             OnlyClientsDisplay( m_gameStartButton.gameObject);
         }
 
@@ -94,28 +126,30 @@ namespace Takechi.UI.RoomJoinedMenu
 
         public void OnChangeTeam(string teamName)
         {
-            if (teamAName != teamName && teamBName != teamName)
+            if (!PhotonNetwork.LocalPlayer.IsLocal) return;
+
+            if (CharacterStatusTeamName.teamAName != teamName && CharacterStatusTeamName.teamBName != teamName)
             {
                 Debug.LogError("The variable you are setting for the button is different from the expected value.");
                 return;
             }
 
-            if ( teamName == teamAName)
+            if ( teamName == CharacterStatusTeamName.teamAName)
             {
                 if (!MaximumOfMembers( m_teamA_memberList))
                 {
-                    setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamName);
+                    setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, teamName);
                 }
                 else
                 {
                     Debug.LogWarning(" The change has been canceled because the new team member is full. ");
                 }
             }
-            else if( teamName == teamBName)
+            else if( teamName == CharacterStatusTeamName.teamBName)
             {
                 if (!MaximumOfMembers( m_teamB_memberList))
                 {
-                    setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamName);
+                    setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, teamName);
                 }
                 else
                 {
@@ -123,23 +157,25 @@ namespace Takechi.UI.RoomJoinedMenu
                 }
             }
 
-            PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " ChangeTeamPlayerInfometion ", CustomPropertyKeyReference.s_CharacterStatusKeys);
+            PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " ChangeTeamPlayerInfometion ", CharacterStatusKey.allKeys);
         }
 
         #endregion
 
-        #region Update IEnumerator 
+        #region IEnumerator Update 
 
-        private IEnumerator ListUpdate()
+        protected override IEnumerator ListUpdate()
         {
+            base.ListUpdate();
+            
             while ( this.gameObject.activeSelf)
             {
                 m_teamA_memberList = new List<Player>();
                 m_teamB_memberList = new List<Player>();
 
-                foreach ( Player player in PhotonNetwork.PlayerList)
+                foreach (Player player in PhotonNetwork.PlayerList)
                 {
-                    if (( player.CustomProperties[CustomPropertyKeyReference.s_CharacterStatusTeam] is string value ? value : "null") == teamAName)
+                    if ((player.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") == CharacterStatusTeamName.teamAName)
                     {
                         m_teamA_memberList.Add(player);
                     }
@@ -149,15 +185,52 @@ namespace Takechi.UI.RoomJoinedMenu
                     }
                 }
 
-                RefreshTheListYouAreViewing();
+                RefreshTheListViewing();
 
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
 
+        protected override void RefreshTheListViewing()
+        {
+            DestroyChildObjects(m_teamAContent);
+            DestroyChildObjects(m_teamBContent);
+
+            InstantiateTheContentsOfListAndChangeText<Text, Player>( m_instansText, m_teamA_memberList, m_teamAContent.transform);
+            InstantiateTheContentsOfListAndChangeText<Text, Player>( m_instansText, m_teamB_memberList, m_teamBContent.transform);
+        }
+
         #endregion
 
         #region private finction
+
+        /// <summary>
+        /// 均等にチームに入室する。
+        /// </summary>
+        private void JoinTheTeamEvenly()
+        {
+            if ( m_teamA_memberList.Count > m_teamB_memberList.Count)
+            {
+                setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamBName);
+            }
+            else if ( m_teamA_memberList.Count < m_teamB_memberList.Count)
+            {
+                setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamAName);
+            }
+            else
+            {
+                if (ReturnsTheProbabilityOf1In2())
+                {
+                    setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamAName);
+                }
+                else
+                {
+                    setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamBName);
+                }
+            }
+
+            PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CharacterStatusKey.allKeys);
+        }
 
         private string WhatTheTextDisplays()
         {
@@ -166,91 +239,12 @@ namespace Takechi.UI.RoomJoinedMenu
                  $" RoomName : <color=green>{PhotonNetwork.CurrentRoom.Name}</color> \n" +
                  $" HostName : <color=green>{PhotonNetwork.MasterClient.NickName}</color> \n";
 
-            foreach (string propertie in CustomPropertyKeyReference.s_RoomStatusKeys)
+            foreach (string propertie in RoomStatusKey.allKeys)
             {
                 s += $" CurrentRoom {propertie} : <color=green>{PhotonNetwork.CurrentRoom.CustomProperties[propertie]}</color> \n";
             }
 
             return s;
-        }
-
-        /// <summary>
-        /// 表示中のリストの更新
-        /// </summary>
-        private void RefreshTheListYouAreViewing()
-        {
-            DestroyChildObjects(m_teamAContent);
-            DestroyChildObjects(m_teamBContent);
-
-            InstantiateTheText(m_instansText, m_teamA_memberList, m_teamAContent.transform);
-            InstantiateTheText(m_instansText, m_teamB_memberList, m_teamBContent.transform);
-        }
-
-        /// <summary>
-        /// ランダムに入室して部屋の状況を見て、設定する。
-        /// </summary>
-        private void RandomTeamSetting()
-        {
-            if (returnsTheProbabilityOf1In2())
-            {
-                if (!MaximumOfMembers(m_teamA_memberList))
-                {
-                    setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamAName);
-                }
-                else
-                {
-                    setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamBName);
-                }
-            }
-            else
-            {
-                if (!MaximumOfMembers(m_teamB_memberList))
-                {
-                    setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamBName);
-                }
-                else
-                {
-                    setLocalPlayerCustomProperties(CustomPropertyKeyReference.s_CharacterStatusTeam, teamAName);
-                }
-            }
-
-            PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CustomPropertyKeyReference.s_CharacterStatusKeys);
-        }
-
-        /// <summary>
-        /// 子オブジェクトの全消去します。
-        /// </summary>
-        /// <param name="parent"></param>
-        private void DestroyChildObjects(GameObject parent)
-        {
-            foreach (Transform n in parent.transform) { GameObject.Destroy(n.gameObject); }
-        }
-
-        /// <summary>
-        /// テキストを、インスタンス化します。
-        /// </summary>
-        /// <param name="instansText"></param>
-        /// <param name="players"></param>
-        /// <param name="p"></param>
-        private void InstantiateTheText(Text instansText, List<Player> players, Transform p)
-        {
-            foreach (Player n in players) { Instantiate(instansText, p).text = n.NickName; }
-        }
-
-        /// <summary>
-        /// 二分の一の確率を返します。
-        /// </summary>
-        /// <returns></returns>
-        private bool returnsTheProbabilityOf1In2() { return Random.Range(1, 10) % 2 == 0; }
-
-        /// <summary>
-        /// memberListの最大に達しているかどうかの確認します。
-        /// </summary>
-        /// <param name="teamMemberList"> teamMemberList</param>
-        /// <returns> max = true </returns>
-        private bool MaximumOfMembers(List<Player> teamMemberList)
-        {
-            return teamMemberList.Count >= PhotonNetwork.CurrentRoom.MaxPlayers / 2;
         }
 
         #endregion

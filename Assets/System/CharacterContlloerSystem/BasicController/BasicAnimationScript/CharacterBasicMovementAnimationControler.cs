@@ -13,6 +13,7 @@ using Takechi.CharacterController.KeyInputStete;
 using System;
 
 using Photon.Pun;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 
 namespace Takechi.CharacterController.BasicAnimation.Movement
@@ -218,7 +219,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
                     collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
                 float power =
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CustomPropertyKeyReference.s_CharacterStatusAttackPower];
+                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
 
                 thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
             }

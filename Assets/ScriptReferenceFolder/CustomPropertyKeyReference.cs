@@ -4,58 +4,74 @@ using UnityEngine;
 
 namespace Takechi.ScriptReference.CustomPropertyKey
 {
-    public class CustomPropertyKeyReference : MonoBehaviour
+    public class CustomPropertyKeyReference
     {
-        /// <summary>
-        /// PlayerStatus AttackPower Key Name
-        /// </summary>
-        public static readonly string s_CharacterStatusAttackPower = "attackPower";
+        public static class CharacterStatusTeamName
+        {
+            /// <summary>
+            /// player custom property teamA name
+            /// </summary>
+            public const string teamAName = "TeamA";
+            /// <summary>
+            /// player custom property teamB name
+            /// </summary>
+            public const string teamBName = "TeamB";
+        }
 
         /// <summary>
-        /// PlayerStatus Mass Key Name
+        /// player custom property key class
         /// </summary>
-        public static readonly string s_CharacterStatusMass = "mass";
-
-        /// <summary>
-        /// PlayerStatus team Key Name
-        /// </summary>
-        public static readonly string s_CharacterStatusTeam = "team";
-
-        /// <summary>
-        /// PlayerStatus selectedCharacter Key Name
-        /// </summary>
-        public static readonly string s_CharacterStatusSelectedCharacter = "selectedCharacter";
-
-        /// <summary>
-        /// PlayerStatus Keys
-        /// </summary>
-        public static readonly string[] s_CharacterStatusKeys =
-            new string[] 
-            { 
-                s_CharacterStatusAttackPower,
-                s_CharacterStatusMass ,
-                s_CharacterStatusTeam,
-                s_CharacterStatusSelectedCharacter
+        public static class CharacterStatusKey
+        {
+            /// <summary>
+            /// player custom property attackPowerKey
+            /// </summary>
+            public const string attackPowerKey = "attackPower";
+            /// <summary>
+            /// player custom property massKey
+            /// </summary>
+            public const string massKey = "mass";
+            /// <summary>
+            /// player custom property teamKey
+            /// </summary>
+            public const string teamKey = "team";
+            /// <summary>
+            /// player custom property selectedCharacterKey
+            /// </summary>
+            public const string selectedCharacterKey = "selectedCharacter";
+            /// <summary>
+            /// player custom property allKeys
+            /// </summary>
+            public static string[] allKeys = new string[]
+            {
+                  attackPowerKey,
+                  massKey,
+                  teamKey,
+                  selectedCharacterKey
             };
+        }
 
         /// <summary>
-        /// RoomStatus GameType Key Name
+        /// room custom property key class
         /// </summary>
-        public static readonly string s_RoomStatusGameType = "gametype";
-        
-        /// <summary>
-        /// RoomStatus Map Key Nmae
-        /// </summary>
-        public static readonly string s_RoomSatusMap = "Map";
-
-        /// <summary>
-        /// RoomStatus Keys
-        /// </summary>
-        public static readonly string[] s_RoomStatusKeys =
-            new string[] 
-            { 
-                s_RoomStatusGameType,
-                s_RoomSatusMap 
+        public static class RoomStatusKey
+        {
+            /// <summary>
+            /// room custom property gameTypeKey
+            /// </summary>
+            public const string gameTypeKey = "gametype";
+            /// <summary>
+            /// room custom property mapKey 
+            /// </summary>
+            public const string mapKey = "Map";
+            /// <summary>
+            /// room custom property allKeys
+            /// </summary>
+            public static string[] allKeys = new string[]
+            {
+                    gameTypeKey,
+                    mapKey,
             };
+        }
     }
 }

@@ -62,7 +62,7 @@
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\MovementScript\CharacterBasicMovement.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
-    <Compile Include="Assets\Resource\ModelResource\Spacecraft\Sqript\WithDoorController.cs" />
+    <Compile Include="Assets\Resource\MapModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
     <Compile Include="Assets\System\ChangePlayerSettingsMuneSelectedSystem\Script\UserNickNameManagement.cs" />
     <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiController.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterInstantiatedInNetworkSystem\CharacterBasicSettingWhenInstantiated.cs" />
-    <Compile Include="Assets\Resource\ModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
+    <Compile Include="Assets\Resource\MapModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
     <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\ExternalDataManagement.cs" />
@@ -100,6 +100,7 @@
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\BaseClass\CharacterStatusManagement.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\DeathblowScript\CharacterBasicDeathblow.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\DisplayListUpdateManagementSystem\DisplayListUpdateManagement.cs" />
     <Compile Include="Assets\TakechiAsset\DontDestroyOnLoadSetting\DontDestroyOnLoadSetting.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingTheAnimationParameterName.cs" />
     <Compile Include="Assets\TakechiAsset\WindowsEditorDebug\WindowsNetworkDebugController.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\ScriptReferenceFolder\ReferencingNetworkEnvironmentDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

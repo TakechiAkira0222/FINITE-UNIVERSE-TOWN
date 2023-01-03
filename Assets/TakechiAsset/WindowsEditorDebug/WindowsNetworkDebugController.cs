@@ -6,6 +6,7 @@ using Photon.Pun;
 using Takechi.ScriptReference;
 using TakechiEngine.PUN.Information;
 using Takechi.ScriptReference.CustomPropertyKey;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.EditorDebug.Windows.NetworkDebug
 {
@@ -21,7 +22,7 @@ namespace Takechi.EditorDebug.Windows.NetworkDebug
                 if (Input.GetKeyDown( m_informationButton))
                 {
                     RoomInfoAndJoinedPlayerInfoDisplay
-                        ( CustomPropertyKeyReference.s_RoomStatusKeys, CustomPropertyKeyReference.s_CharacterStatusKeys);
+                        ( RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
                 }
             }
             else

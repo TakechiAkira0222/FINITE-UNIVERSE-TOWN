@@ -18,6 +18,7 @@ using Takechi.UI.UserNickname;
 using Takechi.ScriptReference.CustomPropertyKey;
 
 using TakechiEngine.PUN.ServerConnect.ToJoinRoom;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.ServerConnect.ToJoinRoom 
 {
@@ -80,7 +81,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
             {
                 SetMyNickName(ConfirmationOfNicknames(m_userNickNameManagement.GetNickNameData().nickName));
 
-                RoomInfoAndJoinedPlayerInfoDisplay( CustomPropertyKeyReference.s_RoomStatusKeys, CustomPropertyKeyReference.s_CharacterStatusKeys);
+                RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
 
                 m_roomJoinedMune.gameObject.SetActive(true);
 
@@ -109,8 +110,8 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
             var customRoomProperties = new ExitGames.Client.Photon.Hashtable
             {
-                { CustomPropertyKeyReference.s_RoomStatusGameType, m_gameTypeSelection.GetGameTypeSelectionIndex()},
-                { CustomPropertyKeyReference.s_RoomSatusMap, m_mapSelection.GetMapSelectionIndex()},
+                { RoomStatusKey.gameTypeKey, m_gameTypeSelection.GetGameTypeSelectionIndex()},
+                { RoomStatusKey.mapKey, m_mapSelection.GetMapSelectionIndex()},
             };
 
             OnRoomCreationAction( CheckForEnteredCharacters( m_roomPropertySetting.GetRoomName()), roomOptions, customRoomProperties);
@@ -167,7 +168,9 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
-            base.OnJoinRandomFailed(returnCode, message);
+            base.OnJoinRoomFailed(returnCode, message);
+
+            PhotonNetwork.JoinLobby();
         }
 
         #endregion
