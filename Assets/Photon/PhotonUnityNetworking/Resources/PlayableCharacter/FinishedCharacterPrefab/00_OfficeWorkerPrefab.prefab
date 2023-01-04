@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 976447556158570949}
   - component: {fileID: 4557960546935035001}
   - component: {fileID: 4624134597785962266}
-  - component: {fileID: 2873905185444241462}
-  - component: {fileID: 8930719316779807064}
+  - component: {fileID: 5149710227923082667}
   - component: {fileID: 1806529563627370134}
+  - component: {fileID: 2873905185444241462}
   m_Layer: 0
   m_Name: OfficeWorkerAvatar
   m_TagString: PlayerCharacter
@@ -62,7 +62,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!136 &1952776157070901584
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -141,31 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 2039010258180462384}
---- !u!114 &2873905185444241462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464520793065001613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8930719316779807064}
-  - {fileID: 1806529563627370134}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &8930719316779807064
+--- !u!114 &5149710227923082667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,6 +173,30 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &2873905185444241462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464520793065001613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5149710227923082667}
+  - {fileID: 1806529563627370134}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &771002715565279974
 GameObject:
   m_ObjectHideFlags: 0

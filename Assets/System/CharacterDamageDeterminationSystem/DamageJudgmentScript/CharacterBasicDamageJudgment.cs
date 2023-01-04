@@ -1,3 +1,5 @@
+using UnityEngine;
+
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Voice.PUN.UtilityScripts;
@@ -7,9 +9,11 @@ using Takechi.CharacterController.Parameters;
 using Takechi.ScriptReference.AnimationParameter;
 using Takechi.ScriptReference.CustomPropertyKey;
 using Takechi.ScriptReference.DamagesThePlayerObject;
-using UnityEngine;
+
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ObjectReferenceThatDamagesThePlayer;
+using JetBrains.Annotations;
+using System.ComponentModel.Design;
 
 namespace Takechi.CharacterController.DamageJudgment
 {
@@ -46,7 +50,7 @@ namespace Takechi.CharacterController.DamageJudgment
                 m_characterStatusManagement.UpdateMass(-power);
                 m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
 
-                StartCoroutine(knockBack(collision, power));
+                StartCoroutine(T_KnockBack(collision, power));
             }
             else if (collision.gameObject.tag == DamageFromPlayerToPlayer.bulletsTagName)
             {
@@ -60,6 +64,8 @@ namespace Takechi.CharacterController.DamageJudgment
 
                 m_characterStatusManagement.UpdateMass(-power);
                 m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
+
+                StartCoroutine(T_KnockBack(collision, power));
             }
 
             foreach (string s in DamageFromObjectToPlayer.objectNameList)
@@ -72,9 +78,22 @@ namespace Takechi.CharacterController.DamageJudgment
                     m_characterStatusManagement.UpdateMass(-power);
                     m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
 
-                    StartCoroutine(knockBack(collision, power));
+                    StartCoroutine(T_KnockBack(collision, power));
                 }
             }
+        }
+        
+        private IEnumerator T_KnockBack(Collision collision, float power)
+        {
+            var impulse = ( m_rb.transform.position - collision.contacts[0].point).normalized;
+            
+             m_rb.AddForce( impulse * (power * 10) * 1000);
+                yield return new WaitForSeconds( Time.deltaTime);
+            //for (int i = 0; i < power; i++)
+            //{
+            //    m_rb.transform.position += new Vector3( impulse.x , 0 , impulse.z);
+            //}
+
         }
 
         /// <summary>
@@ -102,10 +121,11 @@ namespace Takechi.CharacterController.DamageJudgment
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        private bool checkTeammember(int number) {
+        private bool checkTeammember(int number) 
+        {
             return  
-                PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey] ==
-                PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey] ;
+                (string)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey].ToString() ==
+                (string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey].ToString() ;
         }
     }
 }

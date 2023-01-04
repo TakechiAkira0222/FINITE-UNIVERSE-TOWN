@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 7406005690312784647}
   - component: {fileID: 1849418082849908836}
   - component: {fileID: 9107513825222790984}
-  - component: {fileID: 2483176638069775910}
+  - component: {fileID: 8717772095721914088}
   - component: {fileID: 4653448808172329448}
   m_Layer: 0
   m_Name: MechanicalWarriorAvatar
@@ -570,7 +570,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!136 &4800816903482502702
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -581,10 +581,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: f95018ec1c45ac54a94cbd0b7a1c1703, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.75
+  m_Radius: 0.34864265
+  m_Height: 2.0069304
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: -0.010489404, y: 1.028465, z: -0.014891267}
 --- !u!320 &6056008860076011195
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -668,12 +668,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2483176638069775910}
+  - {fileID: 8717772095721914088}
   - {fileID: 4653448808172329448}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2483176638069775910
+--- !u!114 &8717772095721914088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
