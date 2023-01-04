@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using Takechi.CharacterController.Jump;
+using Takechi.CharacterController.Movement;
+using Takechi.CharacterController.Parameters;
+using Takechi.CharacterController.ViewpointOperation;
+using UnityEngine;
+using UnityEngine.Playables;
+
+namespace Takechi.CharacterController.DeathblowAnimationEvent
+{
+    public class MechanicalWarriorNetworkRendererDeathblowAnimationEventManager : MonoBehaviour
+    {
+        #region UnityAnimatorEvent
+
+        private void Awake()
+        {
+
+        }
+
+        /// <summary>
+        /// ïKéEãZanimationÇÃäJén
+        /// </summary>
+        void OfficeWorkerDeathblowStart()
+        {
+          
+        }
+
+        /// <summary>
+        /// ïKéEãZanimationÇÃèIóπ
+        /// </summary>
+        void OfficeWorkerDeathblowEnd()
+        {
+           
+        }
+
+        #endregion
+    }
+}

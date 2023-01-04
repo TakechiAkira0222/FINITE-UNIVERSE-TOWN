@@ -171,12 +171,14 @@ namespace Takechi.CharacterSelection
             { 
                 Image image = Instantiate( m_instansImage, m_teamAContent.transform);
                 image.sprite =  m_parametersManager.GetParameters((int)n.CustomProperties[CharacterStatusKey.selectedCharacterKey]).GetIcon();
+                image.transform.GetChild(0).GetComponent<Text>().text = n.NickName; 
             }
 
             foreach (Player n in m_teamB_memberList)
             {
                 Image image = Instantiate(m_instansImage, m_teamBContent.transform);
                 image.sprite = m_parametersManager.GetParameters((int) n.CustomProperties[CharacterStatusKey.selectedCharacterKey]).GetIcon();
+                image.transform.GetChild(0).GetComponent<Text>().text = n.NickName;
             }
         }
 

@@ -14,6 +14,7 @@ using System;
 
 using Photon.Pun;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using static Takechi.ScriptReference.DamagesThePlayerObject.ObjectReferenceThatDamagesThePlayer;
 
 
 namespace Takechi.CharacterController.BasicAnimation.Movement
@@ -213,10 +214,24 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         {
             if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
 
-            if (collision.gameObject.tag == ObjectReferenceThatDamagesThePlayer.s_PlayerCharacterWeaponTagName)
+            if (collision.gameObject.tag == DamageFromPlayerToPlayer.weaponTagName)
             {
                 int number =
                     collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+
+                if (checkTeammember(number)) return;
+
+                float power =
+                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
+
+                thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+            }
+            else if (collision.gameObject.tag == DamageFromPlayerToPlayer.bulletsTagName)
+            {
+                int number =
+                    collision.transform.GetComponent<PhotonView>().ControllerActorNr;
+
+                if (checkTeammember(number)) return;
 
                 float power =
                     (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
@@ -224,11 +239,11 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
                 thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
             }
 
-            foreach (string s in ObjectReferenceThatDamagesThePlayer.s_DamagesThePlayerObjectNameList)
+            foreach (string s in DamageFromObjectToPlayer.objectNameList)
             {
                 if (collision.gameObject.name == s)
                 {
-                    float power = ObjectReferenceThatDamagesThePlayer.s_DamageObjectPowerDictionary[s];
+                    float power = DamageFromObjectToPlayer.objectDamagesDictionary[s];
                     thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
                 }
             }
@@ -275,5 +290,17 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         }
 
         #endregion
+
+        /// <summary>
+        /// check Teammember
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        private bool checkTeammember(int number)
+        {
+            return
+                PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey] ==
+                PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey];
+        }
     }
 }

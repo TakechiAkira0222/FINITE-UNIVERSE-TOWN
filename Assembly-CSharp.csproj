@@ -64,7 +64,7 @@
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
     <Compile Include="Assets\Resource\MapModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
-    <Compile Include="Assets\System\ChangePlayerSettingsMuneSelectedSystem\Script\UserNickNameManagement.cs" />
+    <Compile Include="Assets\System\UserSettingsMuneSystem\Script\UserNickNameManagement.cs" />
     <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiController.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCustomProperties.cs" />
     <Compile Include="Assets\TakechiAsset\FadingCanvas\script\ToFade.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\DisplayControllSystem\CanvasSetActiveController.cs" />
     <Compile Include="Assets\System\TimeLineSystem\TitleScceneOnlyFolder\TimeLineControllerSqript\TitleScceneTimeLineController.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinedMenuManagementSystem\Script\RoomJoinedMenuManagement.cs" />
+    <Compile Include="Assets\System\ServerControlSystem\TraingGroundServerController\script\TraingGroundServerController.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\BaseClass\CharacterStatusManagement.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ManagementButtonSystem\ButtonObjectStateChangeManagement.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\DisplayControllSystem\CanvasIntaractableController.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayAttribute.cs" />
-    <Compile Include="Assets\System\CharacterStatusManagmetSystem\OfficeWorkerStatusManagement.cs" />
+    <Compile Include="Assets\System\CharacterStatusManagmetSystem\OfficeWorker\OfficeWorkerStatusManagement.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DeviceInfo\DeviceInfo.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinMenuManagementSystem\RoomSearchMenu\script\RoomSearchMenuManagment.cs" />
     <Compile Include="Assets\TakechiAsset\RotateSkyBoxSystem\sqript\RotateSkyBox.cs" />
@@ -137,10 +138,16 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\ServerControlSystem\TraingGroundServerController\script\TraingGroundServerController.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\MechanicalWarrior\AnimationEventSqript\MechanicalWarriorHandOnlyAttackAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\MechanicalWarrior\AnimationEventSqript\MechanicalWarriorNetworkRendererAttackAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\MechanicalWarrior\AnimationEventSqript\MechanicalWarriorNetworkRendererDeathblowAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterContlloerSystem\MechanicalWarrior\AnimationEventSqript\MechanicalWarriorHandOnlyDeathblowAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterStatusManagmetSystem\MechanicalWarrior\MechanicalWarriorStatusManagement.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterSpecificParametersDataBase\MechanicalWarreior\Script\MechanicalWarreiorSpecificParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
+    <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\x86\webrtc-audio.dll" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\x86\opus_egpv.dll" />

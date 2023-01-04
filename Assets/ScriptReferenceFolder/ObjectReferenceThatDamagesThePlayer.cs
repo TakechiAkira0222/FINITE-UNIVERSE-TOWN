@@ -1,3 +1,4 @@
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,29 +7,38 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
 {
     public class ObjectReferenceThatDamagesThePlayer : MonoBehaviour
     {
-        /// <summary>
-        /// Playerが、Playerにダメージを与えるobjectのTagリスト
-        /// </summary>
-        public static readonly string s_PlayerCharacterWeaponTagName = "PlayerCharacterWeapon";
+        public static class DamageFromPlayerToPlayer
+        {
+            /// <summary>
+            /// Player Weapon TagName
+            /// </summary>
+            public const string weaponTagName = "PlayerCharacterWeapon";
 
-        /// <summary>
-        /// Playerにダメージを与えるobjectの名前リスト
-        /// </summary>
-        public static readonly List<string> s_DamagesThePlayerObjectNameList =
-            new List<string>()
-            {
-                "Cube",
-                "Barrel",
-            };
+            /// <summary>
+            /// Player Bullets TagName
+            /// </summary>
+            public const string bulletsTagName = "PlayerCharacterBullets";
+        }
 
-        /// <summary>
-        /// Playerにダメージを与えるobjectの威力の辞書
-        /// </summary>
-        public static readonly Dictionary<string, int> s_DamageObjectPowerDictionary =
-            new Dictionary<string, int>()
-            {
-                { s_DamagesThePlayerObjectNameList[0], 10},
-                { s_DamagesThePlayerObjectNameList[1], 10},
-            };
+        public static class DamageFromObjectToPlayer
+        {
+            /// <summary>
+            /// Playerにダメージを与えるobjectの名前リスト
+            /// </summary>
+            public static readonly List<string> objectNameList =
+                new List<string>()
+                {
+
+                };
+
+            /// <summary>
+            /// Playerにダメージを与えるobjectの威力の辞書
+            /// </summary>
+            public static readonly Dictionary<string, int> objectDamagesDictionary =
+                new Dictionary<string, int>()
+                {
+
+                };
+        }
     }
 }

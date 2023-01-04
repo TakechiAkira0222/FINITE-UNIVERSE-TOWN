@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Takechi.CharacterController.SpecificParameters.OfficeWorker
 {
     [Serializable]
-    [CreateAssetMenu(fileName = " OfficeWorkerSpecificParameters", menuName = " OfficeWorkerSpecificParameters")]
+    [CreateAssetMenu(fileName = "OfficeWorkerSpecificParameters", menuName = "OfficeWorkerSpecificParameters")]
     public class OfficeWorkerSpecificParameters : ScriptableObject
     {
         [Header("=== DeathblowStatusIncreaseSetting ===")]
