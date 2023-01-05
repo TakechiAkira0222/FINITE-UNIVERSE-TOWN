@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Takechi.CharacterController.Parameters;
+using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
 using System.IO;
 using System;
 
@@ -17,28 +18,32 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
+        [Header("=== MechanicalWarreiorSpecificParameters ===")]
+        [SerializeField] private MechanicalWarreiorSpecificParameters m_specificParameters;
+
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PhotonView m_thisPhotonView;
-        [SerializeField] private List<string> m_folderName = new List<string>();
 
-        [SerializeField] private float m_force = 10;
-        [SerializeField] private float m_destroyTime = 5;
         [SerializeField] private GameObject m_instans;
         [SerializeField] private Transform  m_magazineTransfrom;
 
-        private string m_path = "";
-
+     
         #endregion
 
         #region private
         private PhotonView thisPhotonView => m_thisPhotonView;
         private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        private float force => m_specificParameters.GetShootingForce();
+        private float durationTime => m_specificParameters.GetDurationOfBullet();
+
+        private string path => m_specificParameters.GetBulletsPath();
+
 
         #endregion
 
         private void Awake()
         {
-            foreach (string s in m_folderName) { m_path += s + "/"; }
+            
         }
 
         private void Reset()
@@ -55,7 +60,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
 
-            Shooting(m_magazineTransfrom, m_force);
+            Shooting(m_magazineTransfrom, force);
         }
 
         /// <summary>
@@ -65,7 +70,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
 
-            Shooting(m_magazineTransfrom, m_force);
+            Shooting(m_magazineTransfrom, force);
         }
 
         /// <summary>
@@ -74,7 +79,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         void MechanicalWarriorThirdShot()
         {
             if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
-            Shooting(m_magazineTransfrom, m_force);
+            Shooting(m_magazineTransfrom, force);
         }
 
         #endregion
@@ -88,11 +93,11 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private void Shooting( Transform magazine, float force)
         {
             GameObject instans =
-            PhotonNetwork.Instantiate( m_path + m_instans.name, magazine.position, Quaternion.identity);
+            PhotonNetwork.Instantiate( path + m_instans.name, magazine.position, Quaternion.identity);
 
             instans.GetComponent<Rigidbody>().AddForce( magazine.forward * 100 * force);
 
-            StartCoroutine(DelayMethod( m_destroyTime, () =>
+            StartCoroutine(DelayMethod( durationTime, () =>
             {
                 PhotonNetwork.Destroy(instans);
             }));

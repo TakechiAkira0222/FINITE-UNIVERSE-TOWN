@@ -9,25 +9,26 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
     [CreateAssetMenu(fileName = "MechanicalWarreiorSpecificParameters", menuName = "MechanicalWarreiorSpecificParameters")]
     public class MechanicalWarreiorSpecificParameters : ScriptableObject
     {
-        [Header("=== DeathblowStatusIncreaseSetting ===")]
-        [SerializeField, Range(20.0f, 50.0f), Tooltip("必殺技のステータス上昇幅　AttackPower")]
-        private float m_attackPowerIncrease  = 30.0f;
-        [SerializeField, Range(20.0f, 50.0f), Tooltip("必殺技のステータス上昇幅　MoveingSpeed")]
-        private float m_moveingSpeedIncrease = 30.0f;
-        [SerializeField, Range(50.0f, 300.0f), Tooltip("必殺技のステータス上昇幅　JumpPower")]
-        private float m_jumpPowerIncrease    = 300.0f;
-        [SerializeField, Tooltip("必殺技の継続時間　Seconds")]
-        private float m_specialMoveDuration_Seconds = 30;
+        [Header("=== ShootingSetting ===")]
+        [SerializeField, Tooltip("BulletsへのFolder名")] 
+        private List<string> m_bulletsFolderName = new List<string>();
+        [SerializeField, Range(1.0f, 4.0f), Tooltip("射撃の威力")]
+        private float m_shootingForce  = 3.0f;
+        [SerializeField, Range(3.0f, 10.0f), Tooltip("弾の存在時間")]
+        private float m_durationOfBullet = 5;
 
         #region GetStatusFunction
 
-        public float GetAttackPowerIncrease() { return m_attackPowerIncrease; }
+        public float GetShootingForce() { return m_shootingForce; }
+        public float GetDurationOfBullet() { return m_durationOfBullet; }
 
-        public float GetMoveingSpeedIncrease() { return m_moveingSpeedIncrease; }
+        public string GetBulletsPath()
+        {
+            string path = "";
+            foreach ( string s in m_bulletsFolderName) { path += s + "/"; }
 
-        public float GetJumpPowerIncrease() { return m_jumpPowerIncrease; }
-
-        public float GetSpecialMoveDuration_Seconds() {return m_specialMoveDuration_Seconds;}
+            return path;
+        }
 
         #endregion
     }

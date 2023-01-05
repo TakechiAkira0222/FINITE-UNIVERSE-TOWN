@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed84b8ec512dfbe4cb05cef16d77e629, type: 3}
   m_Name: MechanicalWarreiorSpecificParameters
   m_EditorClassIdentifier: 
-  m_attackPowerIncrease: 30
-  m_moveingSpeedIncrease: 30
-  m_jumpPowerIncrease: 300
-  m_specialMoveDuration_Seconds: 30
+  m_bulletsFolderName:
+  - PlayableCharacter
+  - ItemsinstantiationFromCharactersPrefab
+  m_shootingForce: 3
+  m_durationOfBullet: 5

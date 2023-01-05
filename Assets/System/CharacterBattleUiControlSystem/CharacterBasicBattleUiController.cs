@@ -15,6 +15,7 @@ namespace Takechi.UI.BattleUi
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
         [SerializeField] private Slider m_deathblowSlider;
+        [SerializeField] private Slider m_massSlider;
         [SerializeField] private Slider m_ability1Slider;
         [SerializeField] private Slider m_ability2Slider;
         [SerializeField] private Slider m_ability3Slider;
@@ -23,6 +24,8 @@ namespace Takechi.UI.BattleUi
 
         private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
         private Slider deathblowSlider => m_deathblowSlider;
+
+        private Slider massSlider => m_massSlider; 
         private Slider ability1Slider => m_ability1Slider;
         private Slider ability2Slider => m_ability2Slider;
         private Slider ability3Slider => m_ability3Slider;
@@ -30,6 +33,8 @@ namespace Takechi.UI.BattleUi
 
         private void Awake()
         {
+            setValue( massSlider, characterStatusManagement.GetMyRigidbody().mass /characterStatusManagement.GetCleanMass());
+            Debug.Log($" massSlider.value <color=blue>to set</color>.");
             setValue(deathblowSlider, 0);
             Debug.Log($" deathblowSlider.value <color=blue>to set</color>.");
             setValue(ability1Slider, 0);
@@ -41,6 +46,7 @@ namespace Takechi.UI.BattleUi
         }
         private void Update()
         {
+            updateValue(massSlider, characterStatusManagement.GetMyRigidbody().mass, characterStatusManagement.GetCleanMass());
             updateValue(deathblowSlider, characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds() , characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds());
             updateValue(ability1Slider,  characterStatusManagement.GetCanUseAbility1_TimeCount_Seconds() ,  characterStatusManagement.GetCanUseAbility1_RecoveryTime_Seconds());
             updateValue(ability2Slider,  characterStatusManagement.GetCanUseAbility2_TimeCount_Seconds() ,  characterStatusManagement.GetCanUseAbility2_RecoveryTime_Seconds());
