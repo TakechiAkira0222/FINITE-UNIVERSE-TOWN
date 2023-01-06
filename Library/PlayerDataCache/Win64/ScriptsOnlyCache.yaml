@@ -38,19 +38,21 @@ ScriptsOnlyBuild:
     - Takechi.ManagmentButton.SrateChange.ButtonSceneStateChangeManagement
     - Takechi.MapObject.AnimatorController.WithDoorController
     - Takechi.MouseCursorController.MouseCursorController
-    - Takechi.MouseCursorController.ScriptEnabledOrDisabledContlloer
-    - Takechi.NetworkInstantiation.Character.CharacterBasicSettingWhenInstantiated
+    - Takechi.NetworkInstantiation.CharacterSetActive.CharacterBasicSetActiveSettingWhenInstantiated
+    - Takechi.NetworkInstantiation.OutlineController.CharacterBasicModelOutlineController
     - Takechi.RaycastObjectDetectionSystem.RaycastHitInstantiateTheCanvasSystem
     - Takechi.RaycastObjectDetectionSystem.RaycastHitSetActiveTheCanvasSystem
+    - Takechi.ScriptEnabledOrDisabled.ScriptEnabledOrDisabledContlloer
     - Takechi.ServerConnect.ErrorWhenConnecting.ErrorManagementWhenConnecting
     - Takechi.ServerConnect.NetworkInstantiation.NetworkInstantiationAtStartup
     - Takechi.ServerConnect.ToJoinRoom.ConnectToJoinRoomManagment
     - Takechi.ServerConnect.ToLobby.ConnectToLobbyManagment
     - Takechi.ServerConnect.TraingGroundServer.TraingGroundServerController
     - Takechi.SkyBox.Movement.RotateSkyBox
-    - Takechi.UI.BattleUi.CharacterBasicBattleUiController
+    - Takechi.UI.BattleUiMenu.CharacterBasicBattleUiMenuController
     - Takechi.UI.CanvasMune.CanvasIntaractableController
     - Takechi.UI.CanvasMune.CanvasSetActiveController
+    - Takechi.UI.DisplayToOthers.CharacterBasicDisplayToOthersController
     - Takechi.UI.GameTypeSelection.GameTypeSelectionManagement
     - Takechi.UI.MapSelection.MapSelectionManagement
     - Takechi.UI.RoomJoinedMenu.RoomJoinedMenuManagement
@@ -117,7 +119,6 @@ ScriptsOnlyBuild:
     Unity.Timeline.Editor.dll:
     - TimelinePreferences
     - UnityEditor.Timeline.SequenceHierarchy
-    - UnityEditor.Timeline.TimelineAssetViewModel
     - UnityEditor.Timeline.TimelineWindow
     Unity.Timeline.dll:
     - UnityEngine.Timeline.ActivationPlayableAsset
@@ -128,8 +129,11 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -147,6 +151,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.InputField
     - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Mask
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
@@ -302,6 +307,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 82
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
@@ -331,6 +338,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1726}
     - Class: 114
+      Script: {instanceID: 1750}
+    - Class: 114
       Script: {instanceID: 1774}
     - Class: 114
       Script: {instanceID: 1972}
@@ -344,6 +353,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2340}
     - Class: 114
       Script: {instanceID: 2408}
+    - Class: 114
+      Script: {instanceID: 2480}
     - Class: 114
       Script: {instanceID: 2820}
     - Class: 114
@@ -444,6 +455,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8032}
     - Class: 114
       Script: {instanceID: 8174}
+    - Class: 114
+      Script: {instanceID: 627528}
+    - Class: 114
+      Script: {instanceID: 831846}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -692,6 +707,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 82
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
@@ -746,6 +763,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2364}
     - Class: 114
       Script: {instanceID: 2408}
+    - Class: 114
+      Script: {instanceID: 2480}
     - Class: 114
       Script: {instanceID: 2494}
     - Class: 114
@@ -922,6 +941,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8032}
     - Class: 114
       Script: {instanceID: 8174}
+    - Class: 114
+      Script: {instanceID: 627528}
+    - Class: 114
+      Script: {instanceID: 831846}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -991,6 +1014,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
@@ -1020,6 +1045,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1724}
     - Class: 114
+      Script: {instanceID: 1750}
+    - Class: 114
       Script: {instanceID: 1774}
     - Class: 114
       Script: {instanceID: 2028}
@@ -1031,6 +1058,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2340}
     - Class: 114
       Script: {instanceID: 2408}
+    - Class: 114
+      Script: {instanceID: 2480}
     - Class: 114
       Script: {instanceID: 2820}
     - Class: 114
@@ -1129,6 +1158,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8032}
     - Class: 114
       Script: {instanceID: 8174}
+    - Class: 114
+      Script: {instanceID: 627528}
+    - Class: 114
+      Script: {instanceID: 831846}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1412,10 +1445,10 @@ ScriptsOnlyBuild:
     className: PlaymodeTestsController
   - hash:
       serializedVersion: 2
-      Hash: 28a883bc7f6c3858829657999fa8afc9
+      Hash: 041187dcf57710edd6e4120eeb6a0804
     assemblyName: Assembly-CSharp.dll
-    namespaceName: Takechi.UI.BattleUi
-    className: CharacterBasicBattleUiController
+    namespaceName: Takechi.UI.BattleUiMenu
+    className: CharacterBasicBattleUiMenuController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1700,7 +1733,7 @@ ScriptsOnlyBuild:
     className: Read
   - hash:
       serializedVersion: 2
-      Hash: c4fdada5000c642ef329837df77a5bb8
+      Hash: 05cdcf6bac30acf824db1f93cbb67643
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.AttackAnimationEvent
     className: OfficeWorkerHandOnlyAttackAnimationEventManager
@@ -1786,8 +1819,8 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: d4dc406a6a3ddf446cddebc89dc6fe2a
     assemblyName: Assembly-CSharp.dll
-    namespaceName: Takechi.NetworkInstantiation.Character
-    className: CharacterBasicSettingWhenInstantiated
+    namespaceName: Takechi.NetworkInstantiation.CharacterSetActive
+    className: CharacterBasicSetActiveSettingWhenInstantiated
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -2096,7 +2129,7 @@ ScriptsOnlyBuild:
     className: RaycastObjectDetectionSystemInNetwork
   - hash:
       serializedVersion: 2
-      Hash: 2ead97f59a8196ac1ec7156e220ce1a3
+      Hash: 9d25e599d5a4d21c40c46fec6408a57d
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.SpecificParameters.MechanicalWarreior
     className: MechanicalWarreiorSpecificParameters
@@ -2276,7 +2309,7 @@ ScriptsOnlyBuild:
     className: TraingGroundServerController
   - hash:
       serializedVersion: 2
-      Hash: 6e5bf8354d9c97ca1712f40a2c0a7520
+      Hash: a7a440a6b3f7b957ca04aca43bf47f74
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.Parameters
     className: MechanicalWarriorStatusManagement
@@ -2396,7 +2429,7 @@ ScriptsOnlyBuild:
     className: PunPlayerScores
   - hash:
       serializedVersion: 2
-      Hash: 9b708236b322a2ee1287094091910e8a
+      Hash: 82f592b450b8fa35098834d6882f1ab7
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.Parameters
     className: CharacterStatusManagement
@@ -2768,7 +2801,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: db764990c37735141bec328b1335c31e
+      Hash: da13b3817220e0b009639be8658255fb
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.Parameters
     className: OfficeWorkerStatusManagement
@@ -2854,7 +2887,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: 6b5174abb65d2ef1d9efdd29c0c99289
     assemblyName: Assembly-CSharp.dll
-    namespaceName: Takechi.MouseCursorController
+    namespaceName: Takechi.ScriptEnabledOrDisabled
     className: ScriptEnabledOrDisabledContlloer
   - hash:
       serializedVersion: 2
@@ -2930,7 +2963,7 @@ ScriptsOnlyBuild:
     className: Save
   - hash:
       serializedVersion: 2
-      Hash: 6c22f3f6caf0ea0f4a86d9a8587f7553
+      Hash: f7fbd1c3dd56574c50692e6df03ba924
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.CharacterController.AttackAnimationEvent
     className: MechanicalWarriorHandOnlyAttackAnimationEventManager
@@ -3180,6 +3213,24 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Takechi.PhotonVoiceController
     className: GeneratePhotonVoiceControllerInstance
+  - hash:
+      serializedVersion: 2
+      Hash: a0547315dc4cf0e16429b47d02531fee
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Takechi.UI.DisplayToOthers
+    className: CharacterBasicDisplayToOthersController
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Takechi.UI.SliderContlloer
+    className: SliderContlloerManager
+  - hash:
+      serializedVersion: 2
+      Hash: 03f380796f1ae0b44eb8f989359655d5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Takechi.NetworkInstantiation.OutlineController
+    className: CharacterBasicModelOutlineController
   platform: 19
   scenePathNames:
   - Assets/Scenes/TitleScneneFolder/TitleScnene.unity

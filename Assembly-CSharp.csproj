@@ -66,7 +66,7 @@
     <Compile Include="Assets\Resource\MapModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
     <Compile Include="Assets\System\UserSettingsMuneSystem\Script\UserNickNameManagement.cs" />
-    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiController.cs" />
+    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiMenuController.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCustomProperties.cs" />
     <Compile Include="Assets\TakechiAsset\FadingCanvas\script\ToFade.cs" />
     <Compile Include="Assets\TakechiAsset\SingletonMonoBehaviour\SingletonMonoBehaviour.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyAttackAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyDeathblowAnimationEventManager.cs" />
-    <Compile Include="Assets\System\CharacterInstantiatedInNetworkSystem\CharacterBasicSettingWhenInstantiated.cs" />
+    <Compile Include="Assets\System\CharacterInstantiatedInNetworkSystem\CharacterBasicSetActiveSettingWhenInstantiated.cs" />
     <Compile Include="Assets\Resource\MapModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
@@ -144,6 +144,9 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicDisplayToOthersController.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\SliderContlloerSystem\SliderContlloerManager.cs" />
+    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicModelOutlineController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

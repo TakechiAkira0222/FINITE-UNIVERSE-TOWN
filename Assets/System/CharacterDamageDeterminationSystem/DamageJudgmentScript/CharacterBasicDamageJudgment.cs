@@ -3,17 +3,15 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Voice.PUN.UtilityScripts;
+
 using System.Collections;
 using System.Collections.Generic;
+
 using Takechi.CharacterController.Parameters;
-using Takechi.ScriptReference.AnimationParameter;
 using Takechi.ScriptReference.CustomPropertyKey;
 using Takechi.ScriptReference.DamagesThePlayerObject;
-
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ObjectReferenceThatDamagesThePlayer;
-using JetBrains.Annotations;
-using System.ComponentModel.Design;
 
 namespace Takechi.CharacterController.DamageJudgment
 {

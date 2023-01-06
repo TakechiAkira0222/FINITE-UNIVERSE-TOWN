@@ -3,10 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
-using Takechi.CharacterController.Parameters;
-using Takechi.ScriptReference.AnimationParameter;
 using UnityEngine;
-using UnityEngine.SearchService;
+
+using Takechi.CharacterController.Parameters;
 
 namespace Takechi.CharacterController.KeyInputStete
 {

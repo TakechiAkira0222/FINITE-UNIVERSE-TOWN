@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
@@ -57,6 +58,10 @@ namespace Takechi.CharacterController.Parameters
         /// hand only model object
         /// </summary>
         [SerializeField] private GameObject m_networkModelObject;
+        /// <summary>
+        /// model Outline
+        /// </summary>
+        [SerializeField] private Outline m_modelOutline;
 
         #endregion
 
@@ -97,6 +102,10 @@ namespace Takechi.CharacterController.Parameters
         /// network model object
         /// </summary>
         protected GameObject networkModelObject => m_networkModelObject;
+        /// <summary>
+        /// model Outline
+        /// </summary>
+        protected Outline modelOutline => m_modelOutline;
         /// <summary>
         /// local player custom properties
         /// </summary>
@@ -151,6 +160,33 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         protected float canUseAbility3_TimeCount_Seconds;
 
+
+        #endregion
+
+        #region this script status flag
+
+        /// <summary>
+        /// status setup complete : true
+        /// </summary>
+        private bool characterStatusSetUpComplete = false;
+        /// <summary>
+        /// status setup complete : true
+        /// </summary>
+        private bool localPlayerCustomPropertiesStatusSetUpComplete = false;
+
+        #endregion
+
+        #region event Action 
+
+        /// <summary>
+        /// status setup complete action
+        /// </summary>
+        public event Action characterStatusSetUpCompleteAction = delegate{};
+        /// <summary>
+        /// status setup complete action
+        /// </summary>
+        public event Action localPlayerCustomPropertiesStatusSetUpCompleteAction = delegate{};
+
         #endregion
 
         protected virtual void Awake()
@@ -191,6 +227,11 @@ namespace Takechi.CharacterController.Parameters
                       $" canUseAbility2 = {canUseAbility2}\n"+
                       $" canUseAbility3 = {canUseAbility3}\n"
                       );
+
+            characterStatusSetUpComplete = true;
+            Debug.Log(" characterStatusSetUpComplete = <color=blue>true</color>");
+            characterStatusSetUpCompleteAction();
+            Debug.Log("<color=yellow> characterStatusSetUpCompleteAction</color>()");
         }
         /// <summary>
         /// LocalPlayerCustomPropertiesを、データベースの変数で設定します。
@@ -212,6 +253,11 @@ namespace Takechi.CharacterController.Parameters
                    $" {CharacterStatusKey.attackPowerKey} = {m_localPlayerCustomProperties[CharacterStatusKey.attackPowerKey]}\n" +
                    $" {CharacterStatusKey.massKey} = {m_localPlayerCustomProperties[CharacterStatusKey.massKey]}\n"
                    );
+
+            localPlayerCustomPropertiesStatusSetUpComplete = true;
+            Debug.Log(" localPlayerCustomPropertiesStatusSetUpComplete = <color=blue>true</color>");
+            localPlayerCustomPropertiesStatusSetUpCompleteAction();
+            Debug.Log("<color=yellow> localPlayerCustomPropertiesStatusSetUpCompleteAction</color>() ");
         }
 
         #endregion
@@ -233,11 +279,16 @@ namespace Takechi.CharacterController.Parameters
         public void SetMass(float changeValue) { rb.mass = changeValue; }
         public void SetVelocity(Vector3 velocityValue) { rb.velocity = velocityValue; }
         public void SetIsKinematic(bool flag) { rb.isKinematic = flag; }
+        public void SetModelOuline(Outline outline) { m_modelOutline = outline; }
+        public void SetModelOulineColor(Color color) { m_modelOutline.OutlineColor = color; }
+        public void SetModelOulineMode(Outline.Mode mode) { m_modelOutline.OutlineMode = mode; }
 
         #endregion
 
         #region GetFunction
 
+        public bool GetCharacterStatusSetUpCompleteFlag() { return characterStatusSetUpComplete; }
+        public bool GetlocalPlayerCustomPropertiesStatusSetUpCompleteFlag() { return localPlayerCustomPropertiesStatusSetUpComplete; }
         public bool  GetIsGrounded()
         {
             Ray ray =
@@ -283,6 +334,7 @@ namespace Takechi.CharacterController.Parameters
         public GameObject GetHandOnlyModelObject() { return handOnlyModelObject; }
         public Animator   GetNetworkModelAnimator() { return networkModelAnimator; }
         public GameObject GetNetworkModelObject() { return networkModelObject; }
+        public Outline    GetOuline(Outline outline) { return modelOutline; }
 
         #endregion
 

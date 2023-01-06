@@ -17,10 +17,10 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         [SerializeField] private PhotonView m_thisPhotonView;
         [SerializeField] private GameObject m_swordObject;
         [SerializeField] private GameObject m_swordEffectTrail;
-        [SerializeField] private string m_targetTagName = "PlayerCharacter";
-        [SerializeField, Range(1.0f, 2.5f)] private float m_withinRange = 1.3f;
-        [SerializeField, Range(2.5f, 8f)] private float m_outOfRange = 5f;
-        [SerializeField, Range(5, 15)] private int m_trackingFrame = 10;
+        //[SerializeField] private string m_targetTagName = "PlayerCharacter";
+        //[SerializeField, Range(1.0f, 2.5f)] private float m_withinRange = 1.3f;
+        //[SerializeField, Range(2.5f, 8f)] private float m_outOfRange = 5f;
+        //[SerializeField, Range(5, 15)] private int m_trackingFrame = 10;
 
         #endregion
 
@@ -29,12 +29,12 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
         private GameObject swordObject => m_swordObject;
         private GameObject swordEffectTrail => m_swordEffectTrail;
-        private string     targetTagName => m_targetTagName;
         private Rigidbody  rb => characterStatusManagement.GetMyRigidbody();
         private Collider   swordCollider => swordObject.GetComponent<Collider>();
-        private float withinRange => m_withinRange;
-        private float outOfRange =>  m_outOfRange;
-        private float trackingFrame => m_trackingFrame;
+        //private string     targetTagName => m_targetTagName;
+        //private float withinRange => m_withinRange;
+        //private float outOfRange =>  m_outOfRange;
+        //private float trackingFrame => m_trackingFrame;
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             if (characterStatusManagement.GetMyPhotonView().IsMine)
             {
-                StartCoroutine(nameof(AttackTowardsTarget));
+                //StartCoroutine(nameof(AttackTowardsTarget));
             }
             else
             {
@@ -77,7 +77,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             if (characterStatusManagement.GetMyPhotonView().IsMine)
             {
-                StartCoroutine(nameof(AttackTowardsTarget));
+                //StartCoroutine(nameof(AttackTowardsTarget));
             }
             else
             {
@@ -102,7 +102,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             if (characterStatusManagement.GetMyPhotonView().IsMine)
             {
-                StartCoroutine(nameof(AttackTowardsTarget));
+                //StartCoroutine(nameof(AttackTowardsTarget));
             }
             else
             {
@@ -132,27 +132,27 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         #endregion
 
         #region Recursive function
-        /// <summary>
-        /// 攻撃時の非同期追従
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerator AttackTowardsTarget()
-        {
-            GameObject nearObj = serchTag(rb.gameObject, targetTagName);
+        ///// <summary>
+        ///// 攻撃時の非同期追従
+        ///// </summary>
+        ///// <returns></returns>
+        //private IEnumerator AttackTowardsTarget()
+        //{
+        //    GameObject nearObj = serchTag(rb.gameObject, targetTagName);
 
-            Vector3 tagetDir = Vector3.Normalize(nearObj.transform.position - rb.gameObject.transform.position);
+        //    Vector3 tagetDir = Vector3.Normalize(nearObj.transform.position - rb.gameObject.transform.position);
 
-            float dis = Vector3.Distance(nearObj.transform.position, rb.gameObject.transform.position);
+        //    float dis = Vector3.Distance(nearObj.transform.position, rb.gameObject.transform.position);
 
-            if (dis > withinRange && dis < outOfRange)
-            {
-                for (int turn = 0; turn < trackingFrame; turn++)
-                {
-                    rb.gameObject.transform.position += tagetDir / trackingFrame;
-                    yield return new WaitForSeconds(0.01f);
-                }
-            }
-        }
+        //    if (dis > withinRange && dis < outOfRange)
+        //    {
+        //        for (int turn = 0; turn < trackingFrame; turn++)
+        //        {
+        //            rb.gameObject.transform.position += tagetDir / trackingFrame;
+        //            yield return new WaitForSeconds(0.01f);
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// 一番近い距離の指定タグオブジェクトを知る。

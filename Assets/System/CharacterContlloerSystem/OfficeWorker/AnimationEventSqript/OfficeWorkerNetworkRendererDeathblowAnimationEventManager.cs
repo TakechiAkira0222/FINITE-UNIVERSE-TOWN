@@ -29,7 +29,6 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             if (m_characterStatusManagement.photonView.IsMine)
             {
                 m_model.SetActive(true);
-                
             }
             else
             {

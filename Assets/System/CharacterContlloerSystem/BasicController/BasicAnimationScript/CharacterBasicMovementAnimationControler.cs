@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using Takechi.ScriptReference.AnimationParameter;
 using Takechi.ScriptReference.CustomPropertyKey;
 using Takechi.ScriptReference.DamagesThePlayerObject;
 
@@ -13,6 +12,7 @@ using Takechi.CharacterController.KeyInputStete;
 using System;
 
 using Photon.Pun;
+using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ObjectReferenceThatDamagesThePlayer;
 
@@ -62,43 +62,43 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         {
             m_movementAnimatoinAction = (animator, horivec, vertVec) =>
             {
-                animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorXParameterName, horivec);
-                animator.SetFloat(ReferencingTheAnimationParameterName.s_MovementVectorZParameterName, vertVec);
+                animator.SetFloat(AnimatorParameter.movementVectorXParameterName, horivec);
+                animator.SetFloat(AnimatorParameter.movementVectorZParameterName, vertVec);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to set.</color>");
 
             m_dashAnimationAction = (animator, parameter) =>
             {
-                animator.SetFloat(ReferencingTheAnimationParameterName.s_DashParameterName, parameter);
+                animator.SetFloat(AnimatorParameter.dashParameterName, parameter);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_dashAnimationAction function <color=green>to set.</color>");
 
             m_attackAnimationAction = (animator) =>
             {
-                animator.SetTrigger(ReferencingTheAnimationParameterName.s_AttackParameterName);
+                animator.SetTrigger(AnimatorParameter.attackParameterName);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_attackAnimationAction function <color=green>to set.</color>");
 
             m_jumpingAnimationAction = (animator) =>
             {
-                animator.SetTrigger(ReferencingTheAnimationParameterName.s_JumpingParameterName);
+                animator.SetTrigger(AnimatorParameter.jumpingParameterName);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_jumpingAnimationAction function <color=green>to set.</color>");
 
             m_deathblowAnimationAction = (animator) =>
             {
-                animator.SetTrigger(ReferencingTheAnimationParameterName.s_DeathblowParameterName);
+                animator.SetTrigger(AnimatorParameter.deathblowParameterName);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_deathblowAnimationAction function <color=green>to set.</color>");
 
             m_damageAnimationAction = (animator, parameter) =>
             {
-                animator.SetFloat(ReferencingTheAnimationParameterName.s_DamageforceParameterName, parameter);
+                animator.SetFloat(AnimatorParameter.damageforceParameterName, parameter);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_damageAnimationAction function <color=green> to set.</color>");

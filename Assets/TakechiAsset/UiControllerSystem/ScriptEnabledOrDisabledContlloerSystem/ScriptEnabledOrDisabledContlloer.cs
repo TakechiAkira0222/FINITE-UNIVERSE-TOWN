@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using UnityEngine;
 
-namespace Takechi.MouseCursorController
+namespace Takechi.ScriptEnabledOrDisabled
 {
     public class ScriptEnabledOrDisabledContlloer : MonoBehaviour
     {

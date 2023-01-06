@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Takechi.ScriptReference.AnimationParameter
+namespace Takechi.ScriptReference.AnimatorControlVariables
 {
-    public class ReferencingTheAnimationParameterName : MonoBehaviour
+    public class ReferencingTheAnimatorControlVariablesName : MonoBehaviour
     {
-        public static readonly string s_AttackParameterName = "Attack";
-        public static readonly string s_DeathblowParameterName = "Deathblow";
-        public static readonly string s_DamageforceParameterName = "Damageforce";
-        public static readonly string s_MovementVectorXParameterName = "movementVectorX";
-        public static readonly string s_MovementVectorZParameterName = "movementVectorZ";
-        public static readonly string s_JumpingParameterName = "Jumping";
-        public static readonly string s_DashParameterName = "Dash";
+        public static class AnimatorParameter
+        {
+            public const string attackParameterName = "Attack";
+            public const string deathblowParameterName = "Deathblow";
+            public const string damageforceParameterName = "Damageforce";
+            public const string movementVectorXParameterName = "movementVectorX";
+            public const string movementVectorZParameterName = "movementVectorZ";
+            public const string jumpingParameterName = "Jumping";
+            public const string dashParameterName = "Dash";
+        }
+
+        public static class AnimatorLayers 
+        {
+            public const string basicLayer = "BasicLayer";
+            public const string additionalLayer = "AdditionalLayer";
+            public const string overrideLayer = "OverrideLayer";
+        }
     }
 }
