@@ -62,7 +62,10 @@ namespace Takechi.CharacterController.Parameters
         /// model Outline
         /// </summary>
         [SerializeField] private Outline m_modelOutline;
-
+        /// <summary>
+        /// attackHits effect folder name
+        /// </summary>
+        [SerializeField] private List<string> m_attackHitsEffectFolderName = new List<string>(4);
         #endregion
 
         #region protected member variable
@@ -287,6 +290,13 @@ namespace Takechi.CharacterController.Parameters
 
         #region GetFunction
 
+        public string GetAttackHitsEffectFolderName()
+        {
+            string path = "";
+            foreach ( string s in m_attackHitsEffectFolderName) { path += s + "/"; }
+
+            return path;
+        }
         public bool GetCharacterStatusSetUpCompleteFlag() { return characterStatusSetUpComplete; }
         public bool GetlocalPlayerCustomPropertiesStatusSetUpCompleteFlag() { return localPlayerCustomPropertiesStatusSetUpComplete; }
         public bool  GetIsGrounded()

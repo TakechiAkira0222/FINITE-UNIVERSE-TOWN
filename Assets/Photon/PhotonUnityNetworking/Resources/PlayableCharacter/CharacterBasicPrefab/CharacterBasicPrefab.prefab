@@ -531,6 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 9050613250410815036}
+  m_attackHitEffct: {fileID: 0}
 --- !u!114 &5821803723453756655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,6 +765,9 @@ MonoBehaviour:
   m_networkModelAnimator: {fileID: 1564997180904263485}
   m_networkModelObject: {fileID: 1564997179172196866}
   m_modelOutline: {fileID: 0}
+  m_attackHitsEffectFolderName:
+  - PlayableCharacter
+  - EffectPrefab
 --- !u!114 &3058399304391301620
 MonoBehaviour:
   m_ObjectHideFlags: 0

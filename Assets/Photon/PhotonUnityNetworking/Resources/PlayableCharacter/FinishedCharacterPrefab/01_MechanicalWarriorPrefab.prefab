@@ -351,6 +351,9 @@ MonoBehaviour:
   m_networkModelAnimator: {fileID: 4959276594293958807}
   m_networkModelObject: {fileID: 6356864665906232008}
   m_modelOutline: {fileID: 2448548887952855767}
+  m_attackHitsEffectFolderName:
+  - PlayableCharacter
+  - EffectPrefab
   m_mechanicalWarreiorSpecificParameters: {fileID: 11400000, guid: 2436630478bb0574fa51f48a30c86a9b, type: 2}
 --- !u!114 &350944048658735699
 MonoBehaviour:
@@ -668,6 +671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 4014705923852325729}
+  m_attackHitEffct: {fileID: 678596548482708844, guid: 96313760422863641bf36a5856fa1b91, type: 3}
 --- !u!114 &9107513825222790984
 MonoBehaviour:
   m_ObjectHideFlags: 0

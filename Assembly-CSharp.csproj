@@ -83,6 +83,7 @@
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Callbaks\TakechiConnectToLobbyPunCallbacks.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCallbacks.cs" />
+    <Compile Include="Assets\TakechiAsset\UiControllerSystem\SliderContlloerSystem\SliderContlloerManager.cs" />
     <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\baseClass\Read.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyAttackAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Resource\MapModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
+    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicModelOutlineController.cs" />
     <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\ExternalDataManagement.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystem.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Callbaks\TakechiConnectToJoinRoomPunCallbaks.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\OfficeWorker\OfficeWorkerStatusManagement.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DeviceInfo\DeviceInfo.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinMenuManagementSystem\RoomSearchMenu\script\RoomSearchMenuManagment.cs" />
+    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicDisplayToOthersController.cs" />
     <Compile Include="Assets\TakechiAsset\RotateSkyBoxSystem\sqript\RotateSkyBox.cs" />
     <Compile Include="Assets\EditorSetting\WindowsMenuSceneChange.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ScriptEnabledOrDisabledContlloerSystem\ScriptEnabledOrDisabledContlloer.cs" />
@@ -144,9 +147,6 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicDisplayToOthersController.cs" />
-    <Compile Include="Assets\TakechiAsset\UiControllerSystem\SliderContlloerSystem\SliderContlloerManager.cs" />
-    <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicModelOutlineController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

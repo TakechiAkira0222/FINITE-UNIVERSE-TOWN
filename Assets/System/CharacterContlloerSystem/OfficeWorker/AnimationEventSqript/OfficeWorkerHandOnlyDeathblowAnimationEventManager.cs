@@ -54,13 +54,14 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         void OfficeWorkerDeathblowStart()
         {
             m_playableDirector.Play();
+            officeWorkerStatusManagement.SetIsKinematic(true);
+
             m_weightTemporaryComplement = handNetworkModelAnimator.GetLayerWeight(handNetworkModelAnimator.GetLayerIndex(AnimatorLayers.overrideLayer));
             SetLayerWeight( handNetworkModelAnimator, AnimatorLayers.overrideLayer, 0.1f);
 
             if (!officeWorkerStatusManagement.photonView.IsMine) return;
           
             officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(false);
-            officeWorkerStatusManagement.SetIsKinematic(true);
         }
 
         // <summary>
@@ -68,15 +69,16 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         // </summary>
         void OfficeWorkerDeathblowEnd()
         {
-            officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(true);
             officeWorkerStatusManagement.SetIsKinematic(false);
-            SetLayerWeight(handNetworkModelAnimator, AnimatorLayers.overrideLayer, m_weightTemporaryComplement);
+
+            SetLayerWeight( handNetworkModelAnimator, AnimatorLayers.overrideLayer, m_weightTemporaryComplement);
 
             if (!officeWorkerStatusManagement.photonView.IsMine) return;
 
             ActivationStatusManagement();
-
             Invoke(nameof( ExitStatusManagement), officeWorkerStatusManagement.GetDeathblowMoveDuration_Seconds());
+
+            officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(true);
         }
 
         #endregion

@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 2039010258180462384}
+  m_attackHitEffct: {fileID: 678596548482708844, guid: 96313760422863641bf36a5856fa1b91, type: 3}
 --- !u!114 &5149710227923082667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +378,9 @@ MonoBehaviour:
   m_networkModelAnimator: {fileID: 958558028545424994}
   m_networkModelObject: {fileID: 7658016869392991290}
   m_modelOutline: {fileID: 8682012255795559849}
+  m_attackHitsEffectFolderName:
+  - PlayableCharacter
+  - EffectPrefab
   m_officeWorkerSpecificParameters: {fileID: 11400000, guid: fd95e28672d37c6448e1f4995b743c0a, type: 2}
 --- !u!114 &6726275407936802093
 MonoBehaviour:
