@@ -59,7 +59,6 @@
     <Compile Include="Assets\Resource\InputAssetsFolder\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\MouseCorsorContlloerSystem\MouseCursorController.cs" />
     <Compile Include="Assets\System\ServerControlSystem\NetworkInstantiationAtStartup\script\NetworkInstantiationAtStartup.cs" />
-    <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\MovementScript\CharacterBasicMovement.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\MechanicalWarrior\AnimationEventSqript\MechanicalWarriorNetworkRendererAttackAnimationEventManager.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
@@ -104,7 +103,6 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\MechanicalWarrior\AnimationEventSqript\MechanicalWarriorHandOnlyDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\ServerControlSystem\TraingGroundServerController\script\TraingGroundServerController.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\MechanicalWarrior\MechanicalWarriorStatusManagement.cs" />
-    <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\BaseClass\CharacterStatusManagement.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\DeathblowScript\CharacterBasicDeathblow.cs" />
@@ -147,9 +145,9 @@
     <Compile Include="Assets\ScriptReferenceFolder\CustomPropertyKeyReference.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointGameManagement.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\x86\webrtc-audio.dll" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
@@ -157,15 +155,12 @@
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\x86\AudioIn.dll" />
     <None Include="Assets\Photon\PhotonVoice\changes-voice.txt" />
     <None Include="Assets\Resource\InputAssetsFolder\QuickOutline\Resources\Shaders\OutlineMask.shader" />
-    <None Include="Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\x86_64\webrtc-audio.dll" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\ARM\opus_egpv.dll" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\x86_64\opus_egpv.dll" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\ARM\webrtc-audio.dll" />
-    <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
     <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\x64\webrtc-audio.dll" />
-    <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\ARM\Photon.Voice.UWP.MediaExtensions.dll" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\WSA\x64\Photon.Voice.UWP.MediaExtensions.dll" />
     <None Include="Assets\Photon\PhotonVoice\PhotonVoiceLibs\x86\opus_egpv.dll" />
@@ -401,10 +396,10 @@
       <HintPath>D:\Unity\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
-      <HintPath>Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
+      <HintPath>Assets\Photon\PhotonUnityNetworking\Code\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
+      <HintPath>Assets\Photon\PhotonUnityNetworking\Code\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:\Unity\2020.3.26f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

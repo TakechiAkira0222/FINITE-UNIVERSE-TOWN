@@ -25,6 +25,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PlayableDirector m_playableDirector;
+        [SerializeField] private GameObject m_deathblowAreaEffect;
 
         #endregion
 
@@ -59,6 +60,8 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             m_weightTemporaryComplement = handNetworkModelAnimator.GetLayerWeight(handNetworkModelAnimator.GetLayerIndex(AnimatorLayers.overrideLayer));
             SetLayerWeight( handNetworkModelAnimator, AnimatorLayers.overrideLayer, 0.1f);
 
+
+
             if (!officeWorkerStatusManagement.photonView.IsMine) return;
           
             officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(false);
@@ -70,8 +73,12 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         void OfficeWorkerDeathblowEnd()
         {
             officeWorkerStatusManagement.SetIsKinematic(false);
+            ActivationDeathblowAreaEffect();
+            Invoke(nameof(ExitDeathblowAreaEffect), officeWorkerStatusManagement.GetDeathblowMoveDuration_Seconds());
 
             SetLayerWeight( handNetworkModelAnimator, AnimatorLayers.overrideLayer, m_weightTemporaryComplement);
+
+
 
             if (!officeWorkerStatusManagement.photonView.IsMine) return;
 
@@ -101,8 +108,13 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         }
 
         #region recursive function
+
+        /// <summary>
+        /// ステータスの変更　開始
+        /// </summary>
         private void ActivationStatusManagement()
         {
+            m_deathblowAreaEffect.SetActive(true);
             officeWorkerStatusManagement.UpdateAttackPower(officeWorkerStatusManagement.GetAttackPowerIncrease());
             officeWorkerStatusManagement.UpdateMovingSpeed(officeWorkerStatusManagement.GetMoveingSpeedIncrease());
             officeWorkerStatusManagement.UpdateJumpPower(officeWorkerStatusManagement.GetJumpPowerIncrease());
@@ -110,6 +122,9 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
         }
 
+        /// <summary>
+        /// ステータス変更　終了
+        /// </summary>
         private void ExitStatusManagement()
         {
             officeWorkerStatusManagement.UpdateAttackPower(-officeWorkerStatusManagement.GetAttackPowerIncrease());
@@ -117,6 +132,22 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             officeWorkerStatusManagement.UpdateJumpPower(-officeWorkerStatusManagement.GetJumpPowerIncrease());
 
             officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
+        }
+        
+        /// <summary>
+        /// 必殺技areaエフェクト　開始
+        /// </summary>
+        private void ActivationDeathblowAreaEffect()
+        {
+            m_deathblowAreaEffect.SetActive(true);
+        }
+
+        /// <summary>
+        /// 必殺技Areaエフェクト　終了
+        /// </summary>
+        private void ExitDeathblowAreaEffect()
+        {
+            m_deathblowAreaEffect?.SetActive(false);
         }
 
         #endregion

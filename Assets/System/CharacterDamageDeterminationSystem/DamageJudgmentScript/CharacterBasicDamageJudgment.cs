@@ -47,10 +47,7 @@ namespace Takechi.CharacterController.DamageJudgment
                 m_characterStatusManagement.UpdateMass(-power);
                 m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
 
-                var impulse = (m_rb.transform.position - collision.contacts[0].point).normalized;
-                m_rb.AddForce( impulse * ( power * 10) * 1000);
-
-                //StartCoroutine(KnockBack(collision, power));
+                StartCoroutine(KnockBack(collision, power));
 
                 EffectInstantiation(collision.contacts[0].point);
             }
@@ -67,9 +64,7 @@ namespace Takechi.CharacterController.DamageJudgment
                 m_characterStatusManagement.UpdateMass(-power);
                 m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
 
-                var impulse = (m_rb.transform.position - collision.contacts[0].point).normalized;
-                m_rb.AddForce(impulse * (power * 10) * 1000);
-               // StartCoroutine(KnockBack(collision, power));
+                StartCoroutine(KnockBack(collision, power));
 
                 EffectInstantiation(collision.contacts[0].point);
             }
@@ -84,9 +79,7 @@ namespace Takechi.CharacterController.DamageJudgment
                     m_characterStatusManagement.UpdateMass(-power);
                     m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
 
-                    var impulse = (m_rb.transform.position - collision.contacts[0].point).normalized;
-                    m_rb.AddForce(impulse * (power * 10) * 1000);
-                   // StartCoroutine(KnockBack(collision, power));
+                    StartCoroutine(KnockBack(collision, power));
 
                     EffectInstantiation(collision.contacts[0].point);
                 }
@@ -101,15 +94,15 @@ namespace Takechi.CharacterController.DamageJudgment
         {
             var impulse = (m_rb.transform.position - collision.contacts[0].point).normalized;
 
-            //m_rb.AddForce( impulse * ( power * 10) * 1000);
-            //yield return new WaitForSeconds( Time.deltaTime);
+            m_rb.AddForce( impulse * (power * 5000));
+            yield return new WaitForSeconds(Time.deltaTime);
 
             //Å@Transfrom
-            for (int i = 0; i < power; i++)
-            {
-                m_rb.transform.position += new Vector3(impulse.x, 0, impulse.z);
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
+            //for (int i = 0; i < power; i++)
+            //{
+            //    m_rb.transform.position += new Vector3(impulse.x, 0, impulse.z);
+            //    yield return new WaitForSeconds(Time.deltaTime);
+            //}
 
             ////Å@ï®óùÅ@îÒìØä˙
             //float knockBackFrame = m_characterStatusManagement.GetCleanMass() - m_rb.mass;

@@ -64,8 +64,6 @@ namespace Takechi.UI.RoomJoinedMenu
         {
             await Task.Delay(s);
 
-            JoinTheTeamEvenly();
-
             StartCoroutine(nameof(ListUpdate));
 
             updateRoomInfometionText();
@@ -77,12 +75,13 @@ namespace Takechi.UI.RoomJoinedMenu
 
         public override void OnEnable()
         {
-            if (!PhotonNetwork.LocalPlayer.IsLocal) return;
-
             base.OnEnable();
 
-            StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
+            RandomlyJoinTeam();
 
+            StartAfterSync( NetworkSyncSettings.connectionSynchronizationTime);
+
+            m_gameStartButton.interactable = false;
             OnlyClientsDisplay( m_gameStartButton.gameObject);
         }
 
@@ -95,16 +94,16 @@ namespace Takechi.UI.RoomJoinedMenu
             resetRoomInfometionText();
         }
 
-        public override void OnPlayerEnteredRoom(Player newPlayer)
+        public override void OnPlayerLeftRoom(Player otherPlayer)
         {
-            base.OnPlayerEnteredRoom(newPlayer);
+            base.OnPlayerLeftRoom(otherPlayer);
 
             updateRoomInfometionText();
         }
 
-        public override void OnPlayerLeftRoom(Player otherPlayer)
+        public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            base.OnPlayerLeftRoom(otherPlayer);
+            base.OnPlayerEnteredRoom(newPlayer);
 
             updateRoomInfometionText();
         }
@@ -190,6 +189,7 @@ namespace Takechi.UI.RoomJoinedMenu
                 }
 
                 RefreshTheListViewing();
+                m_gameStartButton.interactable = AppropriateConfirmationOfTheNumberOfPeople();
 
                 yield return new WaitForSeconds(Time.deltaTime);
             }
@@ -209,31 +209,20 @@ namespace Takechi.UI.RoomJoinedMenu
         #region private finction
 
         /// <summary>
-        /// 均等にチームに入室する。
+        /// ランダムにチームに入室する
         /// </summary>
-        private void JoinTheTeamEvenly()
+        private void RandomlyJoinTeam()
         {
-            if ( m_teamA_memberList.Count > m_teamB_memberList.Count)
-            {
-                setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamBName);
-            }
-            else if ( m_teamA_memberList.Count < m_teamB_memberList.Count)
-            {
-                setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamAName);
-            }
-            else
-            {
-                if (ReturnsTheProbabilityOf1In2())
-                {
-                    setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamAName);
-                }
-                else
-                {
-                    setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamBName);
-                }
-            }
+            if (ReturnsTheProbabilityOf1In2()) { setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamAName); }
+            else { setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamBName); }
 
             PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CharacterStatusKey.allKeys);
+        }
+
+        private bool AppropriateConfirmationOfTheNumberOfPeople()
+        {
+            return true;
+            //return m_teamA_memberList.Count == m_teamB_memberList.Count ? true : false;
         }
 
         private string WhatTheTextDisplays()

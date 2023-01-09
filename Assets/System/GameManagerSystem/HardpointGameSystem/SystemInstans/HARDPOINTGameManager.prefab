@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5768941778553537807}
   - component: {fileID: 5768941778553537806}
   m_Layer: 0
-  m_Name: PointArea5
+  m_Name: AreaLocation5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5768941779750846352}
   - component: {fileID: 5768941779750846351}
   m_Layer: 0
-  m_Name: PointArea4
+  m_Name: AreaLocation4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,6 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5768941780226464070}
+  - component: {fileID: 2372380009585104160}
   m_Layer: 0
   m_Name: HARDPOINTGameManager
   m_TagString: Untagged
@@ -225,6 +226,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2372380009585104160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768941780226464069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff3929b5e44f3745935561501be844c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_areaLocationList: []
+  m_gameTime: 250
+  m_victoryConditionPoints: 200
+  m_gameTimeCunt: 0
 --- !u!1 &6824931695601949769
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +255,7 @@ GameObject:
   - component: {fileID: 6824931695601949876}
   - component: {fileID: 6824931695601949879}
   m_Layer: 0
-  m_Name: PointArea2
+  m_Name: AreaLocation2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,7 +350,7 @@ GameObject:
   - component: {fileID: 6824931695813730195}
   - component: {fileID: 6824931695813730194}
   m_Layer: 0
-  m_Name: PointArea1
+  m_Name: AreaLocation1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,7 +445,7 @@ GameObject:
   - component: {fileID: 6824931696940720556}
   - component: {fileID: 6824931696940720559}
   m_Layer: 0
-  m_Name: PointArea3
+  m_Name: AreaLocation3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
