@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Takechi.ScriptReference.CustomPropertyKey
 {
     public class CustomPropertyKeyReference
     {
-        public static class CharacterStatusTeamName
+        public static class CharacterTeamStatusName
         {
             /// <summary>
             /// player custom property teamA name
@@ -52,7 +53,7 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         }
 
         /// <summary>
-        /// room custom property key class
+        /// room custom property status key class
         /// </summary>
         public static class RoomStatusKey
         {
@@ -71,6 +72,66 @@ namespace Takechi.ScriptReference.CustomPropertyKey
             {
                     gameTypeKey,
                     mapKey,
+            };
+        }
+
+        /// <summary>
+        /// room custom property team status key class
+        /// </summary>
+        public static class RoomStatusName
+        {
+            /// <summary>
+            /// room custom property map Name
+            /// </summary>
+            public const string neoCities = "NeoCities";
+            /// <summary>
+            /// room custom property map array
+            /// </summary>
+            public static string[] mapSelectionNameArray =
+                new string[]
+                {
+                    neoCities,
+                };
+
+            /// <summary>
+            /// room custom property gameType Name
+            /// </summary>
+            public const string domination = "Domination";
+            /// <summary>
+            /// room custom property gameType Name
+            /// </summary>
+            public const string hardpoint = "Hardpoint";
+            /// <summary>
+            /// room custom property gameType array
+            /// </summary>
+            public static string[] gameTypeSelectionNameArray =
+               new string[]
+               {
+                    domination,
+                    hardpoint,
+               };
+        }
+
+        /// <summary>
+        /// room custom property team status key class
+        /// </summary>
+        public static class RoomTeamStatusKey
+        {
+            /// <summary>
+            /// room custom property teamAPointKey
+            /// </summary>
+            public const string teamAPoint = "PointA";
+            /// <summary>
+            /// room custom property teamBPointKey
+            /// </summary>
+            public const string teamBPoint = "PointB";
+            /// <summary>
+            /// room custom property allKeys
+            /// </summary>
+            public static string[] allKeys = new string[]
+            {
+                 teamAPoint,
+                 teamBPoint,
             };
         }
     }

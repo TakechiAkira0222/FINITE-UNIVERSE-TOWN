@@ -68,15 +68,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_syncTimeFlame: 1000
+  m_photonView: {fileID: 2884053240075192045}
   m_respawnPointA: {fileID: 0}
   m_respawnPointB: {fileID: 0}
-  m_photonView: {fileID: 2884053240075192045}
-  m_folderName:
+  m_playableCharacterFolderName:
   - PlayableCharacter
   - FinishedCharacterPrefab
-  m_networkInstancePrefab:
+  m_playableCharacterInstancePrefab:
   - {fileID: 771002715565279974, guid: 9eb2b8af9d5236842b7cb096c5236265, type: 3}
   - {fileID: 5995818302695466392, guid: 3e00212b0d989674e90b1821b1d93d43, type: 3}
+  m_gameSystemInstansHardpointPrefab: {fileID: 0}
+  m_gameSystemInstansDominationPrefab: {fileID: 0}
 --- !u!114 &1324492233646541812
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ namespace Takechi.UI.UserNickname
             OnDataLoad();
             Debug.Log(" UserNickNameManagement.<color=yellow>OnDataLoad</color>()");
 
-            if ( m_nickNameData == null)
+            if ( m_nickNameData.ToString() == "")
             {
                 m_nickNameData.nickName = "Player";
 
@@ -70,7 +70,7 @@ namespace Takechi.UI.UserNickname
             Debug.Log(" nickNameData.nickName <color=green>to set</color>.");
         }
 
-        public void OnDataSave() { DataSave( m_nickNameData, m_cleanpath); }
+        public void  OnDataSave() { DataSave( m_nickNameData, m_cleanpath); }
 
         private void OnDataLoad() { m_nickNameData = LoadData( m_nickNameData, m_cleanpath); }
     }

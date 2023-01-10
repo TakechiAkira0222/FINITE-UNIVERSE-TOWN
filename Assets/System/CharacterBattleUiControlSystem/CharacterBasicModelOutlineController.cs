@@ -30,7 +30,7 @@ namespace Takechi.NetworkInstantiation.OutlineController
             string team =
                     (string)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey];
 
-            if (team == CharacterStatusTeamName.teamAName) { m_characterStatusManagement.SetModelOulineColor(m_myColor.ATeamColor); }
+            if (team == CharacterTeamStatusName.teamAName) { m_characterStatusManagement.SetModelOulineColor(m_myColor.ATeamColor); }
             else { m_characterStatusManagement.SetModelOulineColor(m_myColor.BTeamColor); }
         }
     }

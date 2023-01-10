@@ -109,8 +109,8 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
             var customRoomProperties = new ExitGames.Client.Photon.Hashtable
             {
-                { RoomStatusKey.gameTypeKey, m_gameTypeSelection.GetGameTypeSelectionIndex()},
-                { RoomStatusKey.mapKey, m_mapSelection.GetMapSelectionIndex()},
+                { RoomStatusKey.gameTypeKey, m_gameTypeSelection.GetGameTypeSelectionName()},
+                { RoomStatusKey.mapKey, m_mapSelection.GetMapSelectionName()},
             };
 
             OnRoomCreationAction( CheckForEnteredCharacters( m_roomPropertySetting.GetRoomName()), roomOptions, customRoomProperties);

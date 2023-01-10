@@ -131,13 +131,13 @@ namespace Takechi.UI.RoomJoinedMenu
         {
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
 
-            if (CharacterStatusTeamName.teamAName != teamName && CharacterStatusTeamName.teamBName != teamName)
+            if (CharacterTeamStatusName.teamAName != teamName && CharacterTeamStatusName.teamBName != teamName)
             {
                 Debug.LogError("The variable you are setting for the button is different from the expected value.");
                 return;
             }
 
-            if ( teamName == CharacterStatusTeamName.teamAName)
+            if ( teamName == CharacterTeamStatusName.teamAName)
             {
                 if (!MaximumOfMembers( m_teamA_memberList))
                 {
@@ -148,7 +148,7 @@ namespace Takechi.UI.RoomJoinedMenu
                     Debug.LogWarning(" The change has been canceled because the new team member is full. ");
                 }
             }
-            else if( teamName == CharacterStatusTeamName.teamBName)
+            else if( teamName == CharacterTeamStatusName.teamBName)
             {
                 if (!MaximumOfMembers( m_teamB_memberList))
                 {
@@ -178,7 +178,7 @@ namespace Takechi.UI.RoomJoinedMenu
 
                 foreach (Player player in PhotonNetwork.PlayerList)
                 {
-                    if ((player.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") == CharacterStatusTeamName.teamAName)
+                    if ((player.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") == CharacterTeamStatusName.teamAName)
                     {
                         m_teamA_memberList.Add(player);
                     }
@@ -213,8 +213,8 @@ namespace Takechi.UI.RoomJoinedMenu
         /// </summary>
         private void RandomlyJoinTeam()
         {
-            if (ReturnsTheProbabilityOf1In2()) { setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamAName); }
-            else { setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterStatusTeamName.teamBName); }
+            if (ReturnsTheProbabilityOf1In2()) { setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterTeamStatusName.teamAName); }
+            else { setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, CharacterTeamStatusName.teamBName); }
 
             PlayerInformationDisplay(PhotonNetwork.LocalPlayer, " RandomTeamSetting ", CharacterStatusKey.allKeys);
         }

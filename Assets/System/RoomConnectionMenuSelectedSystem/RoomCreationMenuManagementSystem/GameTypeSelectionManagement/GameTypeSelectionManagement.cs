@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Takechi.UI.CanvasMune.CursorMnagement;
 using UnityEngine;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.UI.GameTypeSelection
 {
@@ -18,10 +19,10 @@ namespace Takechi.UI.GameTypeSelection
             new List<Transform>(4);
 
         /// <summary>
-        /// ゲームタイプの指数　Get
+        /// ゲームタイプの名前　Get
         /// </summary>
         /// <returns></returns>
-        public int GetGameTypeSelectionIndex() { return GetSelectionIndex(); }
+        public string GetGameTypeSelectionName() { return RoomStatusName.gameTypeSelectionNameArray[GetSelectionIndex()]; }
 
         private void OnEnable()
         {

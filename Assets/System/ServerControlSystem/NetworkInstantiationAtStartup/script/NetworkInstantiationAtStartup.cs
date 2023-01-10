@@ -13,20 +13,25 @@ namespace Takechi.ServerConnect.NetworkInstantiation
 {
     public class NetworkInstantiationAtStartup : TakechiJoinedPunCallbacks
     {
-        private int m_selectedCharacterIndex => (int)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.selectedCharacterKey];
+        private int m_selectedCharacterIndex =>  (int)PhotonNetwork.LocalPlayer.CustomProperties[ CharacterStatusKey.selectedCharacterKey];
+        private string m_selectedGameTypeName => (string)PhotonNetwork.LocalPlayer.CustomProperties[ RoomStatusKey.gameTypeKey];
 
         [SerializeField] private int m_syncTimeFlame = 1000;
 
-        [SerializeField] private Transform m_respawnPointA;
-        [SerializeField] private Transform m_respawnPointB;
+        [SerializeField] private PhotonView   m_photonView;
 
-        [SerializeField] private PhotonView m_photonView;
-        [SerializeField] private List<string> m_folderName = new List<string>();
-        [SerializeField] private List<GameObject> m_networkInstancePrefab = new List<GameObject>();
+        [SerializeField] private Transform    m_respawnPointA;
+        [SerializeField] private Transform    m_respawnPointB;
+
+        [SerializeField] private List<string>     m_playableCharacterFolderName = new List<string>();
+        [SerializeField] private List<GameObject> m_playableCharacterInstancePrefab = new List<GameObject>();
+
+        [SerializeField] private GameObject m_gameSystemInstansHardpointPrefab;
+        [SerializeField] private GameObject m_gameSystemInstansDominationPrefab;
 
         void Awake()
         {
-            if (m_photonView == null) m_photonView = photonView;
+            if ( m_photonView == null) m_photonView = photonView;
         }
 
         void Start()
@@ -41,21 +46,27 @@ namespace Takechi.ServerConnect.NetworkInstantiation
         {
             await Task.Delay(m_syncTimeFlame);
 
-            string path = "";
+            string playableCharacterFolderPath = "";
 
-            foreach (string s in m_folderName)
-            {
-                path += s + "/";
-            }
+            foreach (string s in m_playableCharacterFolderName) { playableCharacterFolderPath += s + "/"; }
 
             if ((PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") ==
-                CharacterStatusTeamName.teamAName)
+                CharacterTeamStatusName.teamAName)
             {
-                PhotonNetwork.Instantiate(path + m_networkInstancePrefab[m_selectedCharacterIndex].name, m_respawnPointA.position, m_respawnPointA.rotation);
+                PhotonNetwork.Instantiate(playableCharacterFolderPath + m_playableCharacterInstancePrefab[m_selectedCharacterIndex].name, m_respawnPointA.position, m_respawnPointA.rotation);
             }
             else
             {
-                PhotonNetwork.Instantiate(path + m_networkInstancePrefab[m_selectedCharacterIndex].name, m_respawnPointB.position, m_respawnPointB.rotation);
+                PhotonNetwork.Instantiate(playableCharacterFolderPath + m_playableCharacterInstancePrefab[m_selectedCharacterIndex].name, m_respawnPointB.position, m_respawnPointB.rotation);
+            }
+
+            if ( m_selectedGameTypeName == RoomStatusName.domination)
+            {
+                m_gameSystemInstansDominationPrefab.gameObject.SetActive(true);
+            }
+            else
+            {
+                m_gameSystemInstansHardpointPrefab.gameObject.SetActive(true);
             }
         }
     }

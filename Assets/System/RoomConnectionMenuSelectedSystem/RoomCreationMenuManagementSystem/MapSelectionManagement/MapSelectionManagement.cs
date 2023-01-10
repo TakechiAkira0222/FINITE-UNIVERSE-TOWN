@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Rendering;
 using Takechi.UI.CanvasMune.CursorMnagement;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.UI.MapSelection
 {
@@ -12,7 +13,7 @@ namespace Takechi.UI.MapSelection
     /// </summary>
     public class MapSelectionManagement : CursorMnagement
     {
-        [SerializeField] 
+        [SerializeField]
         private GameObject m_uiCursor;
 
         [SerializeField]
@@ -20,14 +21,15 @@ namespace Takechi.UI.MapSelection
             new List<Transform>(4);
 
         /// <summary>
-        /// Map選択の指数　Get
+        /// Map選択の名前　Get
         /// </summary>
         /// <returns></returns>
-        public int GetMapSelectionIndex() { return GetSelectionIndex(); }
+        /// 名前に変更途中
+        public string GetMapSelectionName() { return RoomStatusName.mapSelectionNameArray[GetSelectionIndex()]; }
 
-        private void OnEnable() 
+        private void OnEnable()
         {
-            StartCoroutine( uiCursorRotation( m_uiCursor));
+            StartCoroutine(uiCursorRotation(m_uiCursor));
         }
 
         public void OnSelect(int Index)

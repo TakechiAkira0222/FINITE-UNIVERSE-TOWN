@@ -128,7 +128,7 @@ namespace Takechi.CharacterSelection
                 else
                 {
                     SceneSyncChange(3);
-                    this.gameObject.gameObject.SetActive(false);
+                    this.gameObject.gameObject.SetActive( false);
                 }
             }
         }
@@ -144,7 +144,7 @@ namespace Takechi.CharacterSelection
 
                 foreach (Player player in PhotonNetwork.PlayerList)
                 {
-                    if ((player.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") == CharacterStatusTeamName.teamAName)
+                    if ((player.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") == CharacterTeamStatusName.teamAName)
                     {
                         m_teamA_memberList.Add(player);
                     }
