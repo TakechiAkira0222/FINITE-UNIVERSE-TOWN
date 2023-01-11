@@ -11,7 +11,12 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             /// <summary>
             /// connection Synchronization Time
             /// </summary>
-            public const int connectionSynchronizationTime = 600;
+            public const int connectionSynchronizationTime = 1000;
+
+            /// <summary>
+            /// instantiationSetting Synchronization Time
+            /// </summary>
+            public const int instantiationSettingSynchronizationTime = 2000;
         }
     }
 }

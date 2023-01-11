@@ -19,6 +19,9 @@ using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnviro
 
 namespace Takechi.CharacterSelection
 {
+    /// <summary>
+    /// キャラクター選択画面を、管理する。
+    /// </summary>
     public class CharacterSelectionManagement : DisplayListUpdateManagement
     {
         [SerializeField] private PlayableCharacterParametersManager m_parametersManager;
@@ -32,9 +35,9 @@ namespace Takechi.CharacterSelection
         private List<Player> m_teamB_memberList = new List<Player>();
 
         [Header(" ui setting")]
-        [SerializeField] private Text   m_gameStartTimeCuntText;
         [SerializeField] private int    m_nearTimeToStartTheGame_seconds = 5;
         [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
+        [SerializeField] private Text   m_gameStartTimeCuntText;
         [SerializeField] private Text   m_infometionText;
         [SerializeField] private List <GameObject> m_characterPrefabList = new List<GameObject>();
         [SerializeField] private List <Image> m_characterSelectionButtonList = new List<Image>();
@@ -81,7 +84,7 @@ namespace Takechi.CharacterSelection
             StartCoroutine(nameof(TimeUpdate));
             StartCoroutine(nameof(ListUpdate));
 
-            RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
+            RoomInfoAndJoinedPlayerInfoDisplay( RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
         }
 
         #endregion
@@ -94,7 +97,7 @@ namespace Takechi.CharacterSelection
             setInformationText(0);
             setLocalPlayerCustomProperties(CharacterStatusKey.selectedCharacterKey, 0);
 
-            StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
+            StartAfterSync( NetworkSyncSettings.connectionSynchronizationTime);
         }
 
         public override void OnDisable()

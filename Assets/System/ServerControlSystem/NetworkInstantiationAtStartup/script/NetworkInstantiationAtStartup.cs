@@ -1,22 +1,31 @@
 using Photon.Pun;
 using Photon.Realtime;
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using UnityEngine;
+
 using TakechiEngine.PUN.ServerConnect.Joined;
+
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 
 namespace Takechi.ServerConnect.NetworkInstantiation
 {
     public class NetworkInstantiationAtStartup : TakechiJoinedPunCallbacks
     {
+        /// <summary>
+        /// Player CustomProperty
+        /// </summary>
         private int m_selectedCharacterIndex =>  (int)PhotonNetwork.LocalPlayer.CustomProperties[ CharacterStatusKey.selectedCharacterKey];
-        private string m_selectedGameTypeName => (string)PhotonNetwork.LocalPlayer.CustomProperties[ RoomStatusKey.gameTypeKey];
 
-        [SerializeField] private int m_syncTimeFlame = 1000;
+        /// <summary>
+        /// Room CustomProperty
+        /// </summary>
+        private string m_selectedGameTypeName => (string)PhotonNetwork.CurrentRoom.CustomProperties[ RoomStatusKey.gameTypeKey];
 
         [SerializeField] private PhotonView   m_photonView;
 
@@ -29,9 +38,47 @@ namespace Takechi.ServerConnect.NetworkInstantiation
         [SerializeField] private GameObject m_gameSystemInstansHardpointPrefab;
         [SerializeField] private GameObject m_gameSystemInstansDominationPrefab;
 
+        private Dictionary<string, Action> m_storeActionDictionary = new Dictionary<string, Action>();
+
+        public class StoreAction
+        {
+            public Action selectedDomination = delegate { };
+            public Action selectedHardpoint = delegate { };
+
+            public StoreAction( GameObject InstansDomination, GameObject InstansHardpoint) 
+            {
+                selectedDomination += () => 
+                {
+                    InstansHardpoint.gameObject.SetActive(false);
+                    InstansDomination.gameObject.SetActive(true);
+                };
+
+                selectedHardpoint += () => 
+                {
+                    InstansDomination.gameObject.SetActive(false);
+                    InstansHardpoint.gameObject.SetActive(true);
+                };
+            }
+
+            ~StoreAction() 
+            {
+                selectedDomination = delegate { };
+                selectedHardpoint = delegate { };
+            }
+        }
+
         void Awake()
         {
             if ( m_photonView == null) m_photonView = photonView;
+
+            StoreAction storeAction = 
+                new StoreAction( m_gameSystemInstansDominationPrefab, m_gameSystemInstansHardpointPrefab);
+
+            m_storeActionDictionary.Add( RoomStatusName.domination, storeAction.selectedDomination);
+            Debug.Log($" m_storeActionDictionary.<color=yellow>Add</color>( {RoomStatusName.domination}, storeAction.selectedDomination)");
+
+            m_storeActionDictionary.Add( RoomStatusName.hardpoint,  storeAction.selectedHardpoint);
+            Debug.Log($" m_storeActionDictionary.<color=yellow>Add</color>( {RoomStatusName.hardpoint}, storeAction.selectedHardpoint)");
         }
 
         void Start()
@@ -44,7 +91,7 @@ namespace Takechi.ServerConnect.NetworkInstantiation
 
         private async void InstantiationSetting()
         {
-            await Task.Delay(m_syncTimeFlame);
+            await Task.Delay( NetworkSyncSettings.instantiationSettingSynchronizationTime);
 
             string playableCharacterFolderPath = "";
 
@@ -60,14 +107,7 @@ namespace Takechi.ServerConnect.NetworkInstantiation
                 PhotonNetwork.Instantiate(playableCharacterFolderPath + m_playableCharacterInstancePrefab[m_selectedCharacterIndex].name, m_respawnPointB.position, m_respawnPointB.rotation);
             }
 
-            if ( m_selectedGameTypeName == RoomStatusName.domination)
-            {
-                m_gameSystemInstansDominationPrefab.gameObject.SetActive(true);
-            }
-            else
-            {
-                m_gameSystemInstansHardpointPrefab.gameObject.SetActive(true);
-            }
+            m_storeActionDictionary[m_selectedGameTypeName]();
         }
     }
 }

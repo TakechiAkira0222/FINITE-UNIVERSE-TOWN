@@ -12,7 +12,6 @@ namespace Takechi.GameManagerSystem.Hardpoint
         [SerializeField] private HardpointGameManagement m_gameManagement;
         [SerializeField] private GameObject m_navigationText; 
 
-        private List<GameObject> m_hitCharacterList = new List<GameObject>(4);
         private List<GameObject> m_hitTeamAMemberList = new List<GameObject>(4);
         private List<GameObject> m_hitTeamBMemberList = new List<GameObject>(4);
 
@@ -31,7 +30,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         {
             while (uiCursor.activeSelf)
             {
-                uiCursor.transform.localEulerAngles += new Vector3(0, 0.3f, 0);
+                uiCursor.transform.LookAt( Camera.main.transform);
+                //uiCursor.transform.localEulerAngles += new Vector3(0, 0.3f, 0);
 
                 yield return new WaitForSeconds(Time.deltaTime);
             }
@@ -39,40 +39,24 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void OnTriggerEnter(Collider other)
         {
-            if ( other.gameObject.tag == m_gameManagement.GetJudgmentTagName())
+            if (!PhotonNetwork.IsMasterClient) return;
+
+            int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+
+            if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
             {
-                if (  !m_hitCharacterList.Contains(other.gameObject)) m_hitCharacterList.Add(other.gameObject);
+                m_hitTeamAMemberList.Add(other.gameObject);
             }
-
-            foreach ( GameObject o in m_hitCharacterList)
+            else
             {
-                int num = o.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
-
-                if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
-                {
-                    m_hitTeamAMemberList.Add(o);
-                }
-                else
-                {
-                    m_hitTeamBMemberList.Add(o);
-                }
+                m_hitTeamBMemberList.Add(other.gameObject);
             }
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerStay( Collider other)
         {
             if ( other.gameObject.tag == m_gameManagement.GetJudgmentTagName())
             {
-                foreach (GameObject o in m_hitTeamAMemberList)
-                {
-                    Debug.Log(" ATeamMember : " + o.name);
-                }
-
-                foreach (GameObject o in m_hitTeamBMemberList)
-                {
-                    Debug.Log(" BTeamMember : " + o.name);
-                }
-
                 int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
                 if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
@@ -90,23 +74,17 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == m_gameManagement.GetJudgmentTagName())
+            if (!PhotonNetwork.IsMasterClient) return;
+
+            int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+
+            if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
             {
-                if ( !m_hitCharacterList.Contains(other.gameObject)) m_hitCharacterList.Remove(other.gameObject);
+                m_hitTeamAMemberList.Remove(other.gameObject);
             }
-
-            foreach (GameObject o in m_hitCharacterList)
+            else
             {
-                int num = o.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
-
-                if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
-                {
-                    m_hitTeamAMemberList.Remove(o);
-                }
-                else
-                {
-                    m_hitTeamBMemberList.Remove(o);
-                }
+                m_hitTeamBMemberList.Remove(other.gameObject);
             }
         }
     }

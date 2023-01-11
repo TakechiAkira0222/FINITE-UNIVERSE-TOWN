@@ -18,7 +18,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         [SerializeField] private List<GameObject> m_areaLocationList = new List<GameObject>();
         [SerializeField] private int    m_intervalTime_Second = 0;
-        [SerializeField] private int    m_victoryConditionPoints = 200;
+        [SerializeField] private int    m_victoryConditionPoints = 5000;
         [SerializeField] private string m_judgmentTagName = "PlayerCharacter";
 
         #endregion
@@ -42,18 +42,16 @@ namespace Takechi.GameManagerSystem.Hardpoint
         public event Action TeamBToVictory = delegate { };
 
         #region setVariable
-        public void SetTeamAPoint( int value) 
-        { 
-            m_teamAPoint += value;
-            if (!PhotonNetwork.IsMasterClient) return;
-            setCurrentRoomCustomProperties(RoomTeamStatusKey.teamAPoint, m_teamAPoint);
+        public void SetTeamAPoint( int value)
+        {
+            m_teamAPoint = (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomTeamStatusKey.teamAPoint] + value;
+            setCurrentRoomCustomProperties( RoomTeamStatusKey.teamAPoint, m_teamAPoint);
         }
 
         public void SetTeamBPoint( int value) 
-        { 
-            m_teamBPoint += value;
-            if (!PhotonNetwork.IsMasterClient) return;
-            setCurrentRoomCustomProperties(RoomTeamStatusKey.teamBPoint, m_teamBPoint);
+        {
+            m_teamBPoint = (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomTeamStatusKey.teamBPoint] + value;
+            setCurrentRoomCustomProperties( RoomTeamStatusKey.teamBPoint, m_teamBPoint);
         }
 
         public void SetGameStart(bool flag) { m_isGameStart = flag; }
@@ -75,16 +73,24 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #endregion
 
-        private void Start()
+        private void Awake()
         {
-            setCurrentRoomCustomProperties( RoomTeamStatusKey.teamAPoint, 0);
-            setCurrentRoomCustomProperties( RoomTeamStatusKey.teamBPoint, 0);
+            setCurrentRoomCustomProperties(RoomTeamStatusKey.teamAPoint, 0);
+            Debug.Log(" <color=yellow>setCurrentRoomCustomProperties</color>( <color=green>RoomTeamStatusKey</color>.teamAPoint, 0)");
+
+            setCurrentRoomCustomProperties(RoomTeamStatusKey.teamBPoint, 0);
+            Debug.Log(" <color=yellow>setCurrentRoomCustomProperties</color>( <color=green>RoomTeamStatusKey</color>.teamBPoint, 0)");
+
+            setCurrentRoomCustomProperties(RoomStatusKey.victoryPointKey, m_victoryConditionPoints);
+            Debug.Log(" <color=yellow>setCurrentRoomCustomProperties</color>( RoomStatusKey.victoryPointKey, m_victoryConditionPoints)");
         }
 
         #region unity event
         public override void OnEnable()  
         {
             ChangePointIocation += LocationChange;
+
+            Debug.Log("ChangePointIocation += <color=yellow>LocationChange</color>");
             TeamAToVictory += () => { Debug.Log("TeamAVictory"); };
             TeamBToVictory += () => { Debug.Log("TeamBVictory"); };
         }
@@ -92,6 +98,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         public override void OnDisable() 
         { 
             ChangePointIocation -= LocationChange;
+            Debug.Log("ChangePointIocation -= <color=yellow>LocationChange</color>");
+
             TeamAToVictory -= () => { Debug.Log("TeamAVictory"); };
             TeamBToVictory -= () => { Debug.Log("TeamBVictory"); };
         }
@@ -115,8 +123,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #region recursive finction
         private void LocationChange()
         {
-            Debug.Log("ChangePoint");
-
+            Debug.Log("<color=green> LocationChange </color> to call.");
             foreach ( GameObject o in m_areaLocationList) { o.SetActive(false); }
             m_areaLocationList[ m_pointIocationindex % m_areaLocationList.Count].SetActive(true);
 

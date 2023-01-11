@@ -34,7 +34,7 @@ namespace TakechiEngine.PUN.CustomProperties
         /// <param name="customRoomProperties"> 更新したい状態のプロパティー </param>
         protected void setCurrentRoomCustomProperties( ExitGames.Client.Photon.Hashtable customRoomProperties)
         {
-            if (PhotonNetwork.InRoom)
+            if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.CurrentRoom.SetCustomProperties(customRoomProperties);
                 Debug.Log($" setCurrentRoomCustomProperties : <color=green> current room custom properties to set.</color>");
@@ -49,7 +49,7 @@ namespace TakechiEngine.PUN.CustomProperties
         /// <param name="o">　変更内容のオブジェクト型 </param>
         protected void setCurrentRoomCustomProperties(string key, object o)
         {
-            if ( PhotonNetwork.InRoom)
+            if ( PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
             {
                 object temp = null;
                 ExitGames.Client.Photon.Hashtable hastable = PhotonNetwork.CurrentRoom.CustomProperties;
@@ -65,7 +65,31 @@ namespace TakechiEngine.PUN.CustomProperties
                     Debug.Log($" setCurrentRoomCustomProperties[<color=orange>{key}</color>] : {o} <color=green>to add.</color>");
                 }
 
-                PhotonNetwork.CurrentRoom.SetCustomProperties(hastable);
+                PhotonNetwork.CurrentRoom.SetCustomProperties( hastable);
+            }
+        }
+
+        /// <summary>
+        /// CurrentRoomCustomProperties to set. ※ one property
+        /// </summary>
+        /// <remarks>　部屋のカスタムプロパティーに存在するかどうか見て、追記もしくは、書き換えを行います。　</remarks>>
+        /// <param name="key"> プロパティーの鍵　</param>
+        /// <param name="o">　変更内容のオブジェクト型 </param>
+        protected void setCurrentRoomCustomPropertiesOneProperty( string key, object o)
+        {
+            if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
+            {
+                object temp = null;
+                if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(key, out temp))
+                {
+                    PhotonNetwork.CurrentRoom.CustomProperties[key] = o;
+                    Debug.Log($" updateCurrentRoomCustomProperties[<color=orange>{key}</color>] : {o} <color=green>to set.</color>");
+                }
+                else
+                {
+                    PhotonNetwork.CurrentRoom.CustomProperties.Add(key, o);
+                    Debug.Log($" updateCurrentRoomCustomProperties[<color=orange>{key}</color>] : {o} <color=green>to add.</color>");
+                }
             }
         }
 
@@ -81,7 +105,7 @@ namespace TakechiEngine.PUN.CustomProperties
         {
             if (PhotonNetwork.IsConnected)
             {
-                PhotonNetwork.LocalPlayer.SetCustomProperties(customRoomProperties);
+                PhotonNetwork.LocalPlayer.SetCustomProperties( customRoomProperties);
                 Debug.Log($" setLocalPlayerCustomProperties : <color=green> local player custom properties to set.</color>");
             }
         }

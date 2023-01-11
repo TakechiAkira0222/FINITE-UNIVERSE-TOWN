@@ -81,7 +81,6 @@ namespace Takechi.UI.RoomJoinedMenu
 
             StartAfterSync( NetworkSyncSettings.connectionSynchronizationTime);
 
-            m_gameStartButton.interactable = false;
             OnlyClientsDisplay( m_gameStartButton.gameObject);
         }
 

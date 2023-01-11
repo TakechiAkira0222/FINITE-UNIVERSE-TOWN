@@ -58,6 +58,10 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         public static class RoomStatusKey
         {
             /// <summary>
+            /// room custom propety victoryPointKey
+            /// </summary>
+            public const string victoryPointKey = "victoryPoint";
+            /// <summary>
             /// room custom property gameTypeKey
             /// </summary>
             public const string gameTypeKey = "gametype";
@@ -72,6 +76,7 @@ namespace Takechi.ScriptReference.CustomPropertyKey
             {
                     gameTypeKey,
                     mapKey,
+                    victoryPointKey,
             };
         }
 
@@ -93,6 +98,7 @@ namespace Takechi.ScriptReference.CustomPropertyKey
                     neoCities,
                 };
 
+          
             /// <summary>
             /// room custom property gameType Name
             /// </summary>

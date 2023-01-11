@@ -1,10 +1,15 @@
+using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using Takechi.CharacterController.Parameters;
 using Takechi.UI.SliderContlloer;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.UI.BattleUiMenu
 {
@@ -21,7 +26,34 @@ namespace Takechi.UI.BattleUiMenu
         [SerializeField] private Slider m_ability2Slider;
         [SerializeField] private Slider m_ability3Slider;
 
+        [Header(" === Exclusive Ui ===")]
+        [SerializeField] private GameObject m_hardpointGameSystemUi;
+        [SerializeField] private GameObject m_dominationGameSystemUi;
+
         #endregion
+
+        public class StorageAction
+        {
+            public Action hardpointAction  = delegate { };
+            public Action dominationAction = delegate { };
+
+            public StorageAction( GameObject hardpointUi, GameObject dominationUi)
+            {
+                hardpointAction += () =>
+                {
+                    hardpointUi.gameObject.SetActive(true);
+                    dominationUi.gameObject.SetActive(false);
+                };
+
+                dominationAction += () =>
+                {
+                    hardpointUi.gameObject.SetActive(false);
+                    dominationUi.gameObject.SetActive(true);
+                };
+            }
+        }
+
+        private Dictionary<string, Action> m_storageActionDictionary = new Dictionary<string, Action>();
 
         private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
         private Slider deathblowSlider => m_deathblowSlider;
@@ -30,10 +62,9 @@ namespace Takechi.UI.BattleUiMenu
         private Slider ability2Slider => m_ability2Slider;
         private Slider ability3Slider => m_ability3Slider;
 
-
-        private void Awake()
+        private void Start()
         {
-            setValue( massSlider, characterStatusManagement.GetMyRigidbody().mass /characterStatusManagement.GetCleanMass());
+            setValue(massSlider, characterStatusManagement.GetMyRigidbody().mass / characterStatusManagement.GetCleanMass());
             Debug.Log($" massSlider.value <color=blue>to set</color>.");
             setValue(deathblowSlider, 0);
             Debug.Log($" deathblowSlider.value <color=blue>to set</color>.");
@@ -43,7 +74,15 @@ namespace Takechi.UI.BattleUiMenu
             Debug.Log($" ability2Slider.value <color=blue>to set</color>.");
             setValue(ability3Slider, 0);
             Debug.Log($" ability3Slider.value <color=blue>to set</color>.");
+
+            StorageAction storageAction = new StorageAction( m_hardpointGameSystemUi, m_dominationGameSystemUi);
+
+            m_storageActionDictionary.Add( RoomStatusName.hardpoint, storageAction.hardpointAction);
+            m_storageActionDictionary.Add( RoomStatusName.domination, storageAction.dominationAction);
+
+            m_storageActionDictionary[(string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameTypeKey]]();
         }
+
         private void Update()
         {
             updateValue(massSlider, characterStatusManagement.GetMyRigidbody().mass, characterStatusManagement.GetCleanMass());
