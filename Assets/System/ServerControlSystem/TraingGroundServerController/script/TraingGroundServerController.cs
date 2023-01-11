@@ -53,8 +53,11 @@ namespace Takechi.ServerConnect.TraingGroundServer
 
             ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable
             {
-                { RoomStatusKey.gameTypeKey, "255"},
+                { RoomStatusKey.gameTypeKey,  RoomStatusName.hardpoint},
                 { RoomStatusKey.mapKey, "255"},
+                { RoomTeamStatusKey.teamAPoint, 0 },
+                { RoomTeamStatusKey.teamBPoint, 0 },
+                { RoomStatusKey.victoryPointKey, 0 },
             };
 
             if (PhotonNetwork.InLobby)

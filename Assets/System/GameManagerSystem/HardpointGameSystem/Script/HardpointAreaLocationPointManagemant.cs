@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Takechi.GameManagerSystem.Hardpoint
 {
@@ -30,8 +31,10 @@ namespace Takechi.GameManagerSystem.Hardpoint
         {
             while (uiCursor.activeSelf)
             {
+                float size = System.Math.Min(Vector3.Distance( uiCursor.transform.position, Camera.main.transform.position), 30) / 1000;
+
                 uiCursor.transform.LookAt( Camera.main.transform);
-                //uiCursor.transform.localEulerAngles += new Vector3(0, 0.3f, 0);
+                uiCursor.transform.localScale = new Vector3( size, size, size);
 
                 yield return new WaitForSeconds(Time.deltaTime);
             }
