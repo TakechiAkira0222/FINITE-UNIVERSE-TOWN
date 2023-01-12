@@ -61,12 +61,11 @@ namespace Takechi.CharacterController.KeyInputStete
             InputToViewpoint(characterStatusManagement, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
 
-        public void StopInput() 
-        { 
-            m_operation = false;
-            InputToMovement(characterStatusManagement, 0, 0);
-            InputToViewpoint(characterStatusManagement, 0, 0);
+        public bool GetOperation() { return m_operation; }
+        public void SetOperation( bool value) 
+        {
+            m_operation = value;
+            Debug.Log($" SetOperation = <color=green>{value}</color>");
         }
-        public void StartInput() { m_operation = true; }
     }
 }

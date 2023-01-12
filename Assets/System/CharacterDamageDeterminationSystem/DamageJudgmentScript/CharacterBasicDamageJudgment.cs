@@ -129,7 +129,7 @@ namespace Takechi.CharacterController.DamageJudgment
               ( m_characterStatusManagement.GetAttackHitsEffectFolderName() + m_attackHitEffct.name,
               point,Quaternion.identity);
 
-            StartCoroutine(DelayMethod(effct.GetComponent<ParticleSystem>().time - 0.1f, () => { PhotonNetwork.Destroy(effct); }));
+            StartCoroutine(DelayMethod( 0.1f, () => { PhotonNetwork.Destroy(effct); }));
         }
 
         private IEnumerator DelayMethod(float waitTime, Action action)

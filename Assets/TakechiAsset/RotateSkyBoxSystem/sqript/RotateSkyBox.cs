@@ -23,7 +23,7 @@ namespace Takechi.SkyBox.Movement
         void Update()
         {
             //　スカイボックスマテリアルのRotationを操作して角度を変化させる
-            skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat(skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
+            skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat( skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
         }
     }
 }
