@@ -123,22 +123,64 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         /// </summary>
         public static class RoomTeamStatusKey
         {
-            /// <summary>
-            /// room custom property teamAPointKey
-            /// </summary>
-            public const string teamAPoint = "PointA";
-            /// <summary>
-            /// room custom property teamBPointKey
-            /// </summary>
-            public const string teamBPoint = "PointB";
-            /// <summary>
-            /// room custom property allKeys
-            /// </summary>
-            public static string[] allKeys = new string[]
+            public class DominationStatusKey
             {
-                 teamAPoint,
-                 teamBPoint,
-            };
+                /// <summary>
+                /// room custom property teamAPointKey
+                /// </summary>
+                public const string teamAPoint = "teamAPoint";
+                /// <summary>
+                /// room custom property teamBPointKey
+                /// </summary>
+                public const string teamBPoint = "teamBPoint";
+                /// <summary>
+                /// room custom property AreaLocationPoint
+                /// </summary>
+                public const string AreaLocationAPoint = "AreaLocationAPoint";
+                /// <summary>
+                /// room custom property AreaLocationPoint
+                /// </summary>
+                public const string AreaLocationBPoint = "AreaLocationBPoint";
+                /// <summary>
+                /// room custom property AreaLocationPoint
+                /// </summary>
+                public const string AreaLocationCPoint = "AreaLocationCPoint";
+                /// <summary>
+                /// room custom property AreaLocationMaxPoint
+                /// </summary>
+                public const string AreaLocationMaxPoint = "MaxPoint";
+                /// <summary>
+                /// room custom property allKeys
+                /// </summary>
+                public static string[] allKeys = new string[]
+                {
+                   teamAPoint,
+                   teamBPoint,
+                   AreaLocationAPoint,
+                   AreaLocationBPoint,
+                   AreaLocationCPoint,
+                };
+            }
+
+            public class HardPointStatusKey
+            {
+                /// <summary>
+                /// room custom property teamAPointKey
+                /// </summary>
+                public const string teamAPoint = "PointA";
+                /// <summary>
+                /// room custom property teamBPointKey
+                /// </summary>
+                public const string teamBPoint = "PointB";
+                /// <summary>
+                /// room custom property allKeys
+                /// </summary>
+                public static string[] allKeys = new string[]
+                {
+                   teamAPoint,
+                   teamBPoint,
+                };
+            }
         }
     }
 }

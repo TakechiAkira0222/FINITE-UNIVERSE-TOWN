@@ -88,6 +88,7 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\AbilityScript\CharacterBasicAblity2.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerHandOnlyDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterInstantiatedInNetworkSystem\CharacterBasicSetActiveSettingWhenInstantiated.cs" />
+    <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationAreaLocationPointManagemant.cs" />
     <Compile Include="Assets\Resource\MapModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ObjectReferenceThatDamagesThePlayer.cs" />
@@ -98,12 +99,14 @@
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystemInNetwork.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSpecificParametersDataBase\MechanicalWarreior\Script\MechanicalWarreiorSpecificParameters.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\DisplayControllSystem\CanvasSetActiveController.cs" />
+    <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationGameManagement.cs" />
     <Compile Include="Assets\System\TimeLineSystem\TitleScceneOnlyFolder\TimeLineControllerSqript\TitleScceneTimeLineController.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinedMenuManagementSystem\Script\RoomJoinedMenuManagement.cs" />
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointGameManagement.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\MechanicalWarrior\AnimationEventSqript\MechanicalWarriorHandOnlyDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\System\ServerControlSystem\TraingGroundServerController\script\TraingGroundServerController.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\MechanicalWarrior\MechanicalWarriorStatusManagement.cs" />
+    <Compile Include="Assets\System\GameManagerSystem\BaceClass\AreaLocationPointManagemant.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\BaseClass\CharacterStatusManagement.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\DeathblowScript\CharacterBasicDeathblow.cs" />
@@ -113,6 +116,7 @@
     <Compile Include="Assets\TakechiAsset\WindowsEditorDebug\WindowsNetworkDebugController.cs" />
     <Compile Include="Assets\System\CharacterDamageDeterminationSystem\DamageJudgmentScript\CharacterBasicDamageJudgment.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\OfficeWorker\AnimationEventSqript\OfficeWorkerNetworkRendererDeathblowAnimationEventManager.cs" />
+    <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationSliderGetTeamPointMangement.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParametersDataBase.cs" />
     <Compile Include="Assets\System\ServerControlSystem\ConnectToLobbySystem\Script\ConnectToLobbyManagment.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
@@ -148,10 +152,7 @@
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointAreaLocationPointManagemant.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationGameManagement.cs" />
-    <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationSliderGetTeamPointMangement.cs" />
-    <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationAreaLocationPointManagemant.cs" />
-    <Compile Include="Assets\System\GameManagerSystem\BaceClass\AreaLocationPointManagemant.cs" />
+    <Compile Include="Assets\System\CharacterDeathJudgmentSystem\CharacterBasicDeathJudgmentManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />

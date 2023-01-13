@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameManagement: {fileID: 1863905474743283848}
   m_navigationText: {fileID: 329622453}
+  m_pointType: 0
 --- !u!1 &118162658
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameManagement: {fileID: 1863905474743283848}
   m_navigationText: {fileID: 1148450062}
+  m_pointType: 1
 --- !u!1 &299889619
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +307,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299889619}
-  m_Text: C
+  m_Text: "C\n\u21E9"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -318,7 +320,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 1694433535
+    rgba: 1694498815
 --- !u!1 &329622453
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +402,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329622453}
-  m_Text: A
+  m_Text: "A\n\u21E9"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -413,7 +415,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 1694433535
+    rgba: 1694498815
 --- !u!1 &1148450062
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +497,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148450062}
-  m_Text: B
+  m_Text: "B\n\u21E9"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -508,7 +510,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 1694433535
+    rgba: 1694498815
 --- !u!1 &1722843279
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +562,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722843279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -621,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameManagement: {fileID: 1863905474743283848}
   m_navigationText: {fileID: 299889619}
+  m_pointType: 2
 --- !u!1 &4115147403292074242
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,9 +670,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a9a7b5335093b438a3d7811d7477ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_areaLocationList: []
   m_intervalTime_Second: 0
-  m_victoryConditionPoints: 5000
+  m_victoryConditionPoints: 250
+  m_areaLocationMaxPoints: 1000
+  m_nextSceneNumber: 1
   m_judgmentTagName: PlayerCharacter
 --- !u!1001 &261540690
 PrefabInstance:

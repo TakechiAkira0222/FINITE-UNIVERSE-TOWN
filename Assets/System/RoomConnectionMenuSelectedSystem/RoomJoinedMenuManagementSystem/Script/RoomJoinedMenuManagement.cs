@@ -188,6 +188,7 @@ namespace Takechi.UI.RoomJoinedMenu
                 }
 
                 RefreshTheListViewing();
+
                 m_gameStartButton.interactable = AppropriateConfirmationOfTheNumberOfPeople();
 
                 yield return new WaitForSeconds(Time.deltaTime);

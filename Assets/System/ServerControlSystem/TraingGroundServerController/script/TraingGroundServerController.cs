@@ -55,8 +55,8 @@ namespace Takechi.ServerConnect.TraingGroundServer
             {
                 { RoomStatusKey.gameTypeKey,  RoomStatusName.hardpoint},
                 { RoomStatusKey.mapKey, "255"},
-                { RoomTeamStatusKey.teamAPoint, 0 },
-                { RoomTeamStatusKey.teamBPoint, 0 },
+                { RoomTeamStatusKey.HardPointStatusKey.teamAPoint, 0 },
+                { RoomTeamStatusKey.HardPointStatusKey.teamBPoint, 0 },
                 { RoomStatusKey.victoryPointKey, 0 },
             };
 

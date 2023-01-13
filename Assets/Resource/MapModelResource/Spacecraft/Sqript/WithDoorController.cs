@@ -74,10 +74,7 @@ namespace Takechi.MapObject.AnimatorController
 
         void OnJudgmentByDistance()
         {
-            if (Vector3.Distance(this.gameObject.transform.position, Camera.main.transform.position) <= 2)
-            {
-                OnOpenAction();
-            }
+            if (Vector3.Distance(this.gameObject.transform.position, Camera.main.transform.position) <= 2) { OnOpenAction(); }
         }
     }
 }

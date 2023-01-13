@@ -126,9 +126,7 @@ namespace Takechi.UI.RoomSerach
         private string WhatTheTextDisplays(RoomInfo roomInfo)
         {
             return ($"{roomInfo.Name} \n " +
-                    $"{roomInfo.PlayerCount}/{roomInfo.MaxPlayers}\n" +
-                    $"{roomInfo.CustomProperties[RoomStatusKey.mapKey]}\n" +
-                    $"{roomInfo.CustomProperties[RoomStatusKey.gameTypeKey]}");
+                    $"{roomInfo.PlayerCount}/{roomInfo.MaxPlayers}\n");
         }
 
         // w’è‚µ‚½ƒ‹[ƒ€–¼‚Ìƒ‹[ƒ€î•ñ‚ª‚ ‚ê‚Îæ“¾‚·‚é

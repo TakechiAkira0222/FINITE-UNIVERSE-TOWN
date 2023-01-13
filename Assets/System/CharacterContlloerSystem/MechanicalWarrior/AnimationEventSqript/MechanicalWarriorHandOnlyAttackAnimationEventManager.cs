@@ -15,11 +15,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
     {
         #region SerializeField
 
-        [Header("=== CharacterStatusManagement ===")]
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
-
-        [Header("=== MechanicalWarreiorSpecificParameters ===")]
-        [SerializeField] private MechanicalWarreiorSpecificParameters m_specificParameters;
+        [Header("=== MechanicalWarriorStatusManagement ===")]
+        [SerializeField] private MechanicalWarriorStatusManagement m_mechanicalWarriorStatusManagement;
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PhotonView m_thisPhotonView;
@@ -32,11 +29,11 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         #region private
         private PhotonView thisPhotonView => m_thisPhotonView;
-        private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
-        private float force => m_specificParameters.GetShootingForce();
-        private float durationTime => m_specificParameters.GetDurationOfBullet();
+        private MechanicalWarriorStatusManagement mechanicalWarriorStatusManagement => m_mechanicalWarriorStatusManagement;
+        private float force => m_mechanicalWarriorStatusManagement.GetShootingForce();
+        private float durationTime => m_mechanicalWarriorStatusManagement.GetDurationOfBullet();
 
-        private string path => m_specificParameters.GetBulletsPath();
+        private string path => m_mechanicalWarriorStatusManagement.GetBulletsPath();
 
 
         #endregion
@@ -58,7 +55,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void MechanicalWarriorFirstShot()
         {
-            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
 
             Shooting(m_magazineTransfrom, force);
         }
@@ -68,7 +65,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void MechanicalWarriorSecondShot()
         {
-            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
 
             Shooting(m_magazineTransfrom, force);
         }
@@ -78,7 +75,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void MechanicalWarriorThirdShot()
         {
-            if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
             Shooting(m_magazineTransfrom, force);
         }
 

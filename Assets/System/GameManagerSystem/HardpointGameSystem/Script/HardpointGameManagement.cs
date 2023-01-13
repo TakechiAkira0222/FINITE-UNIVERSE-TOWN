@@ -5,14 +5,17 @@ using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using TakechiEngine.PUN;
 using TakechiEngine.PUN.Information;
+using TakechiEngine.PUN.ServerConnect.Joined;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
 
 namespace Takechi.GameManagerSystem.Hardpoint
 {
-    public class HardpointGameManagement : TakechiPunInformationDisclosure
+    public class HardpointGameManagement : TakechiJoinedPunCallbacks
     {
         #region serializeField
 
@@ -29,12 +32,10 @@ namespace Takechi.GameManagerSystem.Hardpoint
         private bool m_isGameEnd = false;
 
         private int m_pointIocationindex = 0;
+
         private int m_gameFrameCunt = 0; 
         private int m_gameTimeCunt_Second => (int)Mathf.Ceil( m_gameFrameCunt / 1f / Time.deltaTime);
-        private int m_teamAPoint = 0;
-        private int m_teamBPoint = 0;
-        private int teamAPoint => m_teamAPoint;
-        private int teamBPoint => m_teamBPoint;
+
         #endregion
 
         public event Action ChangePointIocation = delegate { };
@@ -44,14 +45,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #region setVariable
         public void SetTeamAPoint( int value)
         {
-            m_teamAPoint = (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomTeamStatusKey.teamAPoint] + value;
-            setCurrentRoomCustomProperties( RoomTeamStatusKey.teamAPoint, m_teamAPoint);
+            setCurrentRoomCustomProperties( HardPointStatusKey.teamAPoint, GetTeamAPoint() + value);
         }
 
         public void SetTeamBPoint( int value) 
         {
-            m_teamBPoint = (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomTeamStatusKey.teamBPoint] + value;
-            setCurrentRoomCustomProperties( RoomTeamStatusKey.teamBPoint, m_teamBPoint);
+            setCurrentRoomCustomProperties( HardPointStatusKey.teamBPoint, GetTeamBPoint() + value);
         }
 
         public void SetGameStart(bool flag) { m_isGameStart = flag; }
@@ -62,8 +61,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #region getVariable
 
-        public int    GetTeamAPoint() { return teamAPoint; }
-        public int    GetTeamBPoint() { return teamBPoint; }
+        public int    GetTeamAPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamAPoint]; }
+        public int    GetTeamBPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamBPoint]; }
         public int    GetGameTimeCunt_Second() { return m_gameTimeCunt_Second; }
         public int    GetGameFrameCunt() {return m_gameFrameCunt; }
         public bool   GetGameStart() { return m_isGameStart; }
@@ -75,10 +74,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void Awake()
         {
-            setCurrentRoomCustomProperties(RoomTeamStatusKey.teamAPoint, 0);
+            SetGameStart(true);
+
+            setCurrentRoomCustomProperties(HardPointStatusKey.teamAPoint, 0);
             Debug.Log(" <color=yellow>setCurrentRoomCustomProperties</color>( <color=green>RoomTeamStatusKey</color>.teamAPoint, 0)");
 
-            setCurrentRoomCustomProperties(RoomTeamStatusKey.teamBPoint, 0);
+            setCurrentRoomCustomProperties(HardPointStatusKey.teamBPoint, 0);
             Debug.Log(" <color=yellow>setCurrentRoomCustomProperties</color>( <color=green>RoomTeamStatusKey</color>.teamBPoint, 0)");
 
             setCurrentRoomCustomProperties(RoomStatusKey.victoryPointKey, m_victoryConditionPoints);
@@ -89,10 +90,22 @@ namespace Takechi.GameManagerSystem.Hardpoint
         public override void OnEnable()  
         {
             ChangePointIocation += LocationChange;
-
             Debug.Log("ChangePointIocation += <color=yellow>LocationChange</color>");
-            TeamAToVictory += () => { Debug.Log("TeamAVictory"); };
-            TeamBToVictory += () => { Debug.Log("TeamBVictory"); };
+
+            TeamAToVictory += () => 
+            {
+                SetGameEnd(true);
+                SceneManager.LoadScene(1);
+                LeaveRoom();
+                Debug.Log("TeamAVictory"); 
+            };
+            TeamBToVictory += () => 
+            {
+                SetGameEnd(true);
+                SceneManager.LoadScene(1);
+                LeaveRoom();
+                Debug.Log("TeamBVictory"); 
+            };
         }
 
         public override void OnDisable() 
@@ -100,13 +113,26 @@ namespace Takechi.GameManagerSystem.Hardpoint
             ChangePointIocation -= LocationChange;
             Debug.Log("ChangePointIocation -= <color=yellow>LocationChange</color>");
 
-            TeamAToVictory -= () => { Debug.Log("TeamAVictory"); };
-            TeamBToVictory -= () => { Debug.Log("TeamBVictory"); };
+            TeamAToVictory -= () =>
+            {
+                SetGameEnd(true);
+                SceneManager.LoadScene(1);
+                LeaveRoom();
+                Debug.Log("TeamAVictory");
+            };
+
+            TeamBToVictory -= () => 
+            {
+                SetGameEnd(true);
+                SceneManager.LoadScene(1);
+                LeaveRoom();
+                Debug.Log("TeamBVictory");
+            };
         }
 
         private void FixedUpdate()
         {
-            if ( m_isGameStart || m_isGameStop || m_isGameEnd) return;
+            if ( !m_isGameStart || m_isGameStop || m_isGameEnd) return;
 
             float fps = 1f / Time.deltaTime;
 
@@ -114,8 +140,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
             m_gameFrameCunt += 1;
 
-            if ((int)PhotonNetwork.CurrentRoom.CustomProperties[RoomTeamStatusKey.teamAPoint] >= m_victoryConditionPoints) { TeamAToVictory(); };
-            if ((int)PhotonNetwork.CurrentRoom.CustomProperties[RoomTeamStatusKey.teamBPoint] >= m_victoryConditionPoints) { TeamBToVictory(); };
+            if ((int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamAPoint] >= m_victoryConditionPoints) { TeamAToVictory(); };
+            if ((int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamBPoint] >= m_victoryConditionPoints) { TeamBToVictory(); };
         }
 
         #endregion

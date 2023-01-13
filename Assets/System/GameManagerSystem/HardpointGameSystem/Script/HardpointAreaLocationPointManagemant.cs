@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Takechi.GameManagerSystem.Hardpoint
 {
@@ -21,7 +20,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void OnEnable()
         {
-            StartCoroutine(uiRotation(m_navigationText));
+            StartCoroutine( uiRotation(m_navigationText));
             m_gameManagement.ChangePointIocation += resetMemberList;
             Debug.Log("HardpointAreaLocationPoint.ChangePointIocation += <color=yellow>restresetMemberList</color>");
         }

@@ -14,22 +14,10 @@ namespace Takechi.CharacterController.Parameters
         [Header("=== MechanicalWarreiorStatus Setting===")]
         [SerializeField] private MechanicalWarreiorSpecificParameters m_mechanicalWarreiorSpecificParameters;
 
-        /// <summary>
-        /// 必殺技のステータス上昇幅　AttackPower
-        /// </summary>
-        private float m_attackPowerIncrease;
-        /// <summary>
-        /// 必殺技のステータス上昇幅　MoveingSpeed
-        /// </summary>
-        private float m_moveingSpeedIncrease;
-        /// <summary>
-        /// 必殺技のステータス上昇幅　JumpPower
-        /// </summary>
-        private float m_jumpPowerIncrease;
-        /// <summary>
-        /// 必殺技の継続時間
-        /// </summary>
-        private float m_deathblowMoveDuration_Seconds;
+        private float m_shootingForce = 3.0f;
+        private float m_durationOfBullet = 5;
+
+        private List<string> m_bulletsFolderName = new List<string>();
 
         protected override void Awake()
         {
@@ -40,6 +28,7 @@ namespace Takechi.CharacterController.Parameters
             SetupMechanicalWarreiorSpecificParameters();
         }
 
+      
         #region set up function
 
         /// <summary>
@@ -47,55 +36,46 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private void SetupMechanicalWarreiorSpecificParameters()
         {
-            //SetMoveingSpeedIncrease(m_officeWorkerSpecificParameters.GetMoveingSpeedIncrease());
-            //SetJumpPowerIncrease(m_officeWorkerSpecificParameters.GetJumpPowerIncrease());
-            //SetAttackPowerIncrease(m_officeWorkerSpecificParameters.GetAttackPowerIncrease());
-            //SetSpecialMoveDuration_Seconds(m_officeWorkerSpecificParameters.GetSpecialMoveDuration_Seconds());
+            SetShootingForce( m_mechanicalWarreiorSpecificParameters.GetShootingForce());
+            SetDurationOfBullet( m_mechanicalWarreiorSpecificParameters.GetDurationOfBullet());
 
-            //Debug.Log($"<color=green> setupOfficeWorkerSpecificParameters </color>\n" +
-            //          $"<color=blue> info</color>\n" +
-            //          $" NickName : { PhotonNetwork.LocalPlayer.NickName} \n" +
-            //          $" m_moveingSpeedIncrease = { m_moveingSpeedIncrease}\n" +
-            //          $" m_jumpPowerIncrease    = { m_jumpPowerIncrease}\n" +
-            //          $" m_attackPowerIncrease  = { m_attackPowerIncrease}\n"
-            //          );
+            Debug.Log($"<color=green> setupMechanicalWarriorSpecificParameters </color>\n" +
+                      $"<color=blue> info</color>\n" +
+                      $" NickName : { PhotonNetwork.LocalPlayer.NickName} \n" +
+                      $" m_shootingForce = {m_shootingForce}\n" +
+                      $" m_durationOfBullet    = {m_durationOfBullet}\n"
+                      );
         }
 
         #endregion
 
         #region SetFunction
 
-        public void SetAttackPowerIncrease(float changeValue)
+        public void SetShootingForce(float changeValue)
         {
-            Debug.Log($" AttackPowerIncrease {m_attackPowerIncrease} = {changeValue}");
-            m_attackPowerIncrease = changeValue;
+            Debug.Log($" shootingForce {m_shootingForce} = {changeValue}");
+            m_shootingForce = changeValue;
         }
 
-        public void SetMoveingSpeedIncrease(float changeValue)
+        public void SetDurationOfBullet(float changeValue)
         {
-            Debug.Log($" MoveingSpeedIncrease {m_moveingSpeedIncrease} = {changeValue}");
-            m_moveingSpeedIncrease = changeValue;
-        }
-
-        public void SetJumpPowerIncrease(float changeValue)
-        {
-            Debug.Log($" JumpPowerIncrease {m_jumpPowerIncrease} = { changeValue}");
-            m_jumpPowerIncrease = changeValue;
-        }
-
-        public void SetSpecialMoveDuration_Seconds(float changeValue)
-        {
-            Debug.Log($" SpecialMoveDuration_Seconds {m_deathblowMoveDuration_Seconds} = {changeValue}");
-            m_deathblowMoveDuration_Seconds = changeValue;
+            Debug.Log($" durationOfBullet {m_durationOfBullet} = {changeValue}");
+            m_durationOfBullet = changeValue;
         }
 
         #endregion
 
-        #region GetFunction
-        public float GetAttackPowerIncrease() { return m_attackPowerIncrease; }
-        public float GetMoveingSpeedIncrease() { return m_moveingSpeedIncrease; }
-        public float GetJumpPowerIncrease() { return m_jumpPowerIncrease; }
-        public float GetDeathblowMoveDuration_Seconds() { return m_deathblowMoveDuration_Seconds; }
+        #region GetStatusFunction
+
+        public float  GetShootingForce() { return m_mechanicalWarreiorSpecificParameters.GetShootingForce(); }
+        public float  GetDurationOfBullet() { return m_mechanicalWarreiorSpecificParameters.GetDurationOfBullet(); }
+        public string GetBulletsPath()
+        {
+            string path = "";
+            foreach (string s in m_mechanicalWarreiorSpecificParameters.GetBulletsPath()) { path += s + "/"; }
+
+            return path;
+        }
 
         #endregion
     }

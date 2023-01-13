@@ -11,13 +11,16 @@ public class AreaLocationPointManagemant : MonoBehaviour
 
     protected IEnumerator uiRotation(GameObject uiCursor)
     {
-        while (uiCursor.activeSelf)
+        while ( uiCursor.activeSelf)
         {
-            float size =
-                System.Math.Min(Vector3.Distance(uiCursor.transform.position, Camera.main.transform.position), 30) / 1000;
+            if (Camera.main != null)
+            {
+                float size =
+                    System.Math.Min(Vector3.Distance(uiCursor.transform.position, Camera.main.transform.position), 30) / 1000;
 
-            uiCursor.transform.LookAt(Camera.main.transform);
-            uiCursor.transform.localScale = new Vector3(size, size, size);
+                uiCursor.transform.LookAt(Camera.main.transform);
+                uiCursor.transform.localScale = new Vector3(-size, size, size);
+            }
 
             yield return new WaitForSeconds(Time.deltaTime);
         }

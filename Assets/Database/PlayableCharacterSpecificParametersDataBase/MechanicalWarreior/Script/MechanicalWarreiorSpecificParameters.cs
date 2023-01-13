@@ -21,14 +21,7 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
 
         public float GetShootingForce() { return m_shootingForce; }
         public float GetDurationOfBullet() { return m_durationOfBullet; }
-
-        public string GetBulletsPath()
-        {
-            string path = "";
-            foreach ( string s in m_bulletsFolderName) { path += s + "/"; }
-
-            return path;
-        }
+        public List<string> GetBulletsPath() { return m_bulletsFolderName; }
 
         #endregion
     }

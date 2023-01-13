@@ -122,7 +122,6 @@ namespace Takechi.CharacterSelection
 
                     if ( Mathf.Ceil( m_gameStartTimeCunt_seconds) == m_nearTimeToStartTheGame_seconds)
                     {
-                        Debug.Log("<color=green>nearTimeToStartTheGame</color> ");
                         m_gameStartTimeCuntText.color = new Color( 1, 0, 0);
                     }
 

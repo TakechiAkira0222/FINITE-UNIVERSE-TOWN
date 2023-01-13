@@ -131,6 +131,10 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         protected float jumpPower;
         /// <summary>
+        /// リスポーン時間
+        /// </summary>
+        protected int respawnTime_Seconds;
+        /// <summary>
         /// 必殺技 使用可能
         /// </summary>
         protected bool  canUseDeathblow = false;
@@ -213,6 +217,7 @@ namespace Takechi.CharacterController.Parameters
             SetAttackPower( m_characterParameters.GetAttackPower());
             SetJumpPower( m_characterParameters.GetJumpPower());
             SetMass( m_characterParameters.GetCleanMass());
+            SetRespawnTime_Seconds( m_characterParameters.GetRespawnTime_Seconds());
             SetCanUseDeathblow(false);
             SetCanUseAbility1(false); 
             SetCanUseAbility2(false);
@@ -225,6 +230,7 @@ namespace Takechi.CharacterController.Parameters
                       $" attackPower = {attackPower}\n" +
                       $" jumpPower = {jumpPower}\n" +
                       $" mass = {m_rb.mass}\n"+
+                      $" respawnTime_Seconds = {respawnTime_Seconds}\n"+
                       $" canUseDeathblow = {canUseDeathblow}\n"+
                       $" canUseAbility1 = {canUseAbility1}\n"+
                       $" canUseAbility2 = {canUseAbility2}\n"+
@@ -266,7 +272,7 @@ namespace Takechi.CharacterController.Parameters
         #endregion
 
         #region SetFunction
-
+        public void SetRespawnTime_Seconds(int time) { respawnTime_Seconds = time; }
         public void SetCanUseDeathblow(bool flag) { canUseDeathblow = flag; }
         public void SetCanUseAbility1(bool flag) { canUseAbility1 = flag; }
         public void SetCanUseAbility2(bool flag) { canUseAbility2 = flag; }
@@ -318,6 +324,7 @@ namespace Takechi.CharacterController.Parameters
                 return false;
             }
         }
+        public int   GetRespawnTime_Seconds() { return respawnTime_Seconds; }
         public bool  GetCanUseDeathblow() { return canUseDeathblow; }
         public float GetCanUseDeathblow_TimeCount_Seconds() { return canUseDeathblow_TimeCount_Seconds; }
         public float GetCanUseDeathblow_RecoveryTime_Seconds() {return m_characterParameters.GetDeathblow_RecoveryTime_Seconds(); }

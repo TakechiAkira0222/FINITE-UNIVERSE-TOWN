@@ -21,6 +21,8 @@ namespace Takechi.CharacterController.Parameters
         private string m_information = "特徴や経歴";
         [SerializeField, Tooltip("質量")]
         private int m_cleanMass = 60;
+        [SerializeField, Tooltip("リスポーン時間(秒)")]
+        private int m_respawnTime_Seconds = 5;
         [SerializeField, Tooltip("移動スピード")]
         private float m_movingSpeed = 2.5f;
         [SerializeField, Tooltip("横移動の移動量 割合")]
@@ -92,6 +94,11 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         /// <returns> 干渉を受けていない質量を返します。</returns>
         public float GetCleanMass() { return m_cleanMass; }
+        /// <summary>
+        /// リスポーン時間
+        /// </summary>
+        /// <returns></returns>
+        public int   GetRespawnTime_Seconds() { return m_respawnTime_Seconds; }
         /// <summary>
         /// アビリティー1の回復時間
         /// </summary>
