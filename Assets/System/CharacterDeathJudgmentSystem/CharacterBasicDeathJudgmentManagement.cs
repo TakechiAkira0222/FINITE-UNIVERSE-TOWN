@@ -38,6 +38,7 @@ namespace Takechi.CharacterController.DeathJudgment
 
         private void StartOfDeathJudgment(string respawnPoint)
         {
+            m_characterStatusManagement.GetToFade().OnFadeOut("‘Ò‹@’†");
             m_characterStatusManagement.GetMyAvater().transform.position = GameObject.Find(respawnPoint).transform.position;
             m_characterStatusManagement.GetMyRigidbody().isKinematic = true;
             m_characterKeyInputStateManagement.SetOperation(false);
@@ -45,6 +46,7 @@ namespace Takechi.CharacterController.DeathJudgment
 
         private void EndOfDeathJudgment()
         {
+            m_characterStatusManagement.GetToFade().OnFadeIn("‘Ò‹@’†");
             m_characterStatusManagement.ResetCharacterParameters();
             m_characterStatusManagement.GetMyRigidbody().isKinematic = false;
             m_characterKeyInputStateManagement.SetOperation(true);

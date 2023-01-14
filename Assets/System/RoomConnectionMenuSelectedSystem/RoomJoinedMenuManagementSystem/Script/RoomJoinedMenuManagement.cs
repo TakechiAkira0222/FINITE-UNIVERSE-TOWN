@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using UnityEditor;
@@ -10,16 +11,13 @@ using Photon.Pun;
 using Photon.Realtime;
 
 using TakechiEngine.PUN.ServerConnect.Joined;
-
 using Takechi.ServerConnect.ToJoinRoom;
 using Takechi.ScriptReference.CustomPropertyKey;
 using Takechi.UI.CanvasMune.DisplayListUpdate;
 
-using System.Threading.Tasks;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
-using System.Diagnostics.SymbolStore;
 
 namespace Takechi.UI.RoomJoinedMenu
 {
@@ -111,7 +109,7 @@ namespace Takechi.UI.RoomJoinedMenu
 
         #region PunCallbacks
 
-        public override void OnMasterClientSwitched(Player newMasterClient)
+        public override void OnMasterClientSwitched( Player newMasterClient)
         {
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
 
@@ -122,7 +120,13 @@ namespace Takechi.UI.RoomJoinedMenu
 
         #region event system finction
 
-        public void OnSceneSyncChange() { SceneSyncChange(2); }
+        public void OnSceneSyncChange() 
+        {
+            StartCoroutine(DelayMethod( NetworkSyncSettings.fadeProductionTime_Second, () =>
+            {
+                SceneSyncChange(2);
+            }));
+        }
 
         public void OnLeaveRoom() { LeaveRoom(); }
 

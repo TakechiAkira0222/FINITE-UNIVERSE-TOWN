@@ -16,6 +16,7 @@ using Photon.Realtime;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
+using Takechi.PlayableCharacter.FadingCanvas;
 
 namespace Takechi.CharacterSelection
 {
@@ -39,10 +40,12 @@ namespace Takechi.CharacterSelection
         [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
         [SerializeField] private Text   m_gameStartTimeCuntText;
         [SerializeField] private Text   m_infometionText;
+        [SerializeField] private ToFade m_toFade;
         [SerializeField] private List <GameObject> m_characterPrefabList = new List<GameObject>();
         [SerializeField] private List <Image> m_characterSelectionButtonList = new List<Image>();
 
         private bool m_isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
+        private bool m_goToGameScene = false;
 
         #region set variable
 
@@ -100,14 +103,6 @@ namespace Takechi.CharacterSelection
             StartAfterSync( NetworkSyncSettings.connectionSynchronizationTime);
         }
 
-        public override void OnDisable()
-        {
-            base.OnDisable();
-
-            /// フェイド処理などを入れても良き
-            
-        }
-
         #endregion
 
         #region IEnumerator Update 
@@ -120,17 +115,21 @@ namespace Takechi.CharacterSelection
                     m_gameStartTimeCunt_seconds -= Time.deltaTime;
                     m_gameStartTimeCuntText.text = Mathf.Ceil(m_gameStartTimeCunt_seconds).ToString();
 
-                    if ( Mathf.Ceil( m_gameStartTimeCunt_seconds) == m_nearTimeToStartTheGame_seconds)
-                    {
-                        m_gameStartTimeCuntText.color = new Color( 1, 0, 0);
-                    }
+                    if (Mathf.Ceil( m_gameStartTimeCunt_seconds) == m_nearTimeToStartTheGame_seconds) { m_gameStartTimeCuntText.color = new Color(1, 0, 0); }
 
                     yield return null;
                 }
                 else
                 {
-                    SceneSyncChange(3);
-                    this.gameObject.gameObject.SetActive( false);
+                    m_toFade.OnFadeOut("NowLoading...");
+
+                    StartCoroutine( DelayMethod(NetworkSyncSettings.fadeProductionTime_Second, () =>
+                    {
+                        SceneSyncChange(3);
+                    }));
+
+                    yield return new WaitForSeconds(NetworkSyncSettings.fadeProductionTime_Second * 2);
+
                 }
             }
         }
@@ -179,7 +178,7 @@ namespace Takechi.CharacterSelection
             foreach (Player n in m_teamB_memberList)
             {
                 Image image = Instantiate(m_instansImage, m_teamBContent.transform);
-                image.sprite = m_parametersManager.GetParameters((int) n.CustomProperties[CharacterStatusKey.selectedCharacterKey]).GetIcon();
+                image.sprite = m_parametersManager.GetParameters((int)n.CustomProperties[CharacterStatusKey.selectedCharacterKey]).GetIcon();
                 image.transform.GetChild(0).GetComponent<Text>().text = n.NickName;
             }
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
+using Takechi.PlayableCharacter.FadingCanvas;
 using Takechi.ScriptReference.CustomPropertyKey;
 using TakechiEngine.PUN.CustomProperties;
 using UnityEngine;
@@ -63,6 +64,10 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         [SerializeField] private Outline m_modelOutline;
         /// <summary>
+        /// to Fade
+        /// </summary>
+        [SerializeField] private ToFade  m_toFade;
+        /// <summary>
         /// attackHits effect folder name
         /// </summary>
         [SerializeField] private List<string> m_attackHitsEffectFolderName = new List<string>(4);
@@ -109,6 +114,10 @@ namespace Takechi.CharacterController.Parameters
         /// model Outline
         /// </summary>
         protected Outline modelOutline => m_modelOutline;
+        /// <summary>
+        /// to Fade
+        /// </summary>
+        protected ToFade  toFade => m_toFade;
         /// <summary>
         /// local player custom properties
         /// </summary>
@@ -351,7 +360,8 @@ namespace Takechi.CharacterController.Parameters
         public GameObject GetHandOnlyModelObject() { return handOnlyModelObject; }
         public Animator   GetNetworkModelAnimator() { return networkModelAnimator; }
         public GameObject GetNetworkModelObject() { return networkModelObject; }
-        public Outline    GetOuline(Outline outline) { return modelOutline; }
+        public Outline    GetOuline() { return modelOutline; }
+        public ToFade     GetToFade() { return m_toFade; }
 
         #endregion
 

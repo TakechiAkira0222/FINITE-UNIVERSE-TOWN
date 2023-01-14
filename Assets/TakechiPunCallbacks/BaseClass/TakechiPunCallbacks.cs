@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,18 @@ namespace TakechiEngine.PUN
 {
     public class TakechiPunCallbacks : MonoBehaviourPunCallbacks
     {
+        /// <summary>
+        /// 渡された処理を指定時間後に実行する
+        /// </summary>
+        /// <param name="waitTime">遅延時間[ミリ秒]</param>
+        /// <param name="action">実行したい処理</param>
+        /// <returns></returns>
+        protected IEnumerator DelayMethod(float waitTime, Action action)
+        {
+            yield return new WaitForSeconds(waitTime);
+            action();
+        }
+
         #region SettingsClass
 
         /// <summary>

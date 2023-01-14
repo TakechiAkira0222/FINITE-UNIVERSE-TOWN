@@ -9,6 +9,11 @@ namespace Takechi.ScriptReference.NetworkEnvironment
         public static class NetworkSyncSettings
         {
             /// <summary>
+            /// fade Production Time_second
+            /// </summary>
+            public const int fadeProductionTime_Second = 5;
+
+            /// <summary>
             /// connection Synchronization Time
             /// </summary>
             public const int connectionSynchronizationTime = 1000;
@@ -16,7 +21,7 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             /// <summary>
             /// instantiationSetting Synchronization Time
             /// </summary>
-            public const int instantiationSettingSynchronizationTime = 2000;
+            public const int instantiationSettingSynchronizationTime = 10000;
         }
     }
 }
