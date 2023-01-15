@@ -1,13 +1,13 @@
+using UnityEngine;
 using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Principal;
 using Takechi.PlayableCharacter.FadingCanvas;
 using Takechi.ScriptReference.CustomPropertyKey;
 using TakechiEngine.PUN.CustomProperties;
-using UnityEngine;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using UnityEngine.Android;
 
 namespace Takechi.CharacterController.Parameters
 {
@@ -44,6 +44,10 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         [SerializeField] private Camera m_mainCamera;
         /// <summary>
+        /// death Camera
+        /// </summary>
+        [SerializeField] private Camera  m_deathCamera;
+        /// <summary>
         /// hand only animetor
         /// </summary>
         [SerializeField] private Animator m_handOnlyModelAnimator;
@@ -71,6 +75,10 @@ namespace Takechi.CharacterController.Parameters
         /// attackHits effect folder name
         /// </summary>
         [SerializeField] private List<string> m_attackHitsEffectFolderName = new List<string>(4);
+        /// <summary>
+        /// death effect folder name
+        /// </summary>
+        [SerializeField] private List<string> m_deathEffectFolderName = new List<string>(4);
         #endregion
 
         #region protected member variable
@@ -95,6 +103,10 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         protected Camera mainCamera => m_mainCamera;
         /// <summary>
+        /// death Camera
+        /// </summary>
+        protected Camera deathCamera => m_deathCamera;
+        /// <summary>
         /// hand only animetor
         /// </summary>
         protected Animator handOnlyModelAnimator => m_handOnlyModelAnimator;
@@ -118,6 +130,7 @@ namespace Takechi.CharacterController.Parameters
         /// to Fade
         /// </summary>
         protected ToFade  toFade => m_toFade;
+
         /// <summary>
         /// local player custom properties
         /// </summary>
@@ -176,7 +189,6 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         protected float canUseAbility3_TimeCount_Seconds;
 
-
         #endregion
 
         #region this script status flag
@@ -202,6 +214,10 @@ namespace Takechi.CharacterController.Parameters
         /// status setup complete action
         /// </summary>
         public event Action localPlayerCustomPropertiesStatusSetUpCompleteAction = delegate{};
+        /// <summary>
+        /// initialize camera settings
+        /// </summary>
+        public event Action InitializeCameraSettings = delegate { };
 
         #endregion
 
@@ -312,6 +328,15 @@ namespace Takechi.CharacterController.Parameters
 
             return path;
         }
+
+        public string GetDeathEffectFolderName()
+        {
+            string path = "";
+            foreach (string s in m_deathEffectFolderName) { path += s + "/"; }
+
+            return path;
+        }
+
         public bool GetCharacterStatusSetUpCompleteFlag() { return characterStatusSetUpComplete; }
         public bool GetlocalPlayerCustomPropertiesStatusSetUpCompleteFlag() { return localPlayerCustomPropertiesStatusSetUpComplete; }
         public bool  GetIsGrounded()
@@ -356,11 +381,12 @@ namespace Takechi.CharacterController.Parameters
         public Collider   GetMyCollider() { return mainCollider; }
         public GameObject GetMyAvater() { return avater; }
         public Camera     GetMyMainCamera() { return mainCamera; }
+        public Camera     GetMyDeathCamera()  { return m_deathCamera; }
         public Animator   GetHandOnlyModelAnimator() { return handOnlyModelAnimator; }
         public GameObject GetHandOnlyModelObject() { return handOnlyModelObject; }
         public Animator   GetNetworkModelAnimator() { return networkModelAnimator; }
         public GameObject GetNetworkModelObject() { return networkModelObject; }
-        public Outline    GetOuline() { return modelOutline; }
+        public Outline    GetMyOuline() { return modelOutline; }
         public ToFade     GetToFade() { return m_toFade; }
 
         #endregion
@@ -444,6 +470,14 @@ namespace Takechi.CharacterController.Parameters
                       $" m_jumpPower = {jumpPower}\n" +
                       $" m_mass = {rb.mass}\n"
                       );
+        }
+
+        /// <summary>
+        /// Character Instans ÇÃèÛë‘Çèâä˙âªÇµÇ‹Ç∑ÅB
+        /// </summary>
+        public  void ResetCharacterInstanceState()
+        {
+            InitializeCameraSettings();
         }
 
         #endregion

@@ -1,5 +1,3 @@
-using Photon.Voice.PUN.UtilityScripts;
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -97,6 +95,7 @@ namespace Takechi.CharacterSelection
         {
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
 
+            m_toFade.OnFadeIn("NowLoading...");
             setInformationText(0);
             setLocalPlayerCustomProperties(CharacterStatusKey.selectedCharacterKey, 0);
 

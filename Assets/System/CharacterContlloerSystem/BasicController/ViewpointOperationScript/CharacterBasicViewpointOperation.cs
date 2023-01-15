@@ -53,19 +53,43 @@ namespace Takechi.CharacterController.ViewpointOperation
         {
             cameraRot = mainCamera.transform.localRotation;
             characterRot = avater.transform.localRotation;
+
+           
         }
 
         private void OnEnable()
         {
+            m_characterStatusManagement.InitializeCameraSettings += () =>
+            {
+                ResetCameraRot();
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCameraRot</color>() <color=green>to add.</color>");
+                ResetCharacterRot();
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCharacterRot</color>() <color=green>to add.</color>");
+            };
+
             characterKeyInputStateManagement.InputToViewpoint += (characterStatusManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToViewpoint function <color=green>to add.</color>");
         }
 
         private void OnDisable()
         {
+            m_characterStatusManagement.InitializeCameraSettings -= () =>
+            {
+                ResetCameraRot();
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCameraRot</color>() <color=green>to remove.</color>");
+                ResetCharacterRot();
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCharacterRot</color>() <color=green>to remove.</color>");
+            };
+
             characterKeyInputStateManagement.InputToViewpoint -= (characterStatusManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToViewpoint function <color=green>to remove.</color>");
         }
+
+        #endregion
+
+        #region ResetFinction
+        public void ResetCameraRot() { cameraRot = Quaternion.identity; }
+        public void ResetCharacterRot() { characterRot = Quaternion.identity; }
 
         #endregion
 

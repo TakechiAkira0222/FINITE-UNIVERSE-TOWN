@@ -23,7 +23,6 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         [SerializeField] private GameObject m_instans;
         [SerializeField] private Transform  m_magazineTransfrom;
-
      
         #endregion
 

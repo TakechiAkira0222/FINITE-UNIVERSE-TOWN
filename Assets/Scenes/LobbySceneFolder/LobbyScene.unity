@@ -1631,12 +1631,15 @@ MonoBehaviour:
   m_mainCollider: {fileID: 2640404583997774981}
   m_rb: {fileID: 2640404583997774996}
   m_mainCamera: {fileID: 2640404583997775013}
+  m_deathCamera: {fileID: 0}
   m_handOnlyModelAnimator: {fileID: 7145484607085686165}
   m_handOnlyModelObject: {fileID: 2969309873805938390}
   m_networkModelAnimator: {fileID: 0}
   m_networkModelObject: {fileID: 0}
   m_modelOutline: {fileID: 0}
+  m_toFade: {fileID: 0}
   m_attackHitsEffectFolderName: []
+  m_deathEffectFolderName: []
 --- !u!114 &2640404583997773148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4816,6 +4819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LobbyCharacterMenuScreenCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2350211108728200038, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3028317284582302702, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4828,10 +4835,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4177733782338809071, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+      propertyPath: m_toFade
+      value: 
+      objectReference: {fileID: 406996585}
     - target: {fileID: 4876956303370837634, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_serializeSettingClassName.Array.data[0]
       value: 
       objectReference: {fileID: 1353286531}
+    - target: {fileID: 5774328300320511410, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6394765486595783627, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -4890,7 +4905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8933913520473155985, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8933913520473155985, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode

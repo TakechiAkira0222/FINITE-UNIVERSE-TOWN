@@ -18,6 +18,8 @@ using Takechi.UI.CanvasMune.DisplayListUpdate;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
+using Takechi.PlayableCharacter.FadingCanvas;
+using UnityEngine.SceneManagement;
 
 namespace Takechi.UI.RoomJoinedMenu
 {
@@ -29,13 +31,15 @@ namespace Takechi.UI.RoomJoinedMenu
         #region SerializeField
 
         [Header(" ui setting ")]
-        [SerializeField] private Text   m_roomInfometionText;
+        [SerializeField] private Text m_roomInfometionText;
         [SerializeField] private Button m_gameStartButton;
 
         [Header(" memberList setting ")]
-        [SerializeField] private Text       m_instansText;
+        [SerializeField] private Text m_instansText;
         [SerializeField] private GameObject m_teamAContent;
         [SerializeField] private GameObject m_teamBContent;
+        [SerializeField] private ToFade     m_toFade;
+        [SerializeField] private PhotonView m_thisPhotnView;
 
         #endregion
 
@@ -70,6 +74,10 @@ namespace Takechi.UI.RoomJoinedMenu
         #endregion
 
         #region Unity Event
+        private void Reset()
+        {
+            m_thisPhotnView = this.transform.GetComponent<PhotonView>();
+        }
 
         public override void OnEnable()
         {
@@ -77,17 +85,18 @@ namespace Takechi.UI.RoomJoinedMenu
 
             RandomlyJoinTeam();
 
-            StartAfterSync( NetworkSyncSettings.connectionSynchronizationTime);
+            StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
 
-            OnlyClientsDisplay( m_gameStartButton.gameObject);
+            OnlyClientsDisplay(m_gameStartButton.gameObject);
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
 
-            DestroyChildObjects( m_teamAContent);
-            DestroyChildObjects( m_teamBContent);
+            DestroyChildObjects(m_teamAContent);
+            DestroyChildObjects(m_teamBContent);
+
             resetRoomInfometionText();
         }
 
@@ -109,23 +118,31 @@ namespace Takechi.UI.RoomJoinedMenu
 
         #region PunCallbacks
 
-        public override void OnMasterClientSwitched( Player newMasterClient)
+        public override void OnMasterClientSwitched(Player newMasterClient)
         {
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
 
-            OnlyClientsDisplay( m_gameStartButton.gameObject);
+            OnlyClientsDisplay(m_gameStartButton.gameObject);
         }
 
         #endregion
 
         #region event system finction
 
-        public void OnSceneSyncChange() 
+        public void OnSceneSyncChange()
         {
-            StartCoroutine(DelayMethod( NetworkSyncSettings.fadeProductionTime_Second, () =>
+            m_thisPhotnView.RPC( nameof(RPC_SceneSyncChange),RpcTarget.AllBufferedViaServer);
+
+            StartCoroutine(DelayMethod(NetworkSyncSettings.fadeProductionTime_Second, () =>
             {
                 SceneSyncChange(2);
             }));
+        }
+
+        [PunRPC] 
+        private void RPC_SceneSyncChange()
+        {
+            m_toFade.OnFadeOut("NowLoading...");
         }
 
         public void OnLeaveRoom() { LeaveRoom(); }
