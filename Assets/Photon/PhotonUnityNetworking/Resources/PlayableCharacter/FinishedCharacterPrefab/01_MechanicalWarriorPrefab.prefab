@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 573961035569700374}
   - component: {fileID: 4014705923852325729}
   - component: {fileID: 350944048658735699}
+  - component: {fileID: 4629939105276637709}
   - component: {fileID: 6578075680550754041}
   - component: {fileID: 2883224926216148094}
   - component: {fileID: 5995818302695466398}
@@ -345,6 +346,7 @@ MonoBehaviour:
   m_avater: {fileID: 6914157010678169075}
   m_mainCollider: {fileID: 4800816903482502702}
   m_rb: {fileID: 5026083790970808211}
+  m_mainAudioSource: {fileID: 1237718836542242952}
   m_mainCamera: {fileID: 1479958612527368339}
   m_deathCamera: {fileID: 2792025471387800811}
   m_handOnlyModelAnimator: {fileID: 6863655231128380326}
@@ -379,6 +381,22 @@ MonoBehaviour:
   m_ability1: 101
   m_ability2: 102
   m_ability3: 99
+--- !u!114 &4629939105276637709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995818302695466392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2be744e58b4fa4190f8d211027136e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterStatusManagement: {fileID: 4014705923852325729}
+  m_characterKeyInputStateManagement: {fileID: 350944048658735699}
+  playableCharacterSoundEffects: {fileID: 11400000, guid: 206909744df654d45978e49694602c62, type: 2}
+  mechanicalWarreiorSpecificSoundEffects: {fileID: 11400000, guid: 26098067c30d4694e870ce3f5293e7bc, type: 2}
 --- !u!114 &6578075680550754041
 MonoBehaviour:
   m_ObjectHideFlags: 0

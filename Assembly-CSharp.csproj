@@ -154,6 +154,14 @@
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointAreaLocationPointManagemant.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicController\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterSoundEffectsDatabase\Script\PlayableCharacterSoundEffects.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterSoundEffectsDatabase\Script\PlayableCharacterSoundEffectsDataBase.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterSoundEffectsDatabase\ManagmentSctipt\PlayableCharacterSoundEffectsManager.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterSpecificSoundEffectsDataBase\MechanicalWarreior\Script\MechanicalWarreiorSpecificSoundEffects.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterSpecificSoundEffectsDataBase\OfficeWorker\Script\OfficeWorkerSpecificSoundEffects.cs" />
+    <Compile Include="Assets\System\CharacterSoundEffectsStateManagementSystem\BaseClass\CharacterBasicSoundEffectsStateManagement.cs" />
+    <Compile Include="Assets\System\CharacterSoundEffectsStateManagementSystem\MechanicalWarrior\MechanicalWarriorSoundEffectsManagement.cs" />
+    <Compile Include="Assets\System\CharacterSoundEffectsStateManagementSystem\OfficeWorker\OfficeWorkerSoundEffectsManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />

@@ -8,6 +8,7 @@ using Takechi.ScriptReference.CustomPropertyKey;
 using TakechiEngine.PUN.CustomProperties;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using UnityEngine.Android;
+using System.Net.NetworkInformation;
 
 namespace Takechi.CharacterController.Parameters
 {
@@ -39,6 +40,10 @@ namespace Takechi.CharacterController.Parameters
         /// main rb
         /// </summary>
         [SerializeField] private Rigidbody m_rb;
+        /// <summary>
+        /// main audioSource
+        /// </summary>
+        [SerializeField] private AudioSource m_mainAudioSource;
         /// <summary>
         /// main camera
         /// </summary>
@@ -378,6 +383,7 @@ namespace Takechi.CharacterController.Parameters
         public float GetCleanMass() { return m_characterParameters.GetCleanMass(); }
         public PhotonView GetMyPhotonView() { return thisPhotonView; }
         public Rigidbody  GetMyRigidbody() { return rb; }
+        public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }
         public Collider   GetMyCollider() { return mainCollider; }
         public GameObject GetMyAvater() { return avater; }
         public Camera     GetMyMainCamera() { return mainCamera; }

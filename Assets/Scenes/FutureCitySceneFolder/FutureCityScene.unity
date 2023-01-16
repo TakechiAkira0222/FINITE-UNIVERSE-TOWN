@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.043079868, g: 0.07183448, b: 0.14093274, a: 1}
+  m_IndirectSpecularColor: {r: 0.04248537, g: 0.071139194, b: 0.14016777, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5660898006669219556, guid: bf3804339168863459a78ac9062154e2, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5660898006669219556, guid: bf3804339168863459a78ac9062154e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -425,7 +425,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Neo Cities
+  m_Text: Future City
 --- !u!222 &1639231536
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4115147403292074243, guid: cec554f4895319248adbbf601f99512e, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4115147403292074243, guid: cec554f4895319248adbbf601f99512e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -658,6 +658,63 @@ Light:
   m_CorrespondingSourceObject: {fileID: 8601674267916044095, guid: e478004847e67914595180a086a11fb0, type: 3}
   m_PrefabInstance: {fileID: 8601674267496064943}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1371755798601659923
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856580, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371755798980856581, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
+      propertyPath: m_Name
+      value: FutureCityBgmInstans
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 07b6685d697caf2429ed0aca035a6f2d, type: 3}
 --- !u!1001 &1745063629026759325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -790,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7611581407111361443, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7611581407111361443, guid: f3c85e9ad1a16d3409546a70f55119f1, type: 3}
       propertyPath: m_LocalPosition.x

@@ -88,14 +88,14 @@ namespace Takechi.ScriptReference.CustomPropertyKey
             /// <summary>
             /// room custom property map Name
             /// </summary>
-            public const string neoCities = "NeoCities";
+            public const string futureCity = "FutureCity";
             /// <summary>
             /// room custom property map array
             /// </summary>
             public static string[] mapSelectionNameArray =
                 new string[]
                 {
-                    neoCities,
+                    futureCity,
                 };
 
           
