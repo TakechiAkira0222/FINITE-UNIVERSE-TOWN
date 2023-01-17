@@ -1,31 +1,64 @@
+using Photon.Pun;
 using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.SoundEffects;
 using Takechi.CharacterController.SpecificSoundEffects.OfficeWorker;
-using Photon.Pun;
-using Takechi.CharacterController.KeyInputStete;
+using System.Security.Cryptography;
 
 namespace Takechi.CharacterController.Parameters
 {
     public class OfficeWorkerSoundEffectsManagement : CharacterBasicSoundEffectsStateManagement
     {
+        #region SerializeField
         [Header("=== OfficeWorkerSpecificSoundEffects ===")]
         [SerializeField] private OfficeWorkerSpecificSoundEffects officeWorkerSpecificSoundEffects;
 
+        #endregion
+
+        #region unity evenet
         protected override void OnDisable()
         {
-            characterKeyInputStateManagement.InputToNormalAttack += (c_status) => { c_status.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfNormalAttack()); };
-            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToJump function <color=green>to add.</color>");
             base.OnDisable();
         }
         protected override void OnEnable()
         {
-            characterKeyInputStateManagement.InputToNormalAttack += (c_status) => { c_status.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfNormalAttack()); };
-            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToJump function <color=green>to add.</color>");
             base.OnEnable();
         }
+
+        #endregion
+
+        #region PlayOneShotFunction
+        public void PlayOneShotVoiceOfFirstNormalAttack()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfFirstNormalAttackClip(), officeWorkerSpecificSoundEffects.GetVoiceOfFirstNormalAttackVolume());
+        }
+        public void PlayOneShotVoiceOfSecondNormalAttack()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfSecondNormalAttackClip(), officeWorkerSpecificSoundEffects.GetVoiceOfSecondNormalAttackVolume());
+        }
+        public void PlayOneShotVoiceOfCallOut()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfCallOutClip(), officeWorkerSpecificSoundEffects.GetVoiceOfCallOutVolume());
+        }
+        public void PlayOneShotVoiceOfDeathblowStart()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfDeathblowStartClip(), officeWorkerSpecificSoundEffects.GetVoiceOfDeathblowStartVolume());
+        }
+        public void PlayOneShotPowerUp()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetDeathblowPowerUpClip(), officeWorkerSpecificSoundEffects.GetDeathblowPowerUpVolume());
+        }
+        public void PlayOneShotFirstNormalAttack()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetFirstNormalAttackClip(), officeWorkerSpecificSoundEffects.GetFirstNormalAttackVolume());
+        }
+        public void PlayOneShotSecondNormalAttack()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(officeWorkerSpecificSoundEffects.GetSecondNormalAttackClip(), officeWorkerSpecificSoundEffects.GetSecondNormalAttackVolume());
+        }
+        #endregion
     }
 }
 

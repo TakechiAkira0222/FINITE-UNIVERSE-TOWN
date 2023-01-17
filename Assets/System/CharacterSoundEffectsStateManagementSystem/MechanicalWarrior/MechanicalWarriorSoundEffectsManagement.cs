@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Takechi.CharacterController.SoundEffects;
 using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
 using Takechi.CharacterController.SpecificSoundEffects.MechanicalWarreior;
+using Takechi.CharacterController.SpecificSoundEffects.OfficeWorker;
 using UnityEngine;
 
 namespace Takechi.CharacterController.Parameters
@@ -23,6 +24,15 @@ namespace Takechi.CharacterController.Parameters
         {
             base.OnDisable();
         }
+
+        #region PlayOneShotFunction
+
+        public void PlayOneShotNormalShot()
+        {
+            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetNormalShotClip(), mechanicalWarreiorSpecificSoundEffects.GetNormalShotVolume());
+        }
+
+        #endregion
     }
 }
 

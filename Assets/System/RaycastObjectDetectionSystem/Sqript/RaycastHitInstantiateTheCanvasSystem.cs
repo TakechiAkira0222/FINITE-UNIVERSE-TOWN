@@ -95,6 +95,9 @@ namespace Takechi.RaycastObjectDetectionSystem
                     {
                         if (GameObject.Find(m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName].name + "(Clone)") == null)
                         {
+                            audioSource.PlayOneShot(basicUiSound.GetDecisionSoundClip(), basicUiSound.GettDecisionSoundVolume());
+                            Debug.Log(" <color=green>RaycastHitSetActiveTheCanvasSystem</color>.<color=yellow>OnDecisionSound_OneShot</color>()");
+
                             Instantiate(m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName], m_parent);
                             Debug.Log($"<color=yellow>Instantiate</color>({m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName].name}, {m_parent.name})");
                         }

@@ -87,6 +87,9 @@ namespace Takechi.RaycastObjectDetectionSystem
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
+                        audioSource.PlayOneShot( basicUiSound.GetDecisionSoundClip(), basicUiSound.GettDecisionSoundVolume());
+                        Debug.Log(" <color=green>RaycastHitSetActiveTheCanvasSystem</color>.<color=yellow>OnDecisionSound_OneShot</color>()");
+
                         m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName].SetActive(true);
                         Debug.Log($"{m_theCanvasSuitableForTheHitObjectDictionary[tagetObjectName].name}.<color=yellow>SetActive</color>(<color=blue>true</color>)");
                     }

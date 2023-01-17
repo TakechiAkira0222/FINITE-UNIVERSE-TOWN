@@ -37,6 +37,14 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         }
 
         /// <summary>
+        /// 必殺技叫びの開始
+        /// </summary>
+        void OfficeWorkerDeathblowCallOutVoice()
+        {
+
+        }
+
+        /// <summary>
         /// 必殺技animationの終了
         /// </summary>
         void OfficeWorkerDeathblowEnd()

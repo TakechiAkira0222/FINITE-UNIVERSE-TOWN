@@ -9,7 +9,17 @@ namespace Takechi.CharacterController.SpecificSoundEffects.MechanicalWarreior
     [CreateAssetMenu(fileName = "MechanicalWarreiorSpecificSoundEffects", menuName = "MechanicalWarreiorSpecificSoundEffects")]
     public class MechanicalWarreiorSpecificSoundEffects : ScriptableObject
     {
-        #region GetStatusFunction
+        #region SerializeField
+
+        [SerializeField, Header("í èÌéÀåÇ")] private AudioClip m_normalShot;
+        [SerializeField, Range(0f, 1f)] private float m_normalShotVolume = 0.5f;
+
+        #endregion
+
+        #region GetAudioClipFunction
+
+        public AudioClip GetNormalShotClip() { return m_normalShot; }
+        public float GetNormalShotVolume() { return m_normalShotVolume; }
 
         #endregion
     }

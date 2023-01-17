@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.KeyInputStete;
+using Takechi.CharacterController.SoundEffects;
 using UnityEngine;
 
 namespace Takechi.RaycastObjectDetectionSystem
@@ -32,13 +33,18 @@ namespace Takechi.RaycastObjectDetectionSystem
 
         [SerializeField] private LayerMask m_layerMask;
 
+        [Header(" === BasicUiSoundEffects ===")]
+        [SerializeField] BasicUiSoundEffects m_basicUiSound;
+        [SerializeField] AudioSource m_audioSource;
+
         #endregion
 
         #region protected
 
         protected GameObject lookingObject => m_lookingObject;
-
         protected bool isLooking => m_isLooking;
+        protected BasicUiSoundEffects basicUiSound => m_basicUiSound;
+        protected AudioSource audioSource => m_audioSource;
 
         #endregion
 

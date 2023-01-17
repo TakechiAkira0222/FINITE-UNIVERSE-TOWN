@@ -10,17 +10,17 @@ namespace Takechi.CharacterController.SoundEffects
     public class PlayableCharacterSoundEffects : ScriptableObject
     {
         #region SerializeField
+
         [SerializeField, Tooltip("ジャンプ")]
         private AudioClip m_jumpSoundClip;
+        [SerializeField, Range(0f, 1f)] private float m_jumpSoundClipVolume = 0.5f;
 
         #endregion
 
         #region GetFunction
 
-        /// <summary>
-        /// ジャンプの音
-        /// </summary>
         public AudioClip GetJumpSoundClip() { return m_jumpSoundClip; }
+        public float GetJumpSoundClipVolume() { return m_jumpSoundClipVolume; }
        
         #endregion
     }

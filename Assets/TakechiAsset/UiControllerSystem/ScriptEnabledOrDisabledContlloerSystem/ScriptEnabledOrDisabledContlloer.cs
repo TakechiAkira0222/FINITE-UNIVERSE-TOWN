@@ -35,7 +35,7 @@ namespace Takechi.ScriptEnabledOrDisabled
         void OnDisable()
         {
             setSerializeSettingClass(m_OnDisableEnabled);
-            setFindsetClass(m_OnDisableEnabled);
+            //setFindsetClass(m_OnDisableEnabled);
         }
 
         void OnDestroy()

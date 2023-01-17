@@ -22,6 +22,8 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         [SerializeField] private OfficeWorkerStatusManagement m_officeWorkerStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
+        [Header("=== OfficeWorkerSoundEffectsManagement ===")]
+        [SerializeField] private OfficeWorkerSoundEffectsManagement m_officeWorkerSoundEffectsManagement;
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PlayableDirector m_playableDirector;
@@ -31,6 +33,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
         private OfficeWorkerStatusManagement officeWorkerStatusManagement => m_officeWorkerStatusManagement;
         private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
+        private OfficeWorkerSoundEffectsManagement soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
 
         private Animator handOnlyModelAnimator => officeWorkerStatusManagement.GetHandOnlyModelAnimator();
         private Animator handNetworkModelAnimator => officeWorkerStatusManagement.GetNetworkModelAnimator();
@@ -55,6 +58,9 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         {
             m_playableDirector.Play();
 
+            // audioSource
+            soundEffectsManagement.PlayOneShotVoiceOfDeathblowStart();
+
             // rb
             officeWorkerStatusManagement.SetIsKinematic(true);
 
@@ -68,6 +74,15 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             }
         }
 
+        /// <summary>
+        /// ïKéEãZã©Ç—ÇÃäJén
+        /// </summary>
+        void OfficeWorkerDeathblowCallOutVoice()
+        {
+            // audioSource
+            soundEffectsManagement.PlayOneShotVoiceOfCallOut();
+        }
+
         // <summary>
         // ïKéEãZanimationÇÃèIóπ
         // </summary>
@@ -79,6 +94,9 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
                 Invoke(nameof(ExitStatusManagement), officeWorkerStatusManagement.GetDeathblowMoveDuration_Seconds());
                 officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(true);
             }
+
+            // audioSource
+            soundEffectsManagement.PlayOneShotPowerUp();
 
             // rb
             officeWorkerStatusManagement.SetIsKinematic(false);

@@ -8,6 +8,7 @@ using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
 using System.IO;
 using System;
+using Takechi.CharacterController.SpecificSoundEffects.MechanicalWarreior;
 
 namespace Takechi.CharacterController.AttackAnimationEvent
 {
@@ -17,6 +18,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         [Header("=== MechanicalWarriorStatusManagement ===")]
         [SerializeField] private MechanicalWarriorStatusManagement m_mechanicalWarriorStatusManagement;
+        [Header("=== MechanicalWarriorSoundEffectsManagement ===")]
+        [SerializeField] private MechanicalWarriorSoundEffectsManagement m_soundEffectsManagement;
 
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PhotonView m_thisPhotonView;
@@ -29,6 +32,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         #region private
         private PhotonView thisPhotonView => m_thisPhotonView;
         private MechanicalWarriorStatusManagement mechanicalWarriorStatusManagement => m_mechanicalWarriorStatusManagement;
+        private MechanicalWarriorSoundEffectsManagement soundEffectsManagement => m_soundEffectsManagement;
         private float force => m_mechanicalWarriorStatusManagement.GetShootingForce();
         private float durationTime => m_mechanicalWarriorStatusManagement.GetDurationOfBullet();
 
@@ -54,6 +58,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void MechanicalWarriorFirstShot()
         {
+            soundEffectsManagement.PlayOneShotNormalShot();
+
             if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
 
             Shooting(m_magazineTransfrom, force);
@@ -64,6 +70,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void MechanicalWarriorSecondShot()
         {
+            soundEffectsManagement.PlayOneShotNormalShot();
+
             if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
 
             Shooting(m_magazineTransfrom, force);
@@ -74,6 +82,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void MechanicalWarriorThirdShot()
         {
+            soundEffectsManagement.PlayOneShotNormalShot();
+
             if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
             Shooting(m_magazineTransfrom, force);
         }
