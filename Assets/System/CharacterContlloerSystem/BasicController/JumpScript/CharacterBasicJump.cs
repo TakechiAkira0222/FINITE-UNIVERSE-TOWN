@@ -37,7 +37,7 @@ namespace Takechi.CharacterController.Jump
                 float cleanMass = characterStatusManagement.GetCleanMass();
                 Rigidbody rb = characterStatusManagement.GetMyRigidbody();
 
-                rb.AddForce(transform.up * (upForce * (rb.mass / cleanMass)), ForceMode.Impulse);
+                rb.AddForce( transform.up * (upForce * (rb.mass / cleanMass)), ForceMode.Impulse);
             };
 
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToJump function <color=green>to add.</color>");

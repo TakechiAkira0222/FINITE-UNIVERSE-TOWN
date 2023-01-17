@@ -15,6 +15,9 @@ namespace Takechi.ScriptReference.AnimatorControlVariables
             public const string movementVectorZParameterName = "movementVectorZ";
             public const string jumpingParameterName = "Jumping";
             public const string dashParameterName = "Dash";
+            public const string Ablity1ParameterName = "Ablity1";
+            public const string Ablity2ParameterName = "Ablity2";
+            public const string Ablity3ParameterName = "Ablity3";
         }
 
         public static class AnimatorLayers 

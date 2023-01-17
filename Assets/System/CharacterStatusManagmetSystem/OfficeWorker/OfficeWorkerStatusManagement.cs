@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.SpecificParameters.OfficeWorker;
 using UnityEngine;
@@ -29,6 +30,10 @@ namespace Takechi.CharacterController.Parameters
         /// ïKéEãZÇÃåpë±éûä‘
         /// </summary>
         private float m_deathblowMoveDuration_Seconds;
+        /// <summary>
+        /// îÚçsóÕ
+        /// </summary>
+        private float m_ablity1FlyForce;
 
         protected override void Awake()
         {
@@ -50,13 +55,15 @@ namespace Takechi.CharacterController.Parameters
             SetJumpPowerIncrease(m_officeWorkerSpecificParameters.GetJumpPowerIncrease());
             SetAttackPowerIncrease(m_officeWorkerSpecificParameters.GetAttackPowerIncrease());
             SetSpecialMoveDuration_Seconds(m_officeWorkerSpecificParameters.GetSpecialMoveDuration_Seconds());
+            SetAblity1FlyForce(m_officeWorkerSpecificParameters.GetAblity1FlyForce());
 
             Debug.Log($"<color=green> setupOfficeWorkerSpecificParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" NickName : { PhotonNetwork.LocalPlayer.NickName} \n" +
                       $" m_moveingSpeedIncrease = { m_moveingSpeedIncrease}\n" +
                       $" m_jumpPowerIncrease    = { m_jumpPowerIncrease}\n" +
-                      $" m_attackPowerIncrease  = { m_attackPowerIncrease}\n"
+                      $" m_attackPowerIncrease  = { m_attackPowerIncrease}\n"+
+                      $" m_ablity1FlyForce      = { m_ablity1FlyForce}\n"
                       );
         }
 
@@ -66,26 +73,31 @@ namespace Takechi.CharacterController.Parameters
 
         public void SetAttackPowerIncrease(float changeValue)
         {
-            Debug.Log($" AttackPowerIncrease {m_attackPowerIncrease} = {changeValue}");
             m_attackPowerIncrease = changeValue;
+            Debug.Log($" AttackPowerIncrease {m_attackPowerIncrease} = {changeValue}");
         }
 
         public void SetMoveingSpeedIncrease(float changeValue)
         {
-            Debug.Log($" MoveingSpeedIncrease {m_moveingSpeedIncrease} = {changeValue}");
             m_moveingSpeedIncrease = changeValue;
+            Debug.Log($" MoveingSpeedIncrease {m_moveingSpeedIncrease} = {changeValue}");
         }
 
         public void SetJumpPowerIncrease(float changeValue)
         {
-            Debug.Log($" JumpPowerIncrease {m_jumpPowerIncrease} = { changeValue}");
             m_jumpPowerIncrease = changeValue;
+            Debug.Log($" JumpPowerIncrease {m_jumpPowerIncrease} = { changeValue}");
         }
 
         public void SetSpecialMoveDuration_Seconds(float changeValue)
         {
-            Debug.Log($" SpecialMoveDuration_Seconds {m_deathblowMoveDuration_Seconds} = {changeValue}");
             m_deathblowMoveDuration_Seconds = changeValue;
+            Debug.Log($" SpecialMoveDuration_Seconds {m_deathblowMoveDuration_Seconds} = {changeValue}");
+        }
+        public void SetAblity1FlyForce(float changeValue)
+        {
+            m_ablity1FlyForce = changeValue;
+            Debug.Log($" Ablity1FlyForce {m_ablity1FlyForce} = {changeValue}");
         }
 
         #endregion
@@ -95,6 +107,7 @@ namespace Takechi.CharacterController.Parameters
         public float GetMoveingSpeedIncrease() { return m_moveingSpeedIncrease; }
         public float GetJumpPowerIncrease() { return m_jumpPowerIncrease; }
         public float GetDeathblowMoveDuration_Seconds() { return m_deathblowMoveDuration_Seconds; }
+        public float GetAblity1FlyForce() { return m_ablity1FlyForce; }
 
         #endregion
     }
