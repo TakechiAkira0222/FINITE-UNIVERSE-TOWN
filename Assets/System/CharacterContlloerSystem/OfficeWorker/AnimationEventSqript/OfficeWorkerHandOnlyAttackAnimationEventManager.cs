@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.SpecificSoundEffects.OfficeWorker;
 using UnityEngine;
@@ -10,27 +11,25 @@ namespace Takechi.CharacterController.AttackAnimationEvent
     public class OfficeWorkerHandOnlyAttackAnimationEventManager : MonoBehaviour
     {
         #region SerializeField
-
+        [Header("=== OfficeWorkerAddressManagement === ")]
+        [SerializeField] private OfficeWorkerAddressManagement m_officeWorkerAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== OfficeWorkerSoundEffectsManagement ===")]
         [SerializeField] private OfficeWorkerSoundEffectsManagement m_officeWorkerSoundEffectsManagement;
 
-        [Header("=== ScriptSetting ===")]
-        [SerializeField] private PhotonView m_thisPhotonView;
-        [SerializeField] private GameObject m_swordObject;
-        [SerializeField] private GameObject m_swordEffectTrail;
-
         #endregion
 
-        #region private
-        private PhotonView thisPhotonView => m_thisPhotonView;
+        #region private variable
+        private OfficeWorkerAddressManagement addressManagement => m_officeWorkerAddressManagement;
         private CharacterStatusManagement    characterStatusManagement => m_characterStatusManagement;
         private OfficeWorkerSoundEffectsManagement officeWorkerSoundEffectsManagement => m_officeWorkerSoundEffectsManagement;
-        private GameObject  swordObject => m_swordObject;
-        private GameObject  swordEffectTrail => m_swordEffectTrail;
-        private Rigidbody   rb => characterStatusManagement.GetMyRigidbody();
-        private AudioSource audioSource => characterStatusManagement.GetMyMainAudioSource();
+        private PhotonView  myPhotonView => addressManagement.GetMyPhotonView();
+        private Rigidbody   myRb => addressManagement.GetMyRigidbody();
+        private AudioSource audioSource => addressManagement.GetMyMainAudioSource();
+        private GameObject  swordObject => addressManagement.GetSwordObject();
+        private GameObject  swordEffectTrail => addressManagement.GetSwordEffectTrail();
+        private Collider    myCollider => addressManagement.GetMyCollider();
         private Collider    swordCollider => swordObject.GetComponent<Collider>();
 
         #endregion
@@ -39,7 +38,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         private void Awake()
         {
-            Physics.IgnoreCollision( swordCollider, characterStatusManagement.GetMyCollider(), false);
+            Physics.IgnoreCollision( swordCollider, myCollider, false);
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
             officeWorkerSoundEffectsManagement.PlayOneShotFirstNormalAttack();
             officeWorkerSoundEffectsManagement.PlayOneShotVoiceOfFirstNormalAttack();
 
-            if (characterStatusManagement.GetMyPhotonView().IsMine)
+            if (myPhotonView.IsMine)
             {
 
             }
@@ -65,7 +64,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerFastAttackEnd()
         {
-            if (characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (myPhotonView.IsMine) return;
 
             setSwordStatus(false);
         }
@@ -78,7 +77,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
             officeWorkerSoundEffectsManagement.PlayOneShotSecondNormalAttack();
             officeWorkerSoundEffectsManagement.PlayOneShotVoiceOfSecondNormalAttack();
 
-            if (characterStatusManagement.GetMyPhotonView().IsMine)
+            if (myPhotonView.IsMine)
             {
 
             }
@@ -93,7 +92,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerSecondAttackEnd()
         {
-            if (characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (myPhotonView.IsMine) return;
 
             setSwordStatus(false);
         }
@@ -103,7 +102,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackStart()
         {
-            if (characterStatusManagement.GetMyPhotonView().IsMine)
+            if (myPhotonView.IsMine)
             {
 
             }
@@ -118,7 +117,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// </summary>
         void OfficeWorkerThirdAttackEnd()
         {
-            if (characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (myPhotonView.IsMine) return;
 
             setSwordStatus(false);
         }

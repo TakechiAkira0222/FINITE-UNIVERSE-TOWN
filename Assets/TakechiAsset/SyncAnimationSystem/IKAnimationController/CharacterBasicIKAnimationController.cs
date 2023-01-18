@@ -11,7 +11,6 @@ namespace Takechi.AnimationSystem.IK
     public class CharacterBasicIKAnimationController : MonoBehaviour
     {
         #region SerializeField 
-
         [SerializeField] private Animator  m_animator;
 
         // Target
@@ -20,15 +19,65 @@ namespace Takechi.AnimationSystem.IK
         [SerializeField] private Transform m_rightHandIkTarget;
 
         // Weight
-        [SerializeField, Range(0, 1)] private float m_lookingIkWeight = 0.5f;
-        [SerializeField, Range(0, 1)] private float m_rightHandIkWeight = 0.5f;
-        [SerializeField, Range(0, 1)] private float m_leftHandIkWeight = 0.5f;
+        [SerializeField, Range( 0, 1)] private float m_lookingIkWeight = 0.5f;
+        [SerializeField, Range( 0, 1)] private float m_rightHandIkWeight = 0.5f;
+        [SerializeField, Range( 0, 1)] private float m_leftHandIkWeight = 0.5f;
+
+        private float cleanLookingIkWeight;
+        private float cleanRightHandIkWeight;
+        private float cleanLeftHandIkWeight;
 
         #endregion
+
+        #region Get 
+        public float GetLookingIkWeight()   { return m_lookingIkWeight; }
+        public float GetRightHandIkWeight() { return m_rightHandIkWeight; }
+        public float GetLeftHandIkWeight()  { return m_leftHandIkWeight; }
+
+        #endregion
+
+        #region Set
+
+        public void SetLookingIkWeight(float value)   
+        {
+            m_lookingIkWeight = value;
+            Debug.Log($"{m_lookingIkWeight} = {value}");
+        }
+        public void SetRightHandIkWeight(float value) 
+        {
+            m_rightHandIkWeight = value;
+            Debug.Log($"{m_rightHandIkWeight} = {value}");
+        }
+        public void SetLeftHandIkWeight(float value)  
+        { 
+            m_leftHandIkWeight = value;
+            Debug.Log($"{m_leftHandIkWeight} = {value}");
+        }
+        public void SetAllIkWeight(float value)
+        {
+            SetLookingIkWeight(value);
+            SetRightHandIkWeight(value);
+            SetLeftHandIkWeight(value);
+        }
+        #endregion
+
+        public void ResetAllIkWeight()
+        {
+            SetLookingIkWeight(  cleanLookingIkWeight);
+            SetRightHandIkWeight(cleanRightHandIkWeight);
+            SetLeftHandIkWeight( cleanLeftHandIkWeight);
+        }
 
         private void Reset()
         {
             m_animator = this.GetComponent<Animator>();
+        }
+
+        private void Start()
+        {
+            cleanLookingIkWeight   = GetLookingIkWeight();
+            cleanRightHandIkWeight = GetRightHandIkWeight();
+            cleanLeftHandIkWeight  = GetLeftHandIkWeight();
         }
 
         private void OnAnimatorIK(int layerIndex)

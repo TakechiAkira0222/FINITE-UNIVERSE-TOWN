@@ -18,8 +18,8 @@ namespace Takechi.CharacterController.Deathblow
         #endregion
 
         #region protected
-        protected CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
-        protected CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
+        protected CharacterStatusManagement statusManagement => m_characterStatusManagement;
+        protected CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
 
         #endregion
 
@@ -36,13 +36,13 @@ namespace Takechi.CharacterController.Deathblow
 
         protected virtual void OnEnable()
         {
-            characterKeyInputStateManagement.InputToDeathblow += (characterStatusManagement) => { WhileUsingIt(characterStatusManagement); };
+            keyInputStateManagement.InputToDeathblow += ( statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToDeathblow function <color=green>to add.</color>");
         }
 
         protected virtual void OnDisable()
         {
-            characterKeyInputStateManagement.InputToDeathblow -= (characterStatusManagement) => { WhileUsingIt(characterStatusManagement); };
+            keyInputStateManagement.InputToDeathblow -= (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToDeathblow function <color=green>to remove.</color>");
         }
 
@@ -56,13 +56,13 @@ namespace Takechi.CharacterController.Deathblow
 
         private void AvailabilityTimeControl()
         {
-            if (!characterStatusManagement.GetCanUseDeathblow())
+            if (!statusManagement.GetCanUseDeathblow())
             {
-                characterStatusManagement.UpdateCanUseDeathblow_TimeCount_Seconds(Time.deltaTime);
+                statusManagement.UpdateCanUseDeathblow_TimeCount_Seconds(Time.deltaTime);
 
-                if ( characterStatusManagement.GetCanUseDeathblow_RecoveryTime_Seconds() <= characterStatusManagement.GetCanUseDeathblow_TimeCount_Seconds())
+                if (statusManagement.GetCanUseDeathblow_RecoveryTime_Seconds() <= statusManagement.GetCanUseDeathblow_TimeCount_Seconds())
                 {
-                    characterStatusManagement.SetCanUseDeathblow(true);
+                    statusManagement.SetCanUseDeathblow(true);
                     Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterStatusManagement.<color=yellow>SetCanUseDeathblow</color>(<color=blue>true</color>) <color=green>to set.</color>");
                 }
             }

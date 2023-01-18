@@ -9,6 +9,7 @@ namespace Takechi.CharacterController.SpecificParameters.OfficeWorker
     [CreateAssetMenu(fileName = "OfficeWorkerSpecificParameters", menuName = "OfficeWorkerSpecificParameters")]
     public class OfficeWorkerSpecificParameters : ScriptableObject
     {
+        #region SerializeField
         [Header("=== DeathblowStatusIncreaseSetting ===")]
         [SerializeField, Range(10.0f, 30.0f), Tooltip("必殺技のステータス上昇幅　AttackPower")]
         private float m_attackPowerIncrease  = 30.0f;
@@ -20,6 +21,8 @@ namespace Takechi.CharacterController.SpecificParameters.OfficeWorker
         private float m_specialMoveDuration_Seconds = 30;
         [SerializeField, Tooltip(" アビリティ 1　飛ぶ力")]
         private float m_ablity1FlyForce = 500;
+
+        #endregion
 
         #region GetStatusFunction
         public float GetAttackPowerIncrease() { return m_attackPowerIncrease; }

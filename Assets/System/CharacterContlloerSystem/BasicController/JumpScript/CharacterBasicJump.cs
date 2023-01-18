@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Takechi.CharacterController.Jump
 {
-    [RequireComponent(typeof(CharacterStatusManagement))]
+    [RequireComponent(typeof(CharacterKeyInputStateManagement))]
     public class CharacterBasicJump : MonoBehaviour
     {
         #region SerializeField
@@ -19,23 +19,27 @@ namespace Takechi.CharacterController.Jump
         #endregion
 
         #region private
-        private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
+        private CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
 
         #endregion
 
         #region UnityEvent
+        private void Reset()
+        {
+            m_characterKeyInputStateManagement = this.transform.GetComponent<CharacterKeyInputStateManagement>();
+        }
 
         private void OnEnable()
         {
-            characterKeyInputStateManagement.InputToJump += (characterStatusManagement) =>
+            keyInputStateManagement.InputToJump += (statusManagement, addressManagement) =>
             {
-                if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+                if (!addressManagement.GetMyPhotonView().IsMine) return;
 
-                if (!characterStatusManagement.GetIsGrounded()) return;
+                if (!statusManagement.GetIsGrounded()) return;
 
-                float upForce = characterStatusManagement.GetJumpPower();
-                float cleanMass = characterStatusManagement.GetCleanMass();
-                Rigidbody rb = characterStatusManagement.GetMyRigidbody();
+                float upForce = statusManagement.GetJumpPower();
+                float cleanMass = statusManagement.GetCleanMass();
+                Rigidbody rb = addressManagement.GetMyRigidbody();
 
                 rb.AddForce( transform.up * (upForce * (rb.mass / cleanMass)), ForceMode.Impulse);
             };
@@ -44,15 +48,15 @@ namespace Takechi.CharacterController.Jump
         }
         private void OnDisable()
         {
-            characterKeyInputStateManagement.InputToJump -= (characterStatusManagement) =>
+            keyInputStateManagement.InputToJump -= (statusManagement, addressManagement) =>
             {
-                if (!characterStatusManagement.GetMyPhotonView().IsMine) return;
+                if (!addressManagement.GetMyPhotonView().IsMine) return;
 
-                if (!characterStatusManagement.GetIsGrounded()) return;
+                if (!statusManagement.GetIsGrounded()) return;
 
-                float upForce = characterStatusManagement.GetJumpPower();
-                float cleanMass = characterStatusManagement.GetCleanMass();
-                Rigidbody rb = characterStatusManagement.GetMyRigidbody();
+                float upForce = statusManagement.GetJumpPower();
+                float cleanMass = statusManagement.GetCleanMass();
+                Rigidbody rb = addressManagement.GetMyRigidbody();
 
                 rb.AddForce(transform.up * (upForce * (rb.mass / cleanMass)), ForceMode.Impulse);
             };

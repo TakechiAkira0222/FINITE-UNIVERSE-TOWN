@@ -1,55 +1,39 @@
 using UnityEngine;
 using Photon.Pun;
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using Takechi.CharacterController.Parameters;
-using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
-using System.IO;
-using System;
-using Takechi.CharacterController.SpecificSoundEffects.MechanicalWarreior;
+using Takechi.CharacterController.Address;
 
 namespace Takechi.CharacterController.AttackAnimationEvent
 {
     public class MechanicalWarriorHandOnlyAttackAnimationEventManager : MonoBehaviour
     {
         #region SerializeField
-
+        [Header("=== MechanicalWarriorAddressManagement === ")]
+        [SerializeField] private MechanicalWarriorAddressManagement m_mechanicalWarriorAddressManagement;
         [Header("=== MechanicalWarriorStatusManagement ===")]
         [SerializeField] private MechanicalWarriorStatusManagement m_mechanicalWarriorStatusManagement;
         [Header("=== MechanicalWarriorSoundEffectsManagement ===")]
         [SerializeField] private MechanicalWarriorSoundEffectsManagement m_soundEffectsManagement;
 
-        [Header("=== ScriptSetting ===")]
-        [SerializeField] private PhotonView m_thisPhotonView;
-
-        [SerializeField] private GameObject m_instans;
-        [SerializeField] private Transform  m_magazineTransfrom;
-     
         #endregion
 
-        #region private
-        private PhotonView thisPhotonView => m_thisPhotonView;
+        #region private variable
+        private MechanicalWarriorAddressManagement addressManagement => m_mechanicalWarriorAddressManagement;
         private MechanicalWarriorStatusManagement mechanicalWarriorStatusManagement => m_mechanicalWarriorStatusManagement;
         private MechanicalWarriorSoundEffectsManagement soundEffectsManagement => m_soundEffectsManagement;
-        private float force => m_mechanicalWarriorStatusManagement.GetShootingForce();
-        private float durationTime => m_mechanicalWarriorStatusManagement.GetDurationOfBullet();
-
+        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private GameObject bulletsInstans => addressManagement.GetBulletsInstans();
+        private Transform  magazineTransfrom => addressManagement.GetMagazineTransfrom();
+        private float  force => m_mechanicalWarriorStatusManagement.GetShootingForce();
+        private float  durationTime => m_mechanicalWarriorStatusManagement.GetDurationOfBullet();
         private string path => m_mechanicalWarriorStatusManagement.GetBulletsPath();
 
-
         #endregion
-
-        private void Awake()
-        {
-            
-        }
-
-        private void Reset()
-        {
-            m_thisPhotonView = this.transform.GetComponent<PhotonView>();
-        }
 
         #region UnityAnimatorEvent
 
@@ -60,9 +44,9 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             soundEffectsManagement.PlayOneShotNormalShot();
 
-            if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!myPhotonView.IsMine) return;
 
-            Shooting(m_magazineTransfrom, force);
+            Shooting(magazineTransfrom, force);
         }
 
         /// <summary>
@@ -72,9 +56,9 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             soundEffectsManagement.PlayOneShotNormalShot();
 
-            if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!myPhotonView.IsMine) return;
 
-            Shooting(m_magazineTransfrom, force);
+            Shooting(magazineTransfrom, force);
         }
 
         /// <summary>
@@ -84,13 +68,9 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         {
             soundEffectsManagement.PlayOneShotNormalShot();
 
-            if (!mechanicalWarriorStatusManagement.GetMyPhotonView().IsMine) return;
-            Shooting(m_magazineTransfrom, force);
+            if (!myPhotonView.IsMine) return;
+            Shooting(magazineTransfrom, force);
         }
-
-        #endregion
-
-        #region set Function
 
         #endregion
 
@@ -99,7 +79,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private void Shooting( Transform magazine, float force)
         {
             GameObject instans =
-            PhotonNetwork.Instantiate( path + m_instans.name, magazine.position, Quaternion.identity);
+            PhotonNetwork.Instantiate( path + bulletsInstans.name, magazine.position, Quaternion.identity);
 
             instans.GetComponent<Rigidbody>().AddForce( magazine.forward * 100 * force);
 

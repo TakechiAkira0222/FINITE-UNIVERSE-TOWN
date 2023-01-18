@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
@@ -9,10 +10,22 @@ using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnviro
 
 namespace Takechi.NetworkInstantiation.OutlineController
 {
+    [RequireComponent(typeof(CharacterAddressManagement))]
+    [RequireComponent(typeof(CharacterStatusManagement))]
     public class CharacterBasicModelOutlineController : MonoBehaviour
     {
+        #region SerializeField 
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+
+        #endregion
+
+        #region private variable
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        #endregion
 
         public struct MyColor
         {
@@ -22,10 +35,15 @@ namespace Takechi.NetworkInstantiation.OutlineController
 
         private MyColor m_myColor;
 
+        private void Reset()
+        {
+            m_characterAddressManagement = this.transform.GetComponent<CharacterAddressManagement>();
+            m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
+        }
+
         private void Start()
         {
-            int number =
-                  m_characterStatusManagement.GetMyPhotonView().ControllerActorNr;
+            int number = myPhotonView.ControllerActorNr;
 
             string team =
                     (string)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey];

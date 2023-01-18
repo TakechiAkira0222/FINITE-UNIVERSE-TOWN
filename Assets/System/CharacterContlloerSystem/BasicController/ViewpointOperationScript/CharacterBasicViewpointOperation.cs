@@ -2,6 +2,7 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
@@ -9,11 +10,14 @@ using UnityEngine.Rendering;
 
 namespace Takechi.CharacterController.ViewpointOperation
 {
+    [RequireComponent(typeof(CharacterAddressManagement))]
     [RequireComponent(typeof(CharacterStatusManagement))]
+    [RequireComponent(typeof(CharacterKeyInputStateManagement))]
     public class CharacterBasicViewpointOperation : MonoBehaviour
     {
         #region SerializeField
-
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
@@ -21,12 +25,12 @@ namespace Takechi.CharacterController.ViewpointOperation
 
         #endregion
 
-        #region private
-        private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
-        private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
-        private GameObject avater => characterStatusManagement.GetMyAvater();
-        private Camera mainCamera => characterStatusManagement.GetMyMainCamera();
-
+        #region private variable
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private CharacterStatusManagement statusManagement => m_characterStatusManagement;
+        private CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
+        private GameObject avater => addressManagement.GetMyAvater();
+        private Camera mainCamera => addressManagement.GetMyMainCamera();
         private Quaternion cameraRot, characterRot;
 
         #endregion
@@ -47,19 +51,19 @@ namespace Takechi.CharacterController.ViewpointOperation
         void Reset()
         {
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
+            m_characterAddressManagement = this.transform.GetComponent<CharacterAddressManagement>();
+            m_characterKeyInputStateManagement = this.transform.GetComponent<CharacterKeyInputStateManagement>();
         }
 
         void Start()
         {
             cameraRot = mainCamera.transform.localRotation;
             characterRot = avater.transform.localRotation;
-
-           
         }
 
         private void OnEnable()
         {
-            m_characterStatusManagement.InitializeCameraSettings += () =>
+            statusManagement.InitializeCameraSettings += () =>
             {
                 ResetCameraRot();
                 Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCameraRot</color>() <color=green>to add.</color>");
@@ -67,13 +71,13 @@ namespace Takechi.CharacterController.ViewpointOperation
                 Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCharacterRot</color>() <color=green>to add.</color>");
             };
 
-            characterKeyInputStateManagement.InputToViewpoint += (characterStatusManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
+            keyInputStateManagement.InputToViewpoint += (statusManagement, addressManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToViewpoint function <color=green>to add.</color>");
         }
 
         private void OnDisable()
         {
-            m_characterStatusManagement.InitializeCameraSettings -= () =>
+            statusManagement.InitializeCameraSettings -= () =>
             {
                 ResetCameraRot();
                 Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCameraRot</color>() <color=green>to remove.</color>");
@@ -81,7 +85,7 @@ namespace Takechi.CharacterController.ViewpointOperation
                 Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_characterStatusManagement.InitializeCameraSettings <color=yellow>ResetCharacterRot</color>() <color=green>to remove.</color>");
             };
 
-            characterKeyInputStateManagement.InputToViewpoint -= (characterStatusManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
+            keyInputStateManagement.InputToViewpoint -= (statusManagement, addressManagement, mouseX, mouseY) => { CameraControll(mouseX, mouseY); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToViewpoint function <color=green>to remove.</color>");
         }
 

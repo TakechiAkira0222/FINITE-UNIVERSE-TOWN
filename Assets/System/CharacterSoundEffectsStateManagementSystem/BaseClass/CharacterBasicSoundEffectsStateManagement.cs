@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Takechi.CharacterController.SoundEffects
     public class CharacterBasicSoundEffectsStateManagement : MonoBehaviour
     {
         #region SerializeField
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStateManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
@@ -22,8 +25,10 @@ namespace Takechi.CharacterController.SoundEffects
         #endregion
 
         #region  protected
-        protected CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
-        protected CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
+        protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        protected CharacterStatusManagement  statusManagement => m_characterStatusManagement;
+        protected CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
+        protected AudioSource myMainAudioSource => addressManagement.GetMyMainAudioSource();
 
         #endregion
 
@@ -35,20 +40,20 @@ namespace Takechi.CharacterController.SoundEffects
 
         protected virtual void OnEnable()
         {
-            m_characterKeyInputStateManagement.InputToJump += (c_status) => { PlayOneShotJumpSound(); };
+            keyInputStateManagement.InputToJump += (status, addressManagement) => { PlayOneShotJumpSound(); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToJump function <color=green>to add.</color>");
         }
         
         protected virtual void OnDisable()
         {
-            m_characterKeyInputStateManagement.InputToJump -= (c_status) => { PlayOneShotJumpSound(); };
+            keyInputStateManagement.InputToJump -= (status, addressManagement) => { PlayOneShotJumpSound(); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : m_characterKeyInputStateManagement.InputToJump function <color=green>to remove.</color>");
         }
 
         #region PlayOneShotFunction
         public void PlayOneShotJumpSound()
-        { 
-            characterStatusManagement.GetMyMainAudioSource().PlayOneShot( playableCharacterSoundEffects.GetJumpSoundClip() , playableCharacterSoundEffects.GetJumpSoundClipVolume());
+        {
+            myMainAudioSource.PlayOneShot( playableCharacterSoundEffects.GetJumpSoundClip() , playableCharacterSoundEffects.GetJumpSoundClipVolume());
         }
 
         #endregion

@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
 {
     public class CharacterBasicSetActiveSettingWhenInstantiated : MonoBehaviour
     {
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
 
@@ -16,7 +19,6 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
         /// 自分のみ表示
         /// </summary>
         [SerializeField] private List<GameObject> m_showOnlyMyEnvironment;
-
         /// <summary>
         ///　自分以外表示
         /// </summary>
@@ -25,6 +27,14 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
         [Header("=== Debug ===")]
         [SerializeField] private KeyCode m_debugKey = KeyCode.M;
 
+
+        #region private variable
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+
+        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+
+        #endregion
+
         private void Reset()
         {
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
@@ -32,7 +42,7 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
 
         void Start()
         {
-            if (m_characterStatusManagement.GetMyPhotonView().IsMine)
+            if (myPhotonView.IsMine)
             {
                 foreach (GameObject obj in m_showOnlyMyEnvironment)
                 {

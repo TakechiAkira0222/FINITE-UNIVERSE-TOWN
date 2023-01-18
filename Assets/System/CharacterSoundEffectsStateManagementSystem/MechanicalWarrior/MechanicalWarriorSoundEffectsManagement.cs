@@ -29,7 +29,7 @@ namespace Takechi.CharacterController.Parameters
 
         public void PlayOneShotNormalShot()
         {
-            characterStatusManagement.GetMyMainAudioSource().PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetNormalShotClip(), mechanicalWarreiorSpecificSoundEffects.GetNormalShotVolume());
+            myMainAudioSource.PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetNormalShotClip(), mechanicalWarreiorSpecificSoundEffects.GetNormalShotVolume());
         }
 
         #endregion

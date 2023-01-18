@@ -8,19 +8,37 @@ using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReferenc
 using Takechi.CharacterController.KeyInputStete;
 using TakechiEngine.PUN;
 using System.IO;
+using Takechi.CharacterController.Address;
 
 namespace Takechi.CharacterController.DeathJudgment
 {
     public class CharacterBasicDeathJudgmentManagement : TakechiPunCallbacks
     {
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
-        [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
-
+        [SerializeField] private CharacterStatusManagement  m_characterStatusManagement;
+        [Header("=== CharacterKeyInputStateManagement === ")]
+        [SerializeField] private CharacterKeyInputStateManagement m_characterkeyInputStateManagement;
+        [Header("=== ScriptSetting ===")]
         [SerializeField] private string m_tagName = "AntiField";
         [SerializeField] private string m_respawnPointAName = "RespawnPointA";
         [SerializeField] private string m_respawnPointBName = "RespawnPointB";
-        [SerializeField] private GameObject m_deathEffect;
+
+        #region private variable
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
+        private CharacterKeyInputStateManagement keyInputStateManagement => m_characterkeyInputStateManagement;
+        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private Camera myDeathCamera => addressManagement.GetMyDeathCamera();
+        private Camera myMainCamera  => addressManagement.GetMyMainCamera();
+        private GameObject myAvater  => addressManagement.GetMyAvater();
+        private GameObject handOnlyModelObject => addressManagement.GetHandOnlyModelObject();
+        private GameObject networkModelObject => addressManagement.GetNetworkModelObject();
+        private GameObject deathEffect => addressManagement.GetDeathEffect();
+        private string deathEffectFolderName => addressManagement.GetDeathEffectFolderName();
+
+        #endregion
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -31,7 +49,7 @@ namespace Takechi.CharacterController.DeathJudgment
                     EffectInstantiation(collision.contacts[0].point);
 
                     StartOfDeathJudgment( );
-                    StartCoroutine( DelayMethod(m_characterStatusManagement.GetRespawnTime_Seconds(), 
+                    StartCoroutine( DelayMethod( statusManagement.GetRespawnTime_Seconds(), 
                         () => EndOfDeathJudgment( m_respawnPointAName)));
                 }
                 else
@@ -39,7 +57,7 @@ namespace Takechi.CharacterController.DeathJudgment
                     EffectInstantiation(collision.contacts[0].point);
 
                     StartOfDeathJudgment( );
-                    StartCoroutine(DelayMethod(m_characterStatusManagement.GetRespawnTime_Seconds(), 
+                    StartCoroutine(DelayMethod( statusManagement.GetRespawnTime_Seconds(), 
                         () => EndOfDeathJudgment(m_respawnPointBName)));
                 }
             }
@@ -47,28 +65,28 @@ namespace Takechi.CharacterController.DeathJudgment
 
         private void StartOfDeathJudgment()
         {
-            if (m_characterStatusManagement.GetMyPhotonView().IsMine)
+            if (myPhotonView.IsMine)
             {
-                m_characterStatusManagement.GetHandOnlyModelObject().SetActive(false);
+                handOnlyModelObject.SetActive(false);
                 DrawingCameraSettings(true);
                 CharacterStateChange(true);
             }
             else
             {
-                m_characterStatusManagement.GetNetworkModelObject().SetActive(false);
+                networkModelObject.SetActive(false);
             }
         }
 
         private void EndOfDeathJudgment(string respawnPoint)
         {
-            if (m_characterStatusManagement.GetMyPhotonView().IsMine)
+            if (myPhotonView.IsMine)
             {
-                m_characterStatusManagement.GetHandOnlyModelObject().SetActive(true);
+                handOnlyModelObject.SetActive(true);
                 DrawingCameraSettings(false);
                 CharacterStateChange(false);
                 RespawnMovement(respawnPoint);
 
-                m_characterStatusManagement.GetToFade().OnFadeIn("resumption");
+                addressManagement.GetToFade().OnFadeIn("resumption");
                 Debug.Log(" m_characterStatusManagement.<color=yellow>.GetToFade</color>().<color=yellow>.OnFadeIn</color>(resumption)");
 
                 m_characterStatusManagement.ResetCharacterParameters();
@@ -76,7 +94,7 @@ namespace Takechi.CharacterController.DeathJudgment
             }
             else
             {
-                m_characterStatusManagement.GetNetworkModelObject().SetActive(true);
+                networkModelObject.SetActive(true);
             }
         }
 
@@ -88,12 +106,9 @@ namespace Takechi.CharacterController.DeathJudgment
         /// <param name="point"></param>
         private void EffectInstantiation( Vector3 point)
         {
-            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!myPhotonView.IsMine) return;
 
-            GameObject effct = PhotonNetwork.Instantiate
-              (m_characterStatusManagement.GetDeathEffectFolderName() + m_deathEffect.name,
-              point, Quaternion.identity);
-
+            GameObject effct = PhotonNetwork.Instantiate( deathEffectFolderName + deathEffect.name, point, Quaternion.identity);
             StartCoroutine(DelayMethod(0.5f, () => { PhotonNetwork.Destroy(effct); }));
         }
 
@@ -103,10 +118,10 @@ namespace Takechi.CharacterController.DeathJudgment
         /// <param name="flag"></param>
         private void DrawingCameraSettings(bool flag)
         {
-            m_characterStatusManagement.GetMyDeathCamera().gameObject.SetActive(flag);
+            myDeathCamera.gameObject.SetActive(flag);
             Debug.Log($" m_characterStatusManagement.<color=yellow>GetMyDeathCamera</color>(<color=blue>{flag}</color>)");
 
-            m_characterStatusManagement.GetMyMainCamera().gameObject.SetActive(!flag);
+            myMainCamera.gameObject.SetActive(!flag);
             Debug.Log($" m_characterStatusManagement.<color=yellow>GetMyMainCamera</color>(<color=blue>{!flag}</color>)");
         }
 
@@ -116,11 +131,11 @@ namespace Takechi.CharacterController.DeathJudgment
         /// <param name="flag"></param>
         private void CharacterStateChange(bool flag)
         {
-            m_characterStatusManagement.GetMyRigidbody().isKinematic = flag;
+            statusManagement.SetIsKinematic(flag);
             Debug.Log($" m_characterStatusManagement.<color=yellow>GetMyRigidbody</color>() = {flag}");
 
-            m_characterKeyInputStateManagement.SetOperation(!flag);
-            Debug.Log($" m_characterKeyInputStateManagement.<color=yellow>.SetOperation</color>() = {!flag}");
+            keyInputStateManagement.SetOperation(!flag);
+            Debug.Log($" keyInputStateManagement.<color=yellow>.SetOperation</color>() = {!flag}");
         }
 
       
@@ -131,10 +146,10 @@ namespace Takechi.CharacterController.DeathJudgment
         /// <param name="respawnPoint"></param>
         private void RespawnMovement(string respawnPoint)
         {
-            m_characterStatusManagement.GetMyAvater().transform.position = GameObject.Find(respawnPoint).transform.position;
+            myAvater.transform.position = GameObject.Find(respawnPoint).transform.position;
             Debug.Log($" m_characterStatusManagement<color=yellow>.GetMyAvater</color>().transform.position = <color=green>GameObject</color>.Find({respawnPoint}).transform.position;");
 
-            m_characterStatusManagement.ResetCharacterInstanceState();
+            statusManagement.ResetCharacterInstanceState();
             Debug.Log($" m_characterStatusManagement<color=yellow>.ResetCharacterInstanceState</color>()");
         }
 

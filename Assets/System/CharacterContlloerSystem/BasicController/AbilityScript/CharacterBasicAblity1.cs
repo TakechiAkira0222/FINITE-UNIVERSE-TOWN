@@ -1,31 +1,40 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
 
 namespace Takechi.CharacterController.Ablity1
 {
+    [RequireComponent(typeof(CharacterAddressManagement))]
+    [RequireComponent(typeof(CharacterStatusManagement))]
+    [RequireComponent(typeof(CharacterKeyInputStateManagement))]
     public class CharacterBasicAblity1 : MonoBehaviour
     {
         #region SerializeField
-        [Header("=== CharacterStatusManagement ===")]
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
+        [Header("=== statusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
+
         #endregion
 
         #region protected
-        protected CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        protected CharacterStatusManagement statusManagement => m_characterStatusManagement;
+        protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
         protected CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
 
         #endregion
 
-        private void Reset()
+        void Reset()
         {
-            m_characterStatusManagement = this.GetComponent<CharacterStatusManagement>();
-            m_characterKeyInputStateManagement = this.GetComponent<CharacterKeyInputStateManagement>();
+            m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
+            m_characterAddressManagement = this.transform.GetComponent<CharacterAddressManagement>();
+            m_characterKeyInputStateManagement = this.transform.GetComponent<CharacterKeyInputStateManagement>();
         }
 
         protected virtual void Update()
@@ -35,34 +44,34 @@ namespace Takechi.CharacterController.Ablity1
 
         protected virtual void OnEnable()
         {
-            characterKeyInputStateManagement.InputToAblity1 += (characterStatusManagement) => { WhileUsingIt(characterStatusManagement); };
+            characterKeyInputStateManagement.InputToAblity1 += (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToAblity1 function <color=green>to add.</color>");
         }
 
         protected virtual void OnDisable()
         {
-            characterKeyInputStateManagement.InputToAblity1 -= (characterStatusManagement) => { WhileUsingIt(characterStatusManagement); };
+            characterKeyInputStateManagement.InputToAblity1 -= (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToAblity1 function <color=green>to remove.</color>");
         }
 
-        private void WhileUsingIt(CharacterStatusManagement characterStatusManagement)
+        private void WhileUsingIt(CharacterStatusManagement statusManagement)
         {
-            characterStatusManagement.SetCanUseAbility1(false);
-            characterStatusManagement.SetCanUsecanUseAbility1_TimeCount_Seconds(0);
-            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterStatusManagement.<color=yellow>SetCanUseAbility1</color>(<color=blue>false</color>) <color=green>to set.</color>");
-            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterStatusManagement.<color=yellow>.SetCanUsecanUseAbility1_TimeCount_Seconds</color>(<color=blue>0</color>) <color=green>to set.</color>");
+            statusManagement.SetCanUseAbility1(false);
+            statusManagement.SetCanUsecanUseAbility1_TimeCount_Seconds(0);
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : statusManagement.<color=yellow>SetCanUseAbility1</color>(<color=blue>false</color>) <color=green>to set.</color>");
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : statusManagement.<color=yellow>.SetCanUsecanUseAbility1_TimeCount_Seconds</color>(<color=blue>0</color>) <color=green>to set.</color>");
         }
 
         private void AvailableTimeControl()
         {
-            if (!characterStatusManagement.GetCanUseAbility1())
+            if (!statusManagement.GetCanUseAbility1())
             {
-                characterStatusManagement.UpdateCanUseAbility1_TimeCount_Seconds(Time.deltaTime);
+                statusManagement.UpdateCanUseAbility1_TimeCount_Seconds(Time.deltaTime);
 
-                if (characterStatusManagement.GetCanUseAbility1_RecoveryTime_Seconds() <= characterStatusManagement.GetCanUseAbility1_TimeCount_Seconds())
+                if (statusManagement.GetCanUseAbility1_RecoveryTime_Seconds() <= statusManagement.GetCanUseAbility1_TimeCount_Seconds())
                 {
-                    characterStatusManagement.SetCanUseAbility1(true);
-                    Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterStatusManagement.<color=yellow>SetCanUseAbility1</color>(<color=blue>true</color>) <color=green>to set.</color>");
+                    statusManagement.SetCanUseAbility1(true);
+                    Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : statusManagement.<color=yellow>SetCanUseAbility1</color>(<color=blue>true</color>) <color=green>to set.</color>");
                 }
             }
         }

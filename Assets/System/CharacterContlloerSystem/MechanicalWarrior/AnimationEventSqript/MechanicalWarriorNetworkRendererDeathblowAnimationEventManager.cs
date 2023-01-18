@@ -13,25 +13,28 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
     {
         #region UnityAnimatorEvent
 
-        private void Awake()
+        /// <summary>
+        /// Mechanical Warrior Deathblow Start
+        /// </summary>
+        void MechanicalWarriorDeathblowStart()
         {
 
         }
 
         /// <summary>
-        /// ïKéEãZanimationÇÃäJén
+        /// Mechanical Warrior Deathblow Shot
         /// </summary>
-        void OfficeWorkerDeathblowStart()
+        void MechanicalWarriorDeathblowShot()
         {
-          
+
         }
 
         /// <summary>
-        /// ïKéEãZanimationÇÃèIóπ
+        /// Mechanical Warrior Deathblow End
         /// </summary>
-        void OfficeWorkerDeathblowEnd()
+        void MechanicalWarriorDeathblowEnd()
         {
-           
+
         }
 
         #endregion

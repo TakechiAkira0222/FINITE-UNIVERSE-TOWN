@@ -1,141 +1,51 @@
 using UnityEngine;
 using Photon.Pun;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Takechi.PlayableCharacter.FadingCanvas;
-using Takechi.ScriptReference.CustomPropertyKey;
 using TakechiEngine.PUN.CustomProperties;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
-using UnityEngine.Android;
-using System.Net.NetworkInformation;
+using Takechi.CharacterController.Address;
+using Takechi.CharacterController.KeyInputStete;
 
 namespace Takechi.CharacterController.Parameters
 {
     /// <summary>
     /// パラメータの中間管理を行うクラス
     /// </summary>
+    [RequireComponent(typeof(CharacterAddressManagement))]
     public class CharacterStatusManagement : TakechiPunCustomProperties
     {
         #region SerializeField
+
+        [Header("=== CharacterAddressManagement === ")]
+        /// <summary>
+        /// 住所
+        /// </summary>
+        [SerializeField] private CharacterAddressManagement characterAddressManagement;
 
         [Header("=== CharacterStatus Setting===")]
         /// <summary>
         /// マスターデータ
         /// </summary>
         [SerializeField] private PlayableCharacterParameters m_characterParameters;
-        /// <summary>
-        /// this photonViwe
-        /// </summary>
-        [SerializeField] private PhotonView m_thisPhotonView;
-        /// <summary>
-        /// main avater
-        /// </summary>
-        [SerializeField] private GameObject m_avater;
-        /// <summary>
-        /// main colloder
-        /// </summary>
-        [SerializeField] private Collider m_mainCollider;
-        /// <summary>
-        /// main rb
-        /// </summary>
-        [SerializeField] private Rigidbody m_rb;
-        /// <summary>
-        /// main audioSource
-        /// </summary>
-        [SerializeField] private AudioSource m_mainAudioSource;
-        /// <summary>
-        /// main camera
-        /// </summary>
-        [SerializeField] private Camera m_mainCamera;
-        /// <summary>
-        /// death Camera
-        /// </summary>
-        [SerializeField] private Camera  m_deathCamera;
-        /// <summary>
-        /// hand only animetor
-        /// </summary>
-        [SerializeField] private Animator m_handOnlyModelAnimator;
-        /// <summary>
-        /// hand only model object
-        /// </summary>
-        [SerializeField] private GameObject m_handOnlyModelObject;
-        /// <summary>
-        /// network model animator
-        /// </summary>
-        [SerializeField] private Animator m_networkModelAnimator;
-        /// <summary>
-        /// hand only model object
-        /// </summary>
-        [SerializeField] private GameObject m_networkModelObject;
-        /// <summary>
-        /// model Outline
-        /// </summary>
-        [SerializeField] private Outline m_modelOutline;
-        /// <summary>
-        /// to Fade
-        /// </summary>
-        [SerializeField] private ToFade  m_toFade;
-        /// <summary>
-        /// attackHits effect folder name
-        /// </summary>
-        [SerializeField] private List<string> m_attackHitsEffectFolderName = new List<string>(4);
-        /// <summary>
-        /// death effect folder name
-        /// </summary>
-        [SerializeField] private List<string> m_deathEffectFolderName = new List<string>(4);
+
         #endregion
 
         #region protected member variable
+
         /// <summary>
         /// this photonViwe
         /// </summary>
-        protected PhotonView thisPhotonView => m_thisPhotonView;
-        /// <summary>
-        /// main avater
-        /// </summary>
-        protected GameObject avater => m_avater;
-        /// <summary>
-        /// main colloder
-        /// </summary>
-        protected Collider mainCollider => m_mainCollider;
+        protected PhotonView thisPhotonView => characterAddressManagement.GetMyPhotonView();
         /// <summary>
         /// main rb
         /// </summary>
-        protected Rigidbody rb => m_rb;
-        /// <summary>
-        /// main camera
-        /// </summary>
-        protected Camera mainCamera => m_mainCamera;
-        /// <summary>
-        /// death Camera
-        /// </summary>
-        protected Camera deathCamera => m_deathCamera;
-        /// <summary>
-        /// hand only animetor
-        /// </summary>
-        protected Animator handOnlyModelAnimator => m_handOnlyModelAnimator;
-        /// <summary>
-        /// hand only Model object
-        /// </summary>
-        protected GameObject handOnlyModelObject => m_handOnlyModelObject;
-        /// <summary>
-        /// network model animator
-        /// </summary>
-        protected Animator networkModelAnimator => m_networkModelAnimator;
-        /// <summary>
-        /// network model object
-        /// </summary>
-        protected GameObject networkModelObject => m_networkModelObject;
+        protected Rigidbody rb => characterAddressManagement.GetMyRigidbody();
         /// <summary>
         /// model Outline
         /// </summary>
-        protected Outline modelOutline => m_modelOutline;
-        /// <summary>
-        /// to Fade
-        /// </summary>
-        protected ToFade  toFade => m_toFade;
-
+        protected Outline modelOutline => characterAddressManagement.GetMyOuline();
         /// <summary>
         /// local player custom properties
         /// </summary>
@@ -160,7 +70,7 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// リスポーン時間
         /// </summary>
-        protected int respawnTime_Seconds;
+        protected int   respawnTime_Seconds;
         /// <summary>
         /// 必殺技 使用可能
         /// </summary>
@@ -259,7 +169,7 @@ namespace Takechi.CharacterController.Parameters
                       $" movingSpeed = {movingSpeed}\n" +
                       $" attackPower = {attackPower}\n" +
                       $" jumpPower = {jumpPower}\n" +
-                      $" mass = {m_rb.mass}\n"+
+                      $" mass = {rb.mass}\n"+
                       $" respawnTime_Seconds = {respawnTime_Seconds}\n"+
                       $" canUseDeathblow = {canUseDeathblow}\n"+
                       $" canUseAbility1 = {canUseAbility1}\n"+
@@ -318,29 +228,12 @@ namespace Takechi.CharacterController.Parameters
         public void SetMass(float changeValue) { rb.mass = changeValue; }
         public void SetVelocity(Vector3 velocityValue) { rb.velocity = velocityValue; }
         public void SetIsKinematic(bool flag) { rb.isKinematic = flag; }
-        public void SetModelOuline(Outline outline) { m_modelOutline = outline; }
-        public void SetModelOulineColor(Color color) { m_modelOutline.OutlineColor = color; }
-        public void SetModelOulineMode(Outline.Mode mode) { m_modelOutline.OutlineMode = mode; }
+        public void SetModelOulineColor(Color color) { modelOutline.OutlineColor = color; }
+        public void SetModelOulineMode(Outline.Mode mode) { modelOutline.OutlineMode = mode; }
 
         #endregion
 
         #region GetFunction
-
-        public string GetAttackHitsEffectFolderName()
-        {
-            string path = "";
-            foreach ( string s in m_attackHitsEffectFolderName) { path += s + "/"; }
-
-            return path;
-        }
-
-        public string GetDeathEffectFolderName()
-        {
-            string path = "";
-            foreach (string s in m_deathEffectFolderName) { path += s + "/"; }
-
-            return path;
-        }
 
         public bool GetCharacterStatusSetUpCompleteFlag() { return characterStatusSetUpComplete; }
         public bool GetlocalPlayerCustomPropertiesStatusSetUpCompleteFlag() { return localPlayerCustomPropertiesStatusSetUpComplete; }
@@ -380,21 +273,9 @@ namespace Takechi.CharacterController.Parameters
         public float GetLateralMovementRatio() { return lateralMovementRatio; }
         public float GetAttackPower() { return attackPower; }
         public float GetJumpPower() { return jumpPower; }
+        public float GetMass() { return rb.mass;}
         public float GetCleanMass() { return m_characterParameters.GetCleanMass(); }
-        public PhotonView GetMyPhotonView() { return thisPhotonView; }
-        public Rigidbody  GetMyRigidbody() { return rb; }
-        public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }
-        public Collider   GetMyCollider() { return mainCollider; }
-        public GameObject GetMyAvater() { return avater; }
-        public Camera     GetMyMainCamera() { return mainCamera; }
-        public Camera     GetMyDeathCamera()  { return m_deathCamera; }
-        public Animator   GetHandOnlyModelAnimator() { return handOnlyModelAnimator; }
-        public GameObject GetHandOnlyModelObject() { return handOnlyModelObject; }
-        public Animator   GetNetworkModelAnimator() { return networkModelAnimator; }
-        public GameObject GetNetworkModelObject() { return networkModelObject; }
-        public Outline    GetMyOuline() { return modelOutline; }
-        public ToFade     GetToFade() { return m_toFade; }
-
+       
         #endregion
 
         #region UpdateFunction
@@ -408,7 +289,7 @@ namespace Takechi.CharacterController.Parameters
               new ExitGames.Client.Photon.Hashtable
               {
                     {CharacterStatusKey.attackPowerKey, attackPower},
-                    {CharacterStatusKey.massKey , m_rb.mass},
+                    {CharacterStatusKey.massKey , rb.mass},
               };
 
             setLocalPlayerCustomProperties(m_localPlayerCustomProperties);

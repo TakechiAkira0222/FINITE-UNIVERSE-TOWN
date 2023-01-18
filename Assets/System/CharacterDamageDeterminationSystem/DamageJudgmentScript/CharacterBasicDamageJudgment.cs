@@ -11,15 +11,24 @@ using Takechi.CharacterController.Parameters;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ObjectReferenceThatDamagesThePlayer;
+using Takechi.CharacterController.Address;
 
 namespace Takechi.CharacterController.DamageJudgment
 {
     public class CharacterBasicDamageJudgment : MonoBehaviour
     {
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
-        [SerializeField] private GameObject m_attackHitEffct;
-        private Rigidbody m_rb => m_characterStatusManagement.GetMyRigidbody();
+
+        #region private variable
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private Rigidbody  myRb => addressManagement.GetMyRigidbody();
+        private GameObject attackHitEffct => addressManagement.GetAttackHitEffct();
+        private string attackHitsEffectFolderName => addressManagement.GetAttackHitsEffectFolderName();
+        #endregion
 
         void Start()
         {
@@ -32,7 +41,7 @@ namespace Takechi.CharacterController.DamageJudgment
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!m_characterStatusManagement.GetMyPhotonView().IsMine) return;
+            if (!myPhotonView.IsMine) return;
 
             if ( collision.gameObject.tag == DamageFromPlayerToPlayer.weaponTagName)
             {
@@ -92,9 +101,9 @@ namespace Takechi.CharacterController.DamageJudgment
         /// <returns></returns>
         private IEnumerator KnockBack(Collision collision, float power)
         {
-            var impulse = (m_rb.transform.position - collision.contacts[0].point).normalized;
+            var impulse = (myRb.transform.position - collision.contacts[0].point).normalized;
 
-            m_rb.AddForce( impulse * (power * 5000));
+            myRb.AddForce( impulse * (power * 5000));
             yield return new WaitForSeconds(Time.deltaTime);
 
             //Å@Transfrom
@@ -125,10 +134,7 @@ namespace Takechi.CharacterController.DamageJudgment
         /// <param name="collision"></param>
         private void EffectInstantiation( Vector3 point)
         {
-            GameObject effct = PhotonNetwork.Instantiate
-              ( m_characterStatusManagement.GetAttackHitsEffectFolderName() + m_attackHitEffct.name,
-              point,Quaternion.identity);
-
+            GameObject effct = PhotonNetwork.Instantiate(attackHitsEffectFolderName + attackHitEffct.name, point, Quaternion.identity);
             StartCoroutine(DelayMethod( 0.1f, () => { PhotonNetwork.Destroy(effct); }));
         }
 

@@ -12,16 +12,22 @@ using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnim
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
+using Takechi.CharacterController.Reference;
+using Takechi.CharacterController.Address;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
 {
     public class OfficeWorkerHandOnlyDeathblowAnimationEventManager : MonoBehaviour
     {
         #region SerializeField
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== OfficeWorkerStatusManagement ===")]
         [SerializeField] private OfficeWorkerStatusManagement m_officeWorkerStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
+        [Header("=== CharacterControllerReferenceManagement ===")]
+        [SerializeField] private CharacterControllerReferenceManagement m_characterControllerReferenceManagement;
         [Header("=== OfficeWorkerSoundEffectsManagement ===")]
         [SerializeField] private OfficeWorkerSoundEffectsManagement m_officeWorkerSoundEffectsManagement;
 
@@ -30,13 +36,15 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         [SerializeField] private GameObject m_deathblowAreaEffect;
 
         #endregion
-
-        private OfficeWorkerStatusManagement officeWorkerStatusManagement => m_officeWorkerStatusManagement;
-        private CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
-        private OfficeWorkerSoundEffectsManagement soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
-
-        private Animator handOnlyModelAnimator => officeWorkerStatusManagement.GetHandOnlyModelAnimator();
-        private Animator handNetworkModelAnimator => officeWorkerStatusManagement.GetNetworkModelAnimator();
+        private CharacterAddressManagement             addressManagement => m_characterAddressManagement;
+        private OfficeWorkerStatusManagement           statusManagement => m_officeWorkerStatusManagement;
+        private OfficeWorkerSoundEffectsManagement     soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
+        private CharacterKeyInputStateManagement       keyInputStateManagement => m_characterKeyInputStateManagement;
+        private CharacterControllerReferenceManagement controllerReferenceManagement => m_characterControllerReferenceManagement;
+        private Animator handOnlyModelAnimator =>      addressManagement.GetHandOnlyModelAnimator();
+        private Animator handNetworkModelAnimator =>   addressManagement.GetNetworkModelAnimator();
+        private GameObject handOnlyModelObject =>  addressManagement.GetHandOnlyModelObject();
+        private GameObject networkModelObject =>   addressManagement.GetNetworkModelObject();
 
         #region UnityAnimatorEvent
 
@@ -56,22 +64,15 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         // </summary>
         void OfficeWorkerDeathblowStart()
         {
+            // playableDirector
             m_playableDirector.Play();
 
             // audioSource
             soundEffectsManagement.PlayOneShotVoiceOfDeathblowStart();
 
-            // rb
-            officeWorkerStatusManagement.SetIsKinematic(true);
-
             // animation weiht
             m_weightTemporaryComplement = handNetworkModelAnimator.GetLayerWeight(handNetworkModelAnimator.GetLayerIndex(AnimatorLayers.overrideLayer));
             SetLayerWeight(handNetworkModelAnimator, AnimatorLayers.overrideLayer, 0.1f);
-
-            if (officeWorkerStatusManagement.photonView.IsMine)
-            {
-                officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(false);
-            }
         }
 
         /// <summary>
@@ -88,37 +89,56 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         // </summary>
         void OfficeWorkerDeathblowEnd()
         {
-            if (officeWorkerStatusManagement.photonView.IsMine)
-            {
-                ActivationStatusManagement();
-                Invoke(nameof(ExitStatusManagement), officeWorkerStatusManagement.GetDeathblowMoveDuration_Seconds());
-                officeWorkerStatusManagement.GetHandOnlyModelObject().SetActive(true);
-            }
+            // animation weiht
+            SetLayerWeight(handNetworkModelAnimator, AnimatorLayers.overrideLayer, m_weightTemporaryComplement);
 
             // audioSource
             soundEffectsManagement.PlayOneShotPowerUp();
 
-            // rb
-            officeWorkerStatusManagement.SetIsKinematic(false);
-
-            // animation weiht
-            SetLayerWeight(handNetworkModelAnimator, AnimatorLayers.overrideLayer, m_weightTemporaryComplement);
-
             // effect 
             ActivationDeathblowAreaEffect();
-            Invoke(nameof(ExitDeathblowAreaEffect), officeWorkerStatusManagement.GetDeathblowMoveDuration_Seconds());
+            Invoke(nameof(ExitDeathblowAreaEffect), statusManagement.GetDeathblowMoveDuration_Seconds());
         }
 
         #endregion
 
         private void Director_Stopped(PlayableDirector obj)
         {
-            m_characterKeyInputStateManagement.SetOperation(true);
+            // operation
+            keyInputStateManagement.SetOperation(true);
+
+            // animation Controler
+            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(true);
+
+            // rb
+            statusManagement.SetIsKinematic(false);
+
+            if (statusManagement.photonView.IsMine)
+            {
+                ActivationStatusManagement();
+                Invoke(nameof(ExitStatusManagement), statusManagement.GetDeathblowMoveDuration_Seconds());
+
+                handOnlyModelObject.SetActive(true);
+                networkModelObject.SetActive(false);
+            }
         }
 
         private void Director_Played(PlayableDirector obj)
         {
-            m_characterKeyInputStateManagement.SetOperation(false);
+            // operation
+            keyInputStateManagement.SetOperation(false);
+
+            // animation Controler
+            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
+
+            // rb
+            statusManagement.SetIsKinematic(true);
+
+            if (statusManagement.photonView.IsMine)
+            {
+                handOnlyModelObject.SetActive(false);
+                networkModelObject.SetActive(true);
+            }
         }
 
         private void SetLayerWeight(Animator animator, string layerName, float weight)
@@ -135,11 +155,11 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         /// </summary>
         private void ActivationStatusManagement()
         {
-            officeWorkerStatusManagement.UpdateAttackPower(officeWorkerStatusManagement.GetAttackPowerIncrease());
-            officeWorkerStatusManagement.UpdateMovingSpeed(officeWorkerStatusManagement.GetMoveingSpeedIncrease());
-            officeWorkerStatusManagement.UpdateJumpPower(officeWorkerStatusManagement.GetJumpPowerIncrease());
+            statusManagement.UpdateAttackPower(statusManagement.GetAttackPowerIncrease());
+            statusManagement.UpdateMovingSpeed(statusManagement.GetMoveingSpeedIncrease());
+            statusManagement.UpdateJumpPower(statusManagement.GetJumpPowerIncrease());
 
-            officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
+            statusManagement.UpdateLocalPlayerCustomProrerties();
         }
 
         /// <summary>
@@ -147,11 +167,11 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         /// </summary>
         private void ExitStatusManagement()
         {
-            officeWorkerStatusManagement.UpdateAttackPower(-officeWorkerStatusManagement.GetAttackPowerIncrease());
-            officeWorkerStatusManagement.UpdateMovingSpeed(-officeWorkerStatusManagement.GetMoveingSpeedIncrease());
-            officeWorkerStatusManagement.UpdateJumpPower(-officeWorkerStatusManagement.GetJumpPowerIncrease());
+            statusManagement.UpdateAttackPower(-statusManagement.GetAttackPowerIncrease());
+            statusManagement.UpdateMovingSpeed(-statusManagement.GetMoveingSpeedIncrease());
+            statusManagement.UpdateJumpPower(-statusManagement.GetJumpPowerIncrease());
 
-            officeWorkerStatusManagement.UpdateLocalPlayerCustomProrerties();
+            statusManagement.UpdateLocalPlayerCustomProrerties();
         }
 
         /// <summary>

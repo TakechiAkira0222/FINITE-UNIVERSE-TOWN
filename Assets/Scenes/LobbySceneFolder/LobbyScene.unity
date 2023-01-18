@@ -1504,6 +1504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6bc396ef6f62d4696a205c4964c199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterAddressManagement: {fileID: 0}
   m_characterStatusManagement: {fileID: 2640404583997773107}
   m_characterKeyInputStateManagement: {fileID: 2640404583997773094}
   m_thisPhotnView: {fileID: 2640404583997772407}
@@ -1543,6 +1544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6caf6d99e3580e949b919f108a74a554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterAddressManagement: {fileID: 2640404583997774678}
   m_characterStatusManagement: {fileID: 2640404583997773107}
   m_characterKeyInputStateManagement: {fileID: 2640404583997773094}
 --- !u!114 &2640404583997772526
@@ -1557,6 +1559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8ecaf5144b73644985c413ae778806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterAddressManagement: {fileID: 2640404583997774678}
   m_characterStatusManagement: {fileID: 2640404583997773107}
   m_characterKeyInputStateManagement: {fileID: 2640404583997773094}
 --- !u!114 &2640404583997772527
@@ -1606,6 +1609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc51eb14f3ad32499a4d0694227ab9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterAddressManagement: {fileID: 2640404583997774678}
   m_characterStatusManagement: {fileID: 2640404583997773107}
   m_dashKey: 304
   m_jumpKey: 32
@@ -1625,22 +1629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470ea4469864c574295d024428c6d9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAddressManagement: {fileID: 2640404583997774678}
   m_characterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
-  m_thisPhotonView: {fileID: 2640404583997772855}
-  m_avater: {fileID: 2640404583997773993}
-  m_mainCollider: {fileID: 2640404583997774981}
-  m_rb: {fileID: 2640404583997774996}
-  m_mainAudioSource: {fileID: 0}
-  m_mainCamera: {fileID: 2640404583997775013}
-  m_deathCamera: {fileID: 0}
-  m_handOnlyModelAnimator: {fileID: 7145484607085686165}
-  m_handOnlyModelObject: {fileID: 2969309873805938390}
-  m_networkModelAnimator: {fileID: 0}
-  m_networkModelObject: {fileID: 0}
-  m_modelOutline: {fileID: 0}
-  m_toFade: {fileID: 0}
-  m_attackHitsEffectFolderName: []
-  m_deathEffectFolderName: []
 --- !u!114 &2640404583997773148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,6 +1880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2640404583997775267}
   - component: {fileID: 2640404583997772293}
+  - component: {fileID: 2640404583997774678}
   - component: {fileID: 2640404583997773107}
   - component: {fileID: 2640404583997773094}
   - component: {fileID: 2640404583997772525}
@@ -1903,6 +1894,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2640404583997774678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640404583997774677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e1c949373940344b0d2706923448cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_thisPhotonView: {fileID: 2640404583997772855}
+  m_avater: {fileID: 2640404583997773993}
+  m_mainCollider: {fileID: 2640404583997774981}
+  m_rb: {fileID: 2640404583997774996}
+  m_mainAudioSource: {fileID: 2640404583997773994}
+  m_mainCamera: {fileID: 2640404583997775013}
+  m_deathCamera: {fileID: 0}
+  m_handOnlyModelAnimator: {fileID: 7145484607085686165}
+  m_handOnlyModelObject: {fileID: 2969309873805938390}
+  m_networkModelAnimator: {fileID: 0}
+  m_networkModelObject: {fileID: 0}
+  m_modelOutline: {fileID: 0}
+  m_toFade: {fileID: 406996585}
+  m_attackHitsEffectFolderName: []
+  m_deathEffectFolderName: []
 --- !u!4 &2640404583997774886
 Transform:
   m_ObjectHideFlags: 0

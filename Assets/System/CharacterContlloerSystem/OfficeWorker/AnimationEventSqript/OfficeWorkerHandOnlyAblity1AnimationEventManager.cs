@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Parameters;
 using UnityEditor;
 using UnityEngine;
@@ -8,10 +9,22 @@ namespace Takechi.CharacterController.Ablity1AnimationEvent
 {
     public class OfficeWorkerHandOnlyAblity1AnimationEventManager : MonoBehaviour
     {
+        #region SerializeField
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== OfficeWorkerStatusManagement ===")]
         [SerializeField] private OfficeWorkerStatusManagement m_characterStatusManagement;
-        private Rigidbody m_rb => m_characterStatusManagement.GetMyRigidbody();
-        // private Camera m_mainCamera => m_characterStatusManagement.GetMyMainCamera();
+        [Header("=== OfficeWorkerSoundEffectsManagement ===")]
+        [SerializeField] private OfficeWorkerSoundEffectsManagement m_officeWorkerSoundEffectsManagement;
+
+        #endregion
+
+        #region private variable
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private OfficeWorkerSoundEffectsManagement soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
+        private Rigidbody rb => addressManagement.GetMyRigidbody();
+
+        #endregion
 
         /// <summary>
         /// OfficeWorker Ablity1 Start
@@ -26,7 +39,8 @@ namespace Takechi.CharacterController.Ablity1AnimationEvent
         /// </summary>
         void OfficeWorkerAblity1Fly()
         {
-            m_rb.AddForce( m_rb.transform.forward * ( m_characterStatusManagement.GetAblity1FlyForce() * 1000 * ( m_rb.mass / m_characterStatusManagement.GetCleanMass())), ForceMode.Impulse);
+            soundEffectsManagement.PlayOneShotAblity1Fly();
+            rb.AddForce( rb.transform.forward * ( m_characterStatusManagement.GetAblity1FlyForce() * 1000 * ( rb.mass / m_characterStatusManagement.GetCleanMass())), ForceMode.Impulse);
         }
 
         /// <summary>

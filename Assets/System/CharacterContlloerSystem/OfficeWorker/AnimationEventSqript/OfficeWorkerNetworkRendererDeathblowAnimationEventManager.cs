@@ -13,27 +13,11 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
     {
         #region UnityAnimatorEvent
 
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
-        [SerializeField] private GameObject m_model;
-
-        private void Awake()
-        {
-
-        }
-
         /// <summary>
         /// •KŽE‹Zanimation‚ÌŠJŽn
         /// </summary>
         void OfficeWorkerDeathblowStart()
         {
-            if (m_characterStatusManagement.photonView.IsMine)
-            {
-                m_model.SetActive(true);
-            }
-            else
-            {
-
-            }
         }
 
         /// <summary>
@@ -49,14 +33,6 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         /// </summary>
         void OfficeWorkerDeathblowEnd()
         {
-            if (m_characterStatusManagement.photonView.IsMine)
-            {
-                m_model.SetActive(false);
-            }
-            else
-            {
-
-            }
         }
 
         #endregion
