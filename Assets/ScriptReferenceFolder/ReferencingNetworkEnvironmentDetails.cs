@@ -14,12 +14,12 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             public const int fadeProductionTime_Second = 5;
 
             /// <summary>
-            /// connection Synchronization Time
+            /// connection Synchronization Time Frame
             /// </summary>
             public const int connectionSynchronizationTime = 1000;
 
             /// <summary>
-            /// instantiationSetting Synchronization Time
+            /// instantiationSetting Synchronization Time Frame
             /// </summary>
             public const int instantiationSettingSynchronizationTime = 10000;
         }

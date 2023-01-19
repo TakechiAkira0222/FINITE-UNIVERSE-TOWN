@@ -16,20 +16,19 @@ namespace Takechi.GameManagerSystem.Domination
     public class DominationGameManagement : TakechiJoinedPunCallbacks
     {
         #region serializeField
-        [SerializeField] private int m_intervalTime_Second = 0;
         [SerializeField] private int m_victoryConditionPoints = 1000;
         [SerializeField] private int m_areaLocationMaxPoints  = 100;
         [SerializeField] private int m_nextSceneNumber = 1;
         [SerializeField] private string m_judgmentTagName = "PlayerCharacter";
         #endregion
 
-        #region private Variable
+        #region private variable
         private bool m_isGameStart = false;
         private bool m_isGameStop  = false;
         private bool m_isGameEnd   = false;
-
         private int  m_gameFrameCunt = 0;
-        private int m_gameTimeCunt_Second => (int)Mathf.Ceil(m_gameFrameCunt / 1f / Time.deltaTime);
+        private int  m_gameTimeCunt_Second => (int)Mathf.Ceil(m_gameFrameCunt / 1f / Time.deltaTime);
+
         #endregion
 
         public event Action TeamAToVictory = delegate { };
@@ -55,7 +54,6 @@ namespace Takechi.GameManagerSystem.Domination
         public int    GetAreaLocationBPoint()   { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationBPoint]; }
         public int    GetAreaLocationCPoint()   { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationCPoint]; }
         public int    GetAreaLocationMaxPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationMaxPoint]; }
-
         public int    GetGameTimeCunt_Second() { return m_gameTimeCunt_Second; }
         public int    GetGameFrameCunt() { return m_gameFrameCunt; }
         public bool   GetGameStart() { return m_isGameStart; }
@@ -150,7 +148,6 @@ namespace Takechi.GameManagerSystem.Domination
         #endregion
 
         #region recursive finction
-
         private void JudgmentToAcquirePoints(int areaLocationPoint)
         {
             if (areaLocationPoint > GetAreaLocationMaxPoint() / 2) { SetTeamAPoint(1); }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed84b8ec512dfbe4cb05cef16d77e629, type: 3}
   m_Name: MechanicalWarreiorSpecificParameters
   m_EditorClassIdentifier: 
-  m_bulletsFolderName:
-  - PlayableCharacter
-  - ItemsinstantiationFromCharactersPrefab
-  m_shootingForce: 3
-  m_durationOfBullet: 5
+  m_normalShootingForce: 5.5
+  m_normalDurationOfBullet: 3
+  m_deathblowShootingForce: 10
+  m_deathblowDurationOfBullet: 10
+  m_enemySearch_Seconds: 20

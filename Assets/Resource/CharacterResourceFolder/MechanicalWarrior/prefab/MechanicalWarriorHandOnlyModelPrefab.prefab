@@ -1630,6 +1630,7 @@ GameObject:
   - component: {fileID: 8210002915832171866}
   - component: {fileID: 16080726031563567}
   - component: {fileID: 4328533603585430437}
+  - component: {fileID: 6091340060039756995}
   - component: {fileID: 7399750266740414426}
   - component: {fileID: 8141486305807316574}
   m_Layer: 0
@@ -1686,11 +1687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7976b971ebf86644add86e212d8b1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterStatusManagement: {fileID: 0}
-  m_specificParameters: {fileID: 11400000, guid: 2436630478bb0574fa51f48a30c86a9b, type: 2}
-  m_thisPhotonView: {fileID: 7399750266740414426}
-  m_instans: {fileID: 5411783441149066494, guid: 913f3b0ba4e39944b8a360512a075887, type: 3}
-  m_magazineTransfrom: {fileID: 1504429528184857401}
+  m_mechanicalWarriorAddressManagement: {fileID: 0}
+  m_mechanicalWarriorStatusManagement: {fileID: 0}
+  m_soundEffectsManagement: {fileID: 0}
 --- !u!114 &4328533603585430437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,8 +1702,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915789b1e4551f640b81f2af0907bed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mechanicalWarriorAddressManagement: {fileID: 0}
   m_mechanicalWarriorStatusManagement: {fileID: 0}
   m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_playableDirector: {fileID: 0}
+--- !u!114 &6091340060039756995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210002915425251071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e27e7c53867f64ca27281cd693c872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterAddressManagement: {fileID: 0}
+  m_characterStatusManagement: {fileID: 0}
+  m_officeWorkerSoundEffectsManagement: {fileID: 0}
 --- !u!114 &7399750266740414426
 MonoBehaviour:
   m_ObjectHideFlags: 0

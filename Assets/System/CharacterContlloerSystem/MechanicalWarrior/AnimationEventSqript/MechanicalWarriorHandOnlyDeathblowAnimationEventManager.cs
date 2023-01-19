@@ -1,9 +1,9 @@
 using Photon.Pun;
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+
 using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
@@ -11,6 +11,7 @@ using Takechi.CharacterController.Reference;
 
 using UnityEngine;
 using UnityEngine.Playables;
+
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
@@ -18,9 +19,8 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
     public class MechanicalWarriorHandOnlyDeathblowAnimationEventManager : MonoBehaviour
     {
         #region SerializeField
-
         [Header("=== MechanicalWarriorAddressManagement === ")]
-        [SerializeField] private MechanicalWarriorAddressManagement m_mechanicalWarriorAddressManagement;
+        [SerializeField] private MechanicalWarriorAddressManagement     m_mechanicalWarriorAddressManagement;
         [Header("=== MechanicalWarriorStatusManagement ===")]
         [SerializeField] private MechanicalWarriorStatusManagement      m_mechanicalWarriorStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
@@ -34,19 +34,20 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
         #region private variable
         private MechanicalWarriorAddressManagement addressManagement => m_mechanicalWarriorAddressManagement;
-        private MechanicalWarriorStatusManagement statusManagement => m_mechanicalWarriorStatusManagement;
-        private CharacterKeyInputStateManagement  keyInputStateManagement => m_characterKeyInputStateManagement;
+        private MechanicalWarriorStatusManagement  statusManagement => m_mechanicalWarriorStatusManagement;
+        private CharacterKeyInputStateManagement   keyInputStateManagement => m_characterKeyInputStateManagement;
         private CharacterControllerReferenceManagement controllerReferenceManagement => m_characterControllerReferenceManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private Animator   handNetworkModelAnimator => addressManagement.GetNetworkModelAnimator();
+        private GameObject myAvater => addressManagement.GetMyAvater();
         private GameObject handOnlyModelObject => addressManagement.GetHandOnlyModelObject();
         private GameObject handNetworkModelObject => addressManagement.GetNetworkModelObject();
-        private GameObject bulletsInstans => addressManagement.GetBulletsInstans();
+        private GameObject bulletsInstans => addressManagement.GetDeathblowBulletsInstans();
         private Transform  magazineTransfrom => addressManagement.GetMagazineTransfrom();
         private Rigidbody  myRb => addressManagement.GetMyRigidbody();
-        private float  force => statusManagement.GetShootingForce();
-        private float  durationTime => statusManagement.GetDurationOfBullet();
-        private string path => statusManagement.GetBulletsPath();
+        private string bulletsPath  => addressManagement.GetDeathblowBulletsPath();
+        private float  force => statusManagement.GetDeathblowShootingForce();
+        private float  durationTime => statusManagement.GetDeathblowDurationOfBullet();
         /// <summary>
         /// èdÇ›ÇÃàÍéûï€ä«
         /// </summary>
@@ -60,7 +61,6 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         }
 
         #region UnityAnimatorEvent
-
         /// <summary>
         /// Mechanical Warrior Deathblow Start
         /// </summary>
@@ -83,7 +83,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
             Shooting( magazineTransfrom, force);
 
-            myRb.transform.Translate(0, 0, -1.5f);
+            myRb.transform.Translate( 0, 0, -1.5f);
         }
 
         /// <summary>
@@ -138,28 +138,19 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         private void Shooting(Transform magazine, float force)
         {
             GameObject instans =
-            PhotonNetwork.Instantiate( path + bulletsInstans.name, magazine.position, Quaternion.identity);
-
-            instans.transform.localScale = bulletsInstans.transform.localScale * 5;
-            instans.GetComponent<Collider>().isTrigger = true;
+            PhotonNetwork.Instantiate( bulletsPath + bulletsInstans.name, magazine.position, Quaternion.identity);
 
             Rigidbody rb = instans.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezePositionY;
-            rb.AddForce( magazine.transform.forward * 100 * force);
+            rb.AddForce( myAvater.transform.forward * force, ForceMode.Impulse);
 
-            StartCoroutine(DelayMethod(durationTime, () =>
-            {
-                PhotonNetwork.Destroy(instans);
-            }));
+            StartCoroutine( DelayMethod( durationTime, () => { PhotonNetwork.Destroy(instans); }));
         }
-
         private void SetLayerWeight(Animator animator, string layerName, float weight)
         {
             int LayerIndex = animator.GetLayerIndex(layerName);
             animator.SetLayerWeight(LayerIndex, weight);
             Debug.Log($" handNetworkModelAnimator.<color=yellow>SetLayerWeight</color>({LayerIndex}, {weight}); ");
         }
-
         private IEnumerator DelayMethod(float waitTime, Action action)
         {
             yield return new WaitForSeconds(waitTime);

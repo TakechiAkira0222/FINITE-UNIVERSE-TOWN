@@ -23,17 +23,14 @@ namespace Takechi.CharacterSelection
     /// </summary>
     public class CharacterSelectionManagement : DisplayListUpdateManagement
     {
+        #region SerializeField
+        [Header("=== PlayableCharacterParametersManager ===")]
         [SerializeField] private PlayableCharacterParametersManager m_parametersManager;
-
-        [Header(" memberList setting")]
+        [Header("=== memberList setting ===")]
         [SerializeField] private Image m_instansImage;
         [SerializeField] private GameObject m_teamAContent;
         [SerializeField] private GameObject m_teamBContent;
-
-        private List<Player> m_teamA_memberList = new List<Player>();
-        private List<Player> m_teamB_memberList = new List<Player>();
-
-        [Header(" ui setting")]
+        [Header("=== ui setting ===")]
         [SerializeField] private int    m_nearTimeToStartTheGame_seconds = 5;
         [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
         [SerializeField] private Text   m_gameStartTimeCuntText;
@@ -42,27 +39,29 @@ namespace Takechi.CharacterSelection
         [SerializeField] private List <GameObject> m_characterPrefabList = new List<GameObject>();
         [SerializeField] private List <Image> m_characterSelectionButtonList = new List<Image>();
 
+        #endregion
+
+        #region private variable
+        private List<Player> m_teamA_memberList = new List<Player>();
+        private List<Player> m_teamB_memberList = new List<Player>();
         private bool m_isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
-        private bool m_goToGameScene = false;
+
+        #endregion
 
         #region set variable
-
         private void setInformationText(int num)
         {
             m_infometionText.text = m_parametersManager.GetParameters(num).GetInformation();
         }
-
         private void setInformationText(string name)
         {
             m_infometionText.text = m_parametersManager.GetParameters(name).GetInformation();
         }
-
         private void setDisplayCharacterPrefab(int index)
         {
             foreach (GameObject o in m_characterPrefabList) { o.SetActive(false); }
             m_characterPrefabList[index].SetActive(true);
         }
-
         private void setCharacterSelectionButtonColor(int index)
         {
             foreach (Image n in m_characterSelectionButtonList) { n.color = new Color(Color.black.r, Color.black.g, Color.black.b, 0.5f); }
@@ -128,11 +127,9 @@ namespace Takechi.CharacterSelection
                     }));
 
                     yield return new WaitForSeconds(NetworkSyncSettings.fadeProductionTime_Second * 2);
-
                 }
             }
         }
-
         protected override IEnumerator ListUpdate()
         {
             base.ListUpdate();
@@ -155,11 +152,9 @@ namespace Takechi.CharacterSelection
                 }
 
                 RefreshTheListViewing();
-
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
-
         protected override void RefreshTheListViewing()
         {
             base.RefreshTheListViewing();

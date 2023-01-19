@@ -5,8 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.Address;
+using Takechi.CharacterController.Parameters;
 
 namespace Takechi.CharacterController.AttackAnimationEvent
 {
@@ -27,16 +27,15 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private MechanicalWarriorStatusManagement mechanicalWarriorStatusManagement => m_mechanicalWarriorStatusManagement;
         private MechanicalWarriorSoundEffectsManagement soundEffectsManagement => m_soundEffectsManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
-        private GameObject bulletsInstans => addressManagement.GetBulletsInstans();
+        private GameObject bulletsInstans => addressManagement.GetNormalBulletsInstans();
         private Transform  magazineTransfrom => addressManagement.GetMagazineTransfrom();
-        private float  force => m_mechanicalWarriorStatusManagement.GetShootingForce();
-        private float  durationTime => m_mechanicalWarriorStatusManagement.GetDurationOfBullet();
-        private string path => m_mechanicalWarriorStatusManagement.GetBulletsPath();
+        private string bulletsPath => addressManagement.GetNormalBulletsPath();
+        private float  force => mechanicalWarriorStatusManagement.GetNormalShootingForce();
+        private float  durationTime => mechanicalWarriorStatusManagement.GetNormalDurationOfBullet();
 
         #endregion
 
         #region UnityAnimatorEvent
-
         /// <summary>
         /// FirstShot Animation Start
         /// </summary>
@@ -45,10 +44,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
             soundEffectsManagement.PlayOneShotNormalShot();
 
             if (!myPhotonView.IsMine) return;
-
             Shooting(magazineTransfrom, force);
         }
-
         /// <summary>
         /// SecondShot Animation End
         /// </summary>
@@ -57,10 +54,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
             soundEffectsManagement.PlayOneShotNormalShot();
 
             if (!myPhotonView.IsMine) return;
-
             Shooting(magazineTransfrom, force);
         }
-
         /// <summary>
         /// ThirdShot Animation End
         /// </summary>
@@ -75,20 +70,16 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         #endregion
 
         #region Recursive function
-
         private void Shooting( Transform magazine, float force)
         {
             GameObject instans =
-            PhotonNetwork.Instantiate( path + bulletsInstans.name, magazine.position, Quaternion.identity);
+            PhotonNetwork.Instantiate( bulletsPath + bulletsInstans.name, magazine.position, Quaternion.identity);
 
-            instans.GetComponent<Rigidbody>().AddForce( magazine.forward * 100 * force);
+            Debug.Log(force);
+            instans.GetComponent<Rigidbody>().AddForce( magazine.forward * force, ForceMode.Impulse);
 
-            StartCoroutine(DelayMethod( durationTime, () =>
-            {
-                PhotonNetwork.Destroy(instans);
-            }));
+            StartCoroutine(DelayMethod(durationTime, () => { PhotonNetwork.Destroy(instans); }));
         }
-
         private IEnumerator DelayMethod(float waitTime, Action action)
         {
             yield return new WaitForSeconds(waitTime);

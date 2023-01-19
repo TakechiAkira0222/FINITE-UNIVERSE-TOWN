@@ -9,19 +9,23 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
     [CreateAssetMenu(fileName = "MechanicalWarreiorSpecificParameters", menuName = "MechanicalWarreiorSpecificParameters")]
     public class MechanicalWarreiorSpecificParameters : ScriptableObject
     {
-        [Header("=== ShootingSetting ===")]
-        [SerializeField, Tooltip("Bullets‚Ö‚ÌFolder–¼")] 
-        private List<string> m_bulletsFolderName = new List<string>();
-        [SerializeField, Range(1.0f, 4.0f), Tooltip("ËŒ‚‚ÌˆĞ—Í")]
-        private float m_shootingForce  = 3.0f;
-        [SerializeField, Range(3.0f, 10.0f), Tooltip("’e‚Ì‘¶İŠÔ")]
-        private float m_durationOfBullet = 5;
+        [SerializeField, Range( 1.0f, 10.0f),  Header(" ËŒ‚‚ÌˆĞ—Í@’ÊíUŒ‚ ")]
+        private float m_normalShootingForce = 3.0f;
+        [SerializeField, Range( 3.0f, 10.0f), Header(" ’e‚Ì‘¶İŠÔ ’Êí ")]
+        private float m_normalDurationOfBullet = 5;
+        [SerializeField, Range( 1.0f, 10.0f),  Header(" ËŒ‚‚ÌˆĞ—Í@•KE‹Z ")]
+        private float m_deathblowShootingForce = 3.0f;
+        [SerializeField, Range( 3.0f, 10.0f), Header(" ’e‚Ì‘¶İŠÔ •KE‹Z ")]
+        private float m_deathblowDurationOfBullet = 5;
+        [SerializeField, Range(10, 30), Header(" EnemySearch Œp‘±ŠÔ")]
+        private float m_enemySearch_Seconds;
 
         #region GetStatusFunction
-
-        public float GetShootingForce() { return m_shootingForce; }
-        public float GetDurationOfBullet() { return m_durationOfBullet; }
-        public List<string> GetBulletsPath() { return m_bulletsFolderName; }
+        public float GetNormalShootingForce() { return m_normalShootingForce; }
+        public float GetNormalDurationOfBullet() { return m_normalDurationOfBullet; }
+        public float GetDeathblowShootingForce() { return m_deathblowShootingForce; }
+        public float GetDeathblowDurationOfBullet() { return m_deathblowDurationOfBullet; }
+        public float GetEnemySearch_Seconds() { return m_enemySearch_Seconds; }
 
         #endregion
     }

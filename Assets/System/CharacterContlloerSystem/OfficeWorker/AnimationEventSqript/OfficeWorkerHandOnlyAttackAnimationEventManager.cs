@@ -22,7 +22,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         #region private variable
         private OfficeWorkerAddressManagement addressManagement => m_officeWorkerAddressManagement;
-        private CharacterStatusManagement    characterStatusManagement => m_characterStatusManagement;
+        private CharacterStatusManagement     characterStatusManagement => m_characterStatusManagement;
         private OfficeWorkerSoundEffectsManagement officeWorkerSoundEffectsManagement => m_officeWorkerSoundEffectsManagement;
         private PhotonView  myPhotonView => addressManagement.GetMyPhotonView();
         private Rigidbody   myRb => addressManagement.GetMyRigidbody();

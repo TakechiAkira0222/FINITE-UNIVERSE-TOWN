@@ -15,7 +15,7 @@ using System;
 using Photon.Pun;
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
-using static Takechi.ScriptReference.DamagesThePlayerObject.ObjectReferenceThatDamagesThePlayer;
+using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
 
 
 namespace Takechi.CharacterController.BasicAnimation.Movement

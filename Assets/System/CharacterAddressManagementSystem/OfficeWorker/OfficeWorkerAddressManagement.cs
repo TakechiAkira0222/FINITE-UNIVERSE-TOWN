@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
 using Takechi.CharacterController.SpecificParameters.OfficeWorker;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Takechi.CharacterController.Address
     public class OfficeWorkerAddressManagement : CharacterAddressManagement
     {
         [Header("=== OfficeWorkerAddressSetting ===")]
+
         /// <summary>
         /// swordObject Transfrom 
         /// </summary>
