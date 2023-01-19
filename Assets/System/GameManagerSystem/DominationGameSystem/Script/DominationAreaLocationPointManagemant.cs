@@ -98,12 +98,12 @@ namespace Takechi.GameManagerSystem.Domination
 
                 if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[ CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
                 {
-                    if ( hitTeamBMemberList.Count != 0) return;
+                    //if ( hitTeamBMemberList.Count != 0) return;
                     m_storeActionDictionary[(int)m_pointType](1);
                 }
                 else
                 {
-                    if ( hitTeamAMemberList.Count != 0) return;
+                    //if ( hitTeamAMemberList.Count != 0) return;
                     m_storeActionDictionary[(int)m_pointType](-1);
                 }
             }

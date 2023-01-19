@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 99306463}
   - component: {fileID: 99306467}
   - component: {fileID: 99306466}
-  - component: {fileID: 99306465}
+  - component: {fileID: 1657745274}
   - component: {fileID: 302663848956375193}
   m_Layer: 8
   m_Name: AreaLocationA
@@ -85,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &99306465
-BoxCollider:
+--- !u!64 &1657745274
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,9 +95,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &302663848956375193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +125,7 @@ GameObject:
   - component: {fileID: 118162663}
   - component: {fileID: 118162662}
   - component: {fileID: 118162661}
-  - component: {fileID: 118162660}
+  - component: {fileID: 1657745273}
   - component: {fileID: 5984469801374180645}
   m_Layer: 8
   m_Name: AreaLocationB
@@ -198,8 +199,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &118162660
-BoxCollider:
+--- !u!64 &1657745273
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -208,9 +209,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &5984469801374180645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +524,7 @@ GameObject:
   - component: {fileID: 1722843284}
   - component: {fileID: 1722843283}
   - component: {fileID: 1722843282}
-  - component: {fileID: 1722843281}
+  - component: {fileID: 1657745272}
   - component: {fileID: 2793145445893704021}
   m_Layer: 8
   m_Name: AreaLocationC
@@ -596,8 +598,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1722843281
-BoxCollider:
+--- !u!64 &1657745272
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -606,9 +608,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &2793145445893704021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,9 +673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a9a7b5335093b438a3d7811d7477ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_intervalTime_Second: 0
-  m_victoryConditionPoints: 250
-  m_areaLocationMaxPoints: 1000
+  m_victoryConditionPoints: 500
+  m_areaLocationMaxPoints: 2000
   m_nextSceneNumber: 1
   m_judgmentTagName: PlayerCharacter
 --- !u!1001 &261540690

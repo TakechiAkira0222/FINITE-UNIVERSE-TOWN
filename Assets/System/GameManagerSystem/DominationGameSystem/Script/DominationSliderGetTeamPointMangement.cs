@@ -61,11 +61,11 @@ namespace Takechi.GameManagerSystem.Domination
 
         private void Start()
         {
-            setValue( m_teamAslider, GetTeamAPoint(), GetVictoryPoint());
-            setValue( m_teamBslider, GetTeamBPoint(), GetVictoryPoint());
-            setValue( m_areaLocationAPointsSlider, GetAreaLocationAPoint(), GetAreaLocationMaxPoint());
-            setValue( m_areaLocationBPointsSlider, GetAreaLocationBPoint(), GetAreaLocationMaxPoint());
-            setValue( m_areaLocationCPointsSlider, GetAreaLocationCPoint(), GetAreaLocationMaxPoint());
+            setValue(m_teamAslider, GetTeamAPoint(), GetVictoryPoint());
+            setValue(m_teamBslider, GetTeamBPoint(), GetVictoryPoint());
+            setValue(m_areaLocationAPointsSlider, GetAreaLocationAPoint(), GetAreaLocationMaxPoint());
+            setValue(m_areaLocationBPointsSlider, GetAreaLocationBPoint(), GetAreaLocationMaxPoint());
+            setValue(m_areaLocationCPointsSlider, GetAreaLocationCPoint(), GetAreaLocationMaxPoint());
         }
 
         private void Update()

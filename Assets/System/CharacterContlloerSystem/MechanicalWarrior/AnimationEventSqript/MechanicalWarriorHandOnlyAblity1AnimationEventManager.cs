@@ -9,6 +9,7 @@ using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.Reference;
 using UnityEngine;
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
+using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
 
 namespace Takechi.CharacterController.Ablity1AnimationEvent
 {
@@ -36,6 +37,8 @@ namespace Takechi.CharacterController.Ablity1AnimationEvent
         private CharacterControllerReferenceManagement controllerReferenceManagement => m_characterControllerReferenceManagement;
         private Animator handNetworkModelAnimator => addressManagement.GetNetworkModelAnimator();
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private string playerCharacterPrefabTag => SearchForPrefabTag.playerCharacterPrefabTag;
+        private string characterModelPrefabName => SearchForPrefabName.characterModelPrefabName;
         private bool IsMine => myPhotonView.IsMine;
         private float enemySearch_Seconds => statusManagement.GetEnemySearch_Seconds();
         /// <summary>
@@ -78,14 +81,10 @@ namespace Takechi.CharacterController.Ablity1AnimationEvent
         {
             if (!IsMine) return;
 
-            foreach (Player p in PhotonNetwork.PlayerList)
+            foreach (GameObject o in GameObject.FindGameObjectsWithTag(playerCharacterPrefabTag))
             {
-                int ID = int.Parse(p.ActorNumber.ToString() + "001"); 
-                GameObject player = PhotonView.Find(ID).gameObject;
-
-                Debug.Log(player.name);
-
-                Outline outline = player.transform.GetChild(0).transform.Find("CharacterModel").GetComponent<Outline>();
+                Debug.Log(o.name);
+                Outline outline = o.transform.Find(characterModelPrefabName).GetComponent<Outline>();
                 outline.OutlineMode = Outline.Mode.SilhouetteOnly;
             }
         }
@@ -94,12 +93,9 @@ namespace Takechi.CharacterController.Ablity1AnimationEvent
         {
             if (!IsMine) return;
 
-            foreach (Player p in PhotonNetwork.PlayerList)
+            foreach (GameObject o in GameObject.FindGameObjectsWithTag(playerCharacterPrefabTag))
             {
-                int ID = int.Parse(p.ActorNumber.ToString() + "001");
-                GameObject player = PhotonView.Find(ID).gameObject;
-
-                Outline outline = player.transform.GetChild(0).transform.Find("CharacterModel").GetComponent<Outline>();
+                Outline outline = o.transform.Find(characterModelPrefabName).GetComponent<Outline>();
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
             }
         }

@@ -21,13 +21,13 @@ namespace Takechi.GameManagerSystem.Hardpoint
         private void OnEnable()
         {
             StartCoroutine( uiRotation(m_navigationText));
-            m_gameManagement.ChangePointIocation += resetMemberList;
-            Debug.Log("HardpointAreaLocationPoint.ChangePointIocation += <color=yellow>restresetMemberList</color>");
+            //m_gameManagement.ChangePointIocation += resetMemberList;
+            //Debug.Log("HardpointAreaLocationPoint.ChangePointIocation += <color=yellow>restresetMemberList</color>");
         }
         private void OnDisable()
         {
-            m_gameManagement.ChangePointIocation -= resetMemberList;
-            Debug.Log("HardpointAreaLocationPoint.ChangePointIocation -= <color=yellow>restresetMemberList</color>");
+            //m_gameManagement.ChangePointIocation -= resetMemberList;
+            //Debug.Log("HardpointAreaLocationPoint.ChangePointIocation -= <color=yellow>restresetMemberList</color>");
         }
 
         protected override void OnTriggerStay( Collider other)
@@ -38,12 +38,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
                 if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
                 {
-                    if ( hitTeamBMemberList.Count != 0) return;
+                    // if ( hitTeamBMemberList.Count != 0) return;
                     m_gameManagement.SetTeamAPoint(1);
                 }
                 else
                 {
-                    if ( hitTeamAMemberList.Count != 0) return;
+                    // if ( hitTeamAMemberList.Count != 0) return;
                     m_gameManagement.SetTeamBPoint(1);
                 }
             }

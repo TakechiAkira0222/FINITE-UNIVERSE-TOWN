@@ -24,8 +24,10 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
         /// </summary>
         [SerializeField] private List<GameObject> m_showOtherThanYourselfEnvironment;
 
+#if UNITY_EDITOR
         [Header("=== Debug ===")]
         [SerializeField] private KeyCode m_debugKey = KeyCode.M;
+#endif
 
 
         #region private variable

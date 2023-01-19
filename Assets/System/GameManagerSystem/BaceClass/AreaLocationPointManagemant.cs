@@ -6,8 +6,8 @@ using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReferenc
 
 public class AreaLocationPointManagemant : MonoBehaviour
 {
-    protected List<GameObject> hitTeamAMemberList = new List<GameObject>(4);
-    protected List<GameObject> hitTeamBMemberList = new List<GameObject>(4);
+    //protected List<GameObject> hitTeamAMemberList = new List<GameObject>(4);
+    //protected List<GameObject> hitTeamBMemberList = new List<GameObject>(4);
 
     protected IEnumerator uiRotation(GameObject uiCursor)
     {
@@ -30,16 +30,16 @@ public class AreaLocationPointManagemant : MonoBehaviour
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+        //int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-        if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
-        {
-            hitTeamAMemberList.Add(other.gameObject);
-        }
-        else
-        {
-            hitTeamBMemberList.Add(other.gameObject);
-        }
+        //if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+        //{
+        //    hitTeamAMemberList.Add(other.gameObject);
+        //}
+        //else
+        //{
+        //    hitTeamBMemberList.Add(other.gameObject);
+        //}
     }
 
     protected virtual void OnTriggerStay(Collider other)
@@ -51,21 +51,21 @@ public class AreaLocationPointManagemant : MonoBehaviour
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+        //int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-        if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
-        {
-            hitTeamAMemberList.Remove(other.gameObject);
-        }
-        else
-        {
-            hitTeamBMemberList.Remove(other.gameObject);
-        }
+        //if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+        //{
+        //    hitTeamAMemberList.Remove(other.gameObject);
+        //}
+        //else
+        //{
+        //    hitTeamBMemberList.Remove(other.gameObject);
+        //}
     }
 
-    protected void resetMemberList()
-    {
-        hitTeamAMemberList.Clear();
-        hitTeamBMemberList.Clear();
-    }
+    //protected void resetMemberList()
+    //{
+    //    hitTeamAMemberList.Clear();
+    //    hitTeamBMemberList.Clear();
+    //}
 }

@@ -8,6 +8,7 @@ using UnityEngine;
 using TakechiEngine.PUN.Information;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
+using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
 using TakechiEngine.PUN.ServerConnect.Joined;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,6 @@ namespace Takechi.GameManagerSystem.Domination
         [SerializeField] private int m_victoryConditionPoints = 1000;
         [SerializeField] private int m_areaLocationMaxPoints  = 100;
         [SerializeField] private int m_nextSceneNumber = 1;
-        [SerializeField] private string m_judgmentTagName = "PlayerCharacter";
         #endregion
 
         #region private variable
@@ -28,6 +28,7 @@ namespace Takechi.GameManagerSystem.Domination
         private bool m_isGameEnd   = false;
         private int  m_gameFrameCunt = 0;
         private int  m_gameTimeCunt_Second => (int)Mathf.Ceil(m_gameFrameCunt / 1f / Time.deltaTime);
+        private string m_judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
 
         #endregion
 

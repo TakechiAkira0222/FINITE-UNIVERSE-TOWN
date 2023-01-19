@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.UI.SliderContlloer;
@@ -31,8 +32,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void Start()
         {
-            setValue( m_teamAslider, GetTeamAPoint(), GetVictoryPoint());
-            setValue( m_teamBslider, GetTeamBPoint(), GetVictoryPoint());
+            setValue(m_teamAslider, GetTeamAPoint(), GetVictoryPoint());
+            setValue(m_teamBslider, GetTeamBPoint(), GetVictoryPoint());
         }
 
         private void Update()

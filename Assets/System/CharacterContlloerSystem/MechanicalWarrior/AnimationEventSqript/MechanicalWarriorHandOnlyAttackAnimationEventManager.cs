@@ -75,7 +75,6 @@ namespace Takechi.CharacterController.AttackAnimationEvent
             GameObject instans =
             PhotonNetwork.Instantiate( bulletsPath + bulletsInstans.name, magazine.position, Quaternion.identity);
 
-            Debug.Log(force);
             instans.GetComponent<Rigidbody>().AddForce( magazine.forward * force, ForceMode.Impulse);
 
             StartCoroutine(DelayMethod(durationTime, () => { PhotonNetwork.Destroy(instans); }));

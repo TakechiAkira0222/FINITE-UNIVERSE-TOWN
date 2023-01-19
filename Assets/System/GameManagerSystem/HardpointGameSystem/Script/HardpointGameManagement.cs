@@ -12,6 +12,7 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
+using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
 
 namespace Takechi.GameManagerSystem.Hardpoint
 {
@@ -22,7 +23,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         [SerializeField] private List<GameObject> m_areaLocationList = new List<GameObject>();
         [SerializeField] private int    m_intervalTime_Second = 0;
         [SerializeField] private int    m_victoryConditionPoints = 5000;
-        [SerializeField] private string m_judgmentTagName = "PlayerCharacter";
+
 
         #endregion
 
@@ -30,14 +31,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
         private bool m_isGameStart = false;
         private bool m_isGameStop = false;
         private bool m_isGameEnd = false;
-
         private int m_pointIocationindex = 0;
-
         private int m_gameFrameCunt = 0; 
         private int m_gameTimeCunt_Second => (int)Mathf.Ceil( m_gameFrameCunt / 1f / Time.deltaTime);
+        private string m_judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
 
         #endregion
-
         public event Action ChangePointIocation = delegate { };
         public event Action TeamAToVictory = delegate { };
         public event Action TeamBToVictory = delegate { };
