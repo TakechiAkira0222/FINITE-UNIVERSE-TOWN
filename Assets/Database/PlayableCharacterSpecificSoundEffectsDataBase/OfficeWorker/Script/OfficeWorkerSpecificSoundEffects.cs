@@ -33,8 +33,8 @@ namespace Takechi.CharacterController.SpecificSoundEffects.OfficeWorker
         [SerializeField, Header("通常攻撃2")] private AudioClip m_secondNormalAttackClip;
         [SerializeField, Range( 0f, 1f)] private float m_secondNormalAttackVolume = 0.5f;
 
-        [SerializeField, Header(" アビリティ 1　飛ぶ力")] private AudioClip m_ablity1FlyClip;
-        [SerializeField, Range(0f, 1f)] private float m_ablity1FlyVolume = 0.5f;
+        [SerializeField, Header("飛ぶ力")] private AudioClip m_flyingClip;
+        [SerializeField, Range(0f, 1f)] private float m_flyingVolume = 0.5f;
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace Takechi.CharacterController.SpecificSoundEffects.OfficeWorker
         public AudioClip GetFirstNormalAttackClip()  { return m_firstNormalAttackClip; }
         public AudioClip GetSecondNormalAttackClip() { return m_secondNormalAttackClip; }
         public AudioClip GetDeathblowPowerUpClip() { return m_deathblowPowerUpClip; }
-        public AudioClip GetAblity1FlyClip() { return m_ablity1FlyClip; }
+        public AudioClip GetFlyingClip() { return m_flyingClip; }
 
         public float GetVoiceOfFirstNormalAttackVolume() { return m_voiceOfFirstNormalAttackVolume; }
         public float GetVoiceOfSecondNormalAttackVolume() { return m_voiceOfSecondNormalAttackVolume; }
@@ -55,7 +55,7 @@ namespace Takechi.CharacterController.SpecificSoundEffects.OfficeWorker
         public float GetFirstNormalAttackVolume()  { return m_firstNormalAttackVolume; }
         public float GetSecondNormalAttackVolume() { return m_secondNormalAttackVolume; }
         public float GetDeathblowPowerUpVolume()   { return m_deathblowPowerUpVolume; }
-        public float GetAblity1FlyVolume() { return m_ablity1FlyVolume;}
+        public float GetFlyingVolume() { return m_flyingVolume; }
         #endregion
     }
 }

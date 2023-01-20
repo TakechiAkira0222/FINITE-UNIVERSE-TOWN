@@ -59,9 +59,9 @@ namespace Takechi.CharacterController.Parameters
         {
             myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetSecondNormalAttackClip(), officeWorkerSpecificSoundEffects.GetSecondNormalAttackVolume());
         }
-        public void PlayOneShotAblity1Fly()
+        public void PlayOneShotFlying()
         {
-            myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetAblity1FlyClip(), officeWorkerSpecificSoundEffects.GetAblity1FlyVolume());
+            myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetFlyingClip(), officeWorkerSpecificSoundEffects.GetFlyingVolume());
         }
 
         #endregion

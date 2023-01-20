@@ -1392,6 +1392,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7168090421251080977}
     - target: {fileID: 16080726031563567, guid: f3ef5014d2fc6cd4ab59f37ee3b11a7e, type: 3}
+      propertyPath: m_characterKeyInputStateManagement
+      value: 
+      objectReference: {fileID: 350944048658735699}
+    - target: {fileID: 16080726031563567, guid: f3ef5014d2fc6cd4ab59f37ee3b11a7e, type: 3}
       propertyPath: m_mechanicalWarriorStatusManagement
       value: 
       objectReference: {fileID: 4014705923852325729}
@@ -1399,6 +1403,10 @@ PrefabInstance:
       propertyPath: m_mechanicalWarriorAddressManagement
       value: 
       objectReference: {fileID: 7168090421251080977}
+    - target: {fileID: 16080726031563567, guid: f3ef5014d2fc6cd4ab59f37ee3b11a7e, type: 3}
+      propertyPath: m_characterControllerReferenceManagement
+      value: 
+      objectReference: {fileID: 2555767331787685146}
     - target: {fileID: 4328533603585430437, guid: f3ef5014d2fc6cd4ab59f37ee3b11a7e, type: 3}
       propertyPath: m_instans
       value: 
@@ -1601,6 +1609,58 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2835256926474267408}
     m_Modifications:
+    - target: {fileID: 1409663839654758954, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_characterKeyInputStateManagement
+      value: 
+      objectReference: {fileID: 350944048658735699}
+    - target: {fileID: 1409663839654758954, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_characterControllerReferenceManagement
+      value: 
+      objectReference: {fileID: 2555767331787685146}
+    - target: {fileID: 1886054805958923829, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_characterKeyInputStateManagement
+      value: 
+      objectReference: {fileID: 350944048658735699}
+    - target: {fileID: 1886054805958923829, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_characterControllerReferenceManagement
+      value: 
+      objectReference: {fileID: 2555767331787685146}
+    - target: {fileID: 2276993893172445871, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_characterKeyInputStateManagement
+      value: 
+      objectReference: {fileID: 350944048658735699}
+    - target: {fileID: 2276993893172445871, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_characterControllerReferenceManagement
+      value: 
+      objectReference: {fileID: 2555767331787685146}
+    - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[7].Name
+      value: Ablity1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[7].Type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[8].Name
+      value: Ablity2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[8].Type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[9].Name
+      value: Ablity3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[9].Type
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2540787450899357519, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_SynchronizeLayers.Array.data[0].SynchronizeType
       value: 2

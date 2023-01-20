@@ -19,8 +19,10 @@ namespace Takechi.CharacterController.SpecificParameters.OfficeWorker
         private float m_jumpPowerIncrease    = 300.0f;
         [SerializeField, Tooltip("必殺技の継続時間　Seconds")]
         private float m_specialMoveDuration_Seconds = 30;
-        [SerializeField, Tooltip(" アビリティ 1　飛ぶ力")]
-        private float m_ablity1FlyForce = 500;
+        [SerializeField, Tooltip("飛ぶ力")]
+        private float m_flyingForce = 500;
+        [SerializeField, Tooltip("投げる力")]
+        private float m_throwForce = 500;
 
         #endregion
 
@@ -29,7 +31,8 @@ namespace Takechi.CharacterController.SpecificParameters.OfficeWorker
         public float GetMoveingSpeedIncrease() { return m_moveingSpeedIncrease; }
         public float GetJumpPowerIncrease() { return m_jumpPowerIncrease; }
         public float GetSpecialMoveDuration_Seconds() {return m_specialMoveDuration_Seconds;}
-        public float GetAblity1FlyForce() { return m_ablity1FlyForce; }
+        public float GetFlyingForce() { return m_flyingForce; }
+        public float GetThrowForce() { return m_throwForce; }
         #endregion
     }
 }

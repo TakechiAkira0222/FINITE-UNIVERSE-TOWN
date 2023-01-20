@@ -2406,6 +2406,7 @@ GameObject:
   - component: {fileID: 6018737882793698759}
   - component: {fileID: 1462956121723582944}
   - component: {fileID: 5044457089127630745}
+  - component: {fileID: 31984714684521121}
   - component: {fileID: 6809657440400546484}
   m_Layer: 0
   m_Name: OfficeWorkerHandOnlyModelPrefab
@@ -2460,11 +2461,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6215013db3a74d47bd7a8ed7d1b0a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_officeWorkerAddressManagement: {fileID: 0}
   m_characterStatusManagement: {fileID: 0}
   m_officeWorkerSoundEffectsManagement: {fileID: 0}
-  m_thisPhotonView: {fileID: 6809657440400546484}
-  m_swordObject: {fileID: 0}
-  m_swordEffectTrail: {fileID: 0}
 --- !u!114 &1462956121723582944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2477,8 +2478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79d32a6bd74c26499b02483351ef807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_officeWorkerStatusManagement: {fileID: 0}
   m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_characterAddressManagement: {fileID: 0}
+  m_officeWorkerStatusManagement: {fileID: 0}
   m_officeWorkerSoundEffectsManagement: {fileID: 0}
   m_playableDirector: {fileID: 0}
   m_deathblowAreaEffect: {fileID: 0}
@@ -2494,7 +2497,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678902bbeb9d29344bdf921841377c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_characterAddressManagement: {fileID: 0}
   m_characterStatusManagement: {fileID: 0}
+  m_officeWorkerSoundEffectsManagement: {fileID: 0}
+--- !u!114 &31984714684521121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872832776683955147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11926007967d18548b4c41bb0c106532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_officeWorkerAddressManagement: {fileID: 0}
+  m_characterStatusManagement: {fileID: 0}
+  m_officeWorkerSoundEffectsManagement: {fileID: 0}
 --- !u!114 &6809657440400546484
 MonoBehaviour:
   m_ObjectHideFlags: 0
