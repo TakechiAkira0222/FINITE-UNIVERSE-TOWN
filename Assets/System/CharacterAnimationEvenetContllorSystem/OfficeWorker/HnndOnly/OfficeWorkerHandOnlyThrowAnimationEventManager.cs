@@ -1,14 +1,15 @@
+using UnityEngine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 
 using Takechi.CharacterController.Address;
 using Takechi.CharacterController.AnimationEvent;
-using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.Reference;
-
-using UnityEngine;
+using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
+using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
+using System.ComponentModel;
 
 namespace Takechi.CharacterController.ThrowAnimationEvent
 {
@@ -31,6 +32,7 @@ namespace Takechi.CharacterController.ThrowAnimationEvent
         private Transform  throwTransfrom => addressManagement.GetThrowTransform();
         private string throwInstansPath => addressManagement.GetThrowInstansFolderNamePath();
         private float  force => statusManagement.GetThrowForce();
+        private bool isMine => addressManagement.GetMyPhotonView().IsMine;
 
         #endregion
         /// <summary>
@@ -38,9 +40,9 @@ namespace Takechi.CharacterController.ThrowAnimationEvent
         /// </summary>
         void OfficeWorkerThrowStart()
         {
-            keyInputStateManagement.SetOperation(false);
+            //keyInputStateManagement.SetOperation(false);
+            //controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
             controllerReferenceManagement.GetIKAnimationController().SetAllIkWeight(0);
-            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
         }
 
         /// <summary>
@@ -48,6 +50,7 @@ namespace Takechi.CharacterController.ThrowAnimationEvent
         /// </summary>
         void OfficeWorkerThrowTiming()
         {
+            if (!isMine) return;
             throwing( throwTransfrom, force);
         }
 
@@ -56,8 +59,8 @@ namespace Takechi.CharacterController.ThrowAnimationEvent
         /// </summary>
         void OfficeWorkerThrowEnd()
         {
-            keyInputStateManagement.SetOperation(true);
-            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(true);
+            //keyInputStateManagement.SetOperation(true);
+            //controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(true);
             controllerReferenceManagement.GetIKAnimationController().ResetAllIkWeight();
         }
 
@@ -66,9 +69,7 @@ namespace Takechi.CharacterController.ThrowAnimationEvent
             GameObject instans =
             PhotonNetwork.Instantiate( throwInstansPath + throwInstans.name, throwTransform.position, Quaternion.identity);
 
-            instans.GetComponent<Rigidbody>().AddForce( (throwTransform.forward + throwTransform.up) * force, ForceMode.Impulse);
-
-            // PhotonNetwork.Destroy(instans);
+            instans.GetComponent<Rigidbody>().AddForce((throwTransform.forward + ( throwTransform.up / 10)) * force, ForceMode.Impulse);
         }
     }
 }

@@ -30,6 +30,8 @@ namespace Takechi.CharacterController.Ablity1
 
         #endregion
 
+
+        #region UnityEvenet
         void Reset()
         {
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
@@ -61,6 +63,8 @@ namespace Takechi.CharacterController.Ablity1
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : statusManagement.<color=yellow>SetCanUseAbility1</color>(<color=blue>false</color>) <color=green>to set.</color>");
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : statusManagement.<color=yellow>.SetCanUsecanUseAbility1_TimeCount_Seconds</color>(<color=blue>0</color>) <color=green>to set.</color>");
         }
+
+        #endregion
 
         private void AvailableTimeControl()
         {
