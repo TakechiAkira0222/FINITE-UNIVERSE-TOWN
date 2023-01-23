@@ -60,6 +60,20 @@ namespace TakechiEngine.PUN
             PhotonNetwork.LoadLevel(sceneNumber);
             Debug.Log($"<color=green> SceneSyncChange SceneNumber</color> : {sceneNumber}");
         }
+        /// <summary>
+        /// マスタークライアントと同じシーンに移動させる。
+        /// </summary>
+        /// <remarks> 
+        /// この関数を使用するときには、PhotonNetwork.AutomaticallySyncScene = true にしてください。
+        /// </remarks>
+        /// <param name ="sceneName"> 移行したいシーンの名前 </param>
+        protected void SceneSyncChange(string sceneName)
+        {
+            if (!PhotonNetwork.IsMasterClient) return;
+
+            PhotonNetwork.LoadLevel(sceneName);
+            Debug.Log($"<color=green> SceneSyncChange SceneNumber</color> : {sceneName}");
+        }
 
         #endregion
 

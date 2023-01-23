@@ -22,15 +22,14 @@ namespace Takechi.CharacterController.ThrowingBall
 
         private void OnCollisionEnter(Collision collision)
         {
-            Vector3 explosionPos = collision.transform.position;
+            Vector3 explosionPos = collision.contacts[0].point;
 
-            GameObject[] targets = GameObject.FindGameObjectsWithTag(SearchForPrefabTag.playerCharacterPrefabTag);
+            GameObject[] targets = GameObject.FindGameObjectsWithTag( SearchForPrefabTag.playerCharacterPrefabTag);
 
             foreach (GameObject obj in targets)
             {
                 float dist = Vector3.Distance(obj.transform.position, explosionPos);
 
-                Debug.Log(dist);
                 if (dist < radius)
                 {
                     Rigidbody rb = obj.gameObject.GetComponent<Rigidbody>();
@@ -43,9 +42,7 @@ namespace Takechi.CharacterController.ThrowingBall
             }
 
             if (!m_photonView.IsMine) return;
-            PhotonNetwork.Destroy(this.gameObject);
-
-            //StartCoroutine( DelayMethod( 1, () => { PhotonNetwork.Destroy(this.gameObject); }));
+            StartCoroutine( DelayMethod( 0.1f, () => { PhotonNetwork.Destroy(this.gameObject); }));
         }
     }
 }

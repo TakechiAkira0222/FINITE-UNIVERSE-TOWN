@@ -2,24 +2,19 @@ using System.Collections;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Rendering;
 
 using Photon.Pun;
 using Photon.Realtime;
 
-using TakechiEngine.PUN.ServerConnect.Joined;
-using Takechi.ServerConnect.ToJoinRoom;
-using Takechi.ScriptReference.CustomPropertyKey;
 using Takechi.UI.CanvasMune.DisplayListUpdate;
+using Takechi.PlayableCharacter.FadingCanvas;
 
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
-using Takechi.PlayableCharacter.FadingCanvas;
-using UnityEngine.SceneManagement;
+using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 
 namespace Takechi.UI.RoomJoinedMenu
 {
@@ -135,7 +130,7 @@ namespace Takechi.UI.RoomJoinedMenu
 
             StartCoroutine(DelayMethod(NetworkSyncSettings.fadeProductionTime_Second, () =>
             {
-                SceneSyncChange(2);
+                SceneSyncChange( SceneName.characterSelectionScene);
             }));
         }
 

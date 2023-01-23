@@ -5,6 +5,7 @@ using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Reference;
 using UnityEngine;
 using UnityEngine.Playables;
+using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
 
 namespace Takechi.CharacterController.AnimationEvent
 {

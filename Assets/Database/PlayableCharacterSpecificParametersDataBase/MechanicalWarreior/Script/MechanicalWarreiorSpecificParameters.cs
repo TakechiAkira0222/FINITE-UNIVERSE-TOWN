@@ -19,6 +19,8 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
         private float m_deathblowDurationOfBullet = 5;
         [SerializeField, Range(10, 30), Header(" EnemySearch åpë±éûä‘")]
         private float m_enemySearch_Seconds;
+        [SerializeField, Range(20, 50), Header(" WallÇÃë∂ç›éûä‘")]
+        private float m_wallDuration_Seconds;
 
         #region GetStatusFunction
         public float GetNormalShootingForce() { return m_normalShootingForce; }
@@ -26,6 +28,7 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
         public float GetDeathblowShootingForce() { return m_deathblowShootingForce; }
         public float GetDeathblowDurationOfBullet() { return m_deathblowDurationOfBullet; }
         public float GetEnemySearch_Seconds() { return m_enemySearch_Seconds; }
+        public float GetWallDuration_Seconds() { return m_wallDuration_Seconds; }
 
         #endregion
     }

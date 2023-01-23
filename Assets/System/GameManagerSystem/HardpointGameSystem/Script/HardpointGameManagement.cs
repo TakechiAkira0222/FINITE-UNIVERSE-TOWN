@@ -1,18 +1,13 @@
 using Photon.Pun;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
-using TakechiEngine.PUN;
-using TakechiEngine.PUN.Information;
 using TakechiEngine.PUN.ServerConnect.Joined;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
 using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
+using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 
 namespace Takechi.GameManagerSystem.Hardpoint
 {
@@ -94,15 +89,13 @@ namespace Takechi.GameManagerSystem.Hardpoint
             TeamAToVictory += () => 
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(1);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory"); 
             };
             TeamBToVictory += () => 
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(1);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory"); 
             };
         }
@@ -115,16 +108,14 @@ namespace Takechi.GameManagerSystem.Hardpoint
             TeamAToVictory -= () =>
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(1);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory");
             };
 
             TeamBToVictory -= () => 
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(1);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory");
             };
         }

@@ -17,6 +17,7 @@ namespace Takechi.CharacterController.Parameters
         private float m_deathblowShootingForce;
         private float m_deathblowDurationOfBullet;
         private float m_enemySearch_Seconds;
+        private float m_wallDuration_Seconds;
 
         protected override void Awake()
         {
@@ -39,6 +40,7 @@ namespace Takechi.CharacterController.Parameters
             SetDeathblowShootingForce( m_mechanicalWarreiorSpecificParameters.GetDeathblowShootingForce());
             SetDeathblowDurationOfBullet( m_mechanicalWarreiorSpecificParameters.GetDeathblowDurationOfBullet());
             SetEnemySearch_Seconds(m_mechanicalWarreiorSpecificParameters.GetEnemySearch_Seconds());
+            SetWallDuration_Seconds(m_mechanicalWarreiorSpecificParameters.GetWallDuration_Seconds());
 
             Debug.Log($"<color=green> setupMechanicalWarriorSpecificParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
@@ -47,7 +49,8 @@ namespace Takechi.CharacterController.Parameters
                       $" m_deathblowShootingForce = { m_deathblowShootingForce}\n" +
                       $" m_normalDurationOfBullet = { m_normalDurationOfBullet}\n" +
                       $" m_deathblowDurationOfBullet = { m_deathblowDurationOfBullet}\n"+
-                      $" m_normalDurationOfBullet = { m_normalDurationOfBullet}\n" 
+                      $" m_normalDurationOfBullet = { m_normalDurationOfBullet}\n"+
+                      $" m_wallDuration_Seconds = {m_wallDuration_Seconds}\n"
                       );
         }
 
@@ -79,16 +82,21 @@ namespace Takechi.CharacterController.Parameters
             Debug.Log($" enemySearch_Seconds({m_enemySearch_Seconds}) = {changeValue}");
             m_enemySearch_Seconds = changeValue;
         }
+        public void SetWallDuration_Seconds(float changeValue)
+        {
+            Debug.Log($" wallDuration_Seconds({m_wallDuration_Seconds}) = {changeValue}");
+            m_wallDuration_Seconds = changeValue;
+        }
 
         #endregion
 
         #region GetStatusFunction
-
         public float GetNormalShootingForce() { return m_normalShootingForce; }
         public float GetNormalDurationOfBullet() { return m_normalDurationOfBullet; }
         public float GetDeathblowShootingForce() { return m_deathblowShootingForce; }
         public float GetDeathblowDurationOfBullet() { return m_deathblowDurationOfBullet; }
         public float GetEnemySearch_Seconds() { return m_enemySearch_Seconds; }
+        public float GetWallDuration_Seconds() { return m_wallDuration_Seconds; }
 
         #endregion
     }

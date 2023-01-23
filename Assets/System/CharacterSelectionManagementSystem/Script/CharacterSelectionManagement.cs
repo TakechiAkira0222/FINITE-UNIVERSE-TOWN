@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Takechi.PlayableCharacter.FadingCanvas;
 using Takechi.UI.CanvasMune.DisplayListUpdate;
 using Takechi.CharacterController.Parameters;
 
@@ -13,8 +14,8 @@ using Photon.Pun;
 using Photon.Realtime;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
-using Takechi.PlayableCharacter.FadingCanvas;
 
 namespace Takechi.CharacterSelection
 {
@@ -45,6 +46,8 @@ namespace Takechi.CharacterSelection
         private List<Player> m_teamA_memberList = new List<Player>();
         private List<Player> m_teamB_memberList = new List<Player>();
         private bool m_isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
+
+        private Dictionary<string, Action> m_sceneChangeDictionary = new Dictionary<string, Action>();
 
         #endregion
 
@@ -90,6 +93,12 @@ namespace Takechi.CharacterSelection
         #endregion
 
         #region unity event
+        private void Awake()
+        {
+            m_sceneChangeDictionary.Add( RoomStatusName.futureCity, () => { SceneSyncChange(SceneName.futureCityScene);});
+            Debug.Log(" m_sceneChangeDictionary.<color=yellow>Add</color>(<color=green>RoomStatusName</color>.futureCity, () => { <color=yellow>SceneSyncChange</color>(<color=green>SceneName</color>.futureCityScene);});");
+        }
+
         private void Start()
         {
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
@@ -123,10 +132,10 @@ namespace Takechi.CharacterSelection
 
                     StartCoroutine( DelayMethod(NetworkSyncSettings.fadeProductionTime_Second, () =>
                     {
-                        SceneSyncChange(3);
+                        m_sceneChangeDictionary[(string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.mapKey]]();
                     }));
 
-                    yield return new WaitForSeconds(NetworkSyncSettings.fadeProductionTime_Second * 2);
+                    yield return new WaitForSeconds( NetworkSyncSettings.fadeProductionTime_Second * 2);
                 }
             }
         }

@@ -413,8 +413,10 @@ MonoBehaviour:
   - PlayableCharacter
   - EffectPrefab
   m_deathEffect: {fileID: 8280659534722550110, guid: 5b5f4febd48ae3943ab6de929ccf0f9b, type: 3}
-  m_swordObject: {fileID: 3017449322883736188}
-  m_swordEffectTrail: {fileID: 5600064855182701186}
+  m_handOnlyModelSwordObject: {fileID: 3017449322883736188}
+  m_handOnlySwordEffectTrail: {fileID: 5600064855182701186}
+  m_networkModelSwordObject: {fileID: 3017449322883736188}
+  m_networkModelSwordEffectTrail: {fileID: 4551677105111144606}
   m_throwTransform: {fileID: 3289927555635437866}
   m_throwInstansFolderName:
   - PlayableCharacter
@@ -470,8 +472,8 @@ MonoBehaviour:
   m_jumpKey: 32
   m_deathblowKey: 113
   m_ability1: 101
-  m_ability2: 102
-  m_ability3: 99
+  m_ability2: 99
+  m_ability3: 118
 --- !u!114 &1331679818113063980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,7 +1176,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficeWorkerHandOnlyModelPrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8367677680111794718, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+    - {fileID: 5979254921509499224, guid: 480380abe6b3aac44976e865a564a245, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 480380abe6b3aac44976e865a564a245, type: 3}
 --- !u!95 &3014455638564392100 stripped
 Animator:
@@ -1194,6 +1198,11 @@ Transform:
 --- !u!4 &1210703403019990144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2175994735607743231, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+  m_PrefabInstance: {fileID: 1080837498539210367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4551677105111144606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3590822235896835809, guid: 480380abe6b3aac44976e865a564a245, type: 3}
   m_PrefabInstance: {fileID: 1080837498539210367}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3289927555635437866 stripped

@@ -9,11 +9,24 @@ namespace Takechi.CharacterController.Address
 {
     public class MechanicalWarriorAddressManagement : CharacterAddressManagement
     {
+        #region serialize field
         [Header("=== MechanicalWarriorAddressSetting ===")]
+        /// <summary>
+        /// assaultRifle handOnlyModel GameObject 
+        /// </summary>
+        [SerializeField] private GameObject   m_handOnlyModelAssaultRifleObject;
+        /// <summary>
+        /// assaultRifle networkModel GameObject 
+        /// </summary>
+        [SerializeField] private GameObject   m_networkModelAssaultRifleObject;
         /// <summary>
         /// magazine Transfrom 
         /// </summary>
-        [SerializeField] private Transform m_magazineTransfrom;
+        [SerializeField] private Transform  Å@m_magazineTransfrom;
+        /// <summary>
+        /// wallInstans Transfrom 
+        /// </summary>
+        [SerializeField] private Transform    m_wallInstantiateTransfrom;
         /// <summary>
         /// Bullets Path
         /// </summary>
@@ -21,7 +34,7 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// bullets Instans
         /// </summary>
-        [SerializeField] private GameObject m_normalBulletsInstans;
+        [SerializeField] private GameObject   m_normalBulletsInstans;
         /// <summary>
         /// Bullets Path
         /// </summary>
@@ -29,11 +42,26 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// bullets Instans
         /// </summary>
-        [SerializeField] private GameObject m_deathblowBulletsInstans;
+        [SerializeField] private GameObject   m_deathblowBulletsInstans;
+        /// <summary>
+        /// Wall Path
+        /// </summary>
+        [SerializeField] private List<string> m_wallFolderName = new List<string>();
+        /// <summary>
+        /// Wall Instans
+        /// </summary>
+        [SerializeField] private GameObject   m_wallInstans;
 
+        #endregion
+
+        #region get variable
+        public GameObject GetNetworkModelAssaultRifleObject() { return m_networkModelAssaultRifleObject; }
+        public GameObject GetHandOnlyModelAssaultRifleObject() { return m_handOnlyModelAssaultRifleObject; }
         public Transform  GetMagazineTransfrom() { return m_magazineTransfrom; }
+        public Transform  GetWallInstantiateTransfrom() { return m_wallInstantiateTransfrom; }
         public GameObject GetNormalBulletsInstans() { return m_normalBulletsInstans; }
         public GameObject GetDeathblowBulletsInstans() { return m_deathblowBulletsInstans; }
+        public GameObject GetWallInstans() { return m_wallInstans; }
         public string GetNormalBulletsPath()
         {
             string path = "";
@@ -48,6 +76,15 @@ namespace Takechi.CharacterController.Address
 
             return path;
         }
+        public string GetWallPath()
+        {
+            string path = "";
+            foreach (string s in m_wallFolderName) { path += s + "/"; }
+
+            return path;
+        }
+
+        #endregion
     }
 }
 

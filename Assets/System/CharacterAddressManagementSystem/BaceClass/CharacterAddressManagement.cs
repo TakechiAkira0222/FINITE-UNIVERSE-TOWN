@@ -40,7 +40,7 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// hand only animetor
         /// </summary>
-        [SerializeField] private Animator m_handOnlyModelAnimator;
+        [SerializeField] private Animator   m_handOnlyModelAnimator;
         /// <summary>
         /// hand only model object
         /// </summary>
@@ -48,9 +48,9 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// network model animator
         /// </summary>
-        [SerializeField] private Animator m_networkModelAnimator;
+        [SerializeField] private Animator   m_networkModelAnimator;
         /// <summary>
-        /// hand only model object
+        /// network model object
         /// </summary>
         [SerializeField] private GameObject m_networkModelObject;
         /// <summary>
@@ -128,18 +128,18 @@ namespace Takechi.CharacterController.Address
         protected ToFade toFade => m_toFade;
 
         public PhotonView GetMyPhotonView() { return thisPhotonView; }
-        public Rigidbody GetMyRigidbody() { return rb; }
+        public Rigidbody  GetMyRigidbody() { return rb; }
         public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }
-        public Collider GetMyCollider() { return mainCollider; }
+        public Collider   GetMyCollider() { return mainCollider; }
         public GameObject GetMyAvater() { return avater; }
         public Camera GetMyMainCamera() { return mainCamera; }
         public Camera GetMyDeathCamera() { return m_deathCamera; }
-        public Animator GetHandOnlyModelAnimator() { return handOnlyModelAnimator; }
+        public Animator   GetHandOnlyModelAnimator() { return handOnlyModelAnimator; }
         public GameObject GetHandOnlyModelObject() { return handOnlyModelObject; }
-        public Animator GetNetworkModelAnimator() { return networkModelAnimator; }
+        public Animator   GetNetworkModelAnimator() { return networkModelAnimator; }
         public GameObject GetNetworkModelObject() { return networkModelObject; }
         public Outline GetMyOuline() { return modelOutline; }
-        public ToFade GetToFade() { return m_toFade; }
+        public ToFade  GetToFade() { return m_toFade; }
         public GameObject GetDeathEffect() { return m_deathEffect; }
         public GameObject GetAttackHitEffct() { return m_attackHitEffct; }
 

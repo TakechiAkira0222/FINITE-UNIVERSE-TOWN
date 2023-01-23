@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4942670525716574668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260320072395989028}
+  m_Layer: 0
+  m_Name: WallInstantiateTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260320072395989028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4942670525716574668}
+  m_LocalRotation: {x: -0, y: -0, z: -4.2351647e-22, w: 1}
+  m_LocalPosition: {x: -0, y: 1.75, z: 3}
+  m_LocalScale: {x: 0.010000001, y: 0.010000001, z: 0.010000001}
+  m_Children: []
+  m_Father: {fileID: 8210002915424760543}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5523538207445119426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,6 +1661,7 @@ GameObject:
   - component: {fileID: 16080726031563567}
   - component: {fileID: 4328533603585430437}
   - component: {fileID: 6091340060039756995}
+  - component: {fileID: 4776921633054585131}
   - component: {fileID: 7399750266740414426}
   - component: {fileID: 8141486305807316574}
   m_Layer: 0
@@ -1653,6 +1684,7 @@ Transform:
   m_Children:
   - {fileID: 7812167142314946730}
   - {fileID: 1504429528184857401}
+  - {fileID: 260320072395989028}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1687,6 +1719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7976b971ebf86644add86e212d8b1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
   m_mechanicalWarriorAddressManagement: {fileID: 0}
   m_mechanicalWarriorStatusManagement: {fileID: 0}
   m_soundEffectsManagement: {fileID: 0}
@@ -1702,10 +1736,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915789b1e4551f640b81f2af0907bed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mechanicalWarriorAddressManagement: {fileID: 0}
-  m_mechanicalWarriorStatusManagement: {fileID: 0}
   m_characterKeyInputStateManagement: {fileID: 0}
   m_characterControllerReferenceManagement: {fileID: 0}
+  m_mechanicalWarriorAddressManagement: {fileID: 0}
+  m_mechanicalWarriorStatusManagement: {fileID: 0}
   m_playableDirector: {fileID: 0}
 --- !u!114 &6091340060039756995
 MonoBehaviour:
@@ -1719,9 +1753,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e27e7c53867f64ca27281cd693c872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterAddressManagement: {fileID: 0}
-  m_characterStatusManagement: {fileID: 0}
-  m_officeWorkerSoundEffectsManagement: {fileID: 0}
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_mechanicalWarriorAddressManagement: {fileID: 0}
+  m_mechanicalWarriorStatusManagement: {fileID: 0}
+  m_mechanicalWarriorSoundEffectsManagement: {fileID: 0}
+--- !u!114 &4776921633054585131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210002915425251071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9c2d25a142e9445a79f9739b60c011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_mechanicalWarriorAddressManagement: {fileID: 0}
+  m_mechanicalWarriorStatusManagement: {fileID: 0}
+  m_mechanicalWarriorSoundEffectsManagement: {fileID: 0}
 --- !u!114 &7399750266740414426
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,17 +14,25 @@ namespace Takechi.CharacterController.Address
     {
         [Header("=== OfficeWorkerAddressSetting ===")]
         /// <summary>
-        /// swordObject GameObject 
+        /// handOnlySwordObject GameObject 
         /// </summary>
-        [SerializeField] private GameObject  m_swordObject;
+        [SerializeField] private GameObject   m_handOnlyModelSwordObject;
         /// <summary>
-        /// swordObject EffectTrail
+        /// handOnlySwordObject EffectTrail
         /// </summary>
-        [SerializeField] private GameObject  m_swordEffectTrail;
+        [SerializeField] private GameObject   m_handOnlySwordEffectTrail;
+        /// <summary>
+        /// networkModelSwordObject GameObject 
+        /// </summary>
+        [SerializeField] private GameObject   m_networkModelSwordObject;
+        /// <summary>
+        /// networkModelSwordObject EffectTrail
+        /// </summary>
+        [SerializeField] private GameObject   m_networkModelSwordEffectTrail;
         /// <summary>
         /// throwPoint Transfrom
         /// </summary>
-        [SerializeField] private Transform   m_throwTransform;
+        [SerializeField] private Transform    m_throwTransform;
         /// <summary>
         /// throwInstans Path
         /// </summary>
@@ -34,15 +42,16 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private GameObject   m_throwInstans;
 
-        public GameObject GetSwordObject(){ return m_swordObject;}
-        public GameObject GetSwordEffectTrail(){ return m_swordEffectTrail;}
+        public GameObject GetNetworkModelSwordObject(){ return m_networkModelSwordObject; }
+        public GameObject GetNetworkModelSwordEffectTrail(){ return m_networkModelSwordEffectTrail; }
+        public GameObject GetHandOnlyModelSwordObject(){ return m_handOnlyModelSwordObject; }
+        public GameObject GetHandOnlySwordEffectTrail(){ return m_handOnlySwordEffectTrail; }
         public GameObject GetThrowInstans(){ return m_throwInstans;}
         public Transform  GetThrowTransform(){ return m_throwTransform; }
         public string     GetThrowInstansFolderNamePath()
         {
             string path = "";
             foreach (string s in m_throwInstansFolderName) { path += s + "/"; }
-
             return path;
         }
     }

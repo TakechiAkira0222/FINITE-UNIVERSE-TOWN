@@ -25,7 +25,11 @@ namespace Takechi.UI.MapSelection
         /// </summary>
         /// <returns></returns>
         /// ñºëOÇ…ïœçXìríÜ
-        public string GetMapSelectionName() { return RoomStatusName.mapSelectionNameArray[GetSelectionIndex()]; }
+        public string GetMapSelectionName() 
+        {
+            Debug.Log($" Get RoomStatusName.mapSelectionNameArray[{GetSelectionIndex()}]");
+            return RoomStatusName.mapSelectionNameArray[GetSelectionIndex()]; 
+        }
 
         private void OnEnable()
         {

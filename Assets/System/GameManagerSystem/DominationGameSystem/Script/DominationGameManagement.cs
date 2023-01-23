@@ -11,6 +11,7 @@ using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReferenc
 using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
 using TakechiEngine.PUN.ServerConnect.Joined;
 using UnityEngine.SceneManagement;
+using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 
 namespace Takechi.GameManagerSystem.Domination
 {
@@ -96,15 +97,13 @@ namespace Takechi.GameManagerSystem.Domination
             TeamAToVictory += () =>
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(m_nextSceneNumber);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory");
             };
             TeamBToVictory += () =>
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(m_nextSceneNumber);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory");
             };
         }
@@ -114,15 +113,13 @@ namespace Takechi.GameManagerSystem.Domination
             TeamAToVictory -= () =>
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(m_nextSceneNumber);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory");
             };
             TeamBToVictory -= () =>
             {
                 SetGameEnd(true);
-                SceneManager.LoadScene(m_nextSceneNumber);
-                LeaveRoom();
+                SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory");
             };
         }

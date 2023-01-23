@@ -21,6 +21,7 @@ namespace Takechi.UI.DisplayToOthers
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== ScriptSetting ===")]
         [SerializeField] private Slider m_massSlider;
+        [SerializeField] private Text   m_nickNameText;
 
         #endregion
 
@@ -29,11 +30,19 @@ namespace Takechi.UI.DisplayToOthers
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
 
- #endregion
+        #endregion
 
         void Start()
         {
-            setValue( m_massSlider, statusManagement.GetCleanMass());
+            m_nickNameText.text = myPhotonView.Owner.NickName;
+
+            if ((string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+            {
+                m_nickNameText.color = Color.red;
+            }
+            else { m_nickNameText.color = Color.blue; }
+
+            setValue(m_massSlider, statusManagement.GetCleanMass());
         }
 
         private void Update()
