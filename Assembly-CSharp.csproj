@@ -102,6 +102,7 @@
     <Compile Include="Assets\Resource\MapModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
     <Compile Include="Assets\TakechiAsset\LoadingSystem\LoadingCanvas.cs" />
+    <Compile Include="Assets\System\OneWayContactJudgmentSystem\OneWayContactJudgmentManager.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingObjectWithContactDetectionThePlayer.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSoundEffectsDatabase\Script\PlayableCharacterSoundEffectsDataBase.cs" />
     <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicModelOutlineController.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParametersDataBase.cs" />
     <Compile Include="Assets\System\ServerControlSystem\ConnectToLobbySystem\Script\ConnectToLobbyManagment.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\DebugTextViewController.cs" />
+    <Compile Include="Assets\ScriptReferenceFolder\ReferenceSceneInformation.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\NetworkRenderer\MechanicalWarriorNetworkRendererBuildWallAnimationEvenetManager.cs" />
     <Compile Include="Assets\TakechiAsset\InputScriptInterface\Script\InputScriptInterface.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\AbilityScript\CharacterBasicAblity3.cs" />
@@ -180,7 +182,6 @@
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointAreaLocationPointManagemant.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\ScriptReferenceFolder\ReferenceSceneInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />

@@ -36,7 +36,7 @@ namespace Takechi.UI.DisplayToOthers
         {
             m_nickNameText.text = myPhotonView.Owner.NickName;
 
-            if ((string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+            if ((string)PhotonNetwork.LocalPlayer.Get(myPhotonView.ControllerActorNr).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
             {
                 m_nickNameText.color = Color.red;
             }
@@ -47,7 +47,7 @@ namespace Takechi.UI.DisplayToOthers
 
         private void Update()
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.massKey] == null) return;
+            if (PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.massKey] == null ) return;
 
             int number = myPhotonView.ControllerActorNr;
             float mass  =
