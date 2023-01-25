@@ -633,6 +633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5660898006669219556}
+  - component: {fileID: 4651562944757443512}
   - component: {fileID: 4498122178117261954}
   m_Layer: 0
   m_Name: HARDPOINTGameManager
@@ -660,6 +661,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4651562944757443512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5660898006669219559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708f37afc60b6ec4db414649bd7936dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4498122178117261954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff3929b5e44f3745935561501be844c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_roomStatusManagement: {fileID: 4651562944757443512}
   m_areaLocationList:
   - {fileID: 4627429318899437622}
   - {fileID: 4627429319799084011}

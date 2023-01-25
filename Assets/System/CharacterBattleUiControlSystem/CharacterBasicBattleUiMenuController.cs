@@ -78,8 +78,8 @@ namespace Takechi.UI.BattleUiMenu
 
             StorageAction storageAction = new StorageAction( m_hardpointGameSystemUi, m_dominationGameSystemUi);
 
-            m_storageActionDictionary.Add( RoomStatusName.hardpoint, storageAction.hardpointAction);
-            m_storageActionDictionary.Add( RoomStatusName.domination, storageAction.dominationAction);
+            m_storageActionDictionary.Add( RoomStatusName.GameType.hardpoint, storageAction.hardpointAction);
+            m_storageActionDictionary.Add( RoomStatusName.GameType.domination, storageAction.dominationAction);
 
             m_storageActionDictionary[(string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameTypeKey]]();
         }

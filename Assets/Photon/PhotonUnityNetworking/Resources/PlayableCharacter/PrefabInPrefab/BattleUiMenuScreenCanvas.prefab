@@ -5324,6 +5324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5398671094003051190}
+  - component: {fileID: 6241143143242918367}
   - component: {fileID: 3005031251485236382}
   m_Layer: 5
   m_Name: DominationGameSystemUi
@@ -5357,6 +5358,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6241143143242918367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453909017027521981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708f37afc60b6ec4db414649bd7936dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3005031251485236382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5369,6 +5382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500e8831325febe41a67b10e758a590a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_roomStatusManagement: {fileID: 6241143143242918367}
   m_teamAslider: {fileID: 7254205536767862961}
   m_teamBslider: {fileID: 8860696290339575462}
   m_areaLocationAPointsSlider: {fileID: 3824761454253471318}
@@ -5671,6 +5685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94f09521051c0f488c75d8323448dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_roomStatusManagement: {fileID: 6241143143242918367}
   m_teamAslider: {fileID: 6667830319495587487}
   m_teamBslider: {fileID: 7403371102611721873}
   m_percentageOfTeamAPointsText: {fileID: 3148276906049463109}

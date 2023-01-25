@@ -13,16 +13,16 @@ namespace Takechi.CharacterController.OenOneWayContact
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.tag != SearchForPrefabTag.playerCharacterPrefabTag) return;
-            if (!PhotonNetwork.LocalPlayer.IsLocal) return;
+            if ( other.gameObject.tag != SearchForPrefabTag.playerCharacterPrefabTag) return;
+            if ( !PhotonNetwork.LocalPlayer.IsLocal) return;
 
             foreach (Collider collider in m_colliders) { collider.enabled = false; }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag != SearchForPrefabTag.playerCharacterPrefabTag) return;
-            if (!PhotonNetwork.LocalPlayer.IsLocal) return;
+            if ( other.gameObject.tag != SearchForPrefabTag.playerCharacterPrefabTag) return;
+            if ( !PhotonNetwork.LocalPlayer.IsLocal) return;
 
             foreach (Collider collider in m_colliders) { collider.enabled = true; }
         }

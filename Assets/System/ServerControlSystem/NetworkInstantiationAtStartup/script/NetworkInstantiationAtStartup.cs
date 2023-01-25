@@ -38,7 +38,7 @@ namespace Takechi.ServerConnect.NetworkInstantiation
         [SerializeField] private GameObject m_gameSystemInstansHardpointPrefab;
         [SerializeField] private GameObject m_gameSystemInstansDominationPrefab;
 
-        private Dictionary<string, Action> m_storeActionDictionary = new Dictionary<string, Action>();
+        private Dictionary<string, Action>  m_storeActionDictionary = new Dictionary<string, Action>();
 
         public class StoreAction
         {
@@ -74,11 +74,11 @@ namespace Takechi.ServerConnect.NetworkInstantiation
             StoreAction storeAction = 
                 new StoreAction( m_gameSystemInstansDominationPrefab, m_gameSystemInstansHardpointPrefab);
 
-            m_storeActionDictionary.Add( RoomStatusName.domination, storeAction.selectedDomination);
-            Debug.Log($" m_storeActionDictionary.<color=yellow>Add</color>( {RoomStatusName.domination}, storeAction.selectedDomination)");
+            m_storeActionDictionary.Add( RoomStatusName.GameType.domination, storeAction.selectedDomination);
+            Debug.Log($" m_storeActionDictionary.<color=yellow>Add</color>( {RoomStatusName.GameType.domination}, storeAction.selectedDomination)");
 
-            m_storeActionDictionary.Add( RoomStatusName.hardpoint,  storeAction.selectedHardpoint);
-            Debug.Log($" m_storeActionDictionary.<color=yellow>Add</color>( {RoomStatusName.hardpoint}, storeAction.selectedHardpoint)");
+            m_storeActionDictionary.Add( RoomStatusName.GameType.hardpoint,  storeAction.selectedHardpoint);
+            Debug.Log($" m_storeActionDictionary.<color=yellow>Add</color>( {RoomStatusName.GameType.hardpoint}, storeAction.selectedHardpoint)");
         }
 
         void Start()
@@ -88,7 +88,6 @@ namespace Takechi.ServerConnect.NetworkInstantiation
                 InstantiationSetting();
             }
         }
-
         private async void InstantiationSetting()
         {
             await Task.Delay( NetworkSyncSettings.instantiationSettingSynchronizationTime);

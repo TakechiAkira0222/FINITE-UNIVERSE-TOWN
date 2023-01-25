@@ -58,6 +58,10 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         public static class RoomStatusKey
         {
             /// <summary>
+            /// room custom propety gameStateKey
+            /// </summary>
+            public const string gameStateKey = "gameState";
+            /// <summary>
             /// room custom propety victoryPointKey
             /// </summary>
             public const string victoryPointKey = "victoryPoint";
@@ -74,6 +78,7 @@ namespace Takechi.ScriptReference.CustomPropertyKey
             /// </summary>
             public static string[] allKeys = new string[]
             {
+                    gameStateKey,
                     gameTypeKey,
                     mapKey,
                     victoryPointKey,
@@ -85,37 +90,63 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         /// </summary>
         public static class RoomStatusName
         {
-            /// <summary>
-            /// room custom property map Name
-            /// </summary>
-            public const string futureCity = "FutureCity";
-            /// <summary>
-            /// room custom property map array
-            /// </summary>
-            public static string[] mapSelectionNameArray =
-                new string[]
-                {
-                    futureCity,
-                };
+            public class GameState
+            {
+                /// <summary>
+                /// room custom propety gameState Name
+                /// </summary>
+                public const string running = "running";
+                /// <summary>
+                /// room custom propety gameState Name
+                /// </summary> 
+                public const string stopped = "stopped";
+                /// <summary>
+                /// room custom property gameState array
+                /// </summary>
+                public static string[] gameStateNameArray =
+                    new string[]
+                    {
+                    running,
+                    stopped,
+                    };
+            }
 
-          
-            /// <summary>
-            /// room custom property gameType Name
-            /// </summary>
-            public const string domination = "Domination";
-            /// <summary>
-            /// room custom property gameType Name
-            /// </summary>
-            public const string hardpoint = "Hardpoint";
-            /// <summary>
-            /// room custom property gameType array
-            /// </summary>
-            public static string[] gameTypeSelectionNameArray =
-               new string[]
-               {
+            public static class Map
+            {
+                /// <summary>
+                /// room custom property map Name
+                /// </summary>
+                public const string futureCity = "FutureCity";
+                /// <summary>
+                /// room custom property map array
+                /// </summary>
+                public static string[] mapSelectionNameArray =
+                    new string[]
+                    {
+                    futureCity,
+                    };
+            }
+
+            public static class GameType
+            {
+                /// <summary>
+                /// room custom property gameType Name
+                /// </summary>
+                public const string domination = "Domination";
+                /// <summary>
+                /// room custom property gameType Name
+                /// </summary>
+                public const string hardpoint = "Hardpoint";
+                /// <summary>
+                /// room custom property gameType array
+                /// </summary>
+                public static string[] gameTypeSelectionNameArray =
+                   new string[]
+                   {
                     domination,
                     hardpoint,
-               };
+                   };
+            }
         }
 
         /// <summary>

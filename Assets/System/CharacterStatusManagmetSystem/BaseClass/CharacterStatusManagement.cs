@@ -1,12 +1,11 @@
+using System;
 using UnityEngine;
 using Photon.Pun;
-using System;
-using System.Collections.Generic;
-using Takechi.PlayableCharacter.FadingCanvas;
+
 using TakechiEngine.PUN.CustomProperties;
-using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using Takechi.CharacterController.Address;
-using Takechi.CharacterController.KeyInputStete;
+
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.Parameters
 {
@@ -234,9 +233,8 @@ namespace Takechi.CharacterController.Parameters
         #endregion
 
         #region GetFunction
-
-        public bool GetCharacterStatusSetUpCompleteFlag() { return characterStatusSetUpComplete; }
-        public bool GetlocalPlayerCustomPropertiesStatusSetUpCompleteFlag() { return localPlayerCustomPropertiesStatusSetUpComplete; }
+        public bool  GetCharacterStatusSetUpCompleteFlag() { return characterStatusSetUpComplete; }
+        public bool  GetlocalPlayerCustomPropertiesStatusSetUpCompleteFlag() { return localPlayerCustomPropertiesStatusSetUpComplete; }
         public bool  GetIsGrounded()
         {
             Ray ray =

@@ -5,16 +5,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Takechi.CharacterController.RoomStatus;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.GameManagerSystem.Domination
 {
     public class DominationAreaLocationPointManagemant : AreaLocationPointManagemant
     {
-        [SerializeField] private DominationGameManagement m_gameManagement;
-        [SerializeField] private GameObject m_navigationText;
-        [SerializeField] private AreaLocationPointType m_pointType = AreaLocationPointType.AreaLocationA;
-
         private enum AreaLocationPointType
         {
             AreaLocationA = 0,
@@ -22,65 +19,62 @@ namespace Takechi.GameManagerSystem.Domination
             AreaLocationC,
         }
 
-        public class StoreAction
-        {
-            public Action<int> AreaLocationAAction = delegate { };
-            public Action<int> AreaLocationBAction = delegate { };
-            public Action<int> AreaLocationCAction = delegate { };
-            public StoreAction(DominationGameManagement gameManagement , TextMesh text)
-            {
-                AreaLocationAAction += (point) => 
-                { 
-                    gameManagement.SetAreaLocationAPoint(point);
-                    JudgmentToAcquirePoints(gameManagement.GetAreaLocationAPoint(), gameManagement, text);
-                };
-                AreaLocationBAction += (point) => 
-                {
-                    gameManagement.SetAreaLocationBPoint(point);
-                    JudgmentToAcquirePoints(gameManagement.GetAreaLocationBPoint(), gameManagement, text);
-                };
-                AreaLocationCAction += (point) => 
-                { 
-                    gameManagement.SetAreaLocationCPoint(point);
-                    JudgmentToAcquirePoints(gameManagement.GetAreaLocationCPoint(), gameManagement, text);
-                };
-            }
+        #region SerializeField
+        [Header("=== DominationGameManagement ===")]
+        [SerializeField] private DominationGameManagement m_dominationGameManagement;
+        [Header("=== ScriptSetting ===")]
+        [SerializeField] private GameObject m_navigationText;
+        [SerializeField] private AreaLocationPointType m_pointType = AreaLocationPointType.AreaLocationA;
 
-            public void JudgmentToAcquirePoints( int areaLocationPoint, DominationGameManagement gameManagement, TextMesh text)
-            {
-                if (areaLocationPoint > gameManagement.GetAreaLocationMaxPoint() / 2) { text.color = Color.red; }
-                else if (areaLocationPoint < gameManagement.GetAreaLocationMaxPoint() / 2) { text.color = Color.blue; }
-            }
-        }
+        #endregion
 
-        private StoreAction m_storeAction;
+        #region private variable
+        private DominationGameManagement gameManagement => m_dominationGameManagement;
+        private RoomStatusManagement roomStatusManagement => gameManagement.GetMyRoomStatusManagement();
+        private GameObject navigationText => m_navigationText;
+        private TextMesh   navigationTextTextMesh => m_navigationText.GetComponent<TextMesh>();
         private Dictionary< int, Action<int>> m_storeActionDictionary = new Dictionary< int, Action<int>>();
 
+        #endregion
+
+      
         #region Unity Event
         private void Reset()
         {
-            m_gameManagement = this.transform.root.GetComponent<DominationGameManagement>();
+            m_dominationGameManagement = this.transform.root.GetComponent<DominationGameManagement>();
             m_navigationText = this.transform.GetChild(0).gameObject;
         }
 
         private void OnEnable()
         {
-            StartCoroutine( uiRotation( m_navigationText));
+            StartCoroutine( uiRotation( navigationText));
         }
 
         private void Start()
         {
-            m_storeAction = 
-                new StoreAction( m_gameManagement, m_navigationText.GetComponent<TextMesh>());
+            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationA, (point) => 
+            { 
+                roomStatusManagement.UpdateAreaLocationAPoint_domination(point);
+                JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationAPoint_domination(), roomStatusManagement, navigationTextTextMesh);
+            }); 
 
-            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationA, m_storeAction.AreaLocationAAction); 
-            Debug.Log("actions[(int)AreaLocationPointType.AreaLocationA] : gameManagement.SetAreaLocationAPoint(point) to add.");
+            Debug.Log("actions[(int)AreaLocationPointType.AreaLocationA] : roomStatusManagement.UpdateAreaLocationAPoint_domination(point) to add.");
 
-            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationB, m_storeAction.AreaLocationBAction);
-            Debug.Log("actions[(int)AreaLocationPointType.AreaLocationB] : gameManagement.SetAreaLocationBPoint(point) to add.");
+            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationB, (point) =>
+            {
+                roomStatusManagement.UpdateAreaLocationBPoint_domination(point);
+                JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationBPoint_domination(), roomStatusManagement, navigationTextTextMesh);
+            });
 
-            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationC, m_storeAction.AreaLocationCAction);
-            Debug.Log("actions[(int)AreaLocationPointType.AreaLocationC] : gameManagement.SetAreaLocationCPoint(point) to add.");
+            Debug.Log("actions[(int)AreaLocationPointType.AreaLocationB] : roomStatusManagement.UpdateAreaLocationBPoint_domination(point) to add.");
+
+            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationC, (point) => 
+            {
+                roomStatusManagement.UpdateAreaLocationCPoint_domination(point);
+                JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationCPoint_domination(), roomStatusManagement, navigationTextTextMesh);
+            });
+
+            Debug.Log("actions[(int)AreaLocationPointType.AreaLocationC] : roomStatusManagement.UpdateAreaLocationCPoint_domination(point) to add.");
         }
 
         private void OnDisable()
@@ -92,7 +86,7 @@ namespace Takechi.GameManagerSystem.Domination
         {
             base.OnTriggerStay(other);
 
-            if ( other.gameObject.tag == m_gameManagement.GetJudgmentTagName())
+            if ( other.gameObject.tag == gameManagement.GetJudgmentTagName())
             {
                 int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
@@ -107,6 +101,11 @@ namespace Takechi.GameManagerSystem.Domination
                     m_storeActionDictionary[(int)m_pointType](-1);
                 }
             }
+        }
+        public void JudgmentToAcquirePoints(int areaLocationPoint, RoomStatusManagement roomStatusManagement, TextMesh text)
+        {
+            if (areaLocationPoint > roomStatusManagement.GetAreaLocationMaxPoint_domination() / 2) { text.color = Color.red; }
+            else if (areaLocationPoint < roomStatusManagement.GetAreaLocationMaxPoint_domination() / 2) { text.color = Color.blue; }
         }
 
         #endregion

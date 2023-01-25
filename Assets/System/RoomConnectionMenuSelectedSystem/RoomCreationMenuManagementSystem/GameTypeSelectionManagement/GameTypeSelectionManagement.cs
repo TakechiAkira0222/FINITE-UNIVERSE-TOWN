@@ -22,7 +22,7 @@ namespace Takechi.UI.GameTypeSelection
         /// ゲームタイプの名前　Get
         /// </summary>
         /// <returns></returns>
-        public string GetGameTypeSelectionName() { return RoomStatusName.gameTypeSelectionNameArray[GetSelectionIndex()]; }
+        public string GetGameTypeSelectionName() { return RoomStatusName.GameType.gameTypeSelectionNameArray[GetSelectionIndex()]; }
 
         private void OnEnable()
         {

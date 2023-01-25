@@ -329,6 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 771002715565279975}
   - component: {fileID: 6805313547298386280}
+  - component: {fileID: 7420110901601586921}
   - component: {fileID: 5212166074074840157}
   - component: {fileID: 2039010258180462384}
   - component: {fileID: 982873994682134554}
@@ -380,6 +381,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_keyCode: 282
   m_debugCanvas: {fileID: 8429093481098404846}
+--- !u!114 &7420110901601586921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771002715565279974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708f37afc60b6ec4db414649bd7936dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5212166074074840157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterAddressManagement: {fileID: 5212166074074840157}
   m_characterStatusManagement: {fileID: 2039010258180462384}
+  m_roomStatusManagement: {fileID: 7420110901601586921}
   m_dashKey: 304
   m_jumpKey: 32
   m_deathblowKey: 113

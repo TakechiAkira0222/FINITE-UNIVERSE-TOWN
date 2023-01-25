@@ -1,17 +1,22 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+
+using Takechi.CharacterController.RoomStatus;
 using Takechi.UI.SliderContlloer;
 
 using UnityEngine;
 using UnityEngine.UI;
-using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
-using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
 
 namespace Takechi.GameManagerSystem.Domination
 {
+    [RequireComponent(typeof(RoomStatusManagement))]
     public class DominationSliderGetTeamPointMangement : SliderContlloerManager
     {
+        #region SerializeField
+        [Header("=== RoomStatusManagement ===")]
+        [SerializeField] private RoomStatusManagement m_roomStatusManagement;
+
         [SerializeField] private Slider m_teamAslider;
         [SerializeField] private Slider m_teamBslider;
 
@@ -22,50 +27,31 @@ namespace Takechi.GameManagerSystem.Domination
         [SerializeField] private Text m_percentageOfTeamAPointsText;
         [SerializeField] private Text m_percentageOfTeamBPointsText;
 
+        #endregion
+
+        #region private variable
+        private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
+
         private float m_percentageOfTeamAPoints = 0f;
         private float m_percentageOfTeamBPoints = 0f;
+        private float m_victory_f => roomStatusManagement.GetVictoryPoint();
+        private float m_aPoint_f =>  roomStatusManagement.GetTeamAPoint_domination();
+        private float m_bPoint_f =>  roomStatusManagement.GetTeamBPoint_domination();
 
-        /// <summary>
-        /// Get (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.teamAPoint]
-        /// </summary>
-        private float m_aPoint_f =>  (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.teamAPoint];
-        /// <summary>
-        /// Get (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.teamBPoint]
-        /// </summary>
-        private float m_bPoint_f =>  (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.teamBPoint];
-        /// <summary>
-        /// Get (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.victoryPointKey]
-        /// </summary>
-        private float m_victory_f => (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.victoryPointKey];
-        /// <summary>
-        /// Get (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationAPoint]
-        /// </summary>
-        private float m_AreaLocationAPoint_f => (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationAPoint];
-        /// <summary>
-        /// Get (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationBPoint]
-        /// </summary>
-        private float m_AreaLocationBPoint_f => (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationBPoint];
-        /// <summary>
-        /// Get (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationCPoint]
-        /// </summary>
-        private float m_AreaLocationCPoint_f => (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationCPoint];
+        #endregion 
 
-        public int GetTeamAPoint()   { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.teamAPoint]; }
-        public int GetTeamBPoint()   { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.teamBPoint]; }
-        public int GetVictoryPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.victoryPointKey]; }
-
-        public int GetAreaLocationAPoint()   { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationAPoint]; }
-        public int GetAreaLocationBPoint()   { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationBPoint]; }
-        public int GetAreaLocationCPoint()   { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationCPoint]; }
-        public int GetAreaLocationMaxPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[DominationStatusKey.AreaLocationMaxPoint]; }
+        private void Reset()
+        {
+            m_roomStatusManagement = this.GetComponent<RoomStatusManagement>();
+        }
 
         private void Start()
         {
-            setValue(m_teamAslider, GetTeamAPoint(), GetVictoryPoint());
-            setValue(m_teamBslider, GetTeamBPoint(), GetVictoryPoint());
-            setValue(m_areaLocationAPointsSlider, GetAreaLocationAPoint(), GetAreaLocationMaxPoint());
-            setValue(m_areaLocationBPointsSlider, GetAreaLocationBPoint(), GetAreaLocationMaxPoint());
-            setValue(m_areaLocationCPointsSlider, GetAreaLocationCPoint(), GetAreaLocationMaxPoint());
+            setValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_domination(), roomStatusManagement.GetVictoryPoint());
+            setValue(m_teamBslider, roomStatusManagement.GetTeamBPoint_domination(), roomStatusManagement.GetVictoryPoint());
+            setValue(m_areaLocationAPointsSlider, roomStatusManagement.GetAreaLocationAPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+            setValue(m_areaLocationBPointsSlider, roomStatusManagement.GetAreaLocationBPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+            setValue(m_areaLocationCPointsSlider, roomStatusManagement.GetAreaLocationCPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
         }
 
         private void Update()
@@ -76,11 +62,11 @@ namespace Takechi.GameManagerSystem.Domination
             m_percentageOfTeamAPointsText.text = Mathf.Clamp( m_percentageOfTeamAPoints / 10, 0, 100).ToString() + "%";
             m_percentageOfTeamBPointsText.text = Mathf.Clamp( m_percentageOfTeamBPoints / 10, 0, 100).ToString() + "%";
 
-            updateValue( m_teamAslider, GetTeamAPoint());
-            updateValue( m_teamBslider, GetTeamBPoint());
-            updateValue( m_areaLocationAPointsSlider, GetAreaLocationAPoint());
-            updateValue( m_areaLocationBPointsSlider, GetAreaLocationBPoint());
-            updateValue( m_areaLocationCPointsSlider, GetAreaLocationCPoint());
+            updateValue( m_teamAslider, roomStatusManagement.GetTeamAPoint_domination());
+            updateValue( m_teamBslider, roomStatusManagement.GetTeamBPoint_domination());
+            updateValue( m_areaLocationAPointsSlider, roomStatusManagement.GetAreaLocationAPoint_domination());
+            updateValue( m_areaLocationBPointsSlider, roomStatusManagement.GetAreaLocationBPoint_domination());
+            updateValue( m_areaLocationCPointsSlider, roomStatusManagement.GetAreaLocationCPoint_domination());
         }
     }
 }

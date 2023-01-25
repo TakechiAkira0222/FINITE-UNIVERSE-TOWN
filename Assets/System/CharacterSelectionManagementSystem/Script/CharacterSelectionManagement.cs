@@ -95,7 +95,7 @@ namespace Takechi.CharacterSelection
         #region unity event
         private void Awake()
         {
-            m_sceneChangeDictionary.Add( RoomStatusName.futureCity, () => { SceneSyncChange(SceneName.futureCityScene);});
+            m_sceneChangeDictionary.Add( RoomStatusName.Map.futureCity, () => { SceneSyncChange(SceneName.futureCityScene);});
             Debug.Log(" m_sceneChangeDictionary.<color=yellow>Add</color>(<color=green>RoomStatusName</color>.futureCity, () => { <color=yellow>SceneSyncChange</color>(<color=green>SceneName</color>.futureCityScene);});");
         }
 
