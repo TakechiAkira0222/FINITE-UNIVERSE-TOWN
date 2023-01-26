@@ -119,7 +119,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
             };
 
-            Debug.Log($" m_raycastHitAction(loolingobject) to add.");
+            Debug.Log($" m_raycastHitAction(loolingobject) <color=green>to add.</color>");
 
             m_raycastNotHitAction += (lookingObject) =>
             {
@@ -130,7 +130,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
             };
 
-            Debug.Log($" m_raycastNotHitAction(loolingobject) to add.");
+            Debug.Log($" m_raycastNotHitAction(loolingobject) <color=green>to add.</color>");
 
             m_raycastHitObjectChangeAction += (lookingObject) =>
             {
@@ -141,7 +141,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
             };
 
-            Debug.Log($"  m_raycastHitObjectChangeAction(loolingobject) to add.");
+            Debug.Log($"  m_raycastHitObjectChangeAction(loolingobject) <color=green>to add.</color>");
         }
 
         void removeRaycastAction()
@@ -155,7 +155,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
             };
 
-            Debug.Log($" m_raycastHitAction(loolingobject) to remove.");
+            Debug.Log($" m_raycastHitAction(loolingobject) <color=green>to remove.</color>");
 
             m_raycastNotHitAction -= (lookingObject) =>
             {
@@ -166,7 +166,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
             };
 
-            Debug.Log($" m_raycastNotHitAction(loolingobject) to remove.");
+            Debug.Log($" m_raycastNotHitAction(loolingobject) <color=green>to remove.</color>");
 
             m_raycastHitObjectChangeAction -= (lookingObject) =>
             {
@@ -177,7 +177,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
             };
 
-            Debug.Log($"  m_raycastHitObjectChangeAction(loolingobject) to remove.");
+            Debug.Log($"  m_raycastHitObjectChangeAction(loolingobject) <color=green>to remove.</color>");
         }
 
         void SetDictionary()

@@ -246,6 +246,7 @@ namespace TakechiEngine.PUN
             return direction;
         }
 
+
         /// <summary>
         /// 自身が当たったオブジェクトの衝突方向を確認します。
         /// </summary>
@@ -287,6 +288,12 @@ namespace TakechiEngine.PUN
 
             return direction;
         }
+
+        /// <summary>
+        /// 二分の一の確率を返します。
+        /// </summary>
+        /// <returns></returns>
+        protected bool ReturnsTheProbabilityOf1In2() { return UnityEngine.Random.Range(1, 10) % 2 == 0; }
 
         #endregion
 

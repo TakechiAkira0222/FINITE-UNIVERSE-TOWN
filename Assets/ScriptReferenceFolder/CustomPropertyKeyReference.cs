@@ -25,21 +25,21 @@ namespace Takechi.ScriptReference.CustomPropertyKey
         public static class CharacterStatusKey
         {
             /// <summary>
-            /// player custom property attackPowerKey
+            /// player custom property attackPowerKey (float)
             /// </summary>
             public const string attackPowerKey = "attackPower";
             /// <summary>
-            /// player custom property massKey
+            /// player custom property massKey (float)
             /// </summary>
             public const string massKey = "mass";
             /// <summary>
-            /// player custom property teamKey
+            /// player custom property teamNameKey (string)
             /// </summary>
-            public const string teamKey = "team";
+            public const string teamNameKey = "team";
             /// <summary>
-            /// player custom property selectedCharacterKey
+            /// player custom property selectedCharacterKey(int)
             /// </summary>
-            public const string selectedCharacterKey = "selectedCharacter";
+            public const string selectedCharacterNumberKey = "selectedCharacterNumber";
             /// <summary>
             /// player custom property allKeys
             /// </summary>
@@ -47,8 +47,8 @@ namespace Takechi.ScriptReference.CustomPropertyKey
             {
                   attackPowerKey,
                   massKey,
-                  teamKey,
-                  selectedCharacterKey
+                  teamNameKey,
+                  selectedCharacterNumberKey
             };
         }
 

@@ -78,7 +78,7 @@ namespace Takechi.ServerConnect.ToJoinRoom
 
             OnJoinedRoomAction += () =>
             {
-                SetMyNickName(ConfirmationOfNicknames(m_userNickNameManagement.GetNickNameData().nickName));
+                SetMyNickName( ConfirmationOfNicknames( m_userNickNameManagement.GetNickNameData().nickName));
 
                 RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
 

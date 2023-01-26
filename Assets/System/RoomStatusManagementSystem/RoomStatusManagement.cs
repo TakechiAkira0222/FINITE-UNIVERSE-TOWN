@@ -5,17 +5,11 @@ using System.Collections.Generic;
 using TakechiEngine.PUN.CustomProperties;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
-using UnityEngine.Experimental.GlobalIllumination;
 
 namespace Takechi.CharacterController.RoomStatus
 {
     public class RoomStatusManagement : TakechiPunCustomProperties
     {
-        #region SerializeField
-
-
-        #endregion
-
         #region set function
         /// <summary>
         /// RoomStatusName.GameState Çê›íËÇµÇ‹Ç∑ÅB
@@ -67,16 +61,16 @@ namespace Takechi.CharacterController.RoomStatus
 
         #region update function
         // HardPoint
-        public void UpdateTeamAPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.teamAPoint, GetTeamAPoint_domination() + value); }
-        public void UpdateTeamBPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.teamBPoint, GetTeamBPoint_domination() + value); }
-
-        // Domination
-        public void UpdateAreaLocationAPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.AreaLocationAPoint, Mathf.Clamp(GetAreaLocationAPoint_domination() + value, 0, GetAreaLocationMaxPoint_domination())); }
-        public void UpdateAreaLocationBPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.AreaLocationBPoint, Mathf.Clamp(GetAreaLocationBPoint_domination() + value, 0, GetAreaLocationMaxPoint_domination())); }
-        public void UpdateAreaLocationCPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.AreaLocationCPoint, Mathf.Clamp(GetAreaLocationCPoint_domination() + value, 0, GetAreaLocationMaxPoint_domination())); }
         public void UpdateTeamAPoint_hardPoint(int value) { setCurrentRoomCustomProperties(HardPointStatusKey.teamAPoint, GetTeamAPoint_hardPoint() + value); }
         public void UpdateTeamBPoint_hardPoint(int value) { setCurrentRoomCustomProperties(HardPointStatusKey.teamBPoint, GetTeamBPoint_hardPoint() + value); }
 
+
+        // Domination
+        public void UpdateTeamAPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.teamAPoint, GetTeamAPoint_domination() + value); }
+        public void UpdateTeamBPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.teamBPoint, GetTeamBPoint_domination() + value); }
+        public void UpdateAreaLocationAPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.AreaLocationAPoint, Mathf.Clamp(GetAreaLocationAPoint_domination() + value, 0, GetAreaLocationMaxPoint_domination())); }
+        public void UpdateAreaLocationBPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.AreaLocationBPoint, Mathf.Clamp(GetAreaLocationBPoint_domination() + value, 0, GetAreaLocationMaxPoint_domination())); }
+        public void UpdateAreaLocationCPoint_domination(int value) { setCurrentRoomCustomProperties(DominationStatusKey.AreaLocationCPoint, Mathf.Clamp(GetAreaLocationCPoint_domination() + value, 0, GetAreaLocationMaxPoint_domination())); }
         #endregion
     }
 }

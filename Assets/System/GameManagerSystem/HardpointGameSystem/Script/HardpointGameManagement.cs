@@ -9,8 +9,8 @@ using TakechiEngine.PUN;
 using Takechi.CharacterController.RoomStatus;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
-using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
 using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
+using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 
 namespace Takechi.GameManagerSystem.Hardpoint
@@ -29,13 +29,10 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #region private Variable
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
-        private bool   m_isGameStart = false;
-        private bool   m_isGameStop = false;
-        private bool   m_isGameEnd = false;
-        private int    m_pointIocationindex = 0;
-        private int    m_gameFrameCunt = 0; 
-        private int    m_gameTimeCunt_Second => (int)Mathf.Ceil( m_gameFrameCunt / 1f / Time.deltaTime);
-        private string m_judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
+        private int      synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
+        private string   judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
+        private float    m_gameTimeCunt_Seconds = 0;
+        private int      m_pointIocationindex = 0;
 
         #endregion
         public event Action ChangePointIocation = delegate { };
@@ -43,22 +40,13 @@ namespace Takechi.GameManagerSystem.Hardpoint
         public event Action TeamBToVictory = delegate { };
 
         #region setVariable
-        public void SetGameStart(bool flag) { m_isGameStart = flag;}
-        public void SetGameStop(bool flag) { m_isGameStop = flag;}
-        public void SetGameEnd(bool flag) { m_isGameEnd = flag;}
 
         #endregion
 
         #region getVariable
         public RoomStatusManagement GetMyRoomStatusManagement() { return roomStatusManagement; }
-
-        public bool   GetGameStart() { return m_isGameStart; }
-        public bool   GetGameStop() { return m_isGameStop; }
-        public bool   GetGameEnd() { return m_isGameEnd; }
-
-        public int    GetGameTimeCunt_Second() { return m_gameTimeCunt_Second; }
-        public string GetJudgmentTagName() { return m_judgmentTagName; }
-        public int    GetGameFrameCunt() {return m_gameFrameCunt; }
+        public float    GetGameTimeCunt_Seconds() { return m_gameTimeCunt_Seconds; }
+        public string   GetJudgmentTagName() { return  judgmentTagName; }
 
 
         #endregion
@@ -68,15 +56,10 @@ namespace Takechi.GameManagerSystem.Hardpoint
             m_roomStatusManagement = this.transform.GetComponent<RoomStatusManagement>();
         }
 
-        private void Awake()
-        {
-            SetGameStart(true);
-        }
-
         private void Start()
         {
-            //roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
-            //Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
+            roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+            Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
             roomStatusManagement.SetTeamAPoint_hardPoint(0);
             Debug.Log($" <color=yellow>SetTeamAPoint_hardPoint</color>(0)");
             roomStatusManagement.SetTeamBPoint_hardPoint(0);
@@ -93,13 +76,15 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
             TeamAToVictory += () => 
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory"); 
             };
             TeamBToVictory += () => 
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory"); 
             };
@@ -112,31 +97,50 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
             TeamAToVictory -= () =>
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory");
             };
 
             TeamBToVictory -= () => 
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory");
             };
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if ( !m_isGameStart || m_isGameStop || m_isGameEnd) return;
+            if (!PhotonNetwork.IsMasterClient) return;
 
-            float fps = 1f / Time.deltaTime;
+            if (roomStatusManagement.GetGameRunning())
+            {
+                m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if (( m_gameFrameCunt / fps) % m_intervalTime_Second == 0) { ChangePointIocation(); }
+                if (m_gameTimeCunt_Seconds >= m_intervalTime_Second)
+                {
+                    m_gameTimeCunt_Seconds = 0;
+                    ChangePointIocation();
+                }
 
-            m_gameFrameCunt += 1;
+                if (roomStatusManagement.GetTeamAPoint_hardPoint() >= m_victoryConditionPoints) { TeamAToVictory(); };
+                if (roomStatusManagement.GetTeamBPoint_hardPoint() >= m_victoryConditionPoints) { TeamBToVictory(); };
+            }
+            else
+            {
+                m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if (roomStatusManagement.GetTeamAPoint_hardPoint() >= m_victoryConditionPoints) { TeamAToVictory(); };
-            if (roomStatusManagement.GetTeamBPoint_hardPoint() >= m_victoryConditionPoints) { TeamBToVictory(); };
+                if ( m_gameTimeCunt_Seconds >= synchroTimeBeforeGameStart_Seconds)
+                {
+                    m_gameTimeCunt_Seconds = 0;
+                    ChangePointIocation();
+                    roomStatusManagement.SetGameState(RoomStatusName.GameState.running);
+                    Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.running)");
+                }
+            }
         }
 
         #endregion

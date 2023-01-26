@@ -19,7 +19,7 @@ namespace Takechi.CharacterController.DeathJudgment
         [Header("=== CharacterAddressManagement === ")]
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
-        [SerializeField] private CharacterStatusManagement  m_characterStatusManagement;
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement === ")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterkeyInputStateManagement;
         [Header("=== ScriptSetting ===")]
@@ -33,11 +33,11 @@ namespace Takechi.CharacterController.DeathJudgment
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private CharacterKeyInputStateManagement keyInputStateManagement => m_characterkeyInputStateManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
-        private Camera myDeathCamera => addressManagement.GetMyDeathCamera();
-        private Camera myMainCamera  => addressManagement.GetMyMainCamera();
+        private Camera     myDeathCamera => addressManagement.GetMyDeathCamera();
+        private Camera     myMainCamera  => addressManagement.GetMyMainCamera();
         private GameObject myAvater  => addressManagement.GetMyAvater();
         private GameObject handOnlyModelObject => addressManagement.GetHandOnlyModelObject();
-        private GameObject networkModelObject => addressManagement.GetNetworkModelObject();
+        private GameObject networkModelObject  => addressManagement.GetNetworkModelObject();
         private GameObject deathEffect => addressManagement.GetDeathEffect();
         private string deathEffectFolderName => addressManagement.GetDeathEffectFolderName();
         private string antiFieldTagName => DeathToPlayer.antiFieldTagName;
@@ -49,7 +49,7 @@ namespace Takechi.CharacterController.DeathJudgment
         {
             if (collision.gameObject.tag == antiFieldTagName)
             {
-                if ((string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+                if ( statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     EffectInstantiation(collision.contacts[0].point);
 
@@ -76,10 +76,9 @@ namespace Takechi.CharacterController.DeathJudgment
 
                 if ( checkTeammember(number)) return;
 
-                float power =
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
+                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
-                if ((string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+                if ( statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     EffectInstantiation(other.ClosestPoint(other.transform.position));
 
@@ -123,8 +122,9 @@ namespace Takechi.CharacterController.DeathJudgment
                 addressManagement.GetToFade().OnFadeIn("resumption");
                 Debug.Log(" m_characterStatusManagement.<color=yellow>.GetToFade</color>().<color=yellow>.OnFadeIn</color>(resumption)");
 
-                m_characterStatusManagement.ResetCharacterParameters();
-                m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
+                statusManagement.ResetCharacterParameters();
+                statusManagement.ResetLocalPlayerCustomProperties();
+                statusManagement.UpdateLocalPlayerCustomProrerties();
             }
             else
             {
@@ -142,7 +142,7 @@ namespace Takechi.CharacterController.DeathJudgment
             if (!myPhotonView.IsMine) return;
 
             GameObject effct = PhotonNetwork.Instantiate( deathEffectFolderName + deathEffect.name, point, Quaternion.identity);
-            StartCoroutine(DelayMethod(0.5f, () => { PhotonNetwork.Destroy(effct);}));
+            StartCoroutine(DelayMethod( 0.5f, () => { PhotonNetwork.Destroy(effct);}));
         }
         /// <summary>
         /// instans ÇÃï`âÊèÛë‘ÇÅAïœçXÇµÇ‹Ç∑ÅB

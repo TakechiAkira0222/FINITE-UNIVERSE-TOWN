@@ -20,7 +20,7 @@ namespace Takechi.ServerConnect.NetworkInstantiation
         /// <summary>
         /// Player CustomProperty
         /// </summary>
-        private int m_selectedCharacterIndex =>  (int)PhotonNetwork.LocalPlayer.CustomProperties[ CharacterStatusKey.selectedCharacterKey];
+        private int   m_selectedCharacterIndex =>  (int)PhotonNetwork.LocalPlayer.CustomProperties[ CharacterStatusKey.selectedCharacterNumberKey];
 
         /// <summary>
         /// Room CustomProperty
@@ -96,7 +96,7 @@ namespace Takechi.ServerConnect.NetworkInstantiation
 
             foreach (string s in m_playableCharacterFolderName) { playableCharacterFolderPath += s + "/"; }
 
-            if ((PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") ==
+            if ((PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamNameKey] is string value ? value : "null") ==
                 CharacterTeamStatusName.teamAName)
             {
                 PhotonNetwork.Instantiate(playableCharacterFolderPath + m_playableCharacterInstancePrefab[m_selectedCharacterIndex].name, m_respawnPointA.position, m_respawnPointA.rotation);

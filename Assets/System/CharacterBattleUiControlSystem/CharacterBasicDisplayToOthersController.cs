@@ -5,8 +5,8 @@ using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Parameters;
 using Takechi.UI.SliderContlloer;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
+
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.UI.DisplayToOthers
@@ -36,7 +36,7 @@ namespace Takechi.UI.DisplayToOthers
         {
             m_nickNameText.text = myPhotonView.Owner.NickName;
 
-            if ((string)PhotonNetwork.LocalPlayer.Get(myPhotonView.ControllerActorNr).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+            if (statusManagement.GetCustomPropertiesTeamName( myPhotonView.ControllerActorNr) == CharacterTeamStatusName.teamAName)
             {
                 m_nickNameText.color = Color.red;
             }
@@ -47,12 +47,10 @@ namespace Takechi.UI.DisplayToOthers
 
         private void Update()
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.massKey] == null ) return;
+            if (statusManagement.GetCustomPropertiesTeamName() == null ) return;
 
             int number = myPhotonView.ControllerActorNr;
-            float mass  =
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.massKey];
-
+            float mass = statusManagement.GetCustomPropertiesMass(number);
             updateValue( m_massSlider, mass, m_characterStatusManagement.GetCleanMass());
         }
     }

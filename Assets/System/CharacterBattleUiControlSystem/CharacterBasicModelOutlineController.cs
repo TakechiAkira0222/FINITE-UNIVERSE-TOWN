@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
@@ -24,6 +25,7 @@ namespace Takechi.NetworkInstantiation.OutlineController
 
         #region private variable
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         #endregion
 
@@ -45,8 +47,7 @@ namespace Takechi.NetworkInstantiation.OutlineController
         {
             int number = myPhotonView.ControllerActorNr;
 
-            string team =
-                    (string)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey];
+            string team = statusManagement.GetCustomPropertiesTeamName(number);
 
             if (team == CharacterTeamStatusName.teamAName) { m_characterStatusManagement.SetModelOulineColor(m_myColor.ATeamColor); }
             else { m_characterStatusManagement.SetModelOulineColor(m_myColor.BTeamColor); }

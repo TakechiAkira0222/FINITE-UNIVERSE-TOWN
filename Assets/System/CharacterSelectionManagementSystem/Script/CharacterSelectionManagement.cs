@@ -25,8 +25,10 @@ namespace Takechi.CharacterSelection
     public class CharacterSelectionManagement : DisplayListUpdateManagement
     {
         #region SerializeField
+        [Header("=== CharacterStatusManagement ===")]
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== PlayableCharacterParametersManager ===")]
-        [SerializeField] private PlayableCharacterParametersManager m_parametersManager;
+        [SerializeField] private PlayableCharacterParametersManager m_playableCharacterParametersManager;
         [Header("=== memberList setting ===")]
         [SerializeField] private Image m_instansImage;
         [SerializeField] private GameObject m_teamAContent;
@@ -43,9 +45,13 @@ namespace Takechi.CharacterSelection
         #endregion
 
         #region private variable
+
+        private PlayableCharacterParametersManager parametersManager => m_playableCharacterParametersManager;
+        private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
+
         private List<Player> m_teamA_memberList = new List<Player>();
         private List<Player> m_teamB_memberList = new List<Player>();
-        private bool m_isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
+        private bool isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
 
         private Dictionary<string, Action> m_sceneChangeDictionary = new Dictionary<string, Action>();
 
@@ -54,11 +60,11 @@ namespace Takechi.CharacterSelection
         #region set variable
         private void setInformationText(int num)
         {
-            m_infometionText.text = m_parametersManager.GetParameters(num).GetInformation();
+            m_infometionText.text = parametersManager.GetParameters(num).GetInformation();
         }
         private void setInformationText(string name)
         {
-            m_infometionText.text = m_parametersManager.GetParameters(name).GetInformation();
+            m_infometionText.text = parametersManager.GetParameters(name).GetInformation();
         }
         private void setDisplayCharacterPrefab(int index)
         {
@@ -104,8 +110,10 @@ namespace Takechi.CharacterSelection
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
 
             m_toFade.OnFadeIn("NowLoading...");
+
             setInformationText(0);
-            setLocalPlayerCustomProperties(CharacterStatusKey.selectedCharacterKey, 0);
+
+            statusManagement.SetCustomPropertiesSelectedCharacterNumber(0);
 
             StartAfterSync( NetworkSyncSettings.connectionSynchronizationTime);
         }
@@ -117,7 +125,7 @@ namespace Takechi.CharacterSelection
         {
             while (this.gameObject.activeSelf)
             {
-                if (m_isSelectedTime)
+                if (isSelectedTime)
                 {
                     m_gameStartTimeCunt_seconds -= Time.deltaTime;
                     m_gameStartTimeCuntText.text = Mathf.Ceil(m_gameStartTimeCunt_seconds).ToString();
@@ -130,12 +138,12 @@ namespace Takechi.CharacterSelection
                 {
                     m_toFade.OnFadeOut("NowLoading...");
 
-                    StartCoroutine( DelayMethod(NetworkSyncSettings.fadeProductionTime_Second, () =>
+                    StartCoroutine( DelayMethod(NetworkSyncSettings.fadeProductionTime_Seconds, () =>
                     {
                         m_sceneChangeDictionary[(string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.mapKey]]();
                     }));
 
-                    yield return new WaitForSeconds( NetworkSyncSettings.fadeProductionTime_Second * 2);
+                    yield return new WaitForSeconds( NetworkSyncSettings.fadeProductionTime_Seconds * 2);
                 }
             }
         }
@@ -150,7 +158,7 @@ namespace Takechi.CharacterSelection
 
                 foreach (Player player in PhotonNetwork.PlayerList)
                 {
-                    if ((player.CustomProperties[CharacterStatusKey.teamKey] is string value ? value : "null") == CharacterTeamStatusName.teamAName)
+                    if ( statusManagement.GetCustomPropertiesTeamName(player) == CharacterTeamStatusName.teamAName)
                     {
                         m_teamA_memberList.Add(player);
                     }
@@ -174,14 +182,14 @@ namespace Takechi.CharacterSelection
             foreach (Player n in m_teamA_memberList)
             { 
                 Image image = Instantiate( m_instansImage, m_teamAContent.transform);
-                image.sprite =  m_parametersManager.GetParameters((int)n.CustomProperties[CharacterStatusKey.selectedCharacterKey]).GetIcon();
+                image.sprite = parametersManager.GetParameters(statusManagement.GetCustomPropertiesSelectedCharacterNumber(n)).GetIcon();
                 image.transform.GetChild(0).GetComponent<Text>().text = n.NickName; 
             }
 
             foreach (Player n in m_teamB_memberList)
             {
                 Image image = Instantiate(m_instansImage, m_teamBContent.transform);
-                image.sprite = m_parametersManager.GetParameters((int)n.CustomProperties[CharacterStatusKey.selectedCharacterKey]).GetIcon();
+                image.sprite = parametersManager.GetParameters(statusManagement.GetCustomPropertiesSelectedCharacterNumber(n)).GetIcon();
                 image.transform.GetChild(0).GetComponent<Text>().text = n.NickName;
             }
         }
@@ -193,10 +201,11 @@ namespace Takechi.CharacterSelection
         {
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
 
+            statusManagement.SetCustomPropertiesSelectedCharacterNumber(num);
+
             setInformationText(num);
-            setLocalPlayerCustomProperties( CharacterStatusKey.selectedCharacterKey, num);
-            setDisplayCharacterPrefab((int)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.selectedCharacterKey]);
-            setCharacterSelectionButtonColor((int)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.selectedCharacterKey]);
+            setDisplayCharacterPrefab(num);
+            setCharacterSelectionButtonColor(num);
 
             RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
         }

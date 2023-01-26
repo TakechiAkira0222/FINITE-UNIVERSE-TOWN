@@ -1504,7 +1504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6bc396ef6f62d4696a205c4964c199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterAddressManagement: {fileID: 0}
+  m_characterAddressManagement: {fileID: 2640404583997774678}
   m_characterStatusManagement: {fileID: 2640404583997773107}
   m_characterKeyInputStateManagement: {fileID: 2640404583997773094}
   m_thisPhotnView: {fileID: 2640404583997772407}
@@ -1630,8 +1630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470ea4469864c574295d024428c6d9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterAddressManagement: {fileID: 2640404583997774678}
-  m_characterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
+  m_characterAddressManagement: {fileID: 2640404583997774678}
+  m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
 --- !u!114 &2640404583997773148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5024,6 +5024,10 @@ PrefabInstance:
       propertyPath: m_toFade
       value: 
       objectReference: {fileID: 406996585}
+    - target: {fileID: 4177733782338809071, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+      propertyPath: m_characterStatusManagement
+      value: 
+      objectReference: {fileID: 2640404583997773107}
     - target: {fileID: 4876956303370837634, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_serializeSettingClassName.Array.data[0]
       value: 

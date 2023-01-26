@@ -6,6 +6,7 @@ using TakechiEngine.PUN.CustomProperties;
 using Takechi.CharacterController.Address;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using Photon.Realtime;
 
 namespace Takechi.CharacterController.Parameters
 {
@@ -21,18 +22,29 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// 住所
         /// </summary>
-        [SerializeField] private CharacterAddressManagement characterAddressManagement;
-
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatus Setting===")]
         /// <summary>
         /// マスターデータ
         /// </summary>
-        [SerializeField] private PlayableCharacterParameters m_characterParameters;
+        [SerializeField] private PlayableCharacterParameters m_playableCharacterParameters;
+
+        #endregion
+
+        #region private variable
+        /// <summary>
+        /// character parameters
+        /// </summary>
+        private PlayableCharacterParameters characterParameters => m_playableCharacterParameters;
+     
 
         #endregion
 
         #region protected member variable
-
+        /// <summary>
+        /// character addressManagement
+        /// </summary>
+        protected CharacterAddressManagement  characterAddressManagement => m_characterAddressManagement;
         /// <summary>
         /// this photonViwe
         /// </summary>
@@ -106,7 +118,6 @@ namespace Takechi.CharacterController.Parameters
         #endregion
 
         #region this script status flag
-
         /// <summary>
         /// status setup complete : true
         /// </summary>
@@ -119,7 +130,6 @@ namespace Takechi.CharacterController.Parameters
         #endregion
 
         #region event Action 
-
         /// <summary>
         /// status setup complete action
         /// </summary>
@@ -135,6 +145,7 @@ namespace Takechi.CharacterController.Parameters
 
         #endregion
 
+        #region unity event
         protected virtual void Awake()
         {
             if (!thisPhotonView.IsMine) return;
@@ -144,6 +155,8 @@ namespace Takechi.CharacterController.Parameters
             setupLocalPlayerCustomProperties();
         }
 
+        #endregion
+
         #region set up function
 
         /// <summary>
@@ -151,12 +164,12 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private void setupCharacterParameters()
         {
-            SetMovingSpeed( m_characterParameters.GetSpeed());
-            SetLateralMovementRatio( m_characterParameters.GetLateralMovementRatio());
-            SetAttackPower( m_characterParameters.GetAttackPower());
-            SetJumpPower( m_characterParameters.GetJumpPower());
-            SetMass( m_characterParameters.GetCleanMass());
-            SetRespawnTime_Seconds( m_characterParameters.GetRespawnTime_Seconds());
+            SetMovingSpeed( characterParameters.GetSpeed());
+            SetLateralMovementRatio( characterParameters.GetLateralMovementRatio());
+            SetAttackPower( characterParameters.GetAttackPower());
+            SetJumpPower(characterParameters.GetJumpPower());
+            SetMass( characterParameters.GetCleanMass());
+            SetRespawnTime_Seconds( characterParameters.GetRespawnTime_Seconds());
             SetCanUseDeathblow(false);
             SetCanUseAbility1(false); 
             SetCanUseAbility2(false);
@@ -171,9 +184,9 @@ namespace Takechi.CharacterController.Parameters
                       $" mass = {rb.mass}\n"+
                       $" respawnTime_Seconds = {respawnTime_Seconds}\n"+
                       $" canUseDeathblow = {canUseDeathblow}\n"+
-                      $" canUseAbility1 = {canUseAbility1}\n"+
-                      $" canUseAbility2 = {canUseAbility2}\n"+
-                      $" canUseAbility3 = {canUseAbility3}\n"
+                      $" canUseAbility1  = {canUseAbility1}\n"+
+                      $" canUseAbility2  = {canUseAbility2}\n"+
+                      $" canUseAbility3  = {canUseAbility3}\n"
                       );
 
             characterStatusSetUpComplete = true;
@@ -186,21 +199,8 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private void setupLocalPlayerCustomProperties()
         {
-            m_localPlayerCustomProperties =
-               new ExitGames.Client.Photon.Hashtable
-               {
-                    { CharacterStatusKey.attackPowerKey , m_characterParameters.GetAttackPower()},
-                    { CharacterStatusKey.massKey , m_characterParameters.GetCleanMass()},
-               };
-
-            setLocalPlayerCustomProperties(m_localPlayerCustomProperties);
-
-            Debug.Log($"<color=green> setLocalPlayerCustomProrerties </color>\n" +
-                   $"<color=blue> info</color>\n" +
-                   $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
-                   $" {CharacterStatusKey.attackPowerKey} = {m_localPlayerCustomProperties[CharacterStatusKey.attackPowerKey]}\n" +
-                   $" {CharacterStatusKey.massKey} = {m_localPlayerCustomProperties[CharacterStatusKey.massKey]}\n"
-                   );
+            SetCustomPropertiesAttackPower(characterParameters.GetAttackPower());
+            SetCustomPropertiesMass(characterParameters.GetCleanMass());
 
             localPlayerCustomPropertiesStatusSetUpComplete = true;
             Debug.Log(" localPlayerCustomPropertiesStatusSetUpComplete = <color=blue>true</color>");
@@ -210,7 +210,8 @@ namespace Takechi.CharacterController.Parameters
 
         #endregion
 
-        #region SetFunction
+        #region set function
+        // Character Status
         public void SetRespawnTime_Seconds(int time) { respawnTime_Seconds = time; }
         public void SetCanUseDeathblow(bool flag) { canUseDeathblow = flag; }
         public void SetCanUseAbility1(bool flag) { canUseAbility1 = flag; }
@@ -230,9 +231,16 @@ namespace Takechi.CharacterController.Parameters
         public void SetModelOulineColor(Color color) { modelOutline.OutlineColor = color; }
         public void SetModelOulineMode(Outline.Mode mode) { modelOutline.OutlineMode = mode; }
 
+        // CustomProperties
+        public void SetCustomPropertiesTeamName(string teamName) { setLocalPlayerCustomProperties(CharacterStatusKey.teamNameKey, teamName); }
+        public void SetCustomPropertiesMass(float changeValue) { setLocalPlayerCustomProperties(CharacterStatusKey.massKey, changeValue); }
+        public void SetCustomPropertiesAttackPower(float changeValue) { setLocalPlayerCustomProperties(CharacterStatusKey.attackPowerKey, changeValue); }
+        public void SetCustomPropertiesSelectedCharacterNumber(int characterNumber) { setLocalPlayerCustomProperties(CharacterStatusKey.selectedCharacterNumberKey, characterNumber); }
+
         #endregion
 
-        #region GetFunction
+        #region get function
+        // Character Status
         public bool  GetCharacterStatusSetUpCompleteFlag() { return characterStatusSetUpComplete; }
         public bool  GetlocalPlayerCustomPropertiesStatusSetUpCompleteFlag() { return localPlayerCustomPropertiesStatusSetUpComplete; }
         public bool  GetIsGrounded()
@@ -257,46 +265,57 @@ namespace Takechi.CharacterController.Parameters
         public int   GetRespawnTime_Seconds() { return respawnTime_Seconds; }
         public bool  GetCanUseDeathblow() { return canUseDeathblow; }
         public float GetCanUseDeathblow_TimeCount_Seconds() { return canUseDeathblow_TimeCount_Seconds; }
-        public float GetCanUseDeathblow_RecoveryTime_Seconds() {return m_characterParameters.GetDeathblow_RecoveryTime_Seconds(); }
+        public float GetCanUseDeathblow_RecoveryTime_Seconds() {return characterParameters.GetDeathblow_RecoveryTime_Seconds(); }
         public bool  GetCanUseAbility1() { return canUseAbility1; }
         public float GetCanUseAbility1_TimeCount_Seconds() { return canUseAbility1_TimeCount_Seconds; }
-        public float GetCanUseAbility1_RecoveryTime_Seconds() {return m_characterParameters.GetAbility1_RecoveryTime_Seconds(); }
+        public float GetCanUseAbility1_RecoveryTime_Seconds() {return characterParameters.GetAbility1_RecoveryTime_Seconds(); }
         public bool  GetCanUseAbility2() { return canUseAbility2; }
         public float GetCanUseAbility2_TimeCount_Seconds() { return canUseAbility2_TimeCount_Seconds; }
-        public float GetCanUseAbility2_RecoveryTime_Seconds() {return m_characterParameters.GetAbility2_RecoveryTime_Seconds(); }
+        public float GetCanUseAbility2_RecoveryTime_Seconds() {return characterParameters.GetAbility2_RecoveryTime_Seconds(); }
         public bool  GetCanUseAbility3() { return canUseAbility3; }
         public float GetCanUseAbility3_TimeCount_Seconds() { return canUseAbility3_TimeCount_Seconds; }
-        public float GetCanUseAbility3_RecoveryTime_Seconds() {return m_characterParameters.GetAbility3_RecoveryTime_Seconds(); }
+        public float GetCanUseAbility3_RecoveryTime_Seconds() {return characterParameters.GetAbility3_RecoveryTime_Seconds(); }
         public float GetMovingSpeed() { return movingSpeed; }
         public float GetLateralMovementRatio() { return lateralMovementRatio; }
         public float GetAttackPower() { return attackPower; }
         public float GetJumpPower() { return jumpPower; }
         public float GetMass() { return rb.mass;}
-        public float GetCleanMass() { return m_characterParameters.GetCleanMass(); }
-       
+        public float GetCleanMass() { return characterParameters.GetCleanMass(); }
+
+        // CustomProperties
+        public string GetCustomPropertiesTeamName() { return (string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamNameKey]; }
+        public string GetCustomPropertiesTeamName(Player player) { return (string)player.CustomProperties[CharacterStatusKey.teamNameKey]; }
+        public string GetCustomPropertiesTeamName(int controllerActorNr) { return (string)PhotonNetwork.LocalPlayer.Get(controllerActorNr).CustomProperties[CharacterStatusKey.teamNameKey]; }
+
+        public float  GetCustomPropertiesMass() { return (float)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.massKey]; }
+        public float  GetCustomPropertiesMass(Player player) { return (float)player.CustomProperties[CharacterStatusKey.massKey]; }
+        public float  GetCustomPropertiesMass(int controllerActorNr) { return (float)PhotonNetwork.LocalPlayer.Get(controllerActorNr).CustomProperties[CharacterStatusKey.massKey]; }
+
+        public float  GetCustomPropertiesAttackPower() { return (float)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.attackPowerKey]; }
+        public float  GetCustomPropertiesAttackPower(Player player) { return (float)player.CustomProperties[CharacterStatusKey.attackPowerKey]; }
+        public float  GetCustomPropertiesTeamAttackPower(int controllerActorNr) { return (float)PhotonNetwork.LocalPlayer.Get(controllerActorNr).CustomProperties[CharacterStatusKey.attackPowerKey]; }
+
+        public int    GetCustomPropertiesSelectedCharacterNumber() { return (int)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.selectedCharacterNumberKey]; }
+        public int    GetCustomPropertiesSelectedCharacterNumber(Player player) { return (int)player.CustomProperties[CharacterStatusKey.selectedCharacterNumberKey]; }
+        public int    GetCustomPropertiesSelectedCharacterNumber(int controllerActorNr) { return (int)PhotonNetwork.LocalPlayer.Get(controllerActorNr).CustomProperties[CharacterStatusKey.selectedCharacterNumberKey]; }
+
         #endregion
 
-        #region UpdateFunction
+        #region update function
 
         /// <summary>
         /// LocalPlayerCustomPropertiesを、status の変数で更新します。
         /// </summary>
         public void UpdateLocalPlayerCustomProrerties()
         {
-            m_localPlayerCustomProperties =
-              new ExitGames.Client.Photon.Hashtable
-              {
-                    {CharacterStatusKey.attackPowerKey, attackPower},
-                    {CharacterStatusKey.massKey , rb.mass},
-              };
-
-            setLocalPlayerCustomProperties(m_localPlayerCustomProperties);
+            SetCustomPropertiesAttackPower(attackPower);
+            SetCustomPropertiesMass(rb.mass);
 
             Debug.Log($"<color=green> updateLocalPlayerCustomProrerties </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
-                      $" {CharacterStatusKey.attackPowerKey} = {m_localPlayerCustomProperties[CharacterStatusKey.attackPowerKey]}\n" +
-                      $" {CharacterStatusKey.massKey} = {m_localPlayerCustomProperties[CharacterStatusKey.massKey]}\n"
+                      $" {CharacterStatusKey.attackPowerKey} = {GetCustomPropertiesAttackPower()}\n" +
+                      $" {CharacterStatusKey.massKey} = {GetCustomPropertiesMass()}\n"
                     );
         }
         public void UpdateMovingSpeed(float changeValue)
@@ -334,18 +353,18 @@ namespace Takechi.CharacterController.Parameters
 
         #endregion
 
-        #region ResetParameters
+        #region reset parameters
 
         /// <summary>
         /// CharacterStatus を、データベースの変数で設定します。
         /// </summary>
         public void ResetCharacterParameters()
         {
-            SetMovingSpeed(m_characterParameters.GetSpeed());
-            SetLateralMovementRatio(m_characterParameters.GetLateralMovementRatio());
-            SetAttackPower(m_characterParameters.GetAttackPower());
-            SetJumpPower(m_characterParameters.GetJumpPower());
-            SetMass(m_characterParameters.GetCleanMass());
+            SetMovingSpeed( characterParameters.GetSpeed());
+            SetLateralMovementRatio(characterParameters.GetLateralMovementRatio());
+            SetAttackPower( characterParameters.GetAttackPower());
+            SetJumpPower( characterParameters.GetJumpPower());
+            SetMass( characterParameters.GetCleanMass());
 
             Debug.Log($"<color=green> settingCharacterParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
@@ -358,13 +377,34 @@ namespace Takechi.CharacterController.Parameters
         }
 
         /// <summary>
+        /// LocalPlayerCustomPropertiesを、データベースの変数で設定します。
+        /// </summary>
+        public void ResetLocalPlayerCustomProperties()
+        {
+            SetCustomPropertiesAttackPower(characterParameters.GetAttackPower());
+            SetCustomPropertiesMass(characterParameters.GetCleanMass());
+
+            Debug.Log($"<color=green> setLocalPlayerCustomProrerties </color>\n" +
+                   $"<color=blue> info</color>\n" +
+                   $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
+                   $" {CharacterStatusKey.attackPowerKey} = {GetCustomPropertiesAttackPower()}\n"+
+                   $" {CharacterStatusKey.massKey} = {GetCustomPropertiesMass()}\n"
+                   );
+
+            localPlayerCustomPropertiesStatusSetUpComplete = true;
+            Debug.Log(" localPlayerCustomPropertiesStatusSetUpComplete = <color=blue>true</color>");
+            localPlayerCustomPropertiesStatusSetUpCompleteAction();
+            Debug.Log("<color=yellow> localPlayerCustomPropertiesStatusSetUpCompleteAction</color>()");
+        }
+
+        /// <summary>
         /// Character Instans の状態を初期化します。
         /// </summary>
         public  void ResetCharacterInstanceState()
         {
             InitializeCameraSettings();
         }
-
+    
         #endregion
     }
 }

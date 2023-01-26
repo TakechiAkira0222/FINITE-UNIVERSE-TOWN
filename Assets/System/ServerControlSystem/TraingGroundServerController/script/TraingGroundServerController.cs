@@ -72,7 +72,8 @@ namespace Takechi.ServerConnect.TraingGroundServer
         public override void OnConnected()
         {
             SetMyNickName("Player");
-            setLocalPlayerCustomProperties(CharacterStatusKey.teamKey, "NullTeam");
+
+            setLocalPlayerCustomProperties(CharacterStatusKey.teamNameKey, CharacterTeamStatusName.teamAName);
 
             Debug.Log("OnConnected");
         }

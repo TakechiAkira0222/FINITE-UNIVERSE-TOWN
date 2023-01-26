@@ -1,8 +1,9 @@
 using Photon.Pun;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+using Takechi.CharacterController.Parameters;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.ContactJudgment
@@ -22,9 +23,10 @@ namespace Takechi.CharacterController.ContactJudgment
         /// <returns></returns>
         protected bool checkTeammember(int number)
         {
+            Debug.Log(PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamNameKey]);
             return
-                (string)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey].ToString() ==
-                (string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey].ToString();
+                (string)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamNameKey].ToString() ==
+                (string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamNameKey].ToString();
         }
     }
 }

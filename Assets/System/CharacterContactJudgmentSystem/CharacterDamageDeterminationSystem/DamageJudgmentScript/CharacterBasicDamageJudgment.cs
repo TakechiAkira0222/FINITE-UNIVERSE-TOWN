@@ -7,11 +7,11 @@ using System;
 using System.Collections;
 
 using Takechi.CharacterController.Address;
-using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.ContactJudgment;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
+using Takechi.CharacterController.Parameters;
 
 namespace Takechi.CharacterController.DamageJudgment
 {
@@ -22,26 +22,17 @@ namespace Takechi.CharacterController.DamageJudgment
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
-
         #endregion
 
         #region private variable
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private Rigidbody  myRb => addressManagement.GetMyRigidbody();
         private GameObject attackHitEffct => addressManagement.GetAttackHitEffct();
-        private string attackHitsEffectFolderName => addressManagement.GetAttackHitsEffectFolderName();
+        private string     attackHitsEffectFolderName => addressManagement.GetAttackHitsEffectFolderName();
 
         #endregion
-
-        void Start()
-        {
-            if ( m_characterStatusManagement == null)
-            {
-                m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
-                Debug.LogWarning(" m_characterStatusManagement It wasn't set, so I set it.");
-            }
-        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -54,11 +45,10 @@ namespace Takechi.CharacterController.DamageJudgment
 
                 if (checkTeammember(number)) return;
 
-                float power = 
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
+                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
-                m_characterStatusManagement.UpdateMass(-power);
-                m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
+                statusManagement.UpdateMass(-power);
+                statusManagement.UpdateLocalPlayerCustomProrerties();
 
                 StartCoroutine(KnockBack(collision, power));
 
@@ -71,11 +61,10 @@ namespace Takechi.CharacterController.DamageJudgment
 
                 if( checkTeammember(number)) return;
 
-                float power =
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
+                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
-                m_characterStatusManagement.UpdateMass(-power);
-                m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
+                statusManagement.UpdateMass(-power);
+                statusManagement.UpdateLocalPlayerCustomProrerties();
 
                 StartCoroutine(KnockBack(collision, power));
 
@@ -89,8 +78,8 @@ namespace Takechi.CharacterController.DamageJudgment
                     float power =
                        DamageFromObjectToPlayer.objectDamagesDictionary[s];
 
-                    m_characterStatusManagement.UpdateMass(-power);
-                    m_characterStatusManagement.UpdateLocalPlayerCustomProrerties();
+                    statusManagement.UpdateMass(-power);
+                    statusManagement.UpdateLocalPlayerCustomProrerties();
 
                     StartCoroutine(KnockBack(collision, power));
 

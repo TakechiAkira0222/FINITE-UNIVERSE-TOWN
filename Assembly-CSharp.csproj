@@ -63,7 +63,7 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\MovementScript\CharacterBasicMovement.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\NetworkRenderer\MechanicalWarriorNetworkRendererAttackAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyThrowAnimationEventManager.cs" />
-    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
     <Compile Include="Assets\Resource\MapModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\Database\UiSoundEffectsDataBase\Script\BasicUiSoundEffects.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Assets\Database\PlayableCharacterSpecificSoundEffectsDataBase\MechanicalWarreior\Script\MechanicalWarreiorSpecificSoundEffects.cs" />
     <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationGameManagement.cs" />
     <Compile Include="Assets\System\TimeLineSystem\TitleScceneOnlyFolder\TimeLineControllerSqript\TitleScceneTimeLineController.cs" />
-    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinedMenuManagementSystem\Script\RoomJoinedMenuManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSystem\RoomJoinedMenuManagementSystem\Script\RoomJoinedMenuManagement.cs" />
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointGameManagement.cs" />
     <Compile Include="Assets\System\CharacterContactJudgmentSystem\BaseClass\ContactJudgmentManagement.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\HandOnly\MechanicalWarriorHandOnlyDeathblowAnimationEventManager.cs" />
@@ -146,7 +146,7 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\AbilityScript\CharacterBasicAblity3.cs" />
     <Compile Include="Assets\Database\ItemDatabase\ManagmentScript\ItemManager.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\NetworkRenderer\MechanicalWarriorNetworkRendererEnemySearchAnimationEventManager.cs" />
-    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\MapSelectionManagement\MapSelectionManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSystem\RoomCreationMenuManagementSystem\MapSelectionManagement\MapSelectionManagement.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\NetworkRenderer\OfficeWorkerNetworkRendererThrowAnimationEventManager.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSoundEffectsDatabase\Script\PlayableCharacterSoundEffects.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\AbilityScript\CharacterBasicAblity1.cs" />
@@ -157,13 +157,13 @@
     <Compile Include="Assets\EditorSetting\NamedArrayAttribute.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\OfficeWorker\OfficeWorkerStatusManagement.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DeviceInfo\DeviceInfo.cs" />
-    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomJoinMenuManagementSystem\RoomSearchMenu\script\RoomSearchMenuManagment.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSystem\RoomJoinMenuManagementSystem\RoomSearchMenu\script\RoomSearchMenuManagment.cs" />
     <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicDisplayToOthersController.cs" />
     <Compile Include="Assets\TakechiAsset\RotateSkyBoxSystem\sqript\RotateSkyBox.cs" />
     <Compile Include="Assets\EditorSetting\WindowsMenuSceneChange.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ScriptEnabledOrDisabledContlloerSystem\ScriptEnabledOrDisabledContlloer.cs" />
     <Compile Include="Assets\System\CharacterAddressManagementSystem\BaceClass\CharacterAddressManagement.cs" />
-    <Compile Include="Assets\System\RoomConnectionMenuSelectedSystem\RoomCreationMenuManagementSystem\GameTypeSelectionManagement\GameTypeSelectionManagement.cs" />
+    <Compile Include="Assets\System\RoomConnectionMenuSystem\RoomCreationMenuManagementSystem\GameTypeSelectionManagement\GameTypeSelectionManagement.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\Sqript\RaycastHitInstantiateTheCanvasSystem.cs" />
     <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\baseClass\Save.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\HandOnly\MechanicalWarriorHandOnlyAttackAnimationEventManager.cs" />
@@ -183,6 +183,7 @@
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointAreaLocationPointManagemant.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\System\ResultMenuSystem\script\ResultMuneManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />

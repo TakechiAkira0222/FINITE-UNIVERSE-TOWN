@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.RoomStatus;
 using UnityEngine;
-using UnityEngine.Rendering;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.GameManagerSystem.Hardpoint
@@ -49,7 +48,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
             {
                 int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-                if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
+                if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamNameKey] == CharacterTeamStatusName.teamAName)
                 {
                     // if ( hitTeamBMemberList.Count != 0) return;
                     roomStatusManagement.UpdateTeamAPoint_hardPoint(1);

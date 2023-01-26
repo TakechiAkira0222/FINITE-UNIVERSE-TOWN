@@ -13,6 +13,7 @@ using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefab
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 using TakechiEngine.PUN;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 
 namespace Takechi.GameManagerSystem.Domination
 {
@@ -22,20 +23,18 @@ namespace Takechi.GameManagerSystem.Domination
         #region serializeField
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
+        [SerializeField] private int m_intervalTime_Second = 1;
         [SerializeField] private int m_victoryConditionPoints = 1000;
         [SerializeField] private int m_areaLocationMaxPoints  = 100;
-        [SerializeField] private int m_nextSceneNumber = 1;
 
         #endregion
 
         #region private variable
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
-        private bool 　m_isGameStart = false;
-        private bool 　m_isGameStop  = false;
-        private bool 　m_isGameEnd   = false;
-        private int  　m_gameFrameCunt = 0;
-        private int    m_gameTimeCunt_Second => (int)Mathf.Ceil(m_gameFrameCunt / 1f / Time.deltaTime);
-        private string m_judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
+        private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
+        private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
+
+        private float  m_gameTimeCunt_Seconds = 0;
 
         #endregion
 
@@ -43,22 +42,13 @@ namespace Takechi.GameManagerSystem.Domination
         public event Action TeamBToVictory = delegate { };
 
         #region setVariable
-        public void   SetGameStart(bool flag) { m_isGameStart = flag;}
-        public void   SetGameStop(bool flag)  { m_isGameStop = flag;}
-        public void   SetGameEnd(bool flag)   { m_isGameEnd = flag;}
 
         #endregion
 
         #region getVariable
         public RoomStatusManagement GetMyRoomStatusManagement() { return roomStatusManagement; }
-
-        public bool   GetGameStart() { return m_isGameStart; }
-        public bool   GetGameStop()  { return m_isGameStop; }
-        public bool   GetGameEnd()   { return m_isGameEnd; }
-
-        public int    GetGameTimeCunt_Second() { return m_gameTimeCunt_Second; }
-        public int    GetGameFrameCunt() { return m_gameFrameCunt; }
-        public string GetJudgmentTagName() { return m_judgmentTagName; }
+        public float  GetGameTimeCunt_Seconds() { return m_gameTimeCunt_Seconds; }
+        public string GetJudgmentTagName() { return judgmentTagName; }
 
         #endregion
 
@@ -67,15 +57,10 @@ namespace Takechi.GameManagerSystem.Domination
             m_roomStatusManagement = this.transform.GetComponent<RoomStatusManagement>();
         }
 
-        private void Awake()
-        {
-            SetGameStart(true);
-        }
-
         private void Start()
         {
-            //roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
-            //Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
+            roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+            Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
             roomStatusManagement.SetVictoryPoint(m_victoryConditionPoints);
             Debug.Log($" <color=yellow>SetVictoryPoint_domination</color>( {m_victoryConditionPoints})");
             roomStatusManagement.SetTeamAPoint_domination(0);
@@ -97,13 +82,15 @@ namespace Takechi.GameManagerSystem.Domination
         {
             TeamAToVictory += () =>
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory");
             };
             TeamBToVictory += () =>
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory");
             };
@@ -113,35 +100,50 @@ namespace Takechi.GameManagerSystem.Domination
         {
             TeamAToVictory -= () =>
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamAVictory");
             };
             TeamBToVictory -= () =>
             {
-                SetGameEnd(true);
+                roomStatusManagement.SetGameState(RoomStatusName.GameState.stopped);
+                Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.stopped)");
                 SceneSyncChange(SceneName.resultScene);
                 Debug.Log("TeamBVictory");
             };
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if (!m_isGameStart || m_isGameStop || m_isGameEnd) return;
+            if (!PhotonNetwork.IsMasterClient) return;
 
-            float fps = 1f / Time.deltaTime;
-
-            m_gameFrameCunt += 1;
-
-            if ((m_gameFrameCunt / fps) % 1 == 0)
+            if (roomStatusManagement.GetGameRunning())
             {
-                JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationAPoint_domination());
-                JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationBPoint_domination());
-                JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationCPoint_domination());
-            }
+                m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if (roomStatusManagement.GetTeamAPoint_domination() >= m_victoryConditionPoints) { TeamAToVictory(); };
-            if (roomStatusManagement.GetTeamBPoint_domination() >= m_victoryConditionPoints) { TeamBToVictory(); };
+                if ( m_gameTimeCunt_Seconds >= m_intervalTime_Second)
+                {
+                    m_gameTimeCunt_Seconds = 0;
+                    JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationAPoint_domination());
+                    JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationBPoint_domination());
+                    JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationCPoint_domination());
+                }
+
+                if (roomStatusManagement.GetTeamAPoint_domination() >= m_victoryConditionPoints) { TeamAToVictory(); };
+                if (roomStatusManagement.GetTeamBPoint_domination() >= m_victoryConditionPoints) { TeamBToVictory(); };
+            }
+            else
+            {
+                m_gameTimeCunt_Seconds += Time.deltaTime;
+
+                if (m_gameTimeCunt_Seconds >= synchroTimeBeforeGameStart_Seconds)
+                {
+                    m_gameTimeCunt_Seconds = 0;
+                    roomStatusManagement.SetGameState( RoomStatusName.GameState.running);
+                    Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.running)");
+                }
+            }
         }
 
         #endregion

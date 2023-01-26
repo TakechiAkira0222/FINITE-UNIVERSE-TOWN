@@ -25,7 +25,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         #region SerializeField
         [Header("=== CharacterAddressManagement === ")]
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
-        [Header("=== statusManagement ===")]
+        [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
@@ -38,7 +38,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
         #region protected
         protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
-        protected CharacterStatusManagement statusManagement => m_characterStatusManagement;
+        protected CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         protected CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
         protected PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         protected Rigidbody  rb => addressManagement.GetMyRigidbody();
@@ -277,8 +277,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
                 if (checkTeammember(number)) return;
 
-                float power =
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
+                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
                 thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
             }
@@ -289,8 +288,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
 
                 if (checkTeammember(number)) return;
 
-                float power =
-                    (float)PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.attackPowerKey];
+                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
                 thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
             }
@@ -368,8 +366,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         private bool checkTeammember(int number)
         {
             return
-                PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamKey] ==
-                PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamKey];
+                statusManagement.GetCustomPropertiesTeamName(number) == statusManagement.GetCustomPropertiesTeamName();
         }
     }
 }

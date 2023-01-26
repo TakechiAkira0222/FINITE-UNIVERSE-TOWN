@@ -11,16 +11,24 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             /// <summary>
             /// fade Production Time_second
             /// </summary>
-            public const int fadeProductionTime_Second = 5;
+            public const int fadeProductionTime_Seconds = 5;
+
+            /// <summary>
+            /// Synchro time before game start second
+            /// </summary>
+            public const int synchroTimeBeforeGameStart_Seconds = 3;
+            // public const int synchroTimeBeforeGameStart_Seconds = 10;
 
             /// <summary>
             /// connection Synchronization Time Frame
             /// </summary>
+            //public const int connectionSynchronizationTime = 1;
             public const int connectionSynchronizationTime = 1000;
 
             /// <summary>
             /// instantiationSetting Synchronization Time Frame
             /// </summary>
+            //public const int instantiationSettingSynchronizationTime = 1;
             public const int instantiationSettingSynchronizationTime = 10000;
         }
     }
