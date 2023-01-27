@@ -19,20 +19,22 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #region private variable
         private HardpointGameManagement gameManagement => m_gameManagement;
-        private RoomStatusManagement    roomStatusManagement => gameManagement.GetMyRoomStatusManagement();
+        private RoomStatusManagement roomStatusManagement => gameManagement.GetMyRoomStatusManagement();
         private GameObject navigationText => m_navigationText;
+        private bool localGameEnd => gameManagement.GetLocalGameEnd();
 
         #endregion
 
+        #region unity event 
         private void Reset()
         {
-            m_gameManagement = this.transform.root.GetComponent<HardpointGameManagement>(); 
+            m_gameManagement = this.transform.root.GetComponent<HardpointGameManagement>();
             m_navigationText = this.transform.GetChild(0).gameObject;
         }
 
         private void OnEnable()
         {
-            StartCoroutine( uiRotation(navigationText));
+            StartCoroutine(uiRotation(navigationText));
             //m_gameManagement.ChangePointIocation += resetMemberList;
             //Debug.Log("HardpointAreaLocationPoint.ChangePointIocation += <color=yellow>restresetMemberList</color>");
         }
@@ -42,9 +44,18 @@ namespace Takechi.GameManagerSystem.Hardpoint
             //Debug.Log("HardpointAreaLocationPoint.ChangePointIocation -= <color=yellow>restresetMemberList</color>");
         }
 
-        protected override void OnTriggerStay( Collider other)
+        protected override void OnTriggerStay(Collider other)
         {
-            if ( other.gameObject.tag == m_gameManagement.GetJudgmentTagName())
+            if (roomStatusManagement.IsGameRunning() && !localGameEnd) GameState_Running(other);
+        }
+
+        #endregion
+
+        #region main game function
+
+        private void GameState_Running(Collider other)
+        {
+            if (other.gameObject.tag == m_gameManagement.GetJudgmentTagName())
             {
                 int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
@@ -60,5 +71,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
                 }
             }
         }
+
+        #endregion
     }
 }

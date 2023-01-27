@@ -33,6 +33,8 @@ namespace Takechi.GameManagerSystem.Domination
         private RoomStatusManagement roomStatusManagement => gameManagement.GetMyRoomStatusManagement();
         private GameObject navigationText => m_navigationText;
         private TextMesh   navigationTextTextMesh => m_navigationText.GetComponent<TextMesh>();
+        private bool localGameEnd => gameManagement.GetLocalGameEnd();
+
         private Dictionary< int, Action<int>> m_storeActionDictionary = new Dictionary< int, Action<int>>();
 
         #endregion
@@ -52,11 +54,31 @@ namespace Takechi.GameManagerSystem.Domination
 
         private void Start()
         {
-            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationA, (point) => 
-            { 
+            setupOfStart();
+        }
+
+        private void OnDisable()
+        {
+          
+        }
+
+        protected override void OnTriggerStay( Collider other)
+        {
+            if(roomStatusManagement.IsGameRunning() && !localGameEnd) { GameState_Running(other); }
+        }
+
+    
+        #endregion
+
+        #region set up function
+
+        private void setupOfStart()
+        {
+            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationA, (point) =>
+            {
                 roomStatusManagement.UpdateAreaLocationAPoint_domination(point);
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationAPoint_domination(), roomStatusManagement, navigationTextTextMesh);
-            }); 
+            });
 
             Debug.Log("actions[(int)AreaLocationPointType.AreaLocationA] : roomStatusManagement.UpdateAreaLocationAPoint_domination(point) to add.");
 
@@ -68,7 +90,7 @@ namespace Takechi.GameManagerSystem.Domination
 
             Debug.Log("actions[(int)AreaLocationPointType.AreaLocationB] : roomStatusManagement.UpdateAreaLocationBPoint_domination(point) to add.");
 
-            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationC, (point) => 
+            m_storeActionDictionary.Add((int)AreaLocationPointType.AreaLocationC, (point) =>
             {
                 roomStatusManagement.UpdateAreaLocationCPoint_domination(point);
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationCPoint_domination(), roomStatusManagement, navigationTextTextMesh);
@@ -77,20 +99,16 @@ namespace Takechi.GameManagerSystem.Domination
             Debug.Log("actions[(int)AreaLocationPointType.AreaLocationC] : roomStatusManagement.UpdateAreaLocationCPoint_domination(point) to add.");
         }
 
-        private void OnDisable()
-        {
-          
-        }
+        #endregion
 
-        protected override void OnTriggerStay( Collider other)
+        #region mian game function
+        private void GameState_Running(Collider other)
         {
-            base.OnTriggerStay(other);
-
-            if ( other.gameObject.tag == gameManagement.GetJudgmentTagName())
+            if (other.gameObject.tag == gameManagement.GetJudgmentTagName())
             {
                 int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-                if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[ CharacterStatusKey.teamNameKey] == CharacterTeamStatusName.teamAName)
+                if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamNameKey] == CharacterTeamStatusName.teamAName)
                 {
                     //if ( hitTeamBMemberList.Count != 0) return;
                     m_storeActionDictionary[(int)m_pointType](1);
@@ -102,12 +120,14 @@ namespace Takechi.GameManagerSystem.Domination
                 }
             }
         }
+
+        #endregion
+
+
         public void JudgmentToAcquirePoints(int areaLocationPoint, RoomStatusManagement roomStatusManagement, TextMesh text)
         {
             if (areaLocationPoint > roomStatusManagement.GetAreaLocationMaxPoint_domination() / 2) { text.color = Color.red; }
             else if (areaLocationPoint < roomStatusManagement.GetAreaLocationMaxPoint_domination() / 2) { text.color = Color.blue; }
         }
-
-        #endregion
     }
 }

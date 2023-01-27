@@ -283,6 +283,8 @@ namespace Takechi.CharacterController.Parameters
         public float GetCleanMass() { return characterParameters.GetCleanMass(); }
 
         // CustomProperties
+        public bool   GetIsLocal() { return PhotonNetwork.LocalPlayer.IsLocal; }
+        public bool   GetIsMine() { return thisPhotonView.IsMine; }
         public string GetCustomPropertiesTeamName() { return (string)PhotonNetwork.LocalPlayer.CustomProperties[CharacterStatusKey.teamNameKey]; }
         public string GetCustomPropertiesTeamName(Player player) { return (string)player.CustomProperties[CharacterStatusKey.teamNameKey]; }
         public string GetCustomPropertiesTeamName(int controllerActorNr) { return (string)PhotonNetwork.LocalPlayer.Get(controllerActorNr).CustomProperties[CharacterStatusKey.teamNameKey]; }

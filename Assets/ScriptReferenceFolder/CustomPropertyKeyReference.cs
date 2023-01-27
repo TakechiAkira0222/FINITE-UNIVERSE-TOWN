@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -93,21 +94,36 @@ namespace Takechi.ScriptReference.CustomPropertyKey
             public class GameState
             {
                 /// <summary>
-                /// room custom propety gameState Name
+                /// room custom propety gameState beforeStartName
+                /// </summary>
+                public const string beforeStart = "beforeStart";
+                /// <summary>
+                /// room custom propety gameState runningName
                 /// </summary>
                 public const string running = "running";
                 /// <summary>
-                /// room custom propety gameState Name
+                /// room custom propety gameState stoppedName
                 /// </summary> 
                 public const string stopped = "stopped";
+                /// <summary>
+                /// room custom propety gameState endName
+                /// </summary>
+                public const string end = "end";
+                /// <summary>
+                /// room custom propety gameState nullName
+                /// </summary>
+                public const string  NULL = "null";
                 /// <summary>
                 /// room custom property gameState array
                 /// </summary>
                 public static string[] gameStateNameArray =
                     new string[]
                     {
-                    running,
-                    stopped,
+                        beforeStart,
+                        running,
+                        stopped,
+                        end,
+                        NULL,
                     };
             }
 

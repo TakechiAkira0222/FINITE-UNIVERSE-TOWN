@@ -15,6 +15,7 @@ using Takechi.PlayableCharacter.FadingCanvas;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
+using UnityEngine.Rendering;
 
 namespace Takechi.UI.RoomJoinedMenu
 {
@@ -68,7 +69,7 @@ namespace Takechi.UI.RoomJoinedMenu
             await Task.Delay(s);
 
             StartCoroutine(nameof(ListUpdate));
-            Invoke( nameof(InitialTeamSetup), 0.1f);
+            StartCoroutine(nameof(InitialTeamSetup));
 
             updateRoomInfometionText();
         }
@@ -133,7 +134,7 @@ namespace Takechi.UI.RoomJoinedMenu
         {
             m_thisPhotnView.RPC( nameof(RPC_SceneSyncChange),RpcTarget.AllBufferedViaServer);
 
-            StartCoroutine(DelayMethod(NetworkSyncSettings.fadeProductionTime_Seconds, () =>
+            StartCoroutine(DelayMethod( NetworkSyncSettings.fadeProductionTime_Seconds, () =>
             {
                 SceneSyncChange( SceneName.characterSelectionScene);
             }));
@@ -250,15 +251,19 @@ namespace Takechi.UI.RoomJoinedMenu
             return s;
         }
 
-        private void InitialTeamSetup()
+        private IEnumerator InitialTeamSetup()
         {
-            if (!MaximumOfMembers(m_teamA_memberList))
-            {
-                characterStatusManagement.SetCustomPropertiesTeamName( CharacterTeamStatusName.teamAName);
-            }
-            else
+            characterStatusManagement.SetCustomPropertiesTeamName(CharacterTeamStatusName.teamAName);
+
+            yield return new WaitForSeconds( Time.deltaTime);
+
+            if (!MaximumOfMembers( m_teamB_memberList))
             {
                 characterStatusManagement.SetCustomPropertiesTeamName( CharacterTeamStatusName.teamBName);
+            }
+            else if (!MaximumOfMembers( m_teamA_memberList))
+            {
+                characterStatusManagement.SetCustomPropertiesTeamName( CharacterTeamStatusName.teamAName);
             }
         }
 

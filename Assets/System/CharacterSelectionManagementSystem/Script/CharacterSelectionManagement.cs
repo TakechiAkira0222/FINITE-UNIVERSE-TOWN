@@ -107,7 +107,7 @@ namespace Takechi.CharacterSelection
 
         private void Start()
         {
-            if (!PhotonNetwork.LocalPlayer.IsLocal) return;
+            if (!statusManagement.GetIsLocal()) return;
 
             m_toFade.OnFadeIn("NowLoading...");
 

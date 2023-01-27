@@ -32,18 +32,54 @@ namespace Takechi.CharacterController.RoomStatus
 
         #endregion
 
-        #region get function
+        #region game state flag
+        public bool IsGameBeforeStart()
+        {
+            if (!PhotonNetwork.InRoom) return true;
+            if (GetGameState() == null) { return true; }
 
-        public int   GetVictoryPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.victoryPointKey]; }
-        public bool  GetGameRunning()
+            if (GetGameState() == RoomStatusName.GameState.beforeStart) { return true; }
+            else return false;
+        }
+        public bool IsGameRunning()
+        {
+            if (!PhotonNetwork.InRoom) return true;
+            if (GetGameState() == null) { return true; }
+
+            if (GetGameState() == RoomStatusName.GameState.running) { return true; }
+            else return false;
+        }
+        public bool IsGameStop()
         {
             if (!PhotonNetwork.InRoom) return true;
 
             if (GetGameState() == null) { return true; }
-            else if (GetGameState() == RoomStatusName.GameState.running) { return true; }
+           
+            if (GetGameState() == RoomStatusName.GameState.stopped) { return true; }
             else return false;
         }
-        public string GetGameState() { return (string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameStateKey]; }
+        public bool IsGameEnd()
+        {
+            if (!PhotonNetwork.InRoom) return true;
+            if (GetGameState() == null) { return true; }
+
+            if (GetGameState() == RoomStatusName.GameState.end) { return true; }
+            else return false;
+        }
+
+        #endregion
+
+        #region get function
+
+        public int    GetVictoryPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.victoryPointKey]; }
+        public string GetGameState()
+        {
+            if (!PhotonNetwork.InRoom) return RoomStatusName.GameState.NULL;
+            if ((string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameStateKey] == null) return RoomStatusName.GameState.NULL;
+
+            return (string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameStateKey];
+        }
+           
 
         // HardPoint
         public int GetTeamAPoint_hardPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamAPoint]; }
