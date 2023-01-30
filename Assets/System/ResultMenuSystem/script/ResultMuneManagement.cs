@@ -24,7 +24,6 @@ namespace Takechi.UI.ResultMune
         private CharacterStatusManagement statusManagement => m_characterStatusManagement;
         private List<GameObject> characterPrefabList => m_characterPrefabList;
         private ToFade toFade => m_toFade;
-
         private void Awake()
         {
             if ( !statusManagement.GetIsLocal()) return;
@@ -42,7 +41,6 @@ namespace Takechi.UI.ResultMune
             {
                 LeaveRoom();
             }));
-           
         }
 
         public override void OnLeftRoom()

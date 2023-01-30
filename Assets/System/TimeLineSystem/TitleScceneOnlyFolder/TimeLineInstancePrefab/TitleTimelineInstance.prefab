@@ -59,7 +59,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 1e+10
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -561,7 +561,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8895807000555254746}
-  - component: {fileID: 8895807000555254747}
   - component: {fileID: 6889870087689228997}
   m_Layer: 0
   m_Name: TitleTimelineInstance
@@ -586,37 +585,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!320 &8895807000555254747
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895807000555254745}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: fcdccc001e1433f4b913cd08e7ec9c1e, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  - key: {fileID: -593596071137788653, guid: fcdccc001e1433f4b913cd08e7ec9c1e, type: 2}
-    value: {fileID: 637779407}
-  - key: {fileID: 5254816582859993954, guid: 0cf1186b86fdfd14a9e0d1595935e7f3, type: 2}
-    value: {fileID: 1234762233}
-  - key: {fileID: -2895256750271497725, guid: 0cf1186b86fdfd14a9e0d1595935e7f3, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -9063990303619657295, guid: fcdccc001e1433f4b913cd08e7ec9c1e, type: 2}
-    value: {fileID: 1234762229}
-  - key: {fileID: -95846494954596423, guid: fcdccc001e1433f4b913cd08e7ec9c1e, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
 --- !u!114 &6889870087689228997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +597,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703a140f7ff9fcc47b2065fef585511f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_timelines:
-  - {fileID: 11400000, guid: 0cf1186b86fdfd14a9e0d1595935e7f3, type: 2}
-  - {fileID: 11400000, guid: fcdccc001e1433f4b913cd08e7ec9c1e, type: 2}
-  m_playableDirector: {fileID: 8895807000555254747}
