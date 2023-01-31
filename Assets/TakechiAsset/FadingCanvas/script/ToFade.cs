@@ -7,9 +7,6 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 using System;
-using System.Threading.Tasks;
-using System.Net.NetworkInformation;
-using UnityEngine.SceneManagement;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using UnityEngine.Rendering;
 
