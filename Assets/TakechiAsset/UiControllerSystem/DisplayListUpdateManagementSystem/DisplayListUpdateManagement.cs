@@ -100,12 +100,6 @@ namespace Takechi.UI.CanvasMune.DisplayListUpdate
         }
 
         /// <summary>
-        /// 二分の一の確率を返します。
-        /// </summary>
-        /// <returns></returns>
-        protected bool ReturnsTheProbabilityOf1In2() { return  UnityEngine.Random.Range(1, 10) % 2 == 0; }
-
-        /// <summary>
         /// memberListの最大に達しているかどうかの確認します。
         /// </summary>
         /// <param name="teamMemberList"> teamMemberList</param>

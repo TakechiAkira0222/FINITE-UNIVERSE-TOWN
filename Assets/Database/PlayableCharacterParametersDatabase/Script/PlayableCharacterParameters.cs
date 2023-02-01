@@ -11,14 +11,8 @@ namespace Takechi.CharacterController.Parameters
     public class PlayableCharacterParameters : ScriptableObject
     {
         #region SerializeField
-        [SerializeField, Tooltip("特徴の種類")]
-        private TypeOfCharacterParameters m_typeOfParameters;
-        [SerializeField, Tooltip("アイコン")]
-        private Sprite m_icon;
-        [SerializeField, Tooltip("名前")]
+        [SerializeField, Tooltip("キャラクター 名前")]
         private string m_characterName = "nullname";
-        [SerializeField, Tooltip("情報")]
-        private string m_information = "特徴や経歴";
         [SerializeField, Tooltip("質量")]
         private int m_cleanMass = 60;
         [SerializeField, Tooltip("リスポーン時間(秒)")]
@@ -39,6 +33,7 @@ namespace Takechi.CharacterController.Parameters
         private float m_ability3_RecoveryTime_Seconds = 30;
         [SerializeField, Tooltip("必殺技回復時間")]
         private float m_deathblow_RecoveryTime_Seconds = 60;
+
         #endregion
 
         public enum TypeOfCharacterParameters
@@ -50,75 +45,59 @@ namespace Takechi.CharacterController.Parameters
         }
 
         #region GetFunction
-
-        /// <summary>
-        /// 特徴の種類
-        /// </summary>
-        /// <returns></returns>
-        public TypeOfCharacterParameters GetTypeOfParameters() { return m_typeOfParameters; }
-        /// <summary>
-        /// アイコン
-        /// </summary>
-        /// <returns></returns>
-        public Sprite GetIcon() { return m_icon; }
         /// <summary>
         /// 名前
         /// </summary>
         /// <returns></returns>
         public string GetCharacterName() { return m_characterName; }
         /// <summary>
-        /// 情報
-        /// </summary>
-        /// <returns></returns>
-        public string GetInformation() { return m_information; }
-        /// <summary>
         /// 移動スピード
         /// </summary>
-        public float GetSpeed() { return m_movingSpeed; }
+        public float  GetSpeed() { return m_movingSpeed; }
         /// <summary>
         /// 横移動の移動量 割合
         /// </summary>
-        public float GetLateralMovementRatio() { return m_lateralMovementRatio; }
+        public float  GetLateralMovementRatio() { return m_lateralMovementRatio; }
         /// <summary>
         /// 攻撃力
         /// </summary>
         /// <returns></returns>
-        public float GetAttackPower() { return m_attackPower; }
+        public float  GetAttackPower() { return m_attackPower; }
         /// <summary>
         /// ジャンプ力
         /// </summary>
         /// <returns></returns>
-        public float GetJumpPower() { return m_jumpPower; }
+        public float  GetJumpPower() { return m_jumpPower; }
         /// <summary>
         /// 質量
         /// </summary>
         /// <returns> 干渉を受けていない質量を返します。</returns>
-        public float GetCleanMass() { return m_cleanMass; }
+        public float  GetCleanMass() { return m_cleanMass; }
         /// <summary>
         /// リスポーン時間
         /// </summary>
         /// <returns></returns>
-        public int   GetRespawnTime_Seconds() { return m_respawnTime_Seconds; }
+        public int    GetRespawnTime_Seconds() { return m_respawnTime_Seconds; }
         /// <summary>
         /// アビリティー1の回復時間
         /// </summary>
         /// <returns></returns>
-        public float GetAbility1_RecoveryTime_Seconds() { return m_ability1_RecoveryTime_Seconds; }
+        public float  GetAbility1_RecoveryTime_Seconds() { return m_ability1_RecoveryTime_Seconds; }
         /// <summary>
         /// アビリティー2の回復時間
         /// </summary>
         /// <returns></returns>
-        public float GetAbility2_RecoveryTime_Seconds() { return m_ability2_RecoveryTime_Seconds; }
+        public float  GetAbility2_RecoveryTime_Seconds() { return m_ability2_RecoveryTime_Seconds; }
         /// <summary>
         /// アビリティー3の回復時間
         /// </summary>
         /// <returns></returns>
-        public float GetAbility3_RecoveryTime_Seconds() { return m_ability3_RecoveryTime_Seconds; }
+        public float  GetAbility3_RecoveryTime_Seconds() { return m_ability3_RecoveryTime_Seconds; }
         /// <summary>
         /// 必殺技回復時間
         /// </summary>
         /// <returns></returns>
-        public float GetDeathblow_RecoveryTime_Seconds() { return m_deathblow_RecoveryTime_Seconds; }
+        public float  GetDeathblow_RecoveryTime_Seconds() { return m_deathblow_RecoveryTime_Seconds; }
 
         #endregion
     }
