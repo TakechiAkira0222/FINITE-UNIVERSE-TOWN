@@ -189,7 +189,7 @@ PlayableDirector:
   m_GameObject: {fileID: 464520793065001613}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: bd12ac9b9cdd4204e8a04fd7b30165c3, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: e5ed9410a3593bd4bbdbc4f6740fc48e, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -211,6 +211,12 @@ PlayableDirector:
     value: {fileID: 8518885132748713797}
   - key: {fileID: 447582794931539245, guid: bd12ac9b9cdd4204e8a04fd7b30165c3, type: 2}
     value: {fileID: 8374071579519826987}
+  - key: {fileID: 3213239619388773822, guid: e5ed9410a3593bd4bbdbc4f6740fc48e, type: 2}
+    value: {fileID: 3663181739943255320}
+  - key: {fileID: 4266394559180386613, guid: e5ed9410a3593bd4bbdbc4f6740fc48e, type: 2}
+    value: {fileID: 7658016869392991290}
+  - key: {fileID: 8663381352554151699, guid: e5ed9410a3593bd4bbdbc4f6740fc48e, type: 2}
+    value: {fileID: 7190481225848696807}
   m_ExposedReferences:
     m_References:
     - d1cc25c985634914a8d07ac5a71b2a98: {fileID: 0}
@@ -412,6 +418,7 @@ MonoBehaviour:
   m_mainCollider: {fileID: 1952776157070901584}
   m_rb: {fileID: 2037446226172594413}
   m_mainAudioSource: {fileID: 2406447353689341047}
+  m_myAvatarPlayableDirector: {fileID: 976447556158570949}
   m_mainCamera: {fileID: 5552820265289443309}
   m_deathCamera: {fileID: 4128305567508840962}
   m_handOnlyModelAnimator: {fileID: 3014455638564392100}
@@ -692,7 +699,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5552820265289443297}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.645, z: 0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1075,10 +1082,34 @@ PrefabInstance:
       propertyPath: m_characterControllerReferenceManagement
       value: 
       objectReference: {fileID: 1331679818113063980}
+    - target: {fileID: 560509287681469837, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_officeWorkerStatusManagement
+      value: 
+      objectReference: {fileID: 2039010258180462384}
+    - target: {fileID: 560509287681469837, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_officeWorkerAddressManagement
+      value: 
+      objectReference: {fileID: 5212166074074840157}
+    - target: {fileID: 560509287681469837, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_characterKeyInputStateManagement
+      value: 
+      objectReference: {fileID: 6726275407936802093}
+    - target: {fileID: 560509287681469837, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_officeWorkerSoundEffectsManagement
+      value: 
+      objectReference: {fileID: 982873994682134554}
+    - target: {fileID: 560509287681469837, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_characterControllerReferenceManagement
+      value: 
+      objectReference: {fileID: 1331679818113063980}
     - target: {fileID: 1462956121723582944, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_playableDirector
       value: 
       objectReference: {fileID: 976447556158570949}
+    - target: {fileID: 1462956121723582944, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_deathblowTimeline
+      value: 
+      objectReference: {fileID: 11400000, guid: bd12ac9b9cdd4204e8a04fd7b30165c3, type: 2}
     - target: {fileID: 1462956121723582944, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_deathblowAreaEffect
       value: 
@@ -1100,6 +1131,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 982873994682134554}
     - target: {fileID: 1462956121723582944, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_characterControllerReferenceManagement
+      value: 
+      objectReference: {fileID: 1331679818113063980}
+    - target: {fileID: 4553614280600440715, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_prayingTimeline
+      value: 
+      objectReference: {fileID: 11400000, guid: e5ed9410a3593bd4bbdbc4f6740fc48e, type: 2}
+    - target: {fileID: 4553614280600440715, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_officeWorkerStatusManagement
+      value: 
+      objectReference: {fileID: 2039010258180462384}
+    - target: {fileID: 4553614280600440715, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_officeWorkerAddressManagement
+      value: 
+      objectReference: {fileID: 5212166074074840157}
+    - target: {fileID: 4553614280600440715, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_characterKeyInputStateManagement
+      value: 
+      objectReference: {fileID: 6726275407936802093}
+    - target: {fileID: 4553614280600440715, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+      propertyPath: m_officeWorkerSoundEffectsManagement
+      value: 
+      objectReference: {fileID: 982873994682134554}
+    - target: {fileID: 4553614280600440715, guid: 480380abe6b3aac44976e865a564a245, type: 3}
       propertyPath: m_characterControllerReferenceManagement
       value: 
       objectReference: {fileID: 1331679818113063980}
@@ -1194,6 +1249,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8367677680111794718, guid: 480380abe6b3aac44976e865a564a245, type: 3}
     - {fileID: 5979254921509499224, guid: 480380abe6b3aac44976e865a564a245, type: 3}
+    - {fileID: 31984714684521121, guid: 480380abe6b3aac44976e865a564a245, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 480380abe6b3aac44976e865a564a245, type: 3}
 --- !u!95 &3014455638564392100 stripped
 Animator:
@@ -2697,6 +2753,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficeWorkerNetworkModelPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7151827609785273212, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_characterKeyInputStateManagement
+      value: 
+      objectReference: {fileID: 6726275407936802093}
+    - target: {fileID: 7151827609785273212, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
+      propertyPath: m_characterControllerReferenceManagement
+      value: 
+      objectReference: {fileID: 1331679818113063980}
     - target: {fileID: 8525209834555802792, guid: a260919486502a844bdc507ea4a5abf3, type: 3}
       propertyPath: m_characterKeyInputStateManagement
       value: 

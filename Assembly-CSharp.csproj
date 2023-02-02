@@ -62,7 +62,6 @@
     <Compile Include="Assets\System\ServerControlSystem\NetworkInstantiationAtStartup\script\NetworkInstantiationAtStartup.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\MovementScript\CharacterBasicMovement.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\NetworkRenderer\MechanicalWarriorNetworkRendererAttackAnimationEventManager.cs" />
-    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyThrowAnimationEventManager.cs" />
     <Compile Include="Assets\System\RoomConnectionMenuSystem\RoomCreationMenuManagementSystem\RoomPropertySettingManagement\RoomPropertySettingManagement.cs" />
     <Compile Include="Assets\Resource\MapModelResource\Spacecraft\Sqript\WithDoorController.cs" />
     <Compile Include="Assets\Database\UiSoundEffectsDataBase\Script\BasicUiSoundEffects.cs" />
@@ -192,6 +191,9 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\Script\PlayableCharacterInformation.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyPrayingAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyThrowAnimationEventManager.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\NetworkRenderer\OfficeWorkerNetworkRendererPrayingAnimationEventManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />

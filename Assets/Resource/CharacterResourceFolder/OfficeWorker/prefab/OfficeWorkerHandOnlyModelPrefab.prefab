@@ -2324,7 +2324,8 @@ GameObject:
   - component: {fileID: 6018737882793698759}
   - component: {fileID: 1462956121723582944}
   - component: {fileID: 5044457089127630745}
-  - component: {fileID: 31984714684521121}
+  - component: {fileID: 560509287681469837}
+  - component: {fileID: 4553614280600440715}
   - component: {fileID: 6809657440400546484}
   m_Layer: 0
   m_Name: OfficeWorkerHandOnlyModelPrefab
@@ -2421,7 +2422,7 @@ MonoBehaviour:
   m_characterAddressManagement: {fileID: 0}
   m_characterStatusManagement: {fileID: 0}
   m_officeWorkerSoundEffectsManagement: {fileID: 0}
---- !u!114 &31984714684521121
+--- !u!114 &560509287681469837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2430,7 +2431,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6872832776683955147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11926007967d18548b4c41bb0c106532, type: 3}
+  m_Script: {fileID: 11500000, guid: 966c13f016f0aee44b4533b9681f77cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_officeWorkerAddressManagement: {fileID: 0}
+  m_officeWorkerStatusManagement: {fileID: 0}
+  m_officeWorkerSoundEffectsManagement: {fileID: 0}
+--- !u!114 &4553614280600440715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872832776683955147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e09f8afa1ced6459bc509e195f30ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterKeyInputStateManagement: {fileID: 0}

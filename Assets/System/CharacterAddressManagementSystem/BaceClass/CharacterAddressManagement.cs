@@ -5,6 +5,7 @@ using Takechi.CharacterController.Information;
 using Takechi.CharacterController.Parameters;
 using Takechi.PlayableCharacter.FadingCanvas;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Takechi.CharacterController.Address
 {
@@ -40,6 +41,10 @@ namespace Takechi.CharacterController.Address
         /// main audioSource
         /// </summary>
         [SerializeField] private AudioSource m_mainAudioSource;
+        /// <summary>
+        /// my avatar playable Director
+        /// </summary>
+        [SerializeField] private PlayableDirector m_myAvatarPlayableDirector;
         /// <summary>
         /// main camera
         /// </summary>
@@ -162,6 +167,7 @@ namespace Takechi.CharacterController.Address
         public PhotonView GetMyPhotonView() { return thisPhotonView; }
         public Rigidbody  GetMyRigidbody() { return rb; }
         public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }
+        public PlayableDirector GetMyAvatarPlayableDirector() { return m_myAvatarPlayableDirector; }
         public Collider   GetMyCollider() { return mainCollider; }
         public GameObject GetMyAvater() { return avater; }
         public Camera GetMyMainCamera() { return mainCamera; }

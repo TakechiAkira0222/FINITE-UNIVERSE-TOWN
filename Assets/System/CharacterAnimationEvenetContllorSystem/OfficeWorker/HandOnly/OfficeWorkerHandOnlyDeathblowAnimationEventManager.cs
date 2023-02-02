@@ -24,13 +24,14 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         [Header("=== OfficeWorkerSoundEffectsManagement ===")]
         [SerializeField] private OfficeWorkerSoundEffectsManagement m_officeWorkerSoundEffectsManagement;
         [Header("=== ScriptSetting ===")]
-        [SerializeField] private PlayableDirector m_playableDirector;
-        [SerializeField] private GameObject m_deathblowAreaEffect;
+        [SerializeField] private PlayableAsset m_deathblowTimeline;
+        [SerializeField] private GameObject    m_deathblowAreaEffect;
 
         #endregion
         private CharacterAddressManagement          addressManagement => m_characterAddressManagement;
         private OfficeWorkerStatusManagement        statusManagement => m_officeWorkerStatusManagement;
         private OfficeWorkerSoundEffectsManagement  soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
+        private PlayableDirector   myAvatarPlayableDirector => addressManagement.GetMyAvatarPlayableDirector();
         private Animator   handOnlyModelAnimator =>      addressManagement.GetHandOnlyModelAnimator();
         private Animator   networkModelAnimator =>   addressManagement.GetNetworkModelAnimator();
         private GameObject handOnlyModelObject =>  addressManagement.GetHandOnlyModelObject();
@@ -40,20 +41,18 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         /// </summary>
         private float m_networkModelAnimatorWeight = 0;
 
-        private void Awake()
-        {
-            m_playableDirector.played += Director_Played;
-            m_playableDirector.stopped += Director_Stopped;
-        }
-
         #region UnityAnimatorEvent
         // <summary>
         // •KŽE‹Zanimation‚ÌŠJŽn
         // </summary>
         void OfficeWorkerDeathblowStart()
         {
+            myAvatarPlayableDirector.played += Director_Played;
+            myAvatarPlayableDirector.stopped += Director_Stopped;
+            myAvatarPlayableDirector.playableAsset = m_deathblowTimeline;
+
             // playableDirector
-            m_playableDirector.Play();
+            myAvatarPlayableDirector.Play();
 
             // audioSource
             soundEffectsManagement.PlayOneShotVoiceOfDeathblowStart();
@@ -109,6 +108,9 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
                 handOnlyModelObject.SetActive(true);
                 networkModelObject.SetActive(false);
             }
+
+            myAvatarPlayableDirector.played -= Director_Played;
+            myAvatarPlayableDirector.stopped -= Director_Stopped;
         }
 
         private void Director_Played(PlayableDirector obj)
