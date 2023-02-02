@@ -405,6 +405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17355affda54d849b9a3b2d58a96653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
+  m_playableCharacterInformation: {fileID: 11400000, guid: 213bd2ce490ca2249a0d84452f68d159, type: 2}
   m_thisPhotonView: {fileID: 2465221268226511880}
   m_avater: {fileID: 464520793065001613}
   m_mainCollider: {fileID: 1952776157070901584}
@@ -448,7 +450,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterAddressManagement: {fileID: 5212166074074840157}
-  m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
   m_officeWorkerSpecificParameters: {fileID: 11400000, guid: fd95e28672d37c6448e1f4995b743c0a, type: 2}
 --- !u!114 &982873994682134554
 MonoBehaviour:
@@ -1774,6 +1775,14 @@ PrefabInstance:
       propertyPath: m_characterStatusManagement
       value: 
       objectReference: {fileID: 2039010258180462384}
+    - target: {fileID: 1969845823805458150, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
+      propertyPath: m_characterAddressManagement
+      value: 
+      objectReference: {fileID: 5212166074074840157}
+    - target: {fileID: 1969845823805458150, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
+      propertyPath: m_playableCharacterInformation
+      value: 
+      objectReference: {fileID: 11400000, guid: 213bd2ce490ca2249a0d84452f68d159, type: 2}
     - target: {fileID: 2657917961431705760, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

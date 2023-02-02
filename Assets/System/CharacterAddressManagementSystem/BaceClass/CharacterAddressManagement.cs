@@ -1,6 +1,8 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Information;
+using Takechi.CharacterController.Parameters;
 using Takechi.PlayableCharacter.FadingCanvas;
 using UnityEngine;
 
@@ -8,7 +10,16 @@ namespace Takechi.CharacterController.Address
 {
     public class CharacterAddressManagement : MonoBehaviour
     {
+        #region serializeField
         [Header("=== CharacterAddressSetting ===")]
+        /// <summary>
+        /// character parameters
+        /// </summary>
+        [SerializeField] private PlayableCharacterParameters m_playableCharacterParameters;
+        /// <summary>
+        /// character Information
+        /// </summary>
+        [SerializeField] private PlayableCharacterInformation m_playableCharacterInformation;
         /// <summary>
         /// this photonViwe
         /// </summary>
@@ -78,6 +89,22 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private GameObject m_deathEffect;
 
+        #endregion
+
+        #region private variable
+        /// <summary>
+        /// character parameters
+        /// </summary>
+        private PlayableCharacterParameters characterParameters => m_playableCharacterParameters;
+        /// <summary>
+        /// character infometion
+        /// </summary>
+        private PlayableCharacterInformation characterInformation => m_playableCharacterInformation;
+
+
+        #endregion
+
+        #region protected variable 
         /// <summary>
         /// this photonViwe
         /// </summary>
@@ -127,6 +154,11 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         protected ToFade toFade => m_toFade;
 
+        #endregion
+
+        #region Get function
+        public PlayableCharacterParameters GetCharacterParameters() { return characterParameters; }
+        public PlayableCharacterInformation GetCharacterInformation() { return characterInformation; }
         public PhotonView GetMyPhotonView() { return thisPhotonView; }
         public Rigidbody  GetMyRigidbody() { return rb; }
         public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }
@@ -142,7 +174,6 @@ namespace Takechi.CharacterController.Address
         public ToFade  GetToFade() { return m_toFade; }
         public GameObject GetDeathEffect() { return m_deathEffect; }
         public GameObject GetAttackHitEffct() { return m_attackHitEffct; }
-
         public string GetAttackHitsEffectFolderName()
         {
             string path = "";
@@ -150,7 +181,6 @@ namespace Takechi.CharacterController.Address
 
             return path;
         }
-
         public string GetDeathEffectFolderName()
         {
             string path = "";
@@ -158,5 +188,7 @@ namespace Takechi.CharacterController.Address
 
             return path;
         }
+
+        #endregion
     }
 }

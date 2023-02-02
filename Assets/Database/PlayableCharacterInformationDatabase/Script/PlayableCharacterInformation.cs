@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
-using System;
-using JetBrains.Annotations;
+
+using static Takechi.CharacterController.Information.PlayableCharacterInformation;
 
 namespace Takechi.CharacterController.Information
 {
@@ -10,7 +12,7 @@ namespace Takechi.CharacterController.Information
     [CreateAssetMenu(fileName = "PlayableCharacterInformation", menuName = "PlayableCharacterInformation")]
     public class PlayableCharacterInformation : ScriptableObject
     {
-        public enum TypeOfCharacterParameters
+        public enum FeaturesOfCharacter
         {
             AttackType,
             DefenseType,
@@ -18,17 +20,29 @@ namespace Takechi.CharacterController.Information
             HealerType,
         }
 
+        public enum TypeOfAttack 
+        {
+            AttackTypeOfSword,
+            AttackTypeOfGun,
+        }
+
         #region SerializeField
-        [SerializeField, Tooltip("特徴の種類")]
-        private TypeOfCharacterParameters m_typeOfParameters;
+        [SerializeField, Tooltip("キャラクター 特徴")]
+        private FeaturesOfCharacter m_featuresOfCharacter;
+        [SerializeField, Tooltip("キャラクター 攻撃種類")]
+        private TypeOfAttack        m_attackType;
 
         [Header(" character infomation ")]
         [SerializeField, Tooltip("キャラクター 名前")]
         private string m_characterName = "nullname";
         [SerializeField, Tooltip("キャラクター アイコン")]
         private Sprite m_characterIcon;
+        [SerializeField, Tooltip("キャラクター 攻撃種類 アイコン")]
+        private Sprite m_characterAttackTypeIcon;
+        [SerializeField, Tooltip("キャラクター 特徴 アイコン")]
+        private Sprite m_characterFeaturesIcon;
         [SerializeField, Tooltip("キャラクター 説明")]
-        private string m_characterExplanation = "特徴や経歴";
+        private string m_characterExplanation = "説明";
 
         [Header(" deathblow infomation ")]
         [SerializeField, Tooltip("必殺技 名前")]
@@ -36,7 +50,7 @@ namespace Takechi.CharacterController.Information
         [SerializeField, Tooltip("必殺技 アイコン")]
         private Sprite m_deathblowIcon;
         [SerializeField, Tooltip("必殺技 情報")]
-        private string m_deathblowExplanation = "特徴や経歴";
+        private string m_deathblowExplanation = "説明";
 
         [Header(" ability1 infomation ")]
         [SerializeField, Tooltip("アビリティー1 名前")]
@@ -44,7 +58,7 @@ namespace Takechi.CharacterController.Information
         [SerializeField, Tooltip("アビリティー1 アイコン")]
         private Sprite m_ability1Icon;
         [SerializeField, Tooltip("アビリティー1 情報")]
-        private string m_ability1Explanation = "特徴や経歴";
+        private string m_ability1Explanation = "説明";
 
         [Header(" ability2 infomation ")]
         [SerializeField, Tooltip("アビリティー2 名前")]
@@ -52,7 +66,7 @@ namespace Takechi.CharacterController.Information
         [SerializeField, Tooltip("アビリティー2 アイコン")]
         private Sprite m_ability2Icon;
         [SerializeField, Tooltip("アビリティー2 説明")]
-        private string m_ability2Explanation = "特徴や経歴";
+        private string m_ability2Explanation = "説明";
 
         [Header(" ability3 infomation ")]
         [SerializeField, Tooltip("アビリティー3 名前")]
@@ -60,15 +74,20 @@ namespace Takechi.CharacterController.Information
         [SerializeField, Tooltip("アビリティー3 アイコン")]
         private Sprite m_ability3Icon;
         [SerializeField, Tooltip("アビリティー3 説明")]
-        private string m_ability3Explanation = "特徴や経歴";
+        private string m_ability3Explanation = "説明";
         #endregion
 
         #region GetFunction
         /// <summary>
-        /// 特徴の種類
+        /// キャラクター　特徴
         /// </summary>
         /// <returns></returns>
-        public TypeOfCharacterParameters GetTypeOfParameters() { return m_typeOfParameters; }
+        public FeaturesOfCharacter GetFeaturesOfCharacter() { return m_featuresOfCharacter; }
+        /// <summary>
+        /// キャラクター 攻撃種類
+        /// </summary>
+        /// <returns></returns>
+        public TypeOfAttack GetTypeOfAttack() { return m_attackType; }
         /// <summary>
         /// キャラクター 名前
         /// </summary>
@@ -79,6 +98,16 @@ namespace Takechi.CharacterController.Information
         /// </summary>
         /// <returns></returns>
         public Sprite GetCharacterIcon() { return m_characterIcon; }
+        /// <summary>
+        /// キャラクター 攻撃種類 アイコン
+        /// </summary>
+        /// <returns></returns>
+        public Sprite GetCharacterAttackTypeIcon() { return m_characterAttackTypeIcon; }
+        /// <summary>
+        /// キャラクター 特徴 アイコン
+        /// </summary>
+        /// <returns></returns>
+        public Sprite GetCharacterFeaturesIcon() { return m_characterFeaturesIcon; }
         /// <summary>
         /// キャラクター 説明
         /// </summary>

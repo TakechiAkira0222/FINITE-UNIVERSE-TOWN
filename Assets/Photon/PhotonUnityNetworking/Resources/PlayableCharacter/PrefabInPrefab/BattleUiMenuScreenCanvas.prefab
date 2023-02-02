@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4345535908896483642}
   - component: {fileID: 4762658518348359773}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Ability2Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -434,11 +434,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterStatusManagement: {fileID: 0}
+  m_playableCharacterInformation: {fileID: 0}
   m_deathblowSlider: {fileID: 7212156737557770213}
   m_massSlider: {fileID: 9187213946602125460}
-  m_ability1Slider: {fileID: 4961190790543767373}
-  m_ability2Slider: {fileID: 3923026110796227068}
-  m_ability3Slider: {fileID: 4091561263623471778}
+  m_abilitySliderArray:
+  - {fileID: 4961190790543767373}
+  - {fileID: 3923026110796227068}
+  - {fileID: 4091561263623471778}
+  m_abilityiconArray:
+  - {fileID: 1820203679850232960}
+  - {fileID: 4762658518348359773}
+  - {fileID: 5738421902423630813}
   m_hardpointGameSystemUi: {fileID: 8016287533096426346}
   m_dominationGameSystemUi: {fileID: 7453909017027521981}
 --- !u!1 &544918229775181934
@@ -2989,7 +2995,7 @@ GameObject:
   - component: {fileID: 6886731797035582698}
   - component: {fileID: 5738421902423630813}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Ability3Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3765,7 +3771,7 @@ GameObject:
   - component: {fileID: 4090046872219397958}
   - component: {fileID: 1820203679850232960}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Ability1Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

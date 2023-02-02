@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1399040910}
-  m_IndirectSpecularColor: {r: 0.019888848, g: 0.026079878, b: 0.040738523, a: 1}
+  m_IndirectSpecularColor: {r: 0.018380117, g: 0.024017837, b: 0.037588306, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -654,6 +654,10 @@ PlayableDirector:
     value: {fileID: 1510161530}
   - key: {fileID: -5170762256121232688, guid: 85f794167e8898b429daa36d512641a1, type: 2}
     value: {fileID: 7684572526496367701}
+  - key: {fileID: 130221957654116541, guid: 85f794167e8898b429daa36d512641a1, type: 2}
+    value: {fileID: 1102848297}
+  - key: {fileID: 8920899994349242515, guid: 85f794167e8898b429daa36d512641a1, type: 2}
+    value: {fileID: 1102848298}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &846649273 stripped
@@ -733,6 +737,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1102848297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 396975482298892017, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+  m_PrefabInstance: {fileID: 7684572526496367699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1102848298
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102848297}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1147306936 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7140213536975335954, guid: 09a344ee27b8cd540ae7477f1586ca6f, type: 3}
@@ -862,7 +890,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterAddressManagement: {fileID: 1817388032}
-  m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
 --- !u!114 &1817388032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,6 +902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e1c949373940344b0d2706923448cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playableCharacterParameters: {fileID: 0}
+  m_playableCharacterInformation: {fileID: 0}
   m_thisPhotonView: {fileID: 1817388033}
   m_avater: {fileID: 511683041}
   m_mainCollider: {fileID: 0}
@@ -1140,6 +1169,30 @@ PrefabInstance:
       propertyPath: m_characterPrefabList.Array.data[1]
       value: 
       objectReference: {fileID: 1147306936}
+    - target: {fileID: 2440146875323355246, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440146875323355246, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440146875323355246, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440146875323355246, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440146875323355246, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440146875323355246, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200
+      objectReference: {fileID: 0}
     - target: {fileID: 4818419229576052379, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
       propertyPath: sceneViewId
       value: 1
@@ -1235,6 +1288,14 @@ PrefabInstance:
     - target: {fileID: 6660112340337333927, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
       propertyPath: m_Name
       value: ResultMenuScreenCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198982402335159225, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_Text
+      value: Victory
+      objectReference: {fileID: 0}
+    - target: {fileID: 8198982402335159225, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8873902030968734363, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
       propertyPath: m_FontData.m_FontSize

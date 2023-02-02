@@ -7,6 +7,7 @@ using Takechi.CharacterController.Address;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using Photon.Realtime;
+using Takechi.CharacterController.Information;
 
 namespace Takechi.CharacterController.Parameters
 {
@@ -23,21 +24,17 @@ namespace Takechi.CharacterController.Parameters
         /// 住所
         /// </summary>
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
-        [Header("=== CharacterStatus Setting===")]
-        /// <summary>
-        /// マスターデータ
-        /// </summary>
-        [SerializeField] private PlayableCharacterParameters m_playableCharacterParameters;
-
+       
         #endregion
 
         #region private variable
         /// <summary>
         /// character parameters
         /// </summary>
-        private PlayableCharacterParameters characterParameters => m_playableCharacterParameters;
-     
+        private PlayableCharacterParameters characterParameters => characterAddressManagement.GetCharacterParameters();
+       
 
+       
         #endregion
 
         #region protected member variable

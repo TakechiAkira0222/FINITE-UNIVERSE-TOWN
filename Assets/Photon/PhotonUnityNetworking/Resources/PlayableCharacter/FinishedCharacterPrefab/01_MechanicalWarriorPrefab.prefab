@@ -259,6 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9d1a06e036005409f2fa99d5214df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playableCharacterParameters: {fileID: 11400000, guid: 4c971e7ccefde794385c3d5ded1f67ff, type: 2}
+  m_playableCharacterInformation: {fileID: 11400000, guid: 00e5a9b554ef1d94985cdbd03f1fab4e, type: 2}
   m_thisPhotonView: {fileID: 8912750890280205174}
   m_avater: {fileID: 6914157010678169075}
   m_mainCollider: {fileID: 4800816903482502702}
@@ -309,7 +311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterAddressManagement: {fileID: 7168090421251080977}
-  m_playableCharacterParameters: {fileID: 11400000, guid: 4c971e7ccefde794385c3d5ded1f67ff, type: 2}
   m_mechanicalWarreiorSpecificParameters: {fileID: 11400000, guid: 2436630478bb0574fa51f48a30c86a9b, type: 2}
 --- !u!114 &4629939105276637709
 MonoBehaviour:
@@ -2461,6 +2462,14 @@ PrefabInstance:
       propertyPath: m_characterStatusManagement
       value: 
       objectReference: {fileID: 4014705923852325729}
+    - target: {fileID: 1969845823805458150, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
+      propertyPath: m_characterAddressManagement
+      value: 
+      objectReference: {fileID: 7168090421251080977}
+    - target: {fileID: 1969845823805458150, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
+      propertyPath: m_playableCharacterInformation
+      value: 
+      objectReference: {fileID: 11400000, guid: 00e5a9b554ef1d94985cdbd03f1fab4e, type: 2}
     - target: {fileID: 2657917961431705760, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

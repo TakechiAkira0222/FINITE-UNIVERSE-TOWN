@@ -81,6 +81,7 @@
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\AddDebugView.cs" />
     <Compile Include="Assets\System\ServerControlSystem\ErrorManagementWhenConnectingSystem\Script\ErrorManagementWhenConnecting.cs" />
     <Compile Include="Assets\Database\ItemDatabase\Script\Item.cs" />
+    <Compile Include="Assets\System\CharacterSelectionManagementSystem\Script\CharacterSelectionInfometionManagement.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunInformationDisclosure.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\NetworkRenderer\MechanicalWarriorNetworkRendererDeathblowAnimationEventManager.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\Script\PlayableCharacterParameters.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\SliderContlloerSystem\SliderContlloerManager.cs" />
     <Compile Include="Assets\TakechiAsset\CryptoRedManagementOfDataSystem\baseClass\Read.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyAttackAnimationEventManager.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\ManagmentScript\PlayableCharacterInformationManager.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\HandOnly\MechanicalWarriorHandOnlyBuildWallAnimationEvenetManager.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSpecificSoundEffectsDataBase\OfficeWorker\Script\OfficeWorkerSpecificSoundEffects.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\AbilityScript\CharacterBasicAblity2.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Assets\System\CharacterInstantiatedObjectSystem\OfficeWorker\OfficeWorkerThrowingBall.cs" />
     <Compile Include="Assets\Resource\MapModelResource\TrainingGround\Demo\Scripts\PushPhysics.cs" />
     <Compile Include="Assets\EditorSetting\NamedArrayDrawer.cs" />
+    <Compile Include="Assets\System\CharacterSelectionManagementSystem\Script\CharacterSelectionMenberListManagement.cs" />
     <Compile Include="Assets\TakechiAsset\LoadingSystem\LoadingCanvas.cs" />
     <Compile Include="Assets\System\OneWayContactJudgmentSystem\OneWayContactJudgmentManager.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingObjectWithContactDetectionThePlayer.cs" />
@@ -129,6 +132,7 @@
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\MechanicalWarrior\MechanicalWarriorStatusManagement.cs" />
     <Compile Include="Assets\System\GameManagerSystem\BaceClass\AreaLocationPointManagemant.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
+    <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\Script\PlayableCharacterInformationDataBase.cs" />
     <Compile Include="Assets\System\RoomStatusManagementSystem\RoomStatusManagement.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\HandOnly\MechanicalWarriorHandOnlyEnemySearchAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\BaseClass\CharacterStatusManagement.cs" />
@@ -186,12 +190,8 @@
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\NetworkRenderer\OfficeWorkerNetworkRendererFlyingAnimationEventManager.cs" />
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointAreaLocationPointManagemant.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
-    <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
     <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\Script\PlayableCharacterInformation.cs" />
-    <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\Script\PlayableCharacterInformationDataBase.cs" />
-    <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\ManagmentScript\PlayableCharacterInformationManager.cs" />
-    <Compile Include="Assets\System\CharacterSelectionManagementSystem\Script\CharacterSelectionInfometionManagement.cs" />
-    <Compile Include="Assets\System\CharacterSelectionManagementSystem\Script\CharacterSelectionMenberListManagement.cs" />
+    <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />

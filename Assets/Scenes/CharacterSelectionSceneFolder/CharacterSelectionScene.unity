@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterAddressManagement: {fileID: 519153464}
-  m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
 --- !u!114 &519153464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e1c949373940344b0d2706923448cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
+  m_playableCharacterInformation: {fileID: 11400000, guid: 213bd2ce490ca2249a0d84452f68d159, type: 2}
   m_thisPhotonView: {fileID: 519153465}
   m_avater: {fileID: 1630192660}
   m_mainCollider: {fileID: 0}
@@ -939,6 +940,17 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
+--- !u!114 &2078596522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2602172683210008680, guid: 015b33932be335c48b514c0083d66264, type: 3}
+  m_PrefabInstance: {fileID: 2602172683143045272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393c91eb298d1b345bf684336abebd4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &296682426376234728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -952,10 +964,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 296682425166414268, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 296682425166414268, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
-      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 296682425225129485, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
@@ -1062,14 +1070,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1285188740}
-    - target: {fileID: 296682425511124969, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
-      propertyPath: m_Size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 296682425783302585, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1078,9 +1078,9 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.00006818771
+    - target: {fileID: 2027431250479393536, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 2359839297251428281, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1134,6 +1134,10 @@ PrefabInstance:
       propertyPath: m_characterStatusManagement
       value: 
       objectReference: {fileID: 519153463}
+    - target: {fileID: 8002567054446632526, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
+      propertyPath: m_gameStartTimeCunt_seconds
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8839889301480845742, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1142,6 +1146,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8976428976847147819, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062032103796735192, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
+      propertyPath: m_playableCharacterParametersManager
+      value: 
+      objectReference: {fileID: 2078596522}
     - target: {fileID: 9062032103796735192, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_playableCharacterInformationManager
       value: 
