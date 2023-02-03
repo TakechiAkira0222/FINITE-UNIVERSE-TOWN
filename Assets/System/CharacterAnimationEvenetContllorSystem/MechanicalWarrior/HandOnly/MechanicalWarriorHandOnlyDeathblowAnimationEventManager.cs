@@ -24,22 +24,22 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         [SerializeField] private MechanicalWarriorAddressManagement     m_mechanicalWarriorAddressManagement;
         [Header("=== MechanicalWarriorStatusManagement ===")]
         [SerializeField] private MechanicalWarriorStatusManagement      m_mechanicalWarriorStatusManagement;
-        [Header("=== ScriptSetting ===")]
-        [SerializeField] private PlayableDirector m_playableDirector;
-
+        
         #endregion
 
         #region private variable
         private MechanicalWarriorAddressManagement addressManagement => m_mechanicalWarriorAddressManagement;
         private MechanicalWarriorStatusManagement  statusManagement => m_mechanicalWarriorStatusManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
-        private GameObject myAvater => addressManagement.GetMyAvater();
+        private GameObject myAvater     => addressManagement.GetMyAvater();
+        private PlayableAsset deathblowTimeline => addressManagement.GetDeathblowTimeline();
+        private PlayableDirector myAvatarPlayableDirector => addressManagement.GetMyAvatarPlayableDirector();
         private Animator   networkModelAnimator => addressManagement.GetNetworkModelAnimator();
-        private GameObject networkModelObject =>  addressManagement.GetNetworkModelObject();
-        private GameObject handOnlyModelObject => addressManagement.GetHandOnlyModelObject();
+        private GameObject networkModelObject   => addressManagement.GetNetworkModelObject();
+        private GameObject handOnlyModelObject  => addressManagement.GetHandOnlyModelObject();
         private GameObject bulletsInstans => addressManagement.GetDeathblowBulletsInstans();
         private Transform  magazineTransfrom => addressManagement.GetMagazineTransfrom();
-        private Rigidbody  myRb => addressManagement.GetMyRigidbody();
+        private Rigidbody  myRb     => addressManagement.GetMyRigidbody();
         private string bulletsPath  => addressManagement.GetDeathblowBulletsPath();
         private float  force => statusManagement.GetDeathblowShootingForce();
         private float  durationTime => statusManagement.GetDeathblowDurationOfBullet();
@@ -49,24 +49,34 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         private float m_networkModelAnimatorWeight = 0;
         #endregion
 
-        private void Awake()
-        {
-            m_playableDirector.played  += Director_Played;
-            m_playableDirector.stopped += Director_Stopped;
-        }
-
         #region UnityAnimatorEvent
         /// <summary>
         /// Mechanical Warrior Deathblow Start
         /// </summary>
         void MechanicalWarriorDeathblowStart()
         {
-            m_playableDirector.Play();
+            // play and set playableDirector
+            PlayAndSettingOfPlayableDirector();
+            // rb
+            statusManagement.SetIsKinematic(true);
+
+            // operation
+            keyInputStateManagement.SetOperation(false);
+
+            // animation Controler
+            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
 
             // animation weiht
             m_networkModelAnimatorWeight = networkModelAnimator.GetLayerWeight( networkModelAnimator.GetLayerIndex(AnimatorLayers.overrideLayer));
             SetLayerWeight( networkModelAnimator, AnimatorLayers.overrideLayer, 0f);
             controllerReferenceManagement.GetIKAnimationController().SetAllIkWeight(0);
+
+            // isMine active
+            if (statusManagement.photonView.IsMine)
+            {
+                handOnlyModelObject.SetActive(false);
+                networkModelObject.SetActive(true);
+            }
         }
 
         /// <summary>
@@ -74,6 +84,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         /// </summary>
         void MechanicalWarriorDeathblowShot()
         {
+            // not isMine active
             if (!myPhotonView.IsMine) return;
 
             Shooting( magazineTransfrom, force);
@@ -86,33 +97,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         /// </summary>
         void MechanicalWarriorDeathblowEnd()
         {
-            // animation weiht
-            SetLayerWeight( networkModelAnimator, AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
-            controllerReferenceManagement.GetIKAnimationController().ResetAllIkWeight();
-        }
-
-        #endregion
-
-        private void Director_Played(PlayableDirector obj)
-        {
-            // rb
-            statusManagement.SetIsKinematic(true);
-
-            // operation
-            keyInputStateManagement.SetOperation(false);
-
-            // animation Controler
-            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
-
-            if (statusManagement.photonView.IsMine)
-            {
-                handOnlyModelObject.SetActive(false);
-                networkModelObject.SetActive(true);
-            }
-        }
-
-        private void Director_Stopped(PlayableDirector obj)
-        {
+            // isMine active
             if (statusManagement.photonView.IsMine)
             {
                 handOnlyModelObject.SetActive(true);
@@ -127,7 +112,13 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
             // animation Controler
             controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(true);
+
+            // animation weiht
+            SetLayerWeight( networkModelAnimator, AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
+            controllerReferenceManagement.GetIKAnimationController().ResetAllIkWeight();
         }
+
+        #endregion
 
         #region Recursive function
         private void Shooting(Transform magazine, float force)
@@ -139,6 +130,19 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             rb.AddForce( myAvater.transform.forward * force, ForceMode.Impulse);
 
             StartCoroutine( DelayMethod( durationTime, () => { PhotonNetwork.Destroy(instans); }));
+        }
+
+        /// <summary>
+        /// PlayableDirector çƒê∂Ç∆ê›íË
+        /// </summary>
+        private void PlayAndSettingOfPlayableDirector()
+        {
+            // set playableDirector
+            myAvatarPlayableDirector.playableAsset = deathblowTimeline;
+            Debug.Log(" myAvatarPlayableDirector.playableAsset deathblowTimeline to set.");
+
+            // playableDirector
+            myAvatarPlayableDirector.Play();
         }
 
         #endregion

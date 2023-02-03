@@ -96,7 +96,7 @@ namespace Takechi.CharacterController.DamageJudgment
         {
             var impulse = (myRb.transform.position - collision.contacts[0].point).normalized;
 
-            myRb.AddForce( impulse * ( power * 5000), ForceMode.Impulse);
+            myRb.AddForce( impulse * ( power * 1000), ForceMode.Impulse);
             yield return new WaitForSeconds(Time.deltaTime);
         }
 

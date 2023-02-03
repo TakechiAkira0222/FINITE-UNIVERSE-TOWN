@@ -2,16 +2,12 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Information;
 using Takechi.CharacterController.Parameters;
 using Takechi.UI.SliderContlloer;
 using UnityEditor;
-using UnityEditor.iOS.Xcode;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 

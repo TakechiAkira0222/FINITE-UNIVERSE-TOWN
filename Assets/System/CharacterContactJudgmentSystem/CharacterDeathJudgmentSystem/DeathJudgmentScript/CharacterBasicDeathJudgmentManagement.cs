@@ -23,6 +23,7 @@ namespace Takechi.CharacterController.DeathJudgment
         [Header("=== CharacterKeyInputStateManagement === ")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterkeyInputStateManagement;
         [Header("=== ScriptSetting ===")]
+        [SerializeField] private PhotonView m_thisPhotonView;
         [SerializeField] private string m_respawnPointAName = "RespawnPointA";
         [SerializeField] private string m_respawnPointBName = "RespawnPointB";
 
@@ -33,6 +34,7 @@ namespace Takechi.CharacterController.DeathJudgment
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private CharacterKeyInputStateManagement keyInputStateManagement => m_characterkeyInputStateManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private PhotonView thisPhotoView => m_thisPhotonView; 
         private Camera     myDeathCamera => addressManagement.GetMyDeathCamera();
         private Camera     myMainCamera  => addressManagement.GetMyMainCamera();
         private GameObject myAvater  => addressManagement.GetMyAvater();
@@ -45,30 +47,42 @@ namespace Takechi.CharacterController.DeathJudgment
 
         #endregion
 
+        #region unity event
+        private void Reset()
+        {
+            m_thisPhotonView = this.transform.GetComponent<PhotonView>();
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
+            if (!myPhotonView.IsMine) return;
+
             if (collision.gameObject.tag == antiFieldTagName)
             {
                 if ( statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     EffectInstantiation(collision.contacts[0].point);
 
-                    StartOfDeathJudgment();
+                    thisPhotoView.RPC(nameof(RPC_StartOfDeathJudgment), RpcTarget.AllBufferedViaServer);
+
                     StartCoroutine(DelayMethod(statusManagement.GetRespawnTime_Seconds(),
-                        () => EndOfDeathJudgment(m_respawnPointAName)));
+                       () => thisPhotoView.RPC(nameof(RPC_EndOfDeathJudgment), RpcTarget.AllBufferedViaServer, m_respawnPointAName)));
                 }
                 else
                 {
                     EffectInstantiation(collision.contacts[0].point);
 
-                    StartOfDeathJudgment();
+                    thisPhotoView.RPC(nameof(RPC_StartOfDeathJudgment), RpcTarget.AllBufferedViaServer);
+
                     StartCoroutine(DelayMethod(statusManagement.GetRespawnTime_Seconds(),
-                        () => EndOfDeathJudgment(m_respawnPointBName)));
+                        () => thisPhotoView.RPC(nameof(RPC_EndOfDeathJudgment), RpcTarget.AllBufferedViaServer, m_respawnPointAName)));
                 }
             }
         }
         private void OnTriggerEnter(Collider other)
         {
+            if (!myPhotonView.IsMine) return;
+
             if ( other.gameObject.tag == mechanicalWarriorDeathblowBulletsTagName)
             {
                 int number =
@@ -78,26 +92,32 @@ namespace Takechi.CharacterController.DeathJudgment
 
                 float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
-                if ( statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     EffectInstantiation(other.ClosestPoint(other.transform.position));
 
-                    StartOfDeathJudgment();
+                    thisPhotoView.RPC(nameof(RPC_StartOfDeathJudgment), RpcTarget.AllBufferedViaServer);
+
                     StartCoroutine(DelayMethod(statusManagement.GetRespawnTime_Seconds(),
-                        () => EndOfDeathJudgment(m_respawnPointAName)));
+                        () => thisPhotoView.RPC(nameof(RPC_EndOfDeathJudgment), RpcTarget.AllBufferedViaServer, m_respawnPointAName)));
                 }
                 else
                 {
                     EffectInstantiation(other.ClosestPoint(other.transform.position));
 
-                    StartOfDeathJudgment();
+                    thisPhotoView.RPC(nameof(RPC_StartOfDeathJudgment), RpcTarget.AllBufferedViaServer);
+
                     StartCoroutine(DelayMethod(statusManagement.GetRespawnTime_Seconds(),
-                        () => EndOfDeathJudgment(m_respawnPointBName)));
+                        () => thisPhotoView.RPC(nameof(RPC_EndOfDeathJudgment), RpcTarget.AllBufferedViaServer, m_respawnPointBName)));
                 }
             }
         }
 
-        private void StartOfDeathJudgment()
+        #endregion
+
+        #region RPC function
+        [PunRPC]
+        private void RPC_StartOfDeathJudgment()
         {
             if (myPhotonView.IsMine)
             {
@@ -110,7 +130,9 @@ namespace Takechi.CharacterController.DeathJudgment
                 networkModelObject.SetActive(false);
             }
         }
-        private void EndOfDeathJudgment(string respawnPoint)
+
+        [PunRPC]
+        private void RPC_EndOfDeathJudgment(string respawnPoint)
         {
             if (myPhotonView.IsMine)
             {
@@ -131,6 +153,8 @@ namespace Takechi.CharacterController.DeathJudgment
                 networkModelObject.SetActive(true);
             }
         }
+
+        #endregion
 
         #region recursive function
         /// <summary>

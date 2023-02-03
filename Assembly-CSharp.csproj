@@ -69,12 +69,14 @@
     <Compile Include="Assets\System\UserSettingsMuneSystem\Script\UserNickNameManagement.cs" />
     <Compile Include="Assets\System\CharacterBattleUiControlSystem\CharacterBasicBattleUiMenuController.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCustomProperties.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyPrayingAnimationEventManager.cs" />
     <Compile Include="Assets\TakechiAsset\FadingCanvas\script\ToFade.cs" />
     <Compile Include="Assets\TakechiAsset\SingletonMonoBehaviour\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\ManagementButtonSystem\ButtonSceneStateChangeManagement.cs" />
     <Compile Include="Assets\System\ResultMenuSystem\script\ResultMuneManagement.cs" />
     <Compile Include="Assets\EditorSetting\SharderReplacer.cs" />
     <Compile Include="Assets\System\CharacterSelectionManagementSystem\Script\CharacterSelectionManagement.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\NetworkRenderer\OfficeWorkerNetworkRendererPrayingAnimationEventManager.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\ViewpointOperationScript\CharacterBasicViewpointOperation.cs" />
     <Compile Include="Assets\System\CharacterContlloerSystem\JumpScript\CharacterBasicJump.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\AddDebugView.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Assets\System\CharacterStatusManagmetSystem\MechanicalWarrior\MechanicalWarriorStatusManagement.cs" />
     <Compile Include="Assets\System\GameManagerSystem\BaceClass\AreaLocationPointManagemant.cs" />
     <Compile Include="Assets\Database\PlayableCharacterParametersDatabase\ManagmentScript\PlayableCharacterParametersManager.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyThrowAnimationEventManager.cs" />
     <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\Script\PlayableCharacterInformationDataBase.cs" />
     <Compile Include="Assets\System\RoomStatusManagementSystem\RoomStatusManagement.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\HandOnly\MechanicalWarriorHandOnlyEnemySearchAnimationEventManager.cs" />
@@ -191,9 +194,6 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\BasicAnimationScript\CharacterBasicMovementAnimationControler.cs" />
     <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\Script\PlayableCharacterInformation.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
-    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyPrayingAnimationEventManager.cs" />
-    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyThrowAnimationEventManager.cs" />
-    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\NetworkRenderer\OfficeWorkerNetworkRendererPrayingAnimationEventManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonUnityNetworking\Resources\PlayableCharacter\CharacterBasicPrefab\Explanation.txt" />

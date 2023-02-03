@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Takechi.CharacterController.Parameters;
-using Takechi.CharacterController.KeyInputStete;
 
 using UnityEngine;
 using UnityEngine.Playables;
+using Photon.Pun;
 
-using Takechi.CharacterController.Reference;
 using Takechi.CharacterController.Address;
 using Takechi.CharacterController.AnimationEvent;
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
+using UnityEngine.Rendering;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
 {
@@ -18,28 +18,48 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
     {
         #region SerializeField
         [Header("=== CharacterAddressManagement === ")]
-        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
+        [SerializeField] private OfficeWorkerAddressManagement m_officeWorkerAddressManagement;
         [Header("=== OfficeWorkerStatusManagement ===")]
-        [SerializeField] private OfficeWorkerStatusManagement m_officeWorkerStatusManagement;
+        [SerializeField] private OfficeWorkerStatusManagement  m_officeWorkerStatusManagement;
         [Header("=== OfficeWorkerSoundEffectsManagement ===")]
         [SerializeField] private OfficeWorkerSoundEffectsManagement m_officeWorkerSoundEffectsManagement;
         [Header("=== ScriptSetting ===")]
-        [SerializeField] private PlayableAsset m_deathblowTimeline;
-        [SerializeField] private GameObject    m_deathblowAreaEffect;
+        [SerializeField] private PhotonView    m_thisPhotonView;
 
         #endregion
-        private CharacterAddressManagement          addressManagement => m_characterAddressManagement;
+        private OfficeWorkerAddressManagement addressManagement => m_officeWorkerAddressManagement;
         private OfficeWorkerStatusManagement        statusManagement => m_officeWorkerStatusManagement;
         private OfficeWorkerSoundEffectsManagement  soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
+        private PhotonView thisPhotonView => m_thisPhotonView;
+        private GameObject deathblowAreaEffect => addressManagement.GetDeathblowAuraEffect4();
+        private PlayableAsset      deathblowTimeline => addressManagement.GetDeathblowTimeline();
         private PlayableDirector   myAvatarPlayableDirector => addressManagement.GetMyAvatarPlayableDirector();
         private Animator   handOnlyModelAnimator =>      addressManagement.GetHandOnlyModelAnimator();
         private Animator   networkModelAnimator =>   addressManagement.GetNetworkModelAnimator();
-        private GameObject handOnlyModelObject =>  addressManagement.GetHandOnlyModelObject();
-        private GameObject networkModelObject =>   addressManagement.GetNetworkModelObject();
+        private GameObject handOnlyModelObject  =>   addressManagement.GetHandOnlyModelObject();
+        private GameObject networkModelObject   =>   addressManagement.GetNetworkModelObject();
         /// <summary>
         /// 重みの一時保管
         /// </summary>
         private float m_networkModelAnimatorWeight = 0;
+
+        private void OnEnable()
+        {
+            statusManagement.InitializeEffectSettings += () =>
+            {
+                deathblowAreaEffect.SetActive(false);
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCameraSettings deathblowAreaEffect.<color=yellow>SetActive</color>(<blue=color>false</color>)() <color=green>to add.</color>");
+            };
+        }
+
+        private void OnDisable()
+        {
+            statusManagement.InitializeEffectSettings -= () =>
+            {
+                deathblowAreaEffect.SetActive(false);
+                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCameraSettings deathblowAreaEffect.<color=yellow>SetActive</color>(<blue=color>false</color>)() <color=green>to remove.</color>");
+            };
+        }
 
         #region UnityAnimatorEvent
         // <summary>
@@ -47,12 +67,17 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         // </summary>
         void OfficeWorkerDeathblowStart()
         {
-            myAvatarPlayableDirector.played += Director_Played;
-            myAvatarPlayableDirector.stopped += Director_Stopped;
-            myAvatarPlayableDirector.playableAsset = m_deathblowTimeline;
+            // play and set playableDirector
+            PlayAndSettingOfPlayableDirector();
 
-            // playableDirector
-            myAvatarPlayableDirector.Play();
+            // operation
+            keyInputStateManagement.SetOperation(false);
+
+            // animation Controler
+            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
+
+            // rb
+            statusManagement.SetIsKinematic(true);
 
             // audioSource
             soundEffectsManagement.PlayOneShotVoiceOfDeathblowStart();
@@ -60,6 +85,13 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             // animation weiht
             m_networkModelAnimatorWeight = networkModelAnimator.GetLayerWeight(networkModelAnimator.GetLayerIndex(AnimatorLayers.overrideLayer));
             SetLayerWeight(networkModelAnimator, AnimatorLayers.overrideLayer, 0.1f);
+
+            // isMine active
+            if (statusManagement.photonView.IsMine)
+            {
+                handOnlyModelObject.SetActive(false);
+                networkModelObject.SetActive(true);
+            }
         }
 
         /// <summary>
@@ -76,21 +108,6 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         // </summary>
         void OfficeWorkerDeathblowEnd()
         {
-            // audioSource
-            soundEffectsManagement.PlayOneShotPowerUp();
-
-            // effect 
-            ActivationDeathblowAreaEffect();
-            Invoke(nameof(ExitDeathblowAreaEffect), statusManagement.GetDeathblowMoveDuration_Seconds());
-
-            // animation weiht
-            SetLayerWeight(networkModelAnimator, AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
-        }
-
-        #endregion
-
-        private void Director_Stopped(PlayableDirector obj)
-        {
             // operation
             keyInputStateManagement.SetOperation(true);
 
@@ -100,74 +117,85 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             // rb
             statusManagement.SetIsKinematic(false);
 
-            if (statusManagement.photonView.IsMine)
+            // audioSource
+            soundEffectsManagement.PlayOneShotPowerUp();
+
+            // status
+            ActivationStatusManagement();
+            Invoke(nameof(ExitStatusManagement), statusManagement.GetDeathblowMoveDuration_Seconds());
+
+            // animation weiht
+            SetLayerWeight(networkModelAnimator, AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
+
+            // isMine active
+            if ( statusManagement.photonView.IsMine)
             {
-                ActivationStatusManagement();
-                Invoke(nameof(ExitStatusManagement), statusManagement.GetDeathblowMoveDuration_Seconds());
+                // effect 
+                thisPhotonView.RPC(nameof(RPC_ActivationDeathblowAreaEffect), RpcTarget.AllBufferedViaServer);
+                StartCoroutine(DelayMethod( statusManagement.GetDeathblowMoveDuration_Seconds(), () => thisPhotonView.RPC(nameof(RPC_ExitDeathblowAreaEffect), RpcTarget.AllBufferedViaServer)));
 
                 handOnlyModelObject.SetActive(true);
                 networkModelObject.SetActive(false);
             }
-
-            myAvatarPlayableDirector.played -= Director_Played;
-            myAvatarPlayableDirector.stopped -= Director_Stopped;
         }
 
-        private void Director_Played(PlayableDirector obj)
-        {
-            // operation
-            keyInputStateManagement.SetOperation(false);
+        #endregion
 
-            // animation Controler
-            controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
-
-            // rb
-            statusManagement.SetIsKinematic(true);
-
-            if (statusManagement.photonView.IsMine)
-            {
-                handOnlyModelObject.SetActive(false);
-                networkModelObject.SetActive(true);
-            }
-        }
-   
         #region recursive function
         /// <summary>
         /// ステータスの変更　開始
         /// </summary>
         private void ActivationStatusManagement()
         {
+            statusManagement.ResetCharacterParameters();
+
             statusManagement.UpdateAttackPower(statusManagement.GetAttackPowerIncrease());
             statusManagement.UpdateMovingSpeed(statusManagement.GetMoveingSpeedIncrease());
             statusManagement.UpdateJumpPower(statusManagement.GetJumpPowerIncrease());
 
             statusManagement.UpdateLocalPlayerCustomProrerties();
         }
-
         /// <summary>
         /// ステータス変更　終了
         /// </summary>
         private void ExitStatusManagement()
         {
-            statusManagement.UpdateAttackPower(-statusManagement.GetAttackPowerIncrease());
-            statusManagement.UpdateMovingSpeed(-statusManagement.GetMoveingSpeedIncrease());
-            statusManagement.UpdateJumpPower(-statusManagement.GetJumpPowerIncrease());
+            statusManagement.ResetCharacterParameters();
 
             statusManagement.UpdateLocalPlayerCustomProrerties();
         }
         /// <summary>
+        /// PlayableDirector 再生と設定
+        /// </summary>
+        private void PlayAndSettingOfPlayableDirector()
+        {
+            // set playableDirector
+            myAvatarPlayableDirector.playableAsset = deathblowTimeline;
+            Debug.Log(" myAvatarPlayableDirector.playableAsset deathblowTimeline to set. ");
+
+            // playableDirector
+            myAvatarPlayableDirector.Play();
+        }
+
+        #endregion
+
+        #region RPC function
+        /// <summary>
         /// 必殺技areaエフェクト　開始
         /// </summary>
-        private void ActivationDeathblowAreaEffect()
+        [PunRPC]
+        private void RPC_ActivationDeathblowAreaEffect()
         {
-            m_deathblowAreaEffect.SetActive(true);
+            deathblowAreaEffect.SetActive(true);
         }
+
         /// <summary>
         /// 必殺技Areaエフェクト　終了
         /// </summary>
-        private void ExitDeathblowAreaEffect()
+        [PunRPC]
+        private void RPC_ExitDeathblowAreaEffect()
         {
-            m_deathblowAreaEffect.SetActive(false);
+            deathblowAreaEffect.SetActive(false);
         }
 
         #endregion

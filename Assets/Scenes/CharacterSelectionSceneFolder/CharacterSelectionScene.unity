@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470ea4469864c574295d024428c6d9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterAddressManagement: {fileID: 519153464}
+  m_addressManagement: {fileID: 519153464}
 --- !u!114 &519153464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +257,7 @@ MonoBehaviour:
   m_mainCollider: {fileID: 0}
   m_rb: {fileID: 1630192662}
   m_mainAudioSource: {fileID: 1630192663}
+  m_myAvatarPlayableDirector: {fileID: 0}
   m_mainCamera: {fileID: 1285188740}
   m_deathCamera: {fileID: 0}
   m_handOnlyModelAnimator: {fileID: 0}
@@ -1070,6 +1071,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1285188740}
+    - target: {fileID: 296682425511124969, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1077,6 +1082,10 @@ PrefabInstance:
     - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000044822693
       objectReference: {fileID: 0}
     - target: {fileID: 2027431250479393536, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_Color.a
@@ -1136,7 +1145,7 @@ PrefabInstance:
       objectReference: {fileID: 519153463}
     - target: {fileID: 8002567054446632526, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_gameStartTimeCunt_seconds
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8839889301480845742, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.x

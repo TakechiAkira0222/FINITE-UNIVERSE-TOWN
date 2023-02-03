@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Takechi.CharacterController.Address
 {
@@ -51,10 +52,15 @@ namespace Takechi.CharacterController.Address
         /// Wall Instans
         /// </summary>
         [SerializeField] private GameObject   m_wallInstans;
+        /// <summary>
+        /// deathblow Timeline
+        /// </summary>
+        [SerializeField] private PlayableAsset m_deathblowTimeline;
 
         #endregion
 
         #region get variable
+        public PlayableAsset GetDeathblowTimeline() { return m_deathblowTimeline; }
         public GameObject GetNetworkModelAssaultRifleObject() { return m_networkModelAssaultRifleObject; }
         public GameObject GetHandOnlyModelAssaultRifleObject() { return m_handOnlyModelAssaultRifleObject; }
         public Transform  GetMagazineTransfrom() { return m_magazineTransfrom; }

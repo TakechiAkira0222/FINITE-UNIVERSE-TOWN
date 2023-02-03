@@ -32,8 +32,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         private float m_percentageOfTeamAPoints = 0f;
         private float m_percentageOfTeamBPoints = 0f;
         private float m_victory_f => roomStatusManagement.GetVictoryPoint();
-        private float m_aPoint_f => roomStatusManagement.GetTeamAPoint_hardPoint();
-        private float m_bPoint_f => roomStatusManagement.GetTeamBPoint_hardPoint();
+        private float m_aPoint_f  => roomStatusManagement.GetTeamAPoint_hardPoint();
+        private float m_bPoint_f  => roomStatusManagement.GetTeamBPoint_hardPoint();
 
         #endregion
         private void Reset()
@@ -43,8 +43,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void Start()
         {
-            setValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_hardPoint(), roomStatusManagement.GetVictoryPoint());
-            setValue(m_teamBslider, roomStatusManagement.GetTeamBPoint_hardPoint(), roomStatusManagement.GetVictoryPoint());
+            setValue( m_teamAslider, roomStatusManagement.GetTeamAPoint_hardPoint(), roomStatusManagement.GetVictoryPoint());
+            setValue( m_teamBslider, roomStatusManagement.GetTeamBPoint_hardPoint(), roomStatusManagement.GetVictoryPoint());
         }
 
         private void Update()
@@ -55,8 +55,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
             m_percentageOfTeamAPointsText.text = Mathf.Clamp((m_percentageOfTeamAPoints / 10), 0, 100).ToString() + "%";
             m_percentageOfTeamBPointsText.text = Mathf.Clamp((m_percentageOfTeamBPoints / 10), 0, 100).ToString() + "%";
 
-            updateValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_hardPoint());
-            updateValue(m_teamBslider, roomStatusManagement.GetTeamBPoint_hardPoint());
+            updateValue( m_teamAslider, roomStatusManagement.GetTeamAPoint_hardPoint());
+            updateValue( m_teamBslider, roomStatusManagement.GetTeamBPoint_hardPoint());
         }
     }
 }

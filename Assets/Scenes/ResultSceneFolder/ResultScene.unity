@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1399040910}
-  m_IndirectSpecularColor: {r: 0.018380117, g: 0.024017837, b: 0.037588306, a: 1}
+  m_IndirectSpecularColor: {r: 0.018151106, g: 0.023628963, b: 0.036840647, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470ea4469864c574295d024428c6d9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterAddressManagement: {fileID: 1817388032}
+  m_addressManagement: {fileID: 0}
 --- !u!114 &1817388032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,13 +902,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e1c949373940344b0d2706923448cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playableCharacterParameters: {fileID: 0}
-  m_playableCharacterInformation: {fileID: 0}
+  m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
+  m_playableCharacterInformation: {fileID: 11400000, guid: 213bd2ce490ca2249a0d84452f68d159, type: 2}
   m_thisPhotonView: {fileID: 1817388033}
   m_avater: {fileID: 511683041}
   m_mainCollider: {fileID: 0}
   m_rb: {fileID: 511683043}
   m_mainAudioSource: {fileID: 511683042}
+  m_myAvatarPlayableDirector: {fileID: 0}
   m_mainCamera: {fileID: 0}
   m_deathCamera: {fileID: 0}
   m_handOnlyModelAnimator: {fileID: 0}
@@ -1029,9 +1030,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterResultPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 5789328250384696235, guid: 09a344ee27b8cd540ae7477f1586ca6f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7140213536975335954, guid: 09a344ee27b8cd540ae7477f1586ca6f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09a344ee27b8cd540ae7477f1586ca6f, type: 3}

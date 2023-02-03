@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReferenc
 using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
-using System.Diagnostics.SymbolStore;
 
 namespace Takechi.GameManagerSystem.Hardpoint
 {
@@ -35,8 +35,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
         private PhotonView thisPhtonView => m_thisPhtonView;
         private int synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
-        private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
         private int endPerformanceTime_Seconds => m_endPerformanceTime_Seconds;
+        private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
        
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
         private int   m_pointIocationindex = 0;
@@ -76,10 +76,9 @@ namespace Takechi.GameManagerSystem.Hardpoint
             m_roomStatusManagement = this.transform.GetComponent<RoomStatusManagement>();
             m_thisPhtonView = this.transform.GetComponent<PhotonView>(); 
         }
-
-        private void Start()
+        private void Awake()
         {
-            setupOfStart();
+            setupOfAwake();
         }
 
         public override void OnEnable()
@@ -104,7 +103,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #region set up finction
 
-        private void setupOfStart()
+        private void setupOfAwake()
         {
             roomStatusManagement.SetGameState(RoomStatusName.GameState.beforeStart);
             Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.beforeStart)");
@@ -134,7 +133,14 @@ namespace Takechi.GameManagerSystem.Hardpoint
             TeamAToVictory += () =>
             {
                 SceneSyncChange(SceneName.resultScene);
+
                 Debug.Log("TeamAVictory");
+
+                //foreach(Player player in PhotonNetwork.PlayerList)
+                //{
+
+                //}
+
             };
             TeamBToVictory += () =>
             {
@@ -174,7 +180,6 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #endregion
 
         #region main game finction
-
         private void GameState_BeforeStart()
         {
             m_gameTimeCunt_Seconds += Time.deltaTime;

@@ -266,6 +266,7 @@ MonoBehaviour:
   m_mainCollider: {fileID: 4800816903482502702}
   m_rb: {fileID: 5026083790970808211}
   m_mainAudioSource: {fileID: 3107762665394310955}
+  m_myAvatarPlayableDirector: {fileID: 6056008860076011195}
   m_mainCamera: {fileID: 1479958612527368339}
   m_deathCamera: {fileID: 2792025471387800811}
   m_handOnlyModelAnimator: {fileID: 6863655231128380326}
@@ -298,6 +299,7 @@ MonoBehaviour:
   - PlayableCharacter
   - ItemsinstantiationFromCharactersPrefab
   m_wallInstans: {fileID: 6005564366303157620, guid: 3d5d8af1334b26244892477d5cb5b4f2, type: 3}
+  m_deathblowTimeline: {fileID: 11400000, guid: 3e94095f0d97789489a85318b8325614, type: 2}
 --- !u!114 &4014705923852325729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +881,7 @@ MonoBehaviour:
   m_characterAddressManagement: {fileID: 7168090421251080977}
   m_characterStatusManagement: {fileID: 4014705923852325729}
   m_characterkeyInputStateManagement: {fileID: 350944048658735699}
+  m_thisPhotonView: {fileID: 9107513825222790984}
   m_respawnPointAName: RespawnPointA
   m_respawnPointBName: RespawnPointB
 --- !u!114 &9107513825222790984
@@ -1437,6 +1440,10 @@ PrefabInstance:
       propertyPath: m_playableDirector
       value: 
       objectReference: {fileID: 6056008860076011195}
+    - target: {fileID: 4328533603585430437, guid: f3ef5014d2fc6cd4ab59f37ee3b11a7e, type: 3}
+      propertyPath: m_deathblowTimeline
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e94095f0d97789489a85318b8325614, type: 2}
     - target: {fileID: 4328533603585430437, guid: f3ef5014d2fc6cd4ab59f37ee3b11a7e, type: 3}
       propertyPath: m_magazineTransfrom
       value: 

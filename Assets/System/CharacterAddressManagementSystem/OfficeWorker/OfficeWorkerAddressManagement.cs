@@ -2,11 +2,8 @@ using JetBrains.Annotations;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
-using Takechi.CharacterController.SpecificParameters.OfficeWorker;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Playables;
 
 namespace Takechi.CharacterController.Address
 {
@@ -40,12 +37,27 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// throwInstans
         /// </summary>
-        [SerializeField] private GameObject   m_throwInstans;
+        [SerializeField] private GameObject    m_throwInstans;
+        /// <summary>
+        /// deathblowAuraEffect4 effect
+        /// </summary
+        [SerializeField] private GameObject    m_deathblowAuraEffect4;
+        /// <summary>
+        /// deathblow Timeline
+        /// </summary>
+        [SerializeField] private PlayableAsset m_deathblowTimeline;
+        /// <summary>
+        /// praying Timeline
+        /// </summary>
+        [SerializeField] private PlayableAsset m_prayingTimeline;
 
+        public PlayableAsset GetDeathblowTimeline() { return m_deathblowTimeline; }
+        public PlayableAsset GetPrayingTimeline() { return m_prayingTimeline; }
         public GameObject GetNetworkModelSwordObject(){ return m_networkModelSwordObject; }
         public GameObject GetNetworkModelSwordEffectTrail(){ return m_networkModelSwordEffectTrail; }
         public GameObject GetHandOnlyModelSwordObject(){ return m_handOnlyModelSwordObject; }
         public GameObject GetHandOnlySwordEffectTrail(){ return m_handOnlySwordEffectTrail; }
+        public GameObject GetDeathblowAuraEffect4() { return m_deathblowAuraEffect4; }
         public GameObject GetThrowInstans(){ return m_throwInstans;}
         public Transform  GetThrowTransform(){ return m_throwTransform; }
         public string     GetThrowInstansFolderNamePath()

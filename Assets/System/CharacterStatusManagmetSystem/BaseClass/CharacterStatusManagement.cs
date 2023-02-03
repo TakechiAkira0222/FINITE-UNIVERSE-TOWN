@@ -19,11 +19,11 @@ namespace Takechi.CharacterController.Parameters
     {
         #region SerializeField
 
-        [Header("=== CharacterAddressManagement === ")]
+        [Header("=== addressManagement === ")]
         /// <summary>
         /// 住所
         /// </summary>
-        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
+        [SerializeField] private CharacterAddressManagement m_addressManagement;
        
         #endregion
 
@@ -31,7 +31,7 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// character parameters
         /// </summary>
-        private PlayableCharacterParameters characterParameters => characterAddressManagement.GetCharacterParameters();
+        private PlayableCharacterParameters characterParameters => addressManagement.GetCharacterParameters();
        
 
        
@@ -41,19 +41,19 @@ namespace Takechi.CharacterController.Parameters
         /// <summary>
         /// character addressManagement
         /// </summary>
-        protected CharacterAddressManagement  characterAddressManagement => m_characterAddressManagement;
+        protected CharacterAddressManagement addressManagement => m_addressManagement;
         /// <summary>
         /// this photonViwe
         /// </summary>
-        protected PhotonView thisPhotonView => characterAddressManagement.GetMyPhotonView();
+        protected PhotonView thisPhotonView => addressManagement.GetMyPhotonView();
         /// <summary>
         /// main rb
         /// </summary>
-        protected Rigidbody rb => characterAddressManagement.GetMyRigidbody();
+        protected Rigidbody rb => addressManagement.GetMyRigidbody();
         /// <summary>
         /// model Outline
         /// </summary>
-        protected Outline modelOutline => characterAddressManagement.GetMyOuline();
+        protected Outline modelOutline => addressManagement.GetMyOuline();
         /// <summary>
         /// local player custom properties
         /// </summary>
@@ -139,6 +139,10 @@ namespace Takechi.CharacterController.Parameters
         /// initialize camera settings
         /// </summary>
         public event Action InitializeCameraSettings = delegate { };
+        /// <summary>
+        /// Initialize effect setting
+        /// </summary>
+        public event Action InitializeEffectSettings = delegate { };
 
         #endregion
 
@@ -307,6 +311,8 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         public void UpdateLocalPlayerCustomProrerties()
         {
+            if (!thisPhotonView.IsMine) return;
+
             SetCustomPropertiesAttackPower(attackPower);
             SetCustomPropertiesMass(rb.mass);
 
@@ -334,7 +340,12 @@ namespace Takechi.CharacterController.Parameters
         }
         public void UpdateMass(float changeValue)
         {
-            if (rb.mass + changeValue <= 1)
+            if ( rb.mass + changeValue >= GetCleanMass())
+            {
+                rb.mass = GetCleanMass();
+                Debug.Log($"{rb.mass} -> {GetCleanMass()} GetCleanMass to max");
+            }
+            else if (rb.mass + changeValue <= 1)
             {
                 rb.mass = 1;
                 Debug.Log($"{rb.mass} -> {1}");
@@ -342,13 +353,13 @@ namespace Takechi.CharacterController.Parameters
             else
             {
                 rb.mass += changeValue;
-                Debug.Log($"{rb.mass} ->: {rb.mass + changeValue}");
+                Debug.Log($"{ rb.mass} ->: {rb.mass + changeValue}");
             }
         }
         public void UpdateCanUseDeathblow_TimeCount_Seconds(float changeValue) { canUseDeathblow_TimeCount_Seconds += changeValue; }
-        public void UpdateCanUseAbility1_TimeCount_Seconds(float changeValue) { canUseAbility1_TimeCount_Seconds += changeValue; }
-        public void UpdateCanUseAbility2_TimeCount_Seconds(float changeValue) { canUseAbility2_TimeCount_Seconds += changeValue; }
-        public void UpdateCanUseAbility3_TimeCount_Seconds(float changeValue) { canUseAbility3_TimeCount_Seconds += changeValue; }
+        public void UpdateCanUseAbility1_TimeCount_Seconds(float changeValue)  { canUseAbility1_TimeCount_Seconds += changeValue; }
+        public void UpdateCanUseAbility2_TimeCount_Seconds(float changeValue)  { canUseAbility2_TimeCount_Seconds += changeValue; }
+        public void UpdateCanUseAbility3_TimeCount_Seconds(float changeValue)  { canUseAbility3_TimeCount_Seconds += changeValue; }
 
         #endregion
 
@@ -380,6 +391,8 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         public void ResetLocalPlayerCustomProperties()
         {
+            if (!thisPhotonView.IsMine) return;
+
             SetCustomPropertiesAttackPower(characterParameters.GetAttackPower());
             SetCustomPropertiesMass(characterParameters.GetCleanMass());
 
@@ -395,15 +408,34 @@ namespace Takechi.CharacterController.Parameters
             localPlayerCustomPropertiesStatusSetUpCompleteAction();
             Debug.Log("<color=yellow> localPlayerCustomPropertiesStatusSetUpCompleteAction</color>()");
         }
+        #endregion
 
+        #region reset state
         /// <summary>
         /// Character Instans の状態を初期化します。
         /// </summary>
-        public  void ResetCharacterInstanceState()
+        public virtual void ResetCharacterInstanceState()
+        {
+            InitializeCameraSettings();
+            InitializeEffectSettings();
+        }
+
+        /// <summary>
+        /// Character Instans のカメラの方向を、初期化します。
+        /// </summary>
+        public void ResetCameraSettings()
         {
             InitializeCameraSettings();
         }
-    
+
+        /// <summary>
+        /// Character Instans のエフェクトの状態を、初期化します。
+        /// </summary>
+        public void ResetEffectSettings()
+        {
+            InitializeEffectSettings();
+        }
+
         #endregion
     }
 }

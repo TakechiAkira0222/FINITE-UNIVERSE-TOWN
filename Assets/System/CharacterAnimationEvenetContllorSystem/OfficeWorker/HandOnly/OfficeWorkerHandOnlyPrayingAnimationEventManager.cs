@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,8 +7,6 @@ using Takechi.CharacterController.Address;
 using Takechi.CharacterController.AnimationEvent;
 using Takechi.CharacterController.Parameters;
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
-using System.ComponentModel;
-using UnityEngine.Playables;
 
 namespace Takechi.CharacterController.PrayingAnimationEvent
 {
@@ -20,19 +19,21 @@ namespace Takechi.CharacterController.PrayingAnimationEvent
         [SerializeField] private OfficeWorkerStatusManagement       m_officeWorkerStatusManagement;
         [Header("=== OfficeWorkerSoundEffectsManagement ===")]
         [SerializeField] private OfficeWorkerSoundEffectsManagement m_officeWorkerSoundEffectsManagement;
-        [Header("=== ScriptSetting ===")]
-        [SerializeField] private PlayableAsset m_prayingTimeline;
         #endregion
 
         #region private variable
         private OfficeWorkerAddressManagement addressManagement => m_officeWorkerAddressManagement;
         private OfficeWorkerSoundEffectsManagement soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
         private OfficeWorkerStatusManagement statusManagement => m_officeWorkerStatusManagement;
+        private int amountOfMassRecovered => statusManagement.GetAmountOfMassRecovered();
+        private PlayableAsset    prayingTimeline => addressManagement.GetPrayingTimeline();
         private PlayableDirector myAvatarPlayableDirector => addressManagement.GetMyAvatarPlayableDirector();
         private Animator handOnlyModelAnimator => addressManagement.GetHandOnlyModelAnimator();
-        private Animator networkModelAnimator => addressManagement.GetNetworkModelAnimator();
-        private GameObject handOnlyModelSword => addressManagement.GetHandOnlyModelSwordObject();
-        private GameObject networkModelSword => addressManagement.GetNetworkModelSwordObject();
+        private Animator networkModelAnimator  => addressManagement.GetNetworkModelAnimator();
+        private GameObject networkModelObject  => addressManagement.GetNetworkModelObject();
+        private GameObject handOnlyModelObject => addressManagement.GetHandOnlyModelObject();
+        private GameObject handOnlyModelSword  => addressManagement.GetHandOnlyModelSwordObject();
+        private GameObject networkModelSword   => addressManagement.GetNetworkModelSwordObject();
         /// <summary>
         /// 重みの一時保管
         /// </summary>
@@ -48,21 +49,29 @@ namespace Takechi.CharacterController.PrayingAnimationEvent
             // sword setActive
             setSwordSetActive(false);
 
-            myAvatarPlayableDirector.playableAsset = m_prayingTimeline;
-            myAvatarPlayableDirector.Play();
+            // set operation
+            keyInputStateManagement.SetOperation(false);
 
-            // animation weiht
+            // play and set playableDirector
+            playAndSettingOfPlayableDirector();
+
+            // save animation weiht
             m_networkModelAnimatorWeight = networkModelAnimator.GetLayerWeight(networkModelAnimator.GetLayerIndex(AnimatorLayers.overrideLayer));
             m_handOnlyModelAnimatorWeight = networkModelAnimator.GetLayerWeight(handOnlyModelAnimator.GetLayerIndex(AnimatorLayers.overrideLayer));
-            SetLayerWeight(networkModelAnimator, AnimatorLayers.overrideLayer, 0f);
+
+            // set animation weiht
+            SetLayerWeight(networkModelAnimator,  AnimatorLayers.overrideLayer, 0f);
             SetLayerWeight(handOnlyModelAnimator, AnimatorLayers.overrideLayer, 0f);
 
-            // animation Controler
+            // set animation Controler
             controllerReferenceManagement.GetIKAnimationController().SetAllIkWeight(0);
             controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(false);
 
-            // operation
-            keyInputStateManagement.SetOperation(false);
+            // isMine active
+            if (statusManagement.photonView.IsMine)
+            {
+                changeModelObjectSetActive();
+            }
         }
 
         /// <summary>
@@ -70,21 +79,27 @@ namespace Takechi.CharacterController.PrayingAnimationEvent
         /// </summary>
         void OfficeWorkerPrayingEnd()
         {
-            ActivationStatusManagement();
+            updateStatusManagement();
 
             // sword setActive
             setSwordSetActive(true);
 
-            // animation weiht
+            // set operation
+            keyInputStateManagement.SetOperation(true);
+
+            // set animation weiht
             SetLayerWeight( networkModelAnimator,  AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
             SetLayerWeight( handOnlyModelAnimator, AnimatorLayers.overrideLayer, m_handOnlyModelAnimatorWeight);
 
-            // animation Controler
+            // set animation Controler
             controllerReferenceManagement.GetMovementAnimationControler().SetInterfere(true);
             controllerReferenceManagement.GetIKAnimationController().ResetAllIkWeight();
-
-            // operation
-            keyInputStateManagement.SetOperation(true);
+         
+            // isMine active
+            if (statusManagement.photonView.IsMine)
+            {
+                changeModelObjectSetActive();
+            }
         }
 
         #region private finction
@@ -94,22 +109,30 @@ namespace Takechi.CharacterController.PrayingAnimationEvent
             networkModelSword.SetActive(flag);
         }
 
+        private void changeModelObjectSetActive()
+        {
+            handOnlyModelObject.SetActive(!handOnlyModelObject.activeSelf);
+            networkModelObject.SetActive(!networkModelObject.activeSelf);
+        }
+
         /// <summary>
         /// ステータスの変更　開始
         /// </summary>
-        private void ActivationStatusManagement()
+        private void updateStatusManagement()
         {
-            statusManagement.UpdateMass(10);
-
+            statusManagement.UpdateMass( amountOfMassRecovered);
             statusManagement.UpdateLocalPlayerCustomProrerties();
         }
 
         /// <summary>
-        /// ステータス変更　終了
+        /// PlayableDirector 再生と設定
         /// </summary>
-        private void ExitStatusManagement()
+        private void playAndSettingOfPlayableDirector()
         {
-            statusManagement.UpdateLocalPlayerCustomProrerties();
+            myAvatarPlayableDirector.playableAsset = prayingTimeline;
+            Debug.Log(" myAvatarPlayableDirector.playableAsset prayingTimeline to set.");
+
+            myAvatarPlayableDirector.Play();
         }
 
         #endregion
