@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace Takechi.CharacterController.Deathblow
     public class CharacterBasicDeathblow : MonoBehaviour
     {
         #region SerializeField
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
@@ -18,6 +21,7 @@ namespace Takechi.CharacterController.Deathblow
         #endregion
 
         #region protected
+        protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
         protected CharacterStatusManagement statusManagement => m_characterStatusManagement;
         protected CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
 
@@ -31,17 +35,23 @@ namespace Takechi.CharacterController.Deathblow
 
         protected virtual void Update()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             AvailabilityTimeControl();
         }
 
         protected virtual void OnEnable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             keyInputStateManagement.InputToDeathblow += ( statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToDeathblow function <color=green>to add.</color>");
         }
 
         protected virtual void OnDisable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             keyInputStateManagement.InputToDeathblow -= (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToDeathblow function <color=green>to remove.</color>");
         }

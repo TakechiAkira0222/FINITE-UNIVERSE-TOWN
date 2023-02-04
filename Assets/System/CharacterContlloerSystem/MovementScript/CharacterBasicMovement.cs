@@ -68,6 +68,8 @@ namespace Takechi.CharacterController.Movement
 
         private void OnEnable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             keyInputStateManagement.InputToStartDash += (statusManagement, addressManagement) => { SetMovementSpeed(movementStatusSpeed, m_runningSpeed); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputToStartDash function <color=green>to add.</color>");
 
@@ -80,6 +82,8 @@ namespace Takechi.CharacterController.Movement
 
         private void OnDisable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             keyInputStateManagement.InputToStartDash -= (statusManagement, addressManagement) => { SetMovementSpeed( movementStatusSpeed, m_runningSpeed); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  m_movementAnimatoinAction function <color=green>to remove.</color>");
 

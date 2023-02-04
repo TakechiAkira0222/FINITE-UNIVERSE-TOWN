@@ -18,6 +18,8 @@ namespace Takechi.CharacterController.Parameters
         private float m_deathblowDurationOfBullet;
         private float m_enemySearch_Seconds;
         private float m_wallDuration_Seconds;
+        private float m_smokeDuration_Seconds;
+        private float m_throwSmokeForce;
 
         protected override void Awake()
         {
@@ -41,6 +43,8 @@ namespace Takechi.CharacterController.Parameters
             SetDeathblowDurationOfBullet( m_mechanicalWarreiorSpecificParameters.GetDeathblowDurationOfBullet());
             SetEnemySearch_Seconds(m_mechanicalWarreiorSpecificParameters.GetEnemySearch_Seconds());
             SetWallDuration_Seconds(m_mechanicalWarreiorSpecificParameters.GetWallDuration_Seconds());
+            SetSmokeDuration_Seconds(m_mechanicalWarreiorSpecificParameters.GetSmokeDuration_Seconds());
+            SetThrowSmokeForce(m_mechanicalWarreiorSpecificParameters.GetThrowSmokeForce());
 
             Debug.Log($"<color=green> setupMechanicalWarriorSpecificParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
@@ -50,7 +54,9 @@ namespace Takechi.CharacterController.Parameters
                       $" m_normalDurationOfBullet = { m_normalDurationOfBullet}\n" +
                       $" m_deathblowDurationOfBullet = { m_deathblowDurationOfBullet}\n"+
                       $" m_normalDurationOfBullet = { m_normalDurationOfBullet}\n"+
-                      $" m_wallDuration_Seconds = {m_wallDuration_Seconds}\n"
+                      $" m_wallDuration_Seconds = {m_wallDuration_Seconds}\n"+
+                      $" m_smokeDuration_Seconds = {m_smokeDuration_Seconds}\n"+
+                      $" m_throwSmokeForce = {m_throwSmokeForce}\n"
                       );
         }
 
@@ -87,6 +93,16 @@ namespace Takechi.CharacterController.Parameters
             Debug.Log($" wallDuration_Seconds({m_wallDuration_Seconds}) = {changeValue}");
             m_wallDuration_Seconds = changeValue;
         }
+        public void SetSmokeDuration_Seconds(float changeValue)
+        {
+            Debug.Log($" smokeDuration_Seconds({m_smokeDuration_Seconds}) = {changeValue}");
+            m_smokeDuration_Seconds = changeValue;
+        }
+        public void SetThrowSmokeForce(float changeValue)
+        {
+            Debug.Log($" m_throwSmokeForce({m_throwSmokeForce}) = {changeValue}");
+            m_throwSmokeForce = changeValue;
+        }
 
         #endregion
 
@@ -97,6 +113,8 @@ namespace Takechi.CharacterController.Parameters
         public float GetDeathblowDurationOfBullet() { return m_deathblowDurationOfBullet; }
         public float GetEnemySearch_Seconds() { return m_enemySearch_Seconds; }
         public float GetWallDuration_Seconds() { return m_wallDuration_Seconds; }
+        public float GetSmokeDuration_Seconds() { return m_smokeDuration_Seconds; }
+        public float GetThrowSmokeForce() { return m_throwSmokeForce; }
 
         #endregion
     }

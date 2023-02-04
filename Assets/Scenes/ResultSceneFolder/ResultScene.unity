@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1399040910}
-  m_IndirectSpecularColor: {r: 0.018151106, g: 0.023628963, b: 0.036840647, a: 1}
+  m_IndirectSpecularColor: {r: 0.01803137, g: 0.023554642, b: 0.036863446, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470ea4469864c574295d024428c6d9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_addressManagement: {fileID: 0}
+  m_addressManagement: {fileID: 1817388032}
 --- !u!114 &1817388032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +918,9 @@ MonoBehaviour:
   m_networkModelObject: {fileID: 0}
   m_modelOutline: {fileID: 0}
   m_toFade: {fileID: 0}
+  m_battleUiMenu: {fileID: 0}
+  m_userUiMenu: {fileID: 0}
+  m_reticleCanvas: {fileID: 0}
   m_attackHitsEffectFolderName: []
   m_attackHitEffct: {fileID: 0}
   m_deathEffectFolderName: []

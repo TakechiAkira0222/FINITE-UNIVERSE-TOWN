@@ -11,9 +11,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
-namespace Takechi.UI.BattleUiMenu
+namespace Takechi.UI.BattleCanvasUi
 {
-    public class CharacterBasicBattleUiMenuController : SliderContlloerManager
+    public class CharacterBasicBattleCanvasUiController : SliderContlloerManager
     {
         #region SerializeField
         [Header("=== CharacterAddressManagement === ")]

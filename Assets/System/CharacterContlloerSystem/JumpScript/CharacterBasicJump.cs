@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using Unity.Mathematics;
@@ -12,13 +13,15 @@ namespace Takechi.CharacterController.Jump
     public class CharacterBasicJump : MonoBehaviour
     {
         #region SerializeField
-
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
 
         #endregion
 
         #region private
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
         private CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
 
         #endregion
@@ -31,10 +34,10 @@ namespace Takechi.CharacterController.Jump
 
         private void OnEnable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             keyInputStateManagement.InputToJump += (statusManagement, addressManagement) =>
             {
-                if (!addressManagement.GetMyPhotonView().IsMine) return;
-
                 if (!statusManagement.GetIsGrounded()) return;
 
                 float upForce = statusManagement.GetJumpPower();
@@ -48,10 +51,10 @@ namespace Takechi.CharacterController.Jump
         }
         private void OnDisable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             keyInputStateManagement.InputToJump -= (statusManagement, addressManagement) =>
             {
-                if (!addressManagement.GetMyPhotonView().IsMine) return;
-
                 if (!statusManagement.GetIsGrounded()) return;
 
                 float upForce = statusManagement.GetJumpPower();

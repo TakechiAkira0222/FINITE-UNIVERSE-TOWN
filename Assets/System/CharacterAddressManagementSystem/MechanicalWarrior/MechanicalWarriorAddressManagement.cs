@@ -29,6 +29,10 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private Transform    m_wallInstantiateTransfrom;
         /// <summary>
+        /// throwSmokeInstans Transfrom 
+        /// </summary>
+        [SerializeField] private Transform    m_throwSmokeInstantiateTransfrom;
+        /// <summary>
         /// Bullets Path
         /// </summary>
         [SerializeField] private List<string> m_normalBulletsFolderName = new List<string>();
@@ -53,6 +57,14 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private GameObject   m_wallInstans;
         /// <summary>
+        /// throwSmoke Instans Path
+        /// </summary>
+        [SerializeField] private List<string> m_throwSmokeInstansFolderName = new List<string>();
+        /// <summary>
+        /// throwSmoke Instans
+        /// </summary>
+        [SerializeField] private GameObject   m_throwSmokeInstans;
+        /// <summary>
         /// deathblow Timeline
         /// </summary>
         [SerializeField] private PlayableAsset m_deathblowTimeline;
@@ -65,9 +77,11 @@ namespace Takechi.CharacterController.Address
         public GameObject GetHandOnlyModelAssaultRifleObject() { return m_handOnlyModelAssaultRifleObject; }
         public Transform  GetMagazineTransfrom() { return m_magazineTransfrom; }
         public Transform  GetWallInstantiateTransfrom() { return m_wallInstantiateTransfrom; }
+        public Transform  GetThrowSmokeInstantiateTransfrom() { return m_throwSmokeInstantiateTransfrom; }
         public GameObject GetNormalBulletsInstans() { return m_normalBulletsInstans; }
         public GameObject GetDeathblowBulletsInstans() { return m_deathblowBulletsInstans; }
         public GameObject GetWallInstans() { return m_wallInstans; }
+        public GameObject GetthrowSmokeInstans() { return m_throwSmokeInstans; }
         public string GetNormalBulletsPath()
         {
             string path = "";
@@ -86,6 +100,13 @@ namespace Takechi.CharacterController.Address
         {
             string path = "";
             foreach (string s in m_wallFolderName) { path += s + "/"; }
+
+            return path;
+        }
+        public string GetThrowSmokePath()
+        {
+            string path = "";
+            foreach (string s in m_throwSmokeInstansFolderName) { path += s + "/"; }
 
             return path;
         }

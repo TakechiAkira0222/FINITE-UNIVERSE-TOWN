@@ -24,8 +24,8 @@ namespace Takechi.CharacterController.Ablity3
         #endregion
 
         #region protected
-        protected CharacterStatusManagement statusManagement => m_characterStatusManagement;
         protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        protected CharacterStatusManagement statusManagement => m_characterStatusManagement;
         protected CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
 
         #endregion
@@ -45,12 +45,16 @@ namespace Takechi.CharacterController.Ablity3
 
         protected virtual void OnEnable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             characterKeyInputStateManagement.InputToAblity3 += (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToAblity3 function <color=green>to add.</color>");
         }
 
         protected virtual void OnDisable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             characterKeyInputStateManagement.InputToAblity3 -= (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToAblity3 function <color=green>to remove.</color>");
         }

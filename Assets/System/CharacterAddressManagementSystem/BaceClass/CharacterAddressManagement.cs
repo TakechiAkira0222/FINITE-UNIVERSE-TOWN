@@ -76,7 +76,19 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// to Fade
         /// </summary>
-        [SerializeField] private ToFade m_toFade;
+        [SerializeField] private ToFade  m_toFade;
+        /// <summary>
+        /// battle ui Menu
+        /// </summary>
+        [SerializeField] private GameObject m_battleUiMenu;
+        /// <summary>
+        /// user ui Menu
+        /// </summary>
+        [SerializeField] private GameObject m_userUiMenu;
+        /// <summary>
+        /// reticle Canvas
+        /// </summary>
+        [SerializeField] private Canvas m_reticleCanvas;
         /// <summary>
         /// attackHits effect folder name
         /// </summary>
@@ -164,8 +176,8 @@ namespace Takechi.CharacterController.Address
         #region Get function
         public PlayableCharacterParameters GetCharacterParameters() { return characterParameters; }
         public PlayableCharacterInformation GetCharacterInformation() { return characterInformation; }
-        public PhotonView GetMyPhotonView() { return thisPhotonView; }
-        public Rigidbody  GetMyRigidbody() { return rb; }
+        public PhotonView  GetMyPhotonView() { return thisPhotonView; }
+        public Rigidbody   GetMyRigidbody() { return rb; }
         public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }
         public PlayableDirector GetMyAvatarPlayableDirector() { return m_myAvatarPlayableDirector; }
         public Collider   GetMyCollider() { return mainCollider; }
@@ -178,6 +190,9 @@ namespace Takechi.CharacterController.Address
         public GameObject GetNetworkModelObject() { return networkModelObject; }
         public Outline GetMyOuline() { return modelOutline; }
         public ToFade  GetToFade() { return m_toFade; }
+        public GameObject GetBattleUiMenu() { return m_battleUiMenu; }
+        public GameObject GetUserUiMenu() { return m_userUiMenu;} 
+        public Canvas     GetReticleCanvas() { return m_reticleCanvas;}
         public GameObject GetDeathEffect() { return m_deathEffect; }
         public GameObject GetAttackHitEffct() { return m_attackHitEffct; }
         public string GetAttackHitsEffectFolderName()

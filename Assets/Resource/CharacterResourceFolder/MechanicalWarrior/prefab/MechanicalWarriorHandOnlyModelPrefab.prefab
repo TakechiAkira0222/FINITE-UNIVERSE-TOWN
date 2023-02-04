@@ -60,6 +60,36 @@ Transform:
   m_Father: {fileID: 8210002915424760543}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7570427152937700426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 655730288997439306}
+  m_Layer: 0
+  m_Name: ThrowSmokeInstantiateTransfrom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &655730288997439306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7570427152937700426}
+  m_LocalRotation: {x: -0, y: -0, z: -4.2351647e-22, w: 1}
+  m_LocalPosition: {x: -0, y: 1.75, z: 1.6}
+  m_LocalScale: {x: 0.010000001, y: 0.010000001, z: 0.010000001}
+  m_Children: []
+  m_Father: {fileID: 8210002915424760543}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7855745963267677957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,6 +1692,7 @@ GameObject:
   - component: {fileID: 4328533603585430437}
   - component: {fileID: 6091340060039756995}
   - component: {fileID: 4776921633054585131}
+  - component: {fileID: 350446263988233215}
   - component: {fileID: 7399750266740414426}
   - component: {fileID: 8141486305807316574}
   m_Layer: 0
@@ -1685,6 +1716,7 @@ Transform:
   - {fileID: 7812167142314946730}
   - {fileID: 1504429528184857401}
   - {fileID: 260320072395989028}
+  - {fileID: 655730288997439306}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1740,7 +1772,6 @@ MonoBehaviour:
   m_characterControllerReferenceManagement: {fileID: 0}
   m_mechanicalWarriorAddressManagement: {fileID: 0}
   m_mechanicalWarriorStatusManagement: {fileID: 0}
-  m_playableDirector: {fileID: 0}
 --- !u!114 &6091340060039756995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1775,6 +1806,23 @@ MonoBehaviour:
   m_mechanicalWarriorAddressManagement: {fileID: 0}
   m_mechanicalWarriorStatusManagement: {fileID: 0}
   m_mechanicalWarriorSoundEffectsManagement: {fileID: 0}
+--- !u!114 &350446263988233215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210002915425251071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c035678b9598c5846ad0face16609c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterKeyInputStateManagement: {fileID: 0}
+  m_characterControllerReferenceManagement: {fileID: 0}
+  m_mechanicalWarriorAddressManagement: {fileID: 0}
+  m_mechanicalWarriorStatusManagement: {fileID: 0}
+  m_mechanicalWarriorSoundEffectsManagement: {fileID: 0}
 --- !u!114 &7399750266740414426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,7 +1841,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8141486305807316574}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1833,6 +1882,15 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 0
     Name: Dash
+  - Type: 9
+    SynchronizeType: 0
+    Name: Ablity1
+  - Type: 9
+    SynchronizeType: 0
+    Name: Ablity2
+  - Type: 9
+    SynchronizeType: 0
+    Name: Ablity3
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

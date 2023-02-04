@@ -9,6 +9,7 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
     [CreateAssetMenu(fileName = "MechanicalWarreiorSpecificParameters", menuName = "MechanicalWarreiorSpecificParameters")]
     public class MechanicalWarreiorSpecificParameters : ScriptableObject
     {
+        #region serialize field
         [SerializeField, Range( 1.0f, 10.0f),  Header(" ËŒ‚‚ÌˆĞ—Í@’ÊíUŒ‚ ")]
         private float m_normalShootingForce = 3.0f;
         [SerializeField, Range( 1.0f, 10.0f), Header(" ’e‚Ì‘¶İŠÔ ’Êí ")]
@@ -21,6 +22,12 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
         private float m_enemySearch_Seconds;
         [SerializeField, Range(20, 50), Header(" Wall‚Ì‘¶İŠÔ")]
         private float m_wallDuration_Seconds;
+        [SerializeField, Range(10, 30), Header(" Smoke‚Ì‘¶İŠÔ")]
+        private float m_smokeDuration_Seconds;
+        [SerializeField, Range(10, 30), Header(" Smoke‚Ì“Š‚°‚éˆĞ—Í")]
+        private float m_throwSmokeForce;
+
+        #endregion
 
         #region GetStatusFunction
         public float GetNormalShootingForce() { return m_normalShootingForce; }
@@ -29,6 +36,8 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
         public float GetDeathblowDurationOfBullet() { return m_deathblowDurationOfBullet; }
         public float GetEnemySearch_Seconds() { return m_enemySearch_Seconds; }
         public float GetWallDuration_Seconds() { return m_wallDuration_Seconds; }
+        public float GetSmokeDuration_Seconds() { return m_smokeDuration_Seconds; }
+        public float GetThrowSmokeForce() { return m_throwSmokeForce; }
 
         #endregion
     }

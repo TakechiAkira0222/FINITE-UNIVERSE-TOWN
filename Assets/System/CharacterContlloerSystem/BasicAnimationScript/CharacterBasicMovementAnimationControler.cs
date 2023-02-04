@@ -134,6 +134,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         private void OnEnable()
         {
             if (!PhotonNetwork.InRoom) return;
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
 
             m_characterKeyInputStateManagement.InputToMovement += (statusManagement, addressManagement, horiVec, vertVec) =>
             {
@@ -201,6 +202,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         private void OnDisable()
         {
             if (!PhotonNetwork.InRoom) return;
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
 
             m_characterKeyInputStateManagement.InputToMovement -= (statusManagement, addressManagement, horiVec, vertVec) =>
             {

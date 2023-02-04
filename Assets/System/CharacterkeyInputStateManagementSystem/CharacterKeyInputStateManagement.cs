@@ -31,6 +31,7 @@ namespace Takechi.CharacterController.KeyInputStete
         [SerializeField] private KeyCode m_ability1 = KeyCode.E;
         [SerializeField] private KeyCode m_ability2 = KeyCode.F;
         [SerializeField] private KeyCode m_ability3 = KeyCode.C;
+        [SerializeField] private KeyCode m_userMenu = KeyCode.Escape;
 
         #endregion
 
@@ -39,8 +40,9 @@ namespace Takechi.CharacterController.KeyInputStete
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
-        private bool m_operation = true;
 
+        private bool m_operation = true;
+        private bool m_isUserMenu = false;
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
      
         #endregion
@@ -53,6 +55,7 @@ namespace Takechi.CharacterController.KeyInputStete
         public event Action< CharacterStatusManagement, CharacterAddressManagement> InputToAblity1   = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement> InputToAblity2   = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement> InputToAblity3   = delegate { };
+        public event Action< CharacterStatusManagement, CharacterAddressManagement> InputUserMenu = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement, float , float> InputToMovement  = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement, float , float> InputToViewpoint = delegate { };
 
@@ -75,6 +78,10 @@ namespace Takechi.CharacterController.KeyInputStete
         void Update()
         {
             if (!myPhotonView.IsMine) return;
+
+            if (Input.GetKeyDown(m_userMenu)) { InputUserMenu(statusManagement, addressManagement); }
+
+            if (m_isUserMenu) return;
             if (!m_operation) return;
 
             m_gameMain[roomStatusManagement.GetGameState()]();
@@ -82,6 +89,7 @@ namespace Takechi.CharacterController.KeyInputStete
 
         #region get function
         public bool GetOperation() { return m_operation; }
+        public bool GetIsUserMenu() { return m_isUserMenu; }
 
         #endregion
 
@@ -90,6 +98,11 @@ namespace Takechi.CharacterController.KeyInputStete
         {
             m_operation = value;
             Debug.Log($" SetOperation = <color=green>{value}</color>");
+        }
+        public void SetIsUserMenu(bool value)
+        {
+            m_isUserMenu = value;
+            Debug.Log($" SetIsUserMenu = <color=green>{value}</color>");
         }
 
         #endregion

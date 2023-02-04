@@ -46,12 +46,16 @@ namespace Takechi.CharacterController.Ablity1
 
         protected virtual void OnEnable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             characterKeyInputStateManagement.InputToAblity1 += (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToAblity1 function <color=green>to add.</color>");
         }
 
         protected virtual void OnDisable()
         {
+            if (!addressManagement.GetMyPhotonView().IsMine) return;
+
             characterKeyInputStateManagement.InputToAblity1 -= (statusManagement, addressManagement) => { WhileUsingIt(statusManagement); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : characterKeyInputStateManagement.InputToAblity1 function <color=green>to remove.</color>");
         }
