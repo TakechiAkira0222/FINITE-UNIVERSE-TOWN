@@ -95,6 +95,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         {
             if (!PhotonNetwork.IsMasterClient) return;
             if (GetLocalGameEnd()) return;
+            if (!PhotonNetwork.InRoom) return;
 
             m_gameMain[roomStatusManagement.GetGameState()]();
         }
@@ -236,6 +237,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void GameState_NULL()
         {
+          
             Debug.LogError(" Game state not set");
         }
 

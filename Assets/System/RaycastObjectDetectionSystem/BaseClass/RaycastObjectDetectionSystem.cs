@@ -1,50 +1,63 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
+using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.SoundEffects;
 using UnityEngine;
 
 namespace Takechi.RaycastObjectDetectionSystem
 {
-
     public class RaycastObjectDetectionSystem : MonoBehaviour
     {
         #region PropertyClass
         public class RayProperty
         {
-            public float m_distance;
-            public Vector3 m_direction;
-            public LayerMask m_layerMask;
+            public float     distance;
+            public Vector3   direction;
+            public LayerMask layerMask;
 
-            public RayProperty(float distance, Vector3 direction, LayerMask layerMask)
+            public RayProperty(float _distance, Vector3 _direction, LayerMask _layerMask)
             {
-                m_distance = distance;
-                m_direction = direction;
-                m_layerMask = layerMask;
+                distance  = _distance;
+                direction = _direction;
+                layerMask = _layerMask;
             }
         }
         #endregion
 
-        #region SsrializeFileld
-
-
+        #region srialize fileld
+        [Header(" === Script Setting ===")]
+        [SerializeField] private BasicUiSoundEffects m_basicUiSound;
+        [SerializeField] private AudioSource m_audioSource;
         [SerializeField] private float m_distance = 1;
-
         [SerializeField] private LayerMask m_layerMask;
-
-        [Header(" === BasicUiSoundEffects ===")]
-        [SerializeField] BasicUiSoundEffects m_basicUiSound;
-        [SerializeField] AudioSource m_audioSource;
 
         #endregion
 
-        #region protected
+        #region get variable
+        public bool GetIsOperation() { return isOperation; }
 
-        protected GameObject lookingObject => m_lookingObject;
-        protected bool isLooking => m_isLooking;
+        #endregion
+
+        #region set variable
+        public void SetIsOperation(bool state)
+        {
+            isOperation = state;
+            Debug.Log($" m_isOperation {isOperation} to set. ");
+        }
+
+        #endregion
+
+        #region protected variable
         protected BasicUiSoundEffects basicUiSound => m_basicUiSound;
+        protected GameObject  lookingObject => m_lookingObject;
         protected AudioSource audioSource => m_audioSource;
+        protected LayerMask   layerMask => m_layerMask;
+        protected float distance => m_distance;
+        protected bool  isLooking => m_isLooking;
+        protected bool  isOperation = true;
 
         #endregion
 
@@ -52,7 +65,6 @@ namespace Takechi.RaycastObjectDetectionSystem
 
         protected Action<GameObject> m_raycastHitAction = delegate { };
         protected Action<GameObject> m_raycastNotHitAction = delegate { };
-
         /// <summary>
         /// Hitしているobjectが前回フレームと違った時呼び出されます。
         /// </summary>
@@ -61,30 +73,29 @@ namespace Takechi.RaycastObjectDetectionSystem
 
         #endregion 
 
-        #region private
-
+        #region private variable
         private GameObject m_lookingObject { get; set; }
         private bool m_isLooking
         {
             get
             {
                 RayProperty rayProperty =
-                     new RayProperty(m_distance, this.gameObject.transform.forward, m_layerMask);
+                     new RayProperty( distance, this.gameObject.transform.forward, layerMask);
 
                 Ray ray =
                     new Ray(this.gameObject.transform.position,
-                             rayProperty.m_direction * rayProperty.m_distance);
+                             rayProperty.direction * rayProperty.distance);
 
                 RaycastHit raycastHit;
 
-                if (Physics.Raycast(ray, out raycastHit, rayProperty.m_distance, m_layerMask))
+                if (Physics.Raycast(ray, out raycastHit, rayProperty.distance, m_layerMask))
                 {
-                    Debug.DrawRay( ray.origin, ray.direction * rayProperty.m_distance, Color.green);
+                    Debug.DrawRay(ray.origin, ray.direction * rayProperty.distance, Color.green);
 
-                    m_raycastHitAction( raycastHit.collider.gameObject);
+                    m_raycastHitAction(raycastHit.collider.gameObject);
 
-                    if ( m_lookingObject != raycastHit.collider.gameObject && m_lookingObject!= null) 
-                           m_raycastHitObjectChangeAction( m_lookingObject);
+                    if (m_lookingObject != raycastHit.collider.gameObject && m_lookingObject != null)
+                        m_raycastHitObjectChangeAction(m_lookingObject);
 
                     m_lookingObject = raycastHit.collider.gameObject;
 
@@ -92,9 +103,9 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
                 else
                 {
-                    Debug.DrawRay( ray.origin, ray.direction * rayProperty.m_distance, Color.red);
+                    Debug.DrawRay(ray.origin, ray.direction * rayProperty.distance, Color.red);
 
-                    if( m_lookingObject != null) m_raycastNotHitAction( m_lookingObject);
+                    if (m_lookingObject != null) m_raycastNotHitAction(m_lookingObject);
 
                     m_lookingObject = null;
 

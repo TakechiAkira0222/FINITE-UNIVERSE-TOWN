@@ -13,47 +13,50 @@ namespace Takechi.RaycastObjectDetectionSystem
     /// </summary>
     public class RaycastHitInstantiateTheCanvasSystem : RaycastObjectDetectionSystem
     {
+        #region serialize field
         /// <summary>
         /// 目標物の名前
         /// </summary>
         [SerializeField, NamedArrayAttribute(new string[] { "TrainingGroundConsole", "desk2" })]
         private List<string> m_tagetObjectNameList = new List<string>();
-
         /// <summary>
         /// インスタンス化したいCanvas
         /// </summary>
         [SerializeField, NamedArrayAttribute(new string[] { "TrainingGroundConsole", "desk2" })]
         private List<GameObject> m_instantiateCanvasList = new List<GameObject>();
-
         /// <summary>
         /// Focus時に表示されるUI
         /// </summary>
         [SerializeField]
         private List<GameObject> m_uiDisplayedOnFocusList;
-
         /// <summary>
         /// Focus時に非表示になるUI
         /// </summary>
         [SerializeField]
         private List<GameObject> m_uiHiddenOnFocusList;
-
         /// <summary>
         /// インスタンス化する親
         /// </summary>
         [SerializeField]
         private Transform  m_parent;
 
+        #endregion
+
+        #region private variable
         /// <summary>
         /// 光線に当たったオブジェクトごとのインスタンス化するcanvasを返す辞書
         /// </summary>
         private Dictionary<string, GameObject> m_theCanvasSuitableForTheHitObjectDictionary = 
             new Dictionary<string, GameObject>();
 
+       
+        #endregion
+
+        #region unity event
         private void Awake()
         {
             SetDictionary();
         }
-
         private void OnEnable()
         {
             if (m_tagetObjectNameList.Count == 0)
@@ -67,7 +70,6 @@ namespace Takechi.RaycastObjectDetectionSystem
 
             settingRaycastAction();
         }
-
         private void OnDisable()
         {
             if (m_tagetObjectNameList.Count == 0)
@@ -81,11 +83,10 @@ namespace Takechi.RaycastObjectDetectionSystem
 
             removeRaycastAction();
         }
-
         private void Update()
         {
-            if (!isLooking)
-                return;
+            if (!isOperation) return;
+            if (!isLooking) return;
 
             foreach (string tagetObjectName in m_tagetObjectNameList)
             {
@@ -106,7 +107,9 @@ namespace Takechi.RaycastObjectDetectionSystem
             }
         }
 
-        #region Fanction
+        #endregion
+
+        #region private function
 
         void settingRaycastAction()
         {

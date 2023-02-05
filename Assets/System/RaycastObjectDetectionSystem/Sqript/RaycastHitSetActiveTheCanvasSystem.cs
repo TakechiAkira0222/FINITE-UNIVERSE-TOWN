@@ -13,29 +13,31 @@ namespace Takechi.RaycastObjectDetectionSystem
     /// </summary>
     public class RaycastHitSetActiveTheCanvasSystem : RaycastObjectDetectionSystem
     {
+        #region serialize field
         /// <summary>
         /// 目標物の名前
         /// </summary>
         [SerializeField, NamedArrayAttribute(new string[] { "desk1", "projector" })]
         private List<string> m_tagetObjectNameList = new List<string>();
-
         /// <summary>
         /// Activeの状態を変更したいCanvas
         /// </summary>
         [SerializeField, NamedArrayAttribute(new string[] { "desk1", "projector" })]
         private List<GameObject> m_setActiveCanvasList = new List<GameObject>();
-
         /// <summary>
         /// Focus時に表示されるUI
         /// </summary>
         [SerializeField]
         private List<GameObject> m_uiDisplayedOnFocusList;
-
         /// <summary>
         /// Focus時に非表示になるUI
         /// </summary>
         [SerializeField]
         private List<GameObject> m_uiHiddenOnFocusList;
+
+        #endregion
+
+        #region private variable
 
         /// <summary>
         /// 光線に当たったオブジェクトごとのActiveの状態を変更するcanvasを返す辞書
@@ -43,11 +45,14 @@ namespace Takechi.RaycastObjectDetectionSystem
         private Dictionary<string, GameObject> m_theCanvasSuitableForTheHitObjectDictionary =
             new Dictionary<string, GameObject>();
 
+
+        #endregion
+
+        #region unity event
         private void Awake()
         {
             SetDictionary();
         }
-
         private void OnEnable()
         {
             if (m_tagetObjectNameList.Count == 0)
@@ -61,7 +66,6 @@ namespace Takechi.RaycastObjectDetectionSystem
 
             settingRaycastAction();
         }
-
         private void OnDisable()
         {
             if (m_tagetObjectNameList.Count == 0)
@@ -75,11 +79,10 @@ namespace Takechi.RaycastObjectDetectionSystem
 
             removeRaycastAction();
         }
-
         private void Update()
         {
-            if (!isLooking)
-                return;
+            if (!isOperation) return;
+            if (!isLooking) return;
 
             foreach (string tagetObjectName in m_tagetObjectNameList)
             {
@@ -96,6 +99,8 @@ namespace Takechi.RaycastObjectDetectionSystem
                 }
             }
         }
+
+        #endregion
 
         #region Function
         void settingRaycastAction()

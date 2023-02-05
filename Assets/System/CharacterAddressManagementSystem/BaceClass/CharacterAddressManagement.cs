@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.Information;
 using Takechi.CharacterController.Parameters;
+using Takechi.CharacterController.RoomStatus;
 using Takechi.PlayableCharacter.FadingCanvas;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -16,11 +17,15 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// character parameters
         /// </summary>
-        [SerializeField] private PlayableCharacterParameters m_playableCharacterParameters;
+        [SerializeField] private PlayableCharacterParameters  m_playableCharacterParameters;
         /// <summary>
         /// character Information
         /// </summary>
         [SerializeField] private PlayableCharacterInformation m_playableCharacterInformation;
+        /// <summary>
+        /// this roomStatus management
+        /// </summary>
+        [SerializeField] private RoomStatusManagement m_thisRoomStatusManagement;
         /// <summary>
         /// this photonViwe
         /// </summary>
@@ -123,6 +128,10 @@ namespace Takechi.CharacterController.Address
 
         #region protected variable 
         /// <summary>
+        /// this roomStatus management
+        /// </summary>
+        protected RoomStatusManagement thisRoomStatusManagement => m_thisRoomStatusManagement;
+        /// <summary>
         /// this photonViwe
         /// </summary>
         protected PhotonView thisPhotonView => m_thisPhotonView;
@@ -176,6 +185,7 @@ namespace Takechi.CharacterController.Address
         #region Get function
         public PlayableCharacterParameters GetCharacterParameters() { return characterParameters; }
         public PlayableCharacterInformation GetCharacterInformation() { return characterInformation; }
+        public RoomStatusManagement GetMyRoomStatusManagement() { return thisRoomStatusManagement;}
         public PhotonView  GetMyPhotonView() { return thisPhotonView; }
         public Rigidbody   GetMyRigidbody() { return rb; }
         public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }

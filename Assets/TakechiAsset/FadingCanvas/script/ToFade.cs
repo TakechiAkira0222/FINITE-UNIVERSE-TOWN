@@ -100,6 +100,9 @@ namespace Takechi.PlayableCharacter.FadingCanvas
 
         private IEnumerator StartFadeIn()
         {
+            ChangeDawingState(m_canvasTextList, true);
+            ChangeDawingState(m_canvasImageList, true);
+
             for ( float alpha = 1; alpha >= 0; alpha -= m_fadeSpeed)
             {
                 foreach (UnityEngine.UI.Text  text in m_canvasTextList)   { text.color = new Color(1, 1, 1, alpha); }

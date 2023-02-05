@@ -79,7 +79,7 @@ namespace Takechi.CharacterController.KeyInputStete
         {
             if (!myPhotonView.IsMine) return;
 
-            if (Input.GetKeyDown(m_userMenu)) { InputUserMenu(statusManagement, addressManagement); }
+            if (Input.GetKeyDown( m_userMenu)) { InputUserMenu(statusManagement, addressManagement); }
 
             if (m_isUserMenu) return;
             if (!m_operation) return;
