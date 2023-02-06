@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.044796564, g: 0.07429144, b: 0.14468351, a: 1}
+  m_IndirectSpecularColor: {r: 0.042754512, g: 0.07135995, b: 0.14020596, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -318,6 +318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3389657418401021515, guid: cec554f4895319248adbbf601f99512e, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4115147403292074242, guid: cec554f4895319248adbbf601f99512e, type: 3}
       propertyPath: m_Name
       value: DOMINATIONGameManager

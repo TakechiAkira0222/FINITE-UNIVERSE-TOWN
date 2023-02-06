@@ -67,6 +67,10 @@ namespace Takechi.ScriptReference.CustomPropertyKey
             /// </summary>
             public const string victoryPointKey = "victoryPoint";
             /// <summary>
+            /// room custom propety victoryingTeamKey
+            /// </summary>
+            public const string victoryingTeamKey = "victoryingTeam";
+            /// <summary>
             /// room custom property gameTypeKey
             /// </summary>
             public const string gameTypeKey = "gametype";

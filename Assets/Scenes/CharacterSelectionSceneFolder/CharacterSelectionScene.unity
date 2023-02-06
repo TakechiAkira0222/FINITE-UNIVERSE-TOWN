@@ -200,6 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 519153462}
+  - component: {fileID: 519153466}
   - component: {fileID: 519153464}
   - component: {fileID: 519153463}
   - component: {fileID: 519153465}
@@ -252,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playableCharacterParameters: {fileID: 11400000, guid: 08304af35cde2134e97ffe409fb1d1da, type: 2}
   m_playableCharacterInformation: {fileID: 11400000, guid: 213bd2ce490ca2249a0d84452f68d159, type: 2}
+  m_thisRoomStatusManagement: {fileID: 519153466}
   m_thisPhotonView: {fileID: 519153465}
   m_avater: {fileID: 1630192660}
   m_mainCollider: {fileID: 0}
@@ -266,6 +268,9 @@ MonoBehaviour:
   m_networkModelObject: {fileID: 0}
   m_modelOutline: {fileID: 0}
   m_toFade: {fileID: 0}
+  m_battleUiMenu: {fileID: 0}
+  m_userUiMenu: {fileID: 0}
+  m_reticleCanvas: {fileID: 0}
   m_attackHitsEffectFolderName: []
   m_attackHitEffct: {fileID: 0}
   m_deathEffectFolderName: []
@@ -292,6 +297,18 @@ MonoBehaviour:
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &519153466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519153461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708f37afc60b6ec4db414649bd7936dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1285188738
 GameObject:
   m_ObjectHideFlags: 0

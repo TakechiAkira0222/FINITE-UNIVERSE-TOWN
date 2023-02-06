@@ -1,16 +1,16 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using TakechiEngine.PUN.ServerConnect.Joined;
 
-using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using Takechi.CharacterController.Parameters;
+using Takechi.PlayableCharacter.FadingCanvas;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
-using UnityEngine.SceneManagement;
-using Takechi.CharacterController.Parameters;
-using Photon.Pun;
-using Takechi.PlayableCharacter.FadingCanvas;
 
 namespace Takechi.UI.ResultMune
 {

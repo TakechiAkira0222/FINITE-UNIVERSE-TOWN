@@ -638,6 +638,7 @@ GameObject:
   - component: {fileID: 4115147403292074243}
   - component: {fileID: 8589953272847748196}
   - component: {fileID: 1863905474743283848}
+  - component: {fileID: 3389657418401021515}
   m_Layer: 0
   m_Name: DOMINATIONGameManager
   m_TagString: Untagged
@@ -687,9 +688,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_roomStatusManagement: {fileID: 8589953272847748196}
+  m_thisPhtonView: {fileID: 3389657418401021515}
   m_intervalTime_Second: 1
   m_victoryConditionPoints: 500
   m_areaLocationMaxPoints: 2000
+  m_endPerformanceTime_Seconds: 5
+--- !u!114 &3389657418401021515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4115147403292074242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &261540690
 PrefabInstance:
   m_ObjectHideFlags: 0

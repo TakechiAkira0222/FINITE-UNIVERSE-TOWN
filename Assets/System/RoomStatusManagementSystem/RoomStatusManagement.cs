@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using TakechiEngine.PUN.CustomProperties;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference.RoomTeamStatusKey;
+using UnityEngineInternal;
+using UnityEngine.XR;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Takechi.CharacterController.RoomStatus
 {
@@ -17,6 +20,7 @@ namespace Takechi.CharacterController.RoomStatus
         /// <param name="state"> RoomStatusName.GameState </param>
         public void SetGameState(string state) { setCurrentRoomCustomProperties(RoomStatusKey.gameStateKey, state); }
         public void SetVictoryPoint(int value) { setCurrentRoomCustomProperties(RoomStatusKey.victoryPointKey, value); }
+        public void SetVictoryingTeamName(string teamName) { setCurrentRoomCustomProperties(RoomStatusKey.victoryingTeamKey, teamName); }
 
         // HardPoint
         public void SetTeamAPoint_hardPoint(int value) { setCurrentRoomCustomProperties(HardPointStatusKey.teamAPoint, value); }
@@ -72,6 +76,7 @@ namespace Takechi.CharacterController.RoomStatus
         #region get function
 
         public int    GetVictoryPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.victoryPointKey]; }
+        public string GetVictoryingTeamName() { return (string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.victoryingTeamKey]; } 
         public string GetGameState()
         {
             if (!PhotonNetwork.InRoom) return RoomStatusName.GameState.NULL;
@@ -79,8 +84,11 @@ namespace Takechi.CharacterController.RoomStatus
 
             return (string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameStateKey];
         }
-           
-
+        public string GetGameType() { return (string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameTypeKey]; }
+        public bool GetIsHardPoint() { return (string)GetGameType() == (string)RoomStatusName.GameType.hardpoint; }
+        public bool GetIsDomination() { return (string)GetGameType() == (string)RoomStatusName.GameType.domination; }
+    
+          
         // HardPoint
         public int GetTeamAPoint_hardPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamAPoint]; }
         public int GetTeamBPoint_hardPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamBPoint]; }

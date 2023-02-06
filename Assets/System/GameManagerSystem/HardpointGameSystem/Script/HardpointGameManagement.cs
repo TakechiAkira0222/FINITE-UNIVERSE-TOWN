@@ -34,8 +34,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #region private Variable
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
         private PhotonView thisPhtonView => m_thisPhtonView;
-        private int synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
-        private int endPerformanceTime_Seconds => m_endPerformanceTime_Seconds;
+        private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
+        private int    endPerformanceTime_Seconds => m_endPerformanceTime_Seconds;
         private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
        
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
@@ -51,7 +51,6 @@ namespace Takechi.GameManagerSystem.Hardpoint
         public event Action TeamBToVictory = delegate { };
 
         #endregion
-
 
         #region setVariable
         public void   SetLocalGameEnd(bool flag)
@@ -76,6 +75,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
             m_roomStatusManagement = this.transform.GetComponent<RoomStatusManagement>();
             m_thisPhtonView = this.transform.GetComponent<PhotonView>(); 
         }
+
         private void Awake()
         {
             setupOfAwake();
@@ -134,19 +134,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
             TeamAToVictory += () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-
-                Debug.Log("TeamAVictory");
-
-                //foreach(Player player in PhotonNetwork.PlayerList)
-                //{
-
-                //}
-
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamAName);
             };
             TeamBToVictory += () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-                Debug.Log("TeamBVictory");
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamBName);
             };
         }
         private void setupOfOnDisable()
@@ -168,13 +161,13 @@ namespace Takechi.GameManagerSystem.Hardpoint
             TeamAToVictory -= () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-                Debug.Log("TeamAVictory");
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamAName);
             };
 
             TeamBToVictory -= () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-                Debug.Log("TeamBVictory");
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamBName);
             };
         }
 
@@ -227,7 +220,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void GameState_End()
         {
-
+           
         }
 
         private void GameState_Stopped()
@@ -251,6 +244,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #endregion
 
+        #region RPC fuction
         [PunRPC]
         private void RPC_LocationChange()
         {
@@ -261,5 +255,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
             m_pointIocationindex += 1;
         }
+
+        #endregion
     }
 }

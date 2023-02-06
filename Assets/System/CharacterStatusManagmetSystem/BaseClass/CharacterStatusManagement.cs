@@ -33,8 +33,6 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private PlayableCharacterParameters characterParameters => addressManagement.GetCharacterParameters();
        
-
-       
         #endregion
 
         #region protected member variable

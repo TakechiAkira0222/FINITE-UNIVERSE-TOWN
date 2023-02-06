@@ -22,6 +22,7 @@ namespace Takechi.GameManagerSystem.Domination
         #region serializeField
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
+        [SerializeField] private PhotonView m_thisPhtonView;
         [SerializeField] private int m_intervalTime_Second = 1;
         [SerializeField] private int m_victoryConditionPoints = 1000;
         [SerializeField] private int m_areaLocationMaxPoints  = 100;
@@ -32,6 +33,7 @@ namespace Takechi.GameManagerSystem.Domination
         #region private variable
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
         private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
+        private PhotonView thisPhtonView => m_thisPhtonView;
         private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
         private int    endPerformanceTime_Seconds => m_endPerformanceTime_Seconds;
 
@@ -133,12 +135,12 @@ namespace Takechi.GameManagerSystem.Domination
             TeamAToVictory += () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-                Debug.Log("TeamAVictory");
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamAName);
             };
             TeamBToVictory += () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-                Debug.Log("TeamBVictory");
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamBName);
             };
         }
         private void setupOfOnDisable()
@@ -157,12 +159,12 @@ namespace Takechi.GameManagerSystem.Domination
             TeamAToVictory -= () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-                Debug.Log("TeamAVictory");
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamAName);
             };
             TeamBToVictory -= () =>
             {
                 SceneSyncChange(SceneName.resultScene);
-                Debug.Log("TeamBVictory");
+                roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamBName);
             };
         }
 
