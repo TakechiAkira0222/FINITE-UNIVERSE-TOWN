@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TakechiEngine.PUN;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Takechi.UI.SliderContlloer
 {
-    public class SliderContlloerManager : MonoBehaviour
+    public class SliderContlloerManager : TakechiPunCallbacks
     {
         protected void setValue( Slider slider, float value)
         {

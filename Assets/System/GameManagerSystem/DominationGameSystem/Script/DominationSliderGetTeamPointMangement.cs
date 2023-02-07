@@ -7,6 +7,7 @@ using Takechi.UI.SliderContlloer;
 
 using UnityEngine;
 using UnityEngine.UI;
+using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 
 namespace Takechi.GameManagerSystem.Domination
 {
@@ -47,11 +48,25 @@ namespace Takechi.GameManagerSystem.Domination
 
         private void Start()
         {
-            setValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_domination(), roomStatusManagement.GetVictoryPoint());
-            setValue(m_teamBslider, roomStatusManagement.GetTeamBPoint_domination(), roomStatusManagement.GetVictoryPoint());
-            setValue(m_areaLocationAPointsSlider, roomStatusManagement.GetAreaLocationAPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
-            setValue(m_areaLocationBPointsSlider, roomStatusManagement.GetAreaLocationBPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
-            setValue(m_areaLocationCPointsSlider, roomStatusManagement.GetAreaLocationCPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+            if (PhotonNetwork.IsMasterClient)
+            {
+                setValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_domination(), roomStatusManagement.GetVictoryPoint());
+                setValue(m_teamBslider, roomStatusManagement.GetTeamBPoint_domination(), roomStatusManagement.GetVictoryPoint());
+                setValue(m_areaLocationAPointsSlider, roomStatusManagement.GetAreaLocationAPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+                setValue(m_areaLocationBPointsSlider, roomStatusManagement.GetAreaLocationBPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+                setValue(m_areaLocationCPointsSlider, roomStatusManagement.GetAreaLocationCPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+            }
+            else
+            {
+                StartCoroutine( DelayMethod( NetworkSyncSettings.clientLatencyCountermeasureTime, () =>
+                {
+                    setValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_domination(), roomStatusManagement.GetVictoryPoint());
+                    setValue(m_teamBslider, roomStatusManagement.GetTeamBPoint_domination(), roomStatusManagement.GetVictoryPoint());
+                    setValue(m_areaLocationAPointsSlider, roomStatusManagement.GetAreaLocationAPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+                    setValue(m_areaLocationBPointsSlider, roomStatusManagement.GetAreaLocationBPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+                    setValue(m_areaLocationCPointsSlider, roomStatusManagement.GetAreaLocationCPoint_domination(), roomStatusManagement.GetAreaLocationMaxPoint_domination());
+                }));
+            }
         }
 
         private void Update()

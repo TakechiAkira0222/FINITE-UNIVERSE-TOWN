@@ -18,6 +18,8 @@ namespace Takechi.ScriptReference.AnimatorControlVariables
             public const string Ablity1ParameterName = "Ablity1";
             public const string Ablity2ParameterName = "Ablity2";
             public const string Ablity3ParameterName = "Ablity3";
+            public const string VictoryParameterName = "Victory";
+            public const string LoseParameterName = "Lose";
         }
 
         public static class AnimatorLayers 

@@ -134,13 +134,13 @@ namespace Takechi.GameManagerSystem.Domination
 
             TeamAToVictory += () =>
             {
-                SceneSyncChange(SceneName.resultScene);
                 roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamAName);
+                SceneSyncChange(SceneName.resultScene);
             };
             TeamBToVictory += () =>
             {
-                SceneSyncChange(SceneName.resultScene);
                 roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamBName);
+                SceneSyncChange(SceneName.resultScene);
             };
         }
         private void setupOfOnDisable()
@@ -158,13 +158,13 @@ namespace Takechi.GameManagerSystem.Domination
 
             TeamAToVictory -= () =>
             {
-                SceneSyncChange(SceneName.resultScene);
                 roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamAName);
+                SceneSyncChange(SceneName.resultScene);
             };
             TeamBToVictory -= () =>
             {
-                SceneSyncChange(SceneName.resultScene);
                 roomStatusManagement.SetVictoryingTeamName(CharacterTeamStatusName.teamBName);
+                SceneSyncChange(SceneName.resultScene);
             };
         }
 

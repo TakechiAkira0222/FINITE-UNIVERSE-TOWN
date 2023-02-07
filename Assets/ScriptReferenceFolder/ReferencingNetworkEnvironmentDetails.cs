@@ -1,3 +1,5 @@
+using Photon.Pun;
+using POpusCodec.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +16,15 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             public const int fadeProductionTime_Seconds = 5;
 
             /// <summary>
-            /// Synchro time before game start second
+            /// synchro time before game start second
             /// </summary>
             public const int synchroTimeBeforeGameStart_Seconds = 3;
-            // public const int synchroTimeBeforeGameStart_Seconds = 10;
 
+            /// <summary>
+            /// Client latency countermeasure time
+            /// </summary>
+            public static readonly float clientLatencyCountermeasureTime =  PhotonNetwork.GetPing() / 10;
+#if UNITY_EDITOR
             /// <summary>
             /// connection Synchronization Time Frame
             /// </summary>
@@ -30,6 +36,14 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             /// </summary>
             //public const int instantiationSettingSynchronizationTime = 1;
             public const int instantiationSettingSynchronizationTime = 10000;
+#else
+            public const int connectionSynchronizationTime = 1000;
+            public const int instantiationSettingSynchronizationTime = 10000;
+#endif
+
+
+
+
         }
     }
 }

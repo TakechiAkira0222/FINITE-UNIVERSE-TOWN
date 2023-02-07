@@ -102,7 +102,7 @@ namespace Takechi.UI.RoomSerach
                 Button button = Instantiate( m_instansObject, m_content.transform);
 
                 button.name = info.Name;
-                button.transform.GetChild(0).gameObject.GetComponent<Text>().text = WhatTheTextDisplays(info);
+                button.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>().text = WhatTheTextDisplays(info);
                 button.onClick.AddListener(() => connectToJoinRoomManagment.OnNameReferenceJoinRoom((button)));
             }
         }
@@ -125,8 +125,8 @@ namespace Takechi.UI.RoomSerach
 
         private string WhatTheTextDisplays(RoomInfo roomInfo)
         {
-            return ($"{roomInfo.Name} \n " +
-                    $"{roomInfo.PlayerCount}/{roomInfo.MaxPlayers}\n");
+            return ($" Room Name : {roomInfo.Name} \n " +
+                    $" Player : {roomInfo.PlayerCount}/{roomInfo.MaxPlayers}");
         }
 
         // w’è‚µ‚½ƒ‹[ƒ€–¼‚Ìƒ‹[ƒ€î•ñ‚ª‚ ‚ê‚Îæ“¾‚·‚é

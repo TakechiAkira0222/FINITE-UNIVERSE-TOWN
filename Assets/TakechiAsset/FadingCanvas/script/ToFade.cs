@@ -19,7 +19,7 @@ namespace Takechi.PlayableCharacter.FadingCanvas
         /// </summary>
         [SerializeField] private List< UnityEngine.UI.Text> m_canvasTextList;
         /// <summary>
-        ///　キャンバス内のフェイドするCanavs
+        ///　キャンバス内のフェイドするImage
         /// </summary>
         [SerializeField] private List< UnityEngine.UI.Image> m_canvasImageList;
         /// <summary>

@@ -90,6 +90,8 @@ namespace Takechi.RaycastObjectDetectionSystem
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
+                        setActiveUiDisplayedOnFocusList(false);
+
                         audioSource.PlayOneShot( basicUiSound.GetDecisionSoundClip(), basicUiSound.GettDecisionSoundVolume());
                         Debug.Log(" <color=green>RaycastHitSetActiveTheCanvasSystem</color>.<color=yellow>OnDecisionSound_OneShot</color>()");
 
@@ -185,17 +187,12 @@ namespace Takechi.RaycastObjectDetectionSystem
             }
         }
 
+        void setActiveUiDisplayedOnFocusList(bool flag) { foreach (GameObject o in m_uiDisplayedOnFocusList) { o.SetActive(flag); } }
+        void setActiveUiHiddenOnFocusList(bool flag) { foreach (GameObject o in m_uiHiddenOnFocusList) { o.SetActive(flag); } }
         void SetActiveUI(bool flag)
         {
-            foreach (GameObject o in m_uiDisplayedOnFocusList)
-            {
-                o.SetActive(flag);
-            }
-
-            foreach (GameObject o in m_uiHiddenOnFocusList)
-            {
-                o.SetActive(!flag);
-            }
+            setActiveUiDisplayedOnFocusList(flag);
+            setActiveUiHiddenOnFocusList(!flag);
         }
 
         #endregion 
