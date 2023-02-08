@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.042754512, g: 0.07135995, b: 0.14020596, a: 1}
+  m_IndirectSpecularColor: {r: 0.051114623, g: 0.0812385, b: 0.15365905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -622,6 +622,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5817092796112548811, guid: e71994739c292d94e80957f92b0ec460, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 18cc2001d0dd8f341b1ac1fa62df0cda, type: 2}
+    - target: {fileID: 5817092796112548811, guid: e71994739c292d94e80957f92b0ec460, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8ef8bbf13f603204a8ea885c81de6186, type: 3}
     - target: {fileID: 5817092796373532920, guid: e71994739c292d94e80957f92b0ec460, type: 3}
       propertyPath: m_Name
       value: SceneViewPrefab
