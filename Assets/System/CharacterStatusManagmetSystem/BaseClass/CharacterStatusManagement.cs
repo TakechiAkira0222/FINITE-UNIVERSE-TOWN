@@ -231,6 +231,7 @@ namespace Takechi.CharacterController.Parameters
         public void SetModelOulineMode(Outline.Mode mode) { modelOutline.OutlineMode = mode; }
 
         // CustomProperties
+        public void SetThisPhotonViewRequestOwnership() { thisPhotonView.RequestOwnership(); }
         public void SetCustomPropertiesTeamName(string teamName) { setLocalPlayerCustomProperties(CharacterStatusKey.teamNameKey, teamName); }
         public void SetCustomPropertiesMass(float changeValue) { setLocalPlayerCustomProperties(CharacterStatusKey.massKey, changeValue); }
         public void SetCustomPropertiesAttackPower(float changeValue) { setLocalPlayerCustomProperties(CharacterStatusKey.attackPowerKey, changeValue); }

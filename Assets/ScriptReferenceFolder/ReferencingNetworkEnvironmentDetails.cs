@@ -18,7 +18,7 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             /// <summary>
             /// synchro time before game start second
             /// </summary>
-            public const int synchroTimeBeforeGameStart_Seconds = 3;
+            public const int synchroTimeBeforeGameStart_Seconds = 10;
 
             /// <summary>
             /// Client latency countermeasure time

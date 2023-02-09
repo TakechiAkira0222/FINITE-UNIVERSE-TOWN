@@ -30,7 +30,6 @@ namespace Takechi.PlayableCharacter.FadingCanvas
         /// 表示継続時間
         /// </summary>
         private float m_fadeDisplayTime => NetworkSyncSettings.fadeProductionTime_Seconds;
-
         /// <summary>
         /// フェイドイン
         /// </summary>

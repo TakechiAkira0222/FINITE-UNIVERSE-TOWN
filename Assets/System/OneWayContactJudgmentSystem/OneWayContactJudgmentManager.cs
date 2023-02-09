@@ -15,6 +15,7 @@ namespace Takechi.CharacterController.OenOneWayContact
         {
             if ( other.gameObject.tag != SearchForPrefabTag.playerCharacterPrefabTag) return;
             if ( !PhotonNetwork.LocalPlayer.IsLocal) return;
+            if ( !other.transform.root.gameObject.GetComponent<PhotonView>().IsMine) return;
 
             foreach (Collider collider in m_colliders) { collider.enabled = false; }
         }
@@ -23,6 +24,7 @@ namespace Takechi.CharacterController.OenOneWayContact
         {
             if ( other.gameObject.tag != SearchForPrefabTag.playerCharacterPrefabTag) return;
             if ( !PhotonNetwork.LocalPlayer.IsLocal) return;
+            if ( !other.transform.root.gameObject.GetComponent<PhotonView>().IsMine) return;
 
             foreach (Collider collider in m_colliders) { collider.enabled = true; }
         }

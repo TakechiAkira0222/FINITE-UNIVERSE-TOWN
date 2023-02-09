@@ -21,24 +21,28 @@ namespace Takechi.GameManagerSystem.Hardpoint
     public class HardpointGameManagement : TakechiPunCallbacks
     {
         #region serializeField
+        [Header("=== HardpointGameManagerParameter ===")]
+        [SerializeField] private HardpointGameManagerParameters m_hardpointGameManagerParameters;
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
+        [Header("=== Script Setting ===")]
         [SerializeField] private List<GameObject> m_areaLocationList = new List<GameObject>();
         [SerializeField] private PhotonView m_thisPhtonView;
-        [SerializeField] private int m_intervalTime_Second = 60;
-        [SerializeField] private int m_victoryConditionPoints = 5000;
-        [SerializeField] private int m_endPerformanceTime_Seconds = 5;
 
         #endregion
 
         #region private Variable
+        private HardpointGameManagerParameters gameManagerParameters => m_hardpointGameManagerParameters;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
         private PhotonView thisPhtonView => m_thisPhtonView;
+        private int    victoryConditionPoints     => gameManagerParameters.GetVictoryConditionPoints();
+        private int    endPerformanceTime_Seconds => gameManagerParameters.GetEndPerformanceTime_Seconds();
+        private int    intervalTime_Second => gameManagerParameters.GetIntervalTime_Second();
         private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
-        private int    endPerformanceTime_Seconds => m_endPerformanceTime_Seconds;
         private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
        
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
+
         private int   m_pointIocationindex = 0;
         private bool  m_localGameEnd = false;
         private float m_gameTimeCunt_Seconds = 0;
@@ -112,8 +116,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
             Debug.Log($" <color=yellow>SetTeamAPoint_hardPoint</color>(0)");
             roomStatusManagement.SetTeamBPoint_hardPoint(0);
             Debug.Log($" <color=yellow>SetTeamBPoint_hardPoint</color>(0)");
-            roomStatusManagement.SetVictoryPoint(m_victoryConditionPoints);
-            Debug.Log($" <color=yellow>SetVictoryPoint_domination</color>({m_victoryConditionPoints})");
+            roomStatusManagement.SetVictoryPoint(victoryConditionPoints);
+            Debug.Log($" <color=yellow>SetVictoryPoint_domination</color>({victoryConditionPoints})");
         }
         private void setupOfOnEnable()
         {
@@ -191,13 +195,13 @@ namespace Takechi.GameManagerSystem.Hardpoint
         {
             m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if (m_gameTimeCunt_Seconds >= m_intervalTime_Second)
+            if (m_gameTimeCunt_Seconds >= intervalTime_Second)
             {
                 m_gameTimeCunt_Seconds = 0;
                 ChangePointIocation();
             }
 
-            if (roomStatusManagement.GetTeamAPoint_hardPoint() >= m_victoryConditionPoints)
+            if (roomStatusManagement.GetTeamAPoint_hardPoint() >= victoryConditionPoints)
             {
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");
@@ -207,7 +211,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
                 StartCoroutine(DelayMethod(endPerformanceTime_Seconds, TeamAToVictory));
             };
 
-            if (roomStatusManagement.GetTeamBPoint_hardPoint() >= m_victoryConditionPoints)
+            if (roomStatusManagement.GetTeamBPoint_hardPoint() >= victoryConditionPoints)
             {
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");

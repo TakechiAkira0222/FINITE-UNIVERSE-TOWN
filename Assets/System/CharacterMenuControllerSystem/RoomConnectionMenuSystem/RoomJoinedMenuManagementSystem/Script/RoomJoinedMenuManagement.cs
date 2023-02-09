@@ -16,6 +16,8 @@ using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReferenc
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 using UnityEngine.Rendering;
+using Takechi.CharacterController.RoomStatus;
+using Takechi.CharacterController.Address;
 
 namespace Takechi.UI.RoomJoinedMenu
 {
@@ -27,10 +29,13 @@ namespace Takechi.UI.RoomJoinedMenu
         #region SerializeField
         [Header("=== CharacterStatusManagement ===")]
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+        [Header("=== CharacterAddressManagement === ")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
 
         [Header(" ui setting ")]
         [SerializeField] private Text   m_roomInfometionText;
         [SerializeField] private Button m_gameStartButton;
+        [SerializeField] private Button m_closeButton;
 
         [Header(" memberList setting ")]
         [SerializeField] private Text m_instansText;
@@ -42,7 +47,9 @@ namespace Takechi.UI.RoomJoinedMenu
         #endregion
 
         #region private variable
-        private CharacterStatusManagement characterStatusManagement => m_characterStatusManagement;
+        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private CharacterStatusManagement statusManagement => m_characterStatusManagement;
+        private RoomStatusManagement roomStatusManagement => addressManagement.GetMyRoomStatusManagement();
         private List<Player> m_teamA_memberList = new List<Player>(4);
         private List<Player> m_teamB_memberList = new List<Player>(4);
 
@@ -72,6 +79,9 @@ namespace Takechi.UI.RoomJoinedMenu
             StartCoroutine(nameof(InitialTeamSetup));
 
             updateRoomInfometionText();
+
+            m_closeButton.interactable = true;
+            Debug.Log(" m_closeButton.interactable : true <color=green>to set</color>.");
         }
 
         #endregion
@@ -81,10 +91,13 @@ namespace Takechi.UI.RoomJoinedMenu
         {
             m_thisPhotnView = this.transform.GetComponent<PhotonView>();
         }
-
+       
         public override void OnEnable()
         {
             base.OnEnable();
+
+            m_closeButton.interactable = false;
+            Debug.Log(" m_closeButton.interactable : false <color=green>to set</color>.");
 
             StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
 
@@ -133,8 +146,10 @@ namespace Takechi.UI.RoomJoinedMenu
         public void OnSceneSyncChange()
         {
             m_thisPhotnView.RPC( nameof(RPC_SceneSyncChange),RpcTarget.AllBufferedViaServer);
+            roomStatusManagement.SetIsOpen(false);
+            roomStatusManagement.SetIsVisible(false);
 
-            StartCoroutine(DelayMethod( NetworkSyncSettings.fadeProductionTime_Seconds, () =>
+             StartCoroutine(DelayMethod( NetworkSyncSettings.fadeProductionTime_Seconds, () =>
             {
                 SceneSyncChange( SceneName.characterSelectionScene);
             }));
@@ -146,7 +161,11 @@ namespace Takechi.UI.RoomJoinedMenu
             m_toFade.OnFadeOut("NowLoading...");
         }
 
-        public void OnLeaveRoom() { LeaveRoom(); }
+        public void OnLeaveRoom() 
+        {
+            statusManagement.SetThisPhotonViewRequestOwnership();
+            LeaveRoom();
+        }
 
         public void OnChangeTeam(string teamName)
         {
@@ -162,7 +181,7 @@ namespace Takechi.UI.RoomJoinedMenu
             {
                 if (!MaximumOfMembers( m_teamA_memberList))
                 {
-                    characterStatusManagement.SetCustomPropertiesTeamName(teamName);
+                    statusManagement.SetCustomPropertiesTeamName(teamName);
                 }
                 else
                 {
@@ -173,7 +192,7 @@ namespace Takechi.UI.RoomJoinedMenu
             {
                 if (!MaximumOfMembers( m_teamB_memberList))
                 {
-                    characterStatusManagement.SetCustomPropertiesTeamName(teamName);
+                    statusManagement.SetCustomPropertiesTeamName(teamName);
                 }
                 else
                 {
@@ -199,7 +218,7 @@ namespace Takechi.UI.RoomJoinedMenu
 
                 foreach (Player player in PhotonNetwork.PlayerList)
                 {
-                    if ((characterStatusManagement.GetCustomPropertiesTeamName(player) == CharacterTeamStatusName.teamAName))
+                    if ((statusManagement.GetCustomPropertiesTeamName(player) == CharacterTeamStatusName.teamAName))
                     {
                         m_teamA_memberList.Add(player);
                     }
@@ -253,17 +272,17 @@ namespace Takechi.UI.RoomJoinedMenu
 
         private IEnumerator InitialTeamSetup()
         {
-            characterStatusManagement.SetCustomPropertiesTeamName(CharacterTeamStatusName.teamAName);
+            statusManagement.SetCustomPropertiesTeamName(CharacterTeamStatusName.teamAName);
 
             yield return new WaitForSeconds( Time.deltaTime);
 
             if (!MaximumOfMembers( m_teamB_memberList))
             {
-                characterStatusManagement.SetCustomPropertiesTeamName( CharacterTeamStatusName.teamBName);
+                statusManagement.SetCustomPropertiesTeamName( CharacterTeamStatusName.teamBName);
             }
             else if (!MaximumOfMembers( m_teamA_memberList))
             {
-                characterStatusManagement.SetCustomPropertiesTeamName( CharacterTeamStatusName.teamAName);
+                statusManagement.SetCustomPropertiesTeamName( CharacterTeamStatusName.teamAName);
             }
         }
 

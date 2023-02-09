@@ -53,8 +53,13 @@ namespace Takechi.UI.ResultMune
             if (statusManagement.GetCustomPropertiesTeamName() == roomStatusManagement.GetVictoryingTeamName())
             {
                 victoryOrLoseText.text = "Victory";
+                victoryOrLoseText.color = Color.red;
             }
-            else { victoryOrLoseText.text = "Lose"; }
+            else 
+            {
+                victoryOrLoseText.text = "Lose";
+                victoryOrLoseText.color = Color.blue;
+            }
         }
 
         private void setScoreDisplayText()

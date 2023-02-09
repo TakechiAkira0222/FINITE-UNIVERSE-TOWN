@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1762978699831277017, guid: b61c66b6bd3b1bd44b9b64bde4c66363, type: 3}
+      propertyPath: m_canvasImageList.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2263594298223384452, guid: b61c66b6bd3b1bd44b9b64bde4c66363, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1219,9 +1223,73 @@ PrefabInstance:
       propertyPath: m_raycastHitInstantiateTheCanvasSystem
       value: 
       objectReference: {fileID: 2640404583997773308}
+    - target: {fileID: 2579976604287014694, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579976604287014694, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579976604287014694, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579976604287014694, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579976604287014694, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062935049268964513, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062935049268964513, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062935049268964513, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062935049268964513, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062935049268964513, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662945859130276680, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_characterBasicViewpointOperation
+      value: 
+      objectReference: {fileID: 2640404583997772526}
     - target: {fileID: 5436167066688483612, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
       propertyPath: m_Name
       value: LobbySceneUserUiMenuInstans
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064161583026547541, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064161583026547541, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064161583026547541, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064161583026547541, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064161583026547541, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8790109032267289841, guid: f8fb3fbe0272207449d5c1847a6c0b0f, type: 3}
       propertyPath: m_IsActive
@@ -2453,7 +2521,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 2
@@ -5908,6 +5976,10 @@ PrefabInstance:
       propertyPath: m_characterStatusManagement
       value: 
       objectReference: {fileID: 2640404583997773107}
+    - target: {fileID: 4177733782338809071, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+      propertyPath: m_characterAddressManagement
+      value: 
+      objectReference: {fileID: 2640404583997774678}
     - target: {fileID: 4876956303370837634, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_serializeSettingClassName.Array.data[0]
       value: 

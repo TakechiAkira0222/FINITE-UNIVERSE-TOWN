@@ -5,15 +5,18 @@ using System.Collections.Generic;
 using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
+using Takechi.ExternalData;
+using Takechi.UI.ControlsSettingMenu;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static Takechi.ScriptReference.CryptoRedPath.ReferenceCryptoRedPath;
 
 namespace Takechi.CharacterController.ViewpointOperation
 {
     [RequireComponent(typeof(CharacterAddressManagement))]
     [RequireComponent(typeof(CharacterStatusManagement))]
     [RequireComponent(typeof(CharacterKeyInputStateManagement))]
-    public class CharacterBasicViewpointOperation : MonoBehaviour
+    public class CharacterBasicViewpointOperation : ExternalDataManagement
     {
         #region SerializeField
         [Header("=== CharacterAddressManagement === ")]
@@ -31,31 +34,59 @@ namespace Takechi.CharacterController.ViewpointOperation
         private CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
         private GameObject avater => addressManagement.GetMyAvater();
         private Camera mainCamera => addressManagement.GetMyMainCamera();
+        private ControlsSettingData controlsSettingData = new ControlsSettingData();
+        private string cleanpath => Cleanpath.controlsSettingDataPath;
         private Quaternion cameraRot, characterRot;
+        private float xSensityvity , ySensityvity = 1f;
+
+        #region Get Function
+        public float GetXSensityvity() { return xSensityvity; }
+        public float GetYSensityvity() { return ySensityvity; }
 
         #endregion
-
-        #region Struct
-
-        private struct limitedToCamera
+        #region Set Finction
+        public void SetXSensityvity(float value) 
         {
-            public const float minX = -90f;
-            public const float maxX = 35f;
-            public const float Xsensityvity = 1f;
-            public const float Ysensityvity = 1f;
+            xSensityvity = value;
+            Debug.Log($" xSensityvity : {value} <color=green>to set</color>.");
+        }
+
+        public void SetYSensityvity(float value) 
+        {
+            ySensityvity = value;
+            Debug.Log($" ySensityvity : {value} <color=green>to set</color>.");
         }
 
         #endregion
 
+        #endregion
+
+        #region cost stract 
+        private struct limitedToCamera
+        {
+            public const float minX = -90f;
+            public const float maxX = 35f;
+        }
+
+        #endregion
+
+
         #region UnityEvent
-        void Reset()
+        private void Reset()
         {
             m_characterStatusManagement = this.transform.GetComponent<CharacterStatusManagement>();
             m_characterAddressManagement = this.transform.GetComponent<CharacterAddressManagement>();
             m_characterKeyInputStateManagement = this.transform.GetComponent<CharacterKeyInputStateManagement>();
         }
 
-        void Start()
+        private void Awake()
+        {
+            controlsSettingData = LoadData(controlsSettingData, cleanpath);
+            SetXSensityvity(controlsSettingData.xSensityvity);
+            SetYSensityvity(controlsSettingData.ySensityvity);
+        }
+
+        private void Start()
         {
             cameraRot = mainCamera.transform.localRotation;
             characterRot = avater.transform.localRotation;
@@ -100,8 +131,8 @@ namespace Takechi.CharacterController.ViewpointOperation
         #region ViewpointOperationControll
         private void CameraControll(float mouseX, float mouseY) 
         {
-            float xRot = mouseX * limitedToCamera.Ysensityvity;
-            float yRot = mouseY * limitedToCamera.Xsensityvity;
+            float xRot = mouseX * ySensityvity;
+            float yRot = mouseY * xSensityvity;
 
             cameraRot *= Quaternion.Euler(-yRot, 0, 0);
             characterRot *= Quaternion.Euler(0, xRot, 0);

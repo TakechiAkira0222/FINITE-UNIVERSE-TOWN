@@ -75,7 +75,7 @@
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\Blur.cs" />
     <Compile Include="Assets\Database\UiSoundEffectsDataBase\Script\BasicUiSoundEffects.cs" />
     <Compile Include="Assets\System\CharacterkeyInputStateManagementSystem\CharacterKeyInputStateManagement.cs" />
-    <Compile Include="Assets\System\UserSettingsMuneSystem\Script\UserNickNameManagement.cs" />
+    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\ChangeUserSettingsMuneSystem\script\UserNickNameManagement.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\SunShafts.cs" />
     <Compile Include="Assets\System\CharacterCanvasBattleUiControllerSystem\CharacterBasicBattleCanvasUiController.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\BaseClass\TakechiPunCustomProperties.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="Assets\System\CharacterContlloerSystem\JumpScript\CharacterBasicJump.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\Bloom.cs" />
     <Compile Include="Assets\TakechiAsset\DebugInfo\DebugTextViweSystem\Sqript\AddDebugView.cs" />
-    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\script\CharacterLobbySceneUserUiMenuController.cs" />
+    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\CharacterLobbySceneUserUiMenuSystem\script\CharacterLobbySceneUserUiMenuController.cs" />
     <Compile Include="Assets\System\ServerControlSystem\ErrorManagementWhenConnectingSystem\Script\ErrorManagementWhenConnecting.cs" />
     <Compile Include="Assets\Database\ItemDatabase\Script\Item.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\Unity UI Samples\Scripts\ActiveStateToggler.cs" />
@@ -117,7 +117,7 @@
     <Compile Include="Assets\Resource\InputAssetsFolder\Unity UI Samples\Scripts\DragMe.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\BloomAndFlares.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\OfficeWorker\HandOnly\OfficeWorkerHandOnlyFlyingAnimationEventManager.cs" />
-    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\script\CharacterBattleSceneUserUiMenuController.cs" />
+    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\BattleSceneUserUiMenuSystem\script\CharacterBattleSceneUserUiMenuController.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Alpha Flashing UI\AlphaFlashingText.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\Unity UI Samples\Scripts\ShowSliderValue.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\ScreenOverlay.cs" />
@@ -127,7 +127,7 @@
     <Compile Include="Assets\Resource\InputAssetsFolder\Planets of the Solar System 3D\Script\MoonBehaviourScript.cs" />
     <Compile Include="Assets\TakechiAsset\UiControllerSystem\MouseCorsorContlloerSystem\MouseCursorImageSettingController.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\Unity UI Samples\Scripts\DropMe.cs" />
-    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\script\basic\CharacterBasicUserUiMenuController.cs" />
+    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\basicScript\CharacterBasicUserUiMenuController.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\BloomOptimized.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\DepthOfField.cs" />
     <Compile Include="Assets\System\CharacterContactJudgmentSystem\CharacterDeathJudgmentSystem\DeathJudgmentScript\CharacterBasicDeathJudgmentManagement.cs" />
@@ -144,6 +144,7 @@
     <Compile Include="Assets\System\OneWayContactJudgmentSystem\OneWayContactJudgmentManager.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingObjectWithContactDetectionThePlayer.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\ColorCorrectionLookup.cs" />
+    <Compile Include="Assets\Database\GameManagerDatabase\DOMINATION\Script\DominationGameManagerParameters.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\Twirl.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSoundEffectsDatabase\Script\PlayableCharacterSoundEffectsDataBase.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Assets\TakechiPunCallbacks\Callbaks\TakechiConnectToJoinRoomPunCallbaks.cs" />
     <Compile Include="Assets\System\CharacterAddressManagementSystem\MechanicalWarrior\MechanicalWarriorAddressManagement.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\SlimUI\Modern Menu 1\Scripts\ExtraLinks.cs" />
+    <Compile Include="Assets\Database\GameManagerDatabase\HARDPOINT\Script\HardpointGameManagerParameters.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\SimpleSpinner\SimpleSpinner.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystemInNetwork.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSpecificParametersDataBase\MechanicalWarreior\Script\MechanicalWarreiorSpecificParameters.cs" />
@@ -161,8 +163,10 @@
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\TiltShift.cs" />
     <Compile Include="Assets\System\GameManagerSystem\DominationGameSystem\Script\DominationGameManagement.cs" />
     <Compile Include="Assets\System\CharacterMenuControllerSystem\ResultMenuSystem\script\ResultMuneInfometionManagement.cs" />
+    <Compile Include="Assets\ScriptReferenceFolder\ReferenceCryptoRedPath.cs" />
     <Compile Include="Assets\TakechiAsset\DefaultButton\ButtonManager_GameExit.cs" />
     <Compile Include="Assets\System\TimeLineSystem\TitleScceneOnlyFolder\TimeLineControllerSqript\TitleSceneTimeLineController.cs" />
+    <Compile Include="Assets\System\CharacterMenuControllerSystem\UserUiMenuSystem\BattleSceneUserUiMenuSystem\script\ControlsSettingMenuController.cs" />
     <Compile Include="Assets\System\CharacterMenuControllerSystem\RoomConnectionMenuSystem\RoomJoinedMenuManagementSystem\Script\RoomJoinedMenuManagement.cs" />
     <Compile Include="Assets\System\GameManagerSystem\HardpointGameSystem\Script\HardpointGameManagement.cs" />
     <Compile Include="Assets\System\CharacterContactJudgmentSystem\BaseClass\ContactJudgmentManagement.cs" />

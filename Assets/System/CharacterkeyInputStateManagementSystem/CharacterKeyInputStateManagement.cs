@@ -81,6 +81,7 @@ namespace Takechi.CharacterController.KeyInputStete
 
             if (Input.GetKeyDown( m_userMenu)) { InputUserMenu(statusManagement, addressManagement); }
 
+            Debug.Log( m_isUserMenu + ":"+ m_operation);
             if (m_isUserMenu) return;
             if (!m_operation) return;
 

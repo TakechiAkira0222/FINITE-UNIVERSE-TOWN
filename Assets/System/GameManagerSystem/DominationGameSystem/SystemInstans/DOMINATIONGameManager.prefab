@@ -279,7 +279,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -309,17 +309,17 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299889619}
-  m_Text: "C\n\u21E9"
+  m_Text: C
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 150
-  m_FontStyle: 1
+  m_FontSize: 200
+  m_FontStyle: 3
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 1694498815
@@ -374,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -404,17 +404,17 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329622453}
-  m_Text: "A\n\u21E9"
+  m_Text: A
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 150
-  m_FontStyle: 1
+  m_FontSize: 200
+  m_FontStyle: 3
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 1694498815
@@ -469,7 +469,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -499,17 +499,17 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148450062}
-  m_Text: "B\n\u21E9"
+  m_Text: B
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 150
-  m_FontStyle: 1
+  m_FontSize: 200
+  m_FontStyle: 3
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 1694498815
@@ -687,12 +687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a9a7b5335093b438a3d7811d7477ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dominationGameManagerParameters: {fileID: 11400000, guid: 4ba65d1174bf14e4eaf6e236aa4ac647, type: 2}
   m_roomStatusManagement: {fileID: 8589953272847748196}
   m_thisPhtonView: {fileID: 3389657418401021515}
-  m_intervalTime_Second: 1
-  m_victoryConditionPoints: 500
-  m_areaLocationMaxPoints: 2000
-  m_endPerformanceTime_Seconds: 5
 --- !u!114 &3389657418401021515
 MonoBehaviour:
   m_ObjectHideFlags: 0

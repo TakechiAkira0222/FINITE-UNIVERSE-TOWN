@@ -242,14 +242,7 @@ namespace TakechiEngine.PUN.Information
         /// </returns>
         private string RoomInformationDisplayContents(RoomInfo roomInfo, string[] customPropertieKeyNames)
         {
-            string s =
-                $" roomName : <color=green>{roomInfo.Name}</color> \n" +
-                $" masterClientId : <color=green>{roomInfo.masterClientId}</color> \n" +
-                $" PlayerCount : <color=green>{roomInfo.PlayerCount} / {roomInfo.MaxPlayers}</color> \n" +
-                $" CustomProperties : <color=green>{roomInfo.CustomProperties}</color> \n" +
-                $" Open : <color=green>{roomInfo.IsOpen}</color> \n" +
-                $" Visible : <color=green>{roomInfo.IsVisible}</color> \n" +
-                $" roomInfo : <color=green>{roomInfo}</color> \n";
+            string s = RoomInformationDisplayContents(roomInfo);
 
             foreach (string propertie in customPropertieKeyNames)
             {
@@ -271,6 +264,8 @@ namespace TakechiEngine.PUN.Information
             return
                $" PlayerSlots : <color=green>{PhotonNetwork.CurrentRoom.PlayerCount} / {PhotonNetwork.CurrentRoom.MaxPlayers}</color> \n" +
                $" RoomName : <color=green>{PhotonNetwork.CurrentRoom.Name}</color> \n" +
+               $" IsOpen : <color=green>{PhotonNetwork.CurrentRoom.IsOpen}</color> \n" +
+               $" IsVisible : <color=green>{PhotonNetwork.CurrentRoom.IsVisible}</color> \n" +
                $" HostName : <color=green>{PhotonNetwork.MasterClient.NickName}</color> \n" +
                $" MyPlayerID : <color=green>{PhotonNetwork.LocalPlayer.ActorNumber}</color> \n" +
                $" AutomaticallySyncScene : <color=green>{PhotonNetwork.AutomaticallySyncScene}</color> \n";
@@ -286,12 +281,7 @@ namespace TakechiEngine.PUN.Information
         /// </returns>
         private string RoomInformationDisplayContents(string[] customPropertieKeyNames)
         {
-            string s = 
-               $" PlayerSlots : <color=green>{PhotonNetwork.CurrentRoom.PlayerCount} / {PhotonNetwork.CurrentRoom.MaxPlayers}</color> \n" +
-               $" RoomName : <color=green>{PhotonNetwork.CurrentRoom.Name}</color> \n" +
-               $" HostName : <color=green>{PhotonNetwork.MasterClient.NickName}</color> \n" +
-               $" MyPlayerID : <color=green>{PhotonNetwork.LocalPlayer.ActorNumber}</color> \n" +
-               $" AutomaticallySyncScene : <color=green>{PhotonNetwork.AutomaticallySyncScene}</color> \n";
+            string s = RoomInformationDisplayContents();
 
             foreach (string propertie in customPropertieKeyNames)
             {
@@ -332,12 +322,7 @@ namespace TakechiEngine.PUN.Information
         /// </returns>
         private string WhatPlayerInformationIsDisplayedInTheDebugLog(Photon.Realtime.Player player, string[] customPropertieKeyNames)
         {
-            string s =
-               $" ActorNumber : <color=green>{player.ActorNumber}</color> \n" +
-               $" NickName : <color=green>{player.NickName}</color> \n" +
-               $" IsMasterClient : <color=green>{player.IsMasterClient}</color> \n" +
-               $" IsLocal : <color=green>{player.IsLocal}</color>\n" +
-               $" TagObject : <color=green>{player.TagObject}</color>\n";
+            string s = WhatPlayerInformationIsDisplayedInTheDebugLog(player);
 
             foreach (string propertie in customPropertieKeyNames)
             {

@@ -8,12 +8,15 @@ using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReferenc
 using UnityEngineInternal;
 using UnityEngine.XR;
 using static UnityEngine.Rendering.DebugUI;
+using Photon.Realtime;
 
 namespace Takechi.CharacterController.RoomStatus
 {
     public class RoomStatusManagement : TakechiPunCustomProperties
     {
         #region set function
+        public void SetIsOpen(bool state) { PhotonNetwork.CurrentRoom.IsOpen = state; }
+        public void SetIsVisible(bool state) { PhotonNetwork.CurrentRoom.IsVisible = state ; }
         /// <summary>
         /// RoomStatusName.GameState Çê›íËÇµÇ‹Ç∑ÅB
         /// </summary>

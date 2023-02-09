@@ -13,6 +13,7 @@ using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefab
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
+using Photon.Pun.UtilityScripts;
 
 namespace Takechi.GameManagerSystem.Domination
 {
@@ -20,28 +21,30 @@ namespace Takechi.GameManagerSystem.Domination
     public class DominationGameManagement : TakechiPunCallbacks
     {
         #region serializeField
+        [Header("=== DominationGameManagerParameter ===")]
+        [SerializeField] private DominationGameManagerParameters m_dominationGameManagerParameters;
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
+        [Header("=== Script Setting ===")]
         [SerializeField] private PhotonView m_thisPhtonView;
-        [SerializeField] private int m_intervalTime_Second = 1;
-        [SerializeField] private int m_victoryConditionPoints = 1000;
-        [SerializeField] private int m_areaLocationMaxPoints  = 100;
-        [SerializeField] private int m_endPerformanceTime_Seconds = 5;
 
         #endregion
 
         #region private variable
+        private DominationGameManagerParameters gameManagerParameters => m_dominationGameManagerParameters;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
-        private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
         private PhotonView thisPhtonView => m_thisPhtonView;
+        private int    victoryConditionPoints     => gameManagerParameters.GetVictoryConditionPoints();
+        private int    endPerformanceTime_Seconds => gameManagerParameters.GetEndPerformanceTime_Seconds();
+        private int    intervalTime_Second        => gameManagerParameters.GetIntervalTime_Second();
+        private int    areaLocationMaxPoints => gameManagerParameters.GetAreaLocationMaxPoints();
+        private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
         private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
-        private int    endPerformanceTime_Seconds => m_endPerformanceTime_Seconds;
 
-        private float  m_gameTimeCunt_Seconds = 0;
-
-        private bool   m_localGameEnd = false;
-
+        
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
+        private float  m_gameTimeCunt_Seconds = 0;
+        private bool   m_localGameEnd = false;
 
         #endregion
 
@@ -93,6 +96,7 @@ namespace Takechi.GameManagerSystem.Domination
         {
             if (!PhotonNetwork.IsMasterClient) return;
             if (GetLocalGameEnd()) return;
+            if (!PhotonNetwork.InRoom) return;
 
             m_gameMain[roomStatusManagement.GetGameState()]();
         }
@@ -104,20 +108,20 @@ namespace Takechi.GameManagerSystem.Domination
         {
             roomStatusManagement.SetGameState(RoomStatusName.GameState.beforeStart);
             Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.beforeStart)");
-            roomStatusManagement.SetVictoryPoint(m_victoryConditionPoints);
-            Debug.Log($" <color=yellow>SetVictoryPoint_domination</color>( {m_victoryConditionPoints})");
+            roomStatusManagement.SetVictoryPoint(victoryConditionPoints);
+            Debug.Log($" <color=yellow>SetVictoryPoint_domination</color>( {victoryConditionPoints})");
             roomStatusManagement.SetTeamAPoint_domination(0);
             Debug.Log(" <color=yellow>SetTeamAPoint_domination</color>(0)");
             roomStatusManagement.SetTeamBPoint_domination(0);
             Debug.Log(" <color=yellow>SetTeamBPoint_domination</color>(0)");
-            roomStatusManagement.SetAreaLocationMaxPoint_domination(m_areaLocationMaxPoints);
-            Debug.Log($" <color=yellow>SetAreaLocationMaxPoint_domination</color>( {m_areaLocationMaxPoints})");
-            roomStatusManagement.SetAreaLocationAPoint_domination(m_areaLocationMaxPoints / 2);
-            Debug.Log($" <color=yellow>SetAreaLocationAPoint_domination</color>( {m_areaLocationMaxPoints / 2})");
-            roomStatusManagement.SetAreaLocationBPoint_domination(m_areaLocationMaxPoints / 2);
-            Debug.Log($" <color=yellow>SetAreaLocationBPoint_domination</color>( {m_areaLocationMaxPoints / 2})");
-            roomStatusManagement.SetAreaLocationCPoint_domination(m_areaLocationMaxPoints / 2);
-            Debug.Log($" <color=yellow>SetAreaLocationCPoint_domination</color>( {m_areaLocationMaxPoints / 2})");
+            roomStatusManagement.SetAreaLocationMaxPoint_domination(areaLocationMaxPoints);
+            Debug.Log($" <color=yellow>SetAreaLocationMaxPoint_domination</color>( {areaLocationMaxPoints})");
+            roomStatusManagement.SetAreaLocationAPoint_domination(areaLocationMaxPoints / 2);
+            Debug.Log($" <color=yellow>SetAreaLocationAPoint_domination</color>( {areaLocationMaxPoints / 2})");
+            roomStatusManagement.SetAreaLocationBPoint_domination(areaLocationMaxPoints / 2);
+            Debug.Log($" <color=yellow>SetAreaLocationBPoint_domination</color>( {areaLocationMaxPoints / 2})");
+            roomStatusManagement.SetAreaLocationCPoint_domination(areaLocationMaxPoints / 2);
+            Debug.Log($" <color=yellow>SetAreaLocationCPoint_domination</color>( {areaLocationMaxPoints / 2})");
         }
         private void setupOfOnEnable()
         {
@@ -186,7 +190,7 @@ namespace Takechi.GameManagerSystem.Domination
         {
             m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if (m_gameTimeCunt_Seconds >= m_intervalTime_Second)
+            if ( m_gameTimeCunt_Seconds >= intervalTime_Second)
             {
                 m_gameTimeCunt_Seconds = 0;
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationAPoint_domination());
@@ -194,7 +198,7 @@ namespace Takechi.GameManagerSystem.Domination
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationCPoint_domination());
             }
 
-            if (roomStatusManagement.GetTeamAPoint_domination() >= m_victoryConditionPoints)
+            if (roomStatusManagement.GetTeamAPoint_domination() >= victoryConditionPoints)
             {
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");
@@ -203,7 +207,7 @@ namespace Takechi.GameManagerSystem.Domination
 
                 StartCoroutine(DelayMethod( endPerformanceTime_Seconds, TeamAToVictory));
             };
-            if (roomStatusManagement.GetTeamBPoint_domination() >= m_victoryConditionPoints)
+            if (roomStatusManagement.GetTeamBPoint_domination() >= victoryConditionPoints)
             {
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");

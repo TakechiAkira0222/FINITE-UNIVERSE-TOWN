@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 namespace SlimUI.ModernMenu{
-	[ExecuteInEditMode()]
 	[System.Serializable]
 	public class FlexibleUI : MonoBehaviour {
 
