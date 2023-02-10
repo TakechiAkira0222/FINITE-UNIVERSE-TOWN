@@ -2321,6 +2321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6064910895561636209}
   - component: {fileID: 2822235881943087835}
+  - component: {fileID: 3328735372746019357}
   - component: {fileID: 6018737882793698759}
   - component: {fileID: 1462956121723582944}
   - component: {fileID: 5044457089127630745}
@@ -2369,6 +2370,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3328735372746019357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872832776683955147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af9e9542fefbec488f929577aad0cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_characterStatusManagement: {fileID: 0}
+  m_characterBasicSoundEffectsStateManagement: {fileID: 0}
+  m_thisPhotonView: {fileID: 6809657440400546484}
 --- !u!114 &6018737882793698759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2400,11 +2416,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterKeyInputStateManagement: {fileID: 0}
   m_characterControllerReferenceManagement: {fileID: 0}
-  m_characterAddressManagement: {fileID: 0}
+  m_officeWorkerAddressManagement: {fileID: 0}
   m_officeWorkerStatusManagement: {fileID: 0}
   m_officeWorkerSoundEffectsManagement: {fileID: 0}
-  m_playableDirector: {fileID: 0}
-  m_deathblowAreaEffect: {fileID: 0}
+  m_thisPhotonView: {fileID: 0}
 --- !u!114 &5044457089127630745
 MonoBehaviour:
   m_ObjectHideFlags: 0

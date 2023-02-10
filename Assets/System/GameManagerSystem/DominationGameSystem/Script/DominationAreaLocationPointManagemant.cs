@@ -22,6 +22,8 @@ namespace Takechi.GameManagerSystem.Domination
         #region SerializeField
         [Header("=== DominationGameManagement ===")]
         [SerializeField] private DominationGameManagement m_dominationGameManagement;
+        [Header("=== DominationSoundEffectsManagement ===")]
+        [SerializeField] private DominationSoundEffectsManagement m_dominationSoundEffectsManagement;
         [Header("=== ScriptSetting ===")]
         [SerializeField] private GameObject m_navigationText;
         [SerializeField] private AreaLocationPointType m_pointType = AreaLocationPointType.AreaLocationA;
@@ -30,6 +32,7 @@ namespace Takechi.GameManagerSystem.Domination
 
         #region private variable
         private DominationGameManagement gameManagement => m_dominationGameManagement;
+        private DominationSoundEffectsManagement soundEffectsManagement => m_dominationSoundEffectsManagement;
         private RoomStatusManagement roomStatusManagement => gameManagement.GetMyRoomStatusManagement();
         private GameObject navigationText => m_navigationText;
         private TextMesh   navigationTextTextMesh => m_navigationText.GetComponent<TextMesh>();
@@ -37,9 +40,11 @@ namespace Takechi.GameManagerSystem.Domination
 
         private Dictionary< int, Action<int>> m_storeActionDictionary = new Dictionary< int, Action<int>>();
 
+        public event Action RisingAreaPoints = delegate { };
+
         #endregion
 
-      
+
         #region Unity Event
         private void Reset()
         {
@@ -49,11 +54,17 @@ namespace Takechi.GameManagerSystem.Domination
 
         private void OnEnable()
         {
+            RisingAreaPoints += soundEffectsManagement.RisingPointsSound;
+            Debug.Log("RisingAreaPoints += soundEffectsManagement.<color=yellow>RisingPointsSound</color> <color=green> to add</color>.");
+
             StartCoroutine( uiRotation( navigationText));
         }
 
         private void Start()
         {
+            RisingAreaPoints += soundEffectsManagement.RisingPointsSound;
+            Debug.Log("RisingAreaPoints += soundEffectsManagement.<color=yellow>RisingPointsSound</color> <color=green> to add</color>.");
+
             setupOfStart();
         }
 
@@ -110,12 +121,12 @@ namespace Takechi.GameManagerSystem.Domination
 
                 if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamNameKey] == CharacterTeamStatusName.teamAName)
                 {
-                    //if ( hitTeamBMemberList.Count != 0) return;
+                    RisingAreaPoints();
                     m_storeActionDictionary[(int)m_pointType](1);
                 }
                 else
                 {
-                    //if ( hitTeamAMemberList.Count != 0) return;
+                    RisingAreaPoints();
                     m_storeActionDictionary[(int)m_pointType](-1);
                 }
             }

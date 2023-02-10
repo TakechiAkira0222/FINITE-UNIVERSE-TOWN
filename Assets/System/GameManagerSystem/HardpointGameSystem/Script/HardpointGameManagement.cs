@@ -234,7 +234,6 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void GameState_NULL()
         {
-          
             Debug.LogError(" Game state not set");
         }
 

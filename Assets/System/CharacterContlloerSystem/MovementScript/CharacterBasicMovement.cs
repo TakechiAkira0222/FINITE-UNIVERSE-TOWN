@@ -103,8 +103,9 @@ namespace Takechi.CharacterController.Movement
 
             m_movementVelocity = Vector3.zero;
 
-            m_characterStatusManagement.SetVelocity(velocityValue);
-
+            statusManagement.SetMovingScalar(m_movementSpeed);
+            statusManagement.SetMovingVector(velocityValue);
+            statusManagement.SetVelocity(velocityValue);
         }
 
         #endregion

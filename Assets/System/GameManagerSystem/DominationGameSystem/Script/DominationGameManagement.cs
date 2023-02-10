@@ -49,6 +49,7 @@ namespace Takechi.GameManagerSystem.Domination
         #endregion
 
         #region public event
+        public event Action RisingAreaPoints = delegate { };
         public event Action TeamAToVictory = delegate { };
         public event Action TeamBToVictory = delegate { };
 

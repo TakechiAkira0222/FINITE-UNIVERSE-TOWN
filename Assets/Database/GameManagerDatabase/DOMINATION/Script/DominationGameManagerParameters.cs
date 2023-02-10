@@ -19,6 +19,17 @@ namespace Takechi.GameManagerSystem.Domination
         [SerializeField, Range( 50, 150), Tooltip("endPerformanceTime")]  
         private int m_areaLocationMaxPoints = 100;
 
+        [SerializeField , Tooltip(" エリア　ポイント上昇 音")]
+        private AudioClip m_risingAreaPointsSoundClip;
+        [SerializeField, Range(0f, 1f)]
+        private float m_risingAreaPointsSoundClipVolume = 0.5f;
+
+        //[SerializeField, Tooltip("　チーム ポイント上昇 音")]
+        //private AudioClip m_risingTeamPointsSoundClip;
+        //[SerializeField, Range( 0f, 1f)]
+        //private float m_risingTeamPointsSoundClipVolume = 0.5f;
+
+
         #endregion
 
         #region GetStatusFunction
@@ -26,6 +37,11 @@ namespace Takechi.GameManagerSystem.Domination
         public int GetVictoryConditionPoints() { return m_victoryConditionPoints; }
         public int GetEndPerformanceTime_Seconds() { return m_endPerformanceTime_Seconds; }
         public int GetAreaLocationMaxPoints() { return m_areaLocationMaxPoints; }
+        public AudioClip GetRisingAreaPointsSoundClip() { return m_risingAreaPointsSoundClip; }
+        public float GetRisingAreaPointsSoundClipVolume() { return m_risingAreaPointsSoundClipVolume; }
+
+        //public AudioClip GetRisingTeamPointsSoundClip() { return m_risingTeamPointsSoundClip; }
+        //public float GetRisingTeamPointsSoundClipVolume() { return m_risingTeamPointsSoundClipVolume; }
 
         #endregion
     }

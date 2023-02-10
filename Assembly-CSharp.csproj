@@ -144,7 +144,7 @@
     <Compile Include="Assets\System\OneWayContactJudgmentSystem\OneWayContactJudgmentManager.cs" />
     <Compile Include="Assets\ScriptReferenceFolder\ReferencingObjectWithContactDetectionThePlayer.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\ColorCorrectionLookup.cs" />
-    <Compile Include="Assets\Database\GameManagerDatabase\DOMINATION\Script\DominationGameManagerParameters.cs" />
+    <Compile Include="Assets\Database\GameManagerDatabase\Domination\Script\DominationGameManagerParameters.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\Twirl.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSoundEffectsDatabase\Script\PlayableCharacterSoundEffectsDataBase.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
@@ -154,7 +154,7 @@
     <Compile Include="Assets\TakechiPunCallbacks\Callbaks\TakechiConnectToJoinRoomPunCallbaks.cs" />
     <Compile Include="Assets\System\CharacterAddressManagementSystem\MechanicalWarrior\MechanicalWarriorAddressManagement.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\SlimUI\Modern Menu 1\Scripts\ExtraLinks.cs" />
-    <Compile Include="Assets\Database\GameManagerDatabase\HARDPOINT\Script\HardpointGameManagerParameters.cs" />
+    <Compile Include="Assets\Database\GameManagerDatabase\Hardpoint\Script\HardpointGameManagerParameters.cs" />
     <Compile Include="Assets\Resource\InputAssetsFolder\SimpleSpinner\SimpleSpinner.cs" />
     <Compile Include="Assets\System\RaycastObjectDetectionSystem\BaseClass\RaycastObjectDetectionSystemInNetwork.cs" />
     <Compile Include="Assets\Database\PlayableCharacterSpecificParametersDataBase\MechanicalWarreior\Script\MechanicalWarreiorSpecificParameters.cs" />
@@ -267,6 +267,11 @@
     <Compile Include="Assets\Database\PlayableCharacterInformationDatabase\Script\PlayableCharacterInformation.cs" />
     <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\MechanicalWarrior\NetworkRenderer\MechanicalWarriorNetworkRendererThrowSmokeAnimationEventManager.cs" />
     <Compile Include="Assets\TakechiPunCallbacks\Voice\Sqript\GeneratePhotonVoiceControllerInstance.cs" />
+    <Compile Include="Assets\System\GameManagerSoundEffectsManagmetSystem\Domination\DominationSoundEffectsManagement.cs" />
+    <Compile Include="Assets\System\GameManagerSoundEffectsManagmetSystem\Hardpoint\HardpointSoundEffectsManagement.cs" />
+    <Compile Include="Assets\System\GameManagerSoundEffectsManagmetSystem\BaseClass\GameManagmentBasicSoundEffectsManagement.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\CommonClass\HandOnly\HandOnlyFootstepsAnimationEventManagement.cs" />
+    <Compile Include="Assets\System\CharacterAnimationEvenetContllorSystem\CommonClass\NetworkRenderer\NetworkRendererFootstepsAnimationEventManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resource\InputAssetsFolder\NVJOB Alpha Flashing UI\Example Scenes\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />

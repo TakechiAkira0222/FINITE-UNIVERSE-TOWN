@@ -29,17 +29,6 @@ public class AreaLocationPointManagemant : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (!PhotonNetwork.IsMasterClient) return;
-
-        //int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
-
-        //if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
-        //{
-        //    hitTeamAMemberList.Add(other.gameObject);
-        //}
-        //else
-        //{
-        //    hitTeamBMemberList.Add(other.gameObject);
-        //}
     }
 
     protected virtual void OnTriggerStay(Collider other)
@@ -50,22 +39,5 @@ public class AreaLocationPointManagemant : MonoBehaviour
     protected virtual void OnTriggerExit(Collider other)
     {
         if (!PhotonNetwork.IsMasterClient) return;
-
-        //int num = other.gameObject.transform.root.GetComponent<PhotonView>().ControllerActorNr;
-
-        //if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamKey] == CharacterTeamStatusName.teamAName)
-        //{
-        //    hitTeamAMemberList.Remove(other.gameObject);
-        //}
-        //else
-        //{
-        //    hitTeamBMemberList.Remove(other.gameObject);
-        //}
     }
-
-    //protected void resetMemberList()
-    //{
-    //    hitTeamAMemberList.Clear();
-    //    hitTeamBMemberList.Clear();
-    //}
 }

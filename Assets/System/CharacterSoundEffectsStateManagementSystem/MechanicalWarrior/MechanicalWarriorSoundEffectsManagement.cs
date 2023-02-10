@@ -3,9 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.SoundEffects;
-using Takechi.CharacterController.SpecificParameters.MechanicalWarreior;
 using Takechi.CharacterController.SpecificSoundEffects.MechanicalWarreior;
-using Takechi.CharacterController.SpecificSoundEffects.OfficeWorker;
 using UnityEngine;
 
 namespace Takechi.CharacterController.Parameters

@@ -32,6 +32,9 @@ namespace Takechi.CharacterController.SoundEffects
 
         #endregion
 
+        public AudioSource GetMainAudioSource() { return myMainAudioSource; }
+        public bool GetIsPlaying() { return myMainAudioSource.isPlaying; }
+
         void Reset()
         {
             m_characterKeyInputStateManagement = this.GetComponent<CharacterKeyInputStateManagement>();
@@ -54,6 +57,10 @@ namespace Takechi.CharacterController.SoundEffects
         public void PlayOneShotJumpSound()
         {
             myMainAudioSource.PlayOneShot( playableCharacterSoundEffects.GetJumpSoundClip() , playableCharacterSoundEffects.GetJumpSoundClipVolume());
+        }
+        public void PlayOneShotConcreteFootstepsSound()
+        {
+            myMainAudioSource.PlayOneShot(playableCharacterSoundEffects.GetConcreteFootstepsSoundClip(), playableCharacterSoundEffects.GetConcreteFootstesSoundClipVolume());
         }
 
         #endregion

@@ -1,8 +1,9 @@
 using Photon.Pun;
+using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.RoomStatus;
-using UnityEngine;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.GameManagerSystem.Hardpoint
@@ -12,6 +13,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #region SerializeField
         [Header("=== HardpointGameManagement ===")]
         [SerializeField] private HardpointGameManagement m_gameManagement;
+        [Header("=== HardpointSoundEffectsManagement ===")]
+        [SerializeField] private HardpointSoundEffectsManagement m_hardpointSoundEffectsManagement;
         [Header("=== ScriptSetting ===")]
         [SerializeField] private GameObject m_navigationText;
 
@@ -19,9 +22,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #region private variable
         private HardpointGameManagement gameManagement => m_gameManagement;
+        private HardpointSoundEffectsManagement soundEffectsManagement => m_hardpointSoundEffectsManagement;
         private RoomStatusManagement roomStatusManagement => gameManagement.GetMyRoomStatusManagement();
         private GameObject navigationText => m_navigationText;
         private bool localGameEnd => gameManagement.GetLocalGameEnd();
+
+        public event Action RisingTeamPoints = delegate { };
 
         #endregion
 
@@ -34,14 +40,14 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void OnEnable()
         {
-            StartCoroutine(uiRotation(navigationText));
-            //m_gameManagement.ChangePointIocation += resetMemberList;
-            //Debug.Log("HardpointAreaLocationPoint.ChangePointIocation += <color=yellow>restresetMemberList</color>");
+            StartCoroutine( uiRotation(navigationText));
+            RisingTeamPoints += soundEffectsManagement.RisingPointsSound;
+            Debug.Log("RisingTeamPoints += soundEffectsManagement.<color=yellow>RisingPointsSound</color> <color=green> to add</color>.");
         }
         private void OnDisable()
         {
-            //m_gameManagement.ChangePointIocation -= resetMemberList;
-            //Debug.Log("HardpointAreaLocationPoint.ChangePointIocation -= <color=yellow>restresetMemberList</color>");
+            RisingTeamPoints -= soundEffectsManagement.RisingPointsSound;
+            Debug.Log("RisingTeamPoints += soundEffectsManagement.<color=yellow>RisingPointsSound</color> <color=green> to remove</color>.");
         }
 
         protected override void OnTriggerStay(Collider other)
@@ -61,12 +67,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
                 if ((string)PhotonNetwork.LocalPlayer.Get(num).CustomProperties[CharacterStatusKey.teamNameKey] == CharacterTeamStatusName.teamAName)
                 {
-                    // if ( hitTeamBMemberList.Count != 0) return;
+                    RisingTeamPoints();
                     roomStatusManagement.UpdateTeamAPoint_hardPoint(1);
                 }
                 else
                 {
-                    // if ( hitTeamAMemberList.Count != 0) return;
+                    RisingTeamPoints();
                     roomStatusManagement.UpdateTeamBPoint_hardPoint(1);
                 }
             }

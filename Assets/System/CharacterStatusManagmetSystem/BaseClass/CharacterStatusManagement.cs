@@ -62,6 +62,14 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         protected float movingSpeed;
         /// <summary>
+        /// à⁄ìÆó 
+        /// </summary>
+        protected float movingScalar;
+        /// <summary>
+        /// à⁄ìÆÉxÉNÉgÉã
+        /// </summary>
+        protected Vector3 movingVector;
+        /// <summary>
         /// â°à⁄ìÆÇÃà⁄ìÆó  äÑçá
         /// </summary>
         protected float lateralMovementRatio;
@@ -164,6 +172,8 @@ namespace Takechi.CharacterController.Parameters
         private void setupCharacterParameters()
         {
             SetMovingSpeed( characterParameters.GetSpeed());
+            SetMovingScalar(0);
+            SetMovingVector(Vector3.zero);
             SetLateralMovementRatio( characterParameters.GetLateralMovementRatio());
             SetAttackPower( characterParameters.GetAttackPower());
             SetJumpPower(characterParameters.GetJumpPower());
@@ -178,6 +188,8 @@ namespace Takechi.CharacterController.Parameters
                       $"<color=blue> info</color>\n" +
                       $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
                       $" movingSpeed = {movingSpeed}\n" +
+                      $" movingScalar = {movingScalar}\n" +
+                      $" movingVector = {movingVector}\n" +
                       $" attackPower = {attackPower}\n" +
                       $" jumpPower = {jumpPower}\n" +
                       $" mass = {rb.mass}\n"+
@@ -221,6 +233,8 @@ namespace Takechi.CharacterController.Parameters
         public void SetCanUsecanUseAbility2_TimeCount_Seconds(float changeValue) { canUseAbility2_TimeCount_Seconds = changeValue; }
         public void SetCanUsecanUseAbility3_TimeCount_Seconds(float changeValue) { canUseAbility3_TimeCount_Seconds = changeValue; }
         public void SetMovingSpeed(float changeValue) { movingSpeed = changeValue; }
+        public void SetMovingScalar(float changeValue) { movingScalar = changeValue; }
+        public void SetMovingVector(Vector3 vec) { movingVector = vec; }
         public void SetLateralMovementRatio(float changeValue){ lateralMovementRatio = changeValue;}
         public void SetAttackPower(float changeValue) { attackPower = changeValue; }
         public void SetJumpPower(float changeValue) { jumpPower = changeValue; }
@@ -276,6 +290,8 @@ namespace Takechi.CharacterController.Parameters
         public float GetCanUseAbility3_TimeCount_Seconds() { return canUseAbility3_TimeCount_Seconds; }
         public float GetCanUseAbility3_RecoveryTime_Seconds() {return characterParameters.GetAbility3_RecoveryTime_Seconds(); }
         public float GetMovingSpeed() { return movingSpeed; }
+        public float GetMovingScalar() { return movingScalar; }
+        public Vector3 GetMovingVector() { return movingVector; }
         public float GetLateralMovementRatio() { return lateralMovementRatio; }
         public float GetAttackPower() { return attackPower; }
         public float GetJumpPower() { return jumpPower; }
