@@ -1,6 +1,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace Takechi.ScriptReference.DamagesThePlayerObject
@@ -18,12 +19,17 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
             /// </summary>
             public const string bulletsTagName = "PlayerCharacterBullets";
             /// <summary>
+            /// Player lazer TagName
+            /// </summary>
+            public const string lazerEffectTagName = "PlayerCharacterlazer";
+            /// <summary>
             /// DamageFromPlayerToPlayer all tag
             /// </summary>
-            public static string[] allTag = new string[2]
+            public static string[] allTag = new string[3]
             {
                 weaponTagName,
                 bulletsTagName,
+                lazerEffectTagName,
             };
         }
 

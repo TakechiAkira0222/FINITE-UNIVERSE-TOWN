@@ -35,7 +35,6 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         public void SlimeAttackStart()
         {
             attackEffect.SetActive(true);
-            Debug.Log("");
         }
 
         public void SlimeAttackEnd()

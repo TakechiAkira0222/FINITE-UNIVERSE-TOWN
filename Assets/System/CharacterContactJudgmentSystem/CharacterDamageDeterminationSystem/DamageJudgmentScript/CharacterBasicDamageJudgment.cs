@@ -88,6 +88,24 @@ namespace Takechi.CharacterController.DamageJudgment
             }
         }
 
+        private void OnParticleCollision(GameObject other)
+        {
+            if (!myPhotonView.IsMine) return;
+
+            if (other.tag == DamageFromPlayerToPlayer.lazerEffectTagName)
+            {
+                int number =
+                     other.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+
+                if (checkTeammember(number)) return;
+
+                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
+
+                statusManagement.UpdateMass(-power);
+                statusManagement.UpdateLocalPlayerCustomProrerties();
+            }
+        }
+
         /// <summary>
         /// knockBack
         /// </summary>
@@ -96,7 +114,7 @@ namespace Takechi.CharacterController.DamageJudgment
         {
             var impulse = (myRb.transform.position - collision.contacts[0].point).normalized;
 
-            myRb.AddForce( impulse * ( power * 1000), ForceMode.Impulse);
+            myRb.AddForce(impulse * (power * 1000), ForceMode.Impulse);
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
