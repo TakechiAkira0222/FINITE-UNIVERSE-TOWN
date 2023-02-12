@@ -9,7 +9,7 @@ using static Takechi.CharacterController.Information.PlayableCharacterInformatio
 namespace Takechi.CharacterController.Information
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "PlayableCharacterInformation", menuName = "PlayableCharacterInformation")]
+    [CreateAssetMenu(fileName = "PlayableCharacterInformation", menuName = "PlayableCharacterData/PlayableCharacterInformation")]
     public class PlayableCharacterInformation : ScriptableObject
     {
         public enum FeaturesOfCharacter

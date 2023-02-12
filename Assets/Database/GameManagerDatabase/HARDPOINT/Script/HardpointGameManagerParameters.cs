@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Takechi.GameManagerSystem.Hardpoint
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "HardpointGameManagerParameters", menuName = "HardpointGameManagerParameters")]
+    [CreateAssetMenu(fileName = "HardpointGameManagerParameters", menuName = "GameManagerData/HardpointGameManagerParameters")]
     public class HardpointGameManagerParameters : ScriptableObject
     {
         #region SerializeField

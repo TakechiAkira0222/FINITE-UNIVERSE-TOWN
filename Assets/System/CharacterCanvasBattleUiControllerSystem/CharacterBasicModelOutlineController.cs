@@ -50,7 +50,7 @@ namespace Takechi.NetworkInstantiation.OutlineController
             string team = statusManagement.GetCustomPropertiesTeamName(number);
 
             if (team == CharacterTeamStatusName.teamAName) { m_characterStatusManagement.SetModelOulineColor(m_myColor.ATeamColor); }
-            else { m_characterStatusManagement.SetModelOulineColor(m_myColor.BTeamColor); }
+            else { m_characterStatusManagement.SetModelOulineColor( m_myColor.BTeamColor); }
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-[CreateAssetMenu(fileName = "Item", menuName = "CreateItem")]
+[CreateAssetMenu(fileName = "Item", menuName = "ItemData/CreateItem")]
 public class Item : ScriptableObject
 {
     public enum TypeOfItem

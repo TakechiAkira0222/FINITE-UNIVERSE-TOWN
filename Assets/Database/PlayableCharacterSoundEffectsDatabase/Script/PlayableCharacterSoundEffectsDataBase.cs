@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Takechi.CharacterController.SoundEffects
 {
-    [CreateAssetMenu(fileName = "PlayableCharacterSoundEffectsDataBase", menuName = "PlayableCharacterSoundEffectsDataBase")]
+    [CreateAssetMenu(fileName = "PlayableCharacterSoundEffectsDataBase", menuName = "PlayableCharacterData/PlayableCharacterSoundEffectsDataBase")]
     public class PlayableCharacterSoundEffectsDataBase : ScriptableObject
     {
         [SerializeField]

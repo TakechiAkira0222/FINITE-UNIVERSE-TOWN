@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Takechi.CharacterController.Information
 {
-    [CreateAssetMenu(fileName = "PlayableCharacterInformationDataBase", menuName = "PlayableCharacterInformationDataBase")]
+    [CreateAssetMenu(fileName = "PlayableCharacterInformationDataBase", menuName = "PlayableCharacterData/PlayableCharacterInformationDataBase")]
     public class PlayableCharacterInformationDataBase : ScriptableObject
     {
         [SerializeField]

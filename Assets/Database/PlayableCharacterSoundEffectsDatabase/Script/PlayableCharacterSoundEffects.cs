@@ -6,7 +6,7 @@ using System;
 namespace Takechi.CharacterController.SoundEffects
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "PlayableCharacterSoundEffects", menuName = "PlayableCharacterSoundEffects")]
+    [CreateAssetMenu(fileName = "PlayableCharacterSoundEffects", menuName = "PlayableCharacterData/PlayableCharacterSoundEffects")]
     public class PlayableCharacterSoundEffects : ScriptableObject
     {
         #region SerializeField

@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace Takechi.CharacterController.Parameters
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "PlayableCharacterParameters", menuName = "PlayableCharacterParameters")]
+    [CreateAssetMenu(fileName = "PlayableCharacterParameters", menuName = "PlayableCharacterData/PlayableCharacterParameters")]
     public class PlayableCharacterParameters : ScriptableObject
     {
         #region SerializeField

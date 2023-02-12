@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Takechi.GameManagerSystem.Domination
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "DominationGameManagerParameters", menuName = "DominationGameManagerParameters")]
+    [CreateAssetMenu(fileName = "DominationGameManagerParameters", menuName = "GameManagerData/DominationGameManagerParameters")]
     public class DominationGameManagerParameters : ScriptableObject
     {
         #region SerializeField

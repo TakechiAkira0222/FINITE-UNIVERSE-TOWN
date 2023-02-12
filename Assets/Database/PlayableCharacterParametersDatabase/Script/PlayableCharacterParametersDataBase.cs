@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Takechi.CharacterController.Parameters
 {
-    [CreateAssetMenu(fileName = "PlayableCharacterParametersDataBase", menuName = "PlayableCharacterParametersDataBase")]
+    [CreateAssetMenu(fileName = "PlayableCharacterParametersDataBase", menuName = "PlayableCharacterData/PlayableCharacterParametersDataBase")]
     public class PlayableCharacterParametersDataBase : ScriptableObject
     {
         [SerializeField]
