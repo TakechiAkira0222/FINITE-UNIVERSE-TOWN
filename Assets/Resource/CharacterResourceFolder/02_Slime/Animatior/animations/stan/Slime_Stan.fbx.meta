@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 81c4fe76ddb8c314087afd9c59b831b3
+guid: 08a0ee10a8d761e41bf8bc9b832040d1
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -14,16 +14,16 @@ ModelImporter:
     second: Crown
   - first:
       1: 100006
-    second: EyeBall
+    second: //RootNode
   - first:
       1: 100008
-    second: EyeCTRL
+    second: EyeBall
   - first:
       1: 100010
-    second: Head
+    second: EyeCTRL
   - first:
       1: 100012
-    second: //RootNode
+    second: Head
   - first:
       1: 100014
     second: Side_L
@@ -50,16 +50,16 @@ ModelImporter:
     second: Crown
   - first:
       4: 400006
-    second: EyeBall
+    second: //RootNode
   - first:
       4: 400008
-    second: EyeCTRL
+    second: EyeBall
   - first:
       4: 400010
-    second: Head
+    second: EyeCTRL
   - first:
       4: 400012
-    second: //RootNode
+    second: Head
   - first:
       4: 400014
     second: Side_L
@@ -80,7 +80,7 @@ ModelImporter:
     second: Slime
   - first:
       74: 7400000
-    second: SenseSomethingST
+    second: Slime_Stan
   - first:
       95: 9500000
     second: //RootNode
@@ -116,18 +116,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SenseSomethingST
+      name: Slime_Stan
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 62
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -139,7 +139,28 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: SlimeStanStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9207373
+        functionName: SlimeStanEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6703704
+        functionName: SlimeStan
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

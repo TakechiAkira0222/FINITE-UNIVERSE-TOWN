@@ -7,11 +7,10 @@ using System;
 using System.Collections;
 
 using Takechi.CharacterController.Address;
+using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.ContactJudgment;
 
-using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
-using Takechi.CharacterController.Parameters;
 
 namespace Takechi.CharacterController.DamageJudgment
 {
@@ -29,6 +28,7 @@ namespace Takechi.CharacterController.DamageJudgment
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private Rigidbody  myRb => addressManagement.GetMyRigidbody();
+        private GameObject myAvater  => addressManagement.GetMyAvater();
         private GameObject attackHitEffct => addressManagement.GetAttackHitEffct();
         private string     attackHitsEffectFolderName => addressManagement.GetAttackHitsEffectFolderName();
 
@@ -38,12 +38,12 @@ namespace Takechi.CharacterController.DamageJudgment
         {
             if (!myPhotonView.IsMine) return;
 
-            if ( collision.gameObject.tag == DamageFromPlayerToPlayer.weaponTagName)
+            if ( collision.gameObject.tag == DamageFromPlayerToPlayer.ColliderTag.weaponTagName)
             {
                 int number = 
                     collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-                if (checkTeammember(number)) return;
+                if ( checkTeammember(number)) return;
 
                 float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
@@ -54,7 +54,7 @@ namespace Takechi.CharacterController.DamageJudgment
 
                 EffectInstantiation(collision.contacts[0].point);
             }
-            else if ( collision.gameObject.tag == DamageFromPlayerToPlayer.bulletsTagName)
+            else if ( collision.gameObject.tag == DamageFromPlayerToPlayer.ColliderTag.bulletsTagName)
             {
                 int number =
                    collision.transform.GetComponent<PhotonView>().ControllerActorNr;
@@ -87,12 +87,39 @@ namespace Takechi.CharacterController.DamageJudgment
                 }
             }
         }
+        private void OnTriggerEnter( Collider other)
+        {
+            if ( other.name == DamageFromPlayerToPlayer.ColliderName.slimeAblityTornadoColliderName)
+            {
+                int number =
+                     other.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+
+                if (checkTeammember(number)) return;
+
+                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
+
+                myRb.AddForce( myAvater.transform.up * ( power * 1000), ForceMode.Impulse);
+
+                statusManagement.UpdateMass(-power);
+                statusManagement.UpdateLocalPlayerCustomProrerties();
+            }
+
+            if (other.name == DamageFromPlayerToPlayer.ColliderName.slimeAblityStanColliderName)
+            {
+                int number =
+                     other.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+
+                if (checkTeammember(number)) return;
+
+                Debug.Log("stan èàóù");
+            }
+        }
 
         private void OnParticleCollision(GameObject other)
         {
             if (!myPhotonView.IsMine) return;
 
-            if (other.tag == DamageFromPlayerToPlayer.lazerEffectTagName)
+            if (other.tag == DamageFromPlayerToPlayer.ColliderTag.lazerEffectTagName)
             {
                 int number =
                      other.transform.root.GetComponent<PhotonView>().ControllerActorNr;

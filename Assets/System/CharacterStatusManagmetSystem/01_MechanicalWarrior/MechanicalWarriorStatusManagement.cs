@@ -25,9 +25,9 @@ namespace Takechi.CharacterController.Parameters
         {
             base.Awake();
 
-            if (!base.thisPhotonView.IsMine) return;
-
             SetupMechanicalWarreiorSpecificParameters();
+         
+            if (!base.thisPhotonView.IsMine) return;
         }
 
       
@@ -37,10 +37,10 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private void SetupMechanicalWarreiorSpecificParameters()
         {
-            SetNormalShootingForce( m_mechanicalWarreiorSpecificParameters.GetNormalShootingForce());
-            SetNormalDurationOfBullet( m_mechanicalWarreiorSpecificParameters.GetNormalDurationOfBullet());
-            SetDeathblowShootingForce( m_mechanicalWarreiorSpecificParameters.GetDeathblowShootingForce());
-            SetDeathblowDurationOfBullet( m_mechanicalWarreiorSpecificParameters.GetDeathblowDurationOfBullet());
+            SetNormalShootingForce(m_mechanicalWarreiorSpecificParameters.GetNormalShootingForce());
+            SetNormalDurationOfBullet(m_mechanicalWarreiorSpecificParameters.GetNormalDurationOfBullet());
+            SetDeathblowShootingForce(m_mechanicalWarreiorSpecificParameters.GetDeathblowShootingForce());
+            SetDeathblowDurationOfBullet(m_mechanicalWarreiorSpecificParameters.GetDeathblowDurationOfBullet());
             SetEnemySearch_Seconds(m_mechanicalWarreiorSpecificParameters.GetEnemySearch_Seconds());
             SetWallDuration_Seconds(m_mechanicalWarreiorSpecificParameters.GetWallDuration_Seconds());
             SetSmokeDuration_Seconds(m_mechanicalWarreiorSpecificParameters.GetSmokeDuration_Seconds());

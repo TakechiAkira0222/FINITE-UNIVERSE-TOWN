@@ -15,7 +15,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         [Header("=== SlimeAddressManagement === ")]
         [SerializeField] private SlimeAddressManagement m_slimeAddressManagement;
         [Header("=== SlimeStatusManagement ===")]
-        [SerializeField] private SlimeStatusManagement m_slimeStatusManagement;
+        [SerializeField] private SlimeStatusManagement  m_slimeStatusManagement;
         [Header("=== OfficeWorkerSoundEffectsManagement ===")]
         [SerializeField] private SlimeSoundEffectsManagement m_slimeSoundEffectsManagement;
 
@@ -27,8 +27,6 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private SlimeSoundEffectsManagement soundEffectsManagement => m_slimeSoundEffectsManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private GameObject attackEffect => addressManagement.GetAttackLaserEffectObject();
-        //private GameObject bulletsInstans => addressManagement.GetNormalBulletsInstans();
-        //private Transform magazineTransfrom => addressManagement.GetMagazineTransfrom();
 
         #endregion
 

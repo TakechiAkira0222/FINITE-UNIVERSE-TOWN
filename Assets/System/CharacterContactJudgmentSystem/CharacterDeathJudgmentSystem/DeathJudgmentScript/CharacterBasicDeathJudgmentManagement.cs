@@ -42,8 +42,8 @@ namespace Takechi.CharacterController.DeathJudgment
         private GameObject networkModelObject  => addressManagement.GetNetworkModelObject();
         private GameObject deathEffect => addressManagement.GetDeathEffect();
         private string deathEffectFolderName => addressManagement.GetDeathEffectFolderName();
-        private string antiFieldTagName => DeathToPlayer.antiFieldTagName;
-        private string mechanicalWarriorDeathblowBulletsTagName => DeathToPlayer.MechanicalWarriorDeathblowBulletsTagName;
+        private string antiFieldTagName => DeathToPlayer.ColliderTag.antiFieldTagName;
+        private string mechanicalWarriorDeathblowBulletsColliderName => DeathToPlayer.ColliderName.mechanicalWarriorDeathblowBulletsColliderName;
 
         #endregion
 
@@ -75,15 +75,15 @@ namespace Takechi.CharacterController.DeathJudgment
                     thisPhotoView.RPC(nameof(RPC_StartOfDeathJudgment), RpcTarget.AllBufferedViaServer);
 
                     StartCoroutine(DelayMethod(statusManagement.GetRespawnTime_Seconds(),
-                        () => thisPhotoView.RPC(nameof(RPC_EndOfDeathJudgment), RpcTarget.AllBufferedViaServer, m_respawnPointAName)));
+                        () => thisPhotoView.RPC(nameof(RPC_EndOfDeathJudgment), RpcTarget.AllBufferedViaServer, m_respawnPointBName)));
                 }
             }
         }
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter( Collider other)
         {
             if (!myPhotonView.IsMine) return;
 
-            if ( other.gameObject.tag == mechanicalWarriorDeathblowBulletsTagName)
+            if ( other.gameObject.name == mechanicalWarriorDeathblowBulletsColliderName)
             {
                 int number =
                   other.transform.GetComponent<PhotonView>().ControllerActorNr;
@@ -92,7 +92,7 @@ namespace Takechi.CharacterController.DeathJudgment
 
                 float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
-                if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                if ( statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     EffectInstantiation(other.ClosestPoint(other.transform.position));
 
@@ -158,7 +158,7 @@ namespace Takechi.CharacterController.DeathJudgment
 
         #region recursive function
         /// <summary>
-        /// Effect のInstantiate を行います。
+        /// Effect の Instantiate を行います。
         /// </summary>
         /// <param name="point"></param>
         private void EffectInstantiation( Vector3 point)

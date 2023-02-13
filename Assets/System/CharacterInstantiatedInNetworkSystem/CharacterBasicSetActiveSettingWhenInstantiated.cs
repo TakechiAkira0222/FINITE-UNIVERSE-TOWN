@@ -12,7 +12,7 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
         [Header("=== CharacterAddressManagement === ")]
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+        [SerializeField] private CharacterStatusManagement  m_characterStatusManagement;
 
         [Header("=== ScriptSetting ===")]
         /// <summary>
@@ -34,6 +34,7 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
 
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private GameObject handOnlyModel => addressManagement.GetHandOnlyModelObject();
 
         #endregion
 
@@ -79,6 +80,8 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
                 {
                    obj.SetActive(obj.activeSelf == false ? true : false);
                 }
+
+                handOnlyModel.SetActive(handOnlyModel.activeSelf == false ? true : false);
             }
 #endif
         }

@@ -132,7 +132,7 @@ namespace Takechi.CharacterController.Parameters
 
         #endregion
 
-        #region event Action 
+        #region event action
         /// <summary>
         /// status setup complete action
         /// </summary>
@@ -155,9 +155,9 @@ namespace Takechi.CharacterController.Parameters
         #region unity event
         protected virtual void Awake()
         {
-            if (!thisPhotonView.IsMine) return;
-
             setupCharacterParameters();
+
+            if (!thisPhotonView.IsMine) return;
 
             setupLocalPlayerCustomProperties();
         }
@@ -171,13 +171,13 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private void setupCharacterParameters()
         {
-            SetMovingSpeed( characterParameters.GetSpeed());
+            SetMovingSpeed(characterParameters.GetSpeed());
             SetMovingScalar(0);
             SetMovingVector(Vector3.zero);
-            SetLateralMovementRatio( characterParameters.GetLateralMovementRatio());
-            SetAttackPower( characterParameters.GetAttackPower());
+            SetLateralMovementRatio(characterParameters.GetLateralMovementRatio());
+            SetAttackPower(characterParameters.GetAttackPower());
             SetJumpPower(characterParameters.GetJumpPower());
-            SetMass( characterParameters.GetCleanMass());
+            SetMass(characterParameters.GetCleanMass());
             SetRespawnTime_Seconds( characterParameters.GetRespawnTime_Seconds());
             SetCanUseDeathblow(false);
             SetCanUseAbility1(false); 

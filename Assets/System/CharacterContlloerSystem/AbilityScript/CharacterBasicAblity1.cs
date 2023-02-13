@@ -24,7 +24,7 @@ namespace Takechi.CharacterController.Ablity1
         #endregion
 
         #region protected
-        protected CharacterStatusManagement statusManagement => m_characterStatusManagement;
+        protected CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
         protected CharacterKeyInputStateManagement characterKeyInputStateManagement => m_characterKeyInputStateManagement;
 

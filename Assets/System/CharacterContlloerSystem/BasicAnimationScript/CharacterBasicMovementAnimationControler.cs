@@ -272,27 +272,32 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
             if (!m_interfere) return;
             if (!myPhotonView.IsMine) return;
 
-            if (collision.gameObject.tag == DamageFromPlayerToPlayer.weaponTagName)
+            foreach(string tag in DamageFromPlayerToPlayer.ColliderTag.allTag)
             {
-                int number =
-                    collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
+                if (collision.gameObject.tag == tag)
+                {
+                    int number =
+                        collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-                if (checkTeammember(number)) return;
+                    if (checkTeammember(number)) return;
 
-                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
-
-                thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+                    float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
+                    thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+                }
             }
-            else if (collision.gameObject.tag == DamageFromPlayerToPlayer.bulletsTagName)
+
+            foreach (string name in DamageFromPlayerToPlayer.ColliderName.allName)
             {
-                int number =
-                    collision.transform.GetComponent<PhotonView>().ControllerActorNr;
+                if (collision.gameObject.name == name)
+                {
+                    int number =
+                        collision.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-                if (checkTeammember(number)) return;
+                    if (checkTeammember(number)) return;
 
-                float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
-
-                thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+                    float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
+                    thisPhotnView.RPC(nameof(RPC_DamageAnimationSetFloat), RpcTarget.AllBufferedViaServer, power);
+                }
             }
 
             foreach (string s in DamageFromObjectToPlayer.objectNameList)

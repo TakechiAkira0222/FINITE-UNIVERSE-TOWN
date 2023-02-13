@@ -10,49 +10,85 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
     {
         public static class DamageFromPlayerToPlayer
         {
-            /// <summary>
-            /// Player Weapon TagName
-            /// </summary>
-            public const string weaponTagName = "PlayerCharacterWeapon";
-            /// <summary>
-            /// Player Bullets TagName
-            /// </summary>
-            public const string bulletsTagName = "PlayerCharacterBullets";
-            /// <summary>
-            /// Player lazer TagName
-            /// </summary>
-            public const string lazerEffectTagName = "PlayerCharacterlazer";
-            /// <summary>
-            /// DamageFromPlayerToPlayer all tag
-            /// </summary>
-            public static string[] allTag = new string[3]
+            public class ColliderTag
             {
-                weaponTagName,
-                bulletsTagName,
-                lazerEffectTagName,
-            };
+                /// <summary>
+                /// Player Weapon ColliderTagName
+                /// </summary>
+                public const string weaponTagName = "PlayerCharacterWeapon";
+                /// <summary>
+                /// Player Bullets ColliderTagName
+                /// </summary>
+                public const string bulletsTagName = "PlayerCharacterBullets";
+                /// <summary>
+                /// Player lazer ColliderTagName
+                /// </summary>
+                public const string lazerEffectTagName = "PlayerCharacterLazer";
+                /// <summary>
+                /// DamageFromPlayerToPlayer all ColliderTag
+                /// </summary>
+                public static string[] allTag = new string[3]
+                {
+                   weaponTagName,
+                   bulletsTagName,
+                   lazerEffectTagName,
+                };
+            }
+
+            public class ColliderName
+            {
+                /// <summary>
+                /// Player Tornado ColliderName
+                /// </summary>
+                public const string slimeAblityTornadoColliderName = "SliemAblity1TornadoEffect";
+                /// <summary>
+                /// Player Stan ColliderName
+                /// </summary>
+                public const string slimeAblityStanColliderName = "SliemAblity2Stan2Effect";
+                /// <summary>
+                /// DamageFromPlayerToPlayer all ColliderName
+                /// </summary>
+                public static string[] allName = new string[2]
+                {
+                   slimeAblityTornadoColliderName,
+                   slimeAblityStanColliderName,
+                };
+            }
         }
 
         public static class DeathToPlayer
         {
-            /// <summary>
-            /// AntiField Object Tag
-            /// </summary>
-            public const string antiFieldTagName = "AntiField";
-
-            /// <summary>
-            /// 
-            /// </summary>
-            public const string MechanicalWarriorDeathblowBulletsTagName = "MechanicalWarriorDeathblowBullets";
-
-            /// <summary>
-            /// deathToPlayer all tag
-            /// </summary>
-            public static string[] allTag = new string[2]
+            public class ColliderTag
             {
+                /// <summary>
+                /// AntiField Object Tag
+                /// </summary>
+                public const string antiFieldTagName = "AntiField";
+
+                /// <summary>
+                /// deathToPlayer all tag
+                /// </summary>
+                public static string[] allTag = new string[1]
+                {
                 antiFieldTagName,
-                MechanicalWarriorDeathblowBulletsTagName,
-            };
+                };
+            }
+
+            public class ColliderName
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public const string mechanicalWarriorDeathblowBulletsColliderName = "MechanicalWarriorDeathblowBullets(Clone)";
+
+                /// <summary>
+                /// deathToPlayer all naem
+                /// </summary>
+                public static string[] allnaem = new string[1]
+                {
+                mechanicalWarriorDeathblowBulletsColliderName,
+                };
+            }
         }
 
         public static class DamageFromObjectToPlayer

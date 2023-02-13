@@ -88,7 +88,6 @@ namespace Takechi.CharacterController.ThrowSmokeAnimationEvent
 
             instans.GetComponent<Rigidbody>().AddForce((throwTransform.forward + (throwTransform.up / 10)) * force, ForceMode.Impulse);
 
-            if (!isMine) return;
             StartCoroutine(DelayMethod( smokeDuration_Seconds, () => { PhotonNetwork.Destroy(instans); }));
         }
 

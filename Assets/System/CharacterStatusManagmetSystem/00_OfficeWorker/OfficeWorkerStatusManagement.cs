@@ -48,9 +48,9 @@ namespace Takechi.CharacterController.Parameters
         {
             base.Awake();
 
-            if (!base.thisPhotonView.IsMine) return;
-
             SetupOfficeWorkerSpecificParameters();
+
+            if (!base.thisPhotonView.IsMine) return;
         }
 
         #region set up function
