@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.Address;
+using Takechi.CharacterController.AnimationEvent;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.SoundEffects;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Takechi.CharacterController.AttackAnimationEvent
 {
-    public class SlimeHandOnlyAttackAnimationEventManager : MonoBehaviour
+    public class SlimeHandOnlyAttackAnimationEventManager : AnimationEventManagement
     {
         #region SerializeField
         [Header("=== SlimeAddressManagement === ")]
@@ -26,18 +27,28 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private SlimeStatusManagement  statusManagement => m_slimeStatusManagement;
         private SlimeSoundEffectsManagement soundEffectsManagement => m_slimeSoundEffectsManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
-        private GameObject attackEffect => addressManagement.GetAttackLaserEffectObject();
+        private Transform  attackLaserPointTransfrom => addressManagement.GetAttackLaserPointTransfrom();
+        private string     attackEffectPath => addressManagement.GetAttackLaserEffectPath();
+        private GameObject attackEffectInstans => addressManagement.GetAttackLaserEffectInstans();
+        private bool isMine => myPhotonView.IsMine;
 
+        private GameObject attackLaserGameObject;
         #endregion
 
         public void SlimeAttackStart()
         {
-            attackEffect.SetActive(true);
+            if (!isMine) return;
+            attackLaserGameObject = Shooting( attackLaserPointTransfrom);
         }
 
         public void SlimeAttackEnd()
         {
-            attackEffect.SetActive(false);
+            if (!isMine) return;
+            PhotonNetwork.Destroy(attackLaserGameObject);
         }
+
+        #region Recursive function
+        private GameObject Shooting(Transform laserPoint) { return PhotonNetwork.Instantiate(attackEffectPath + attackEffectInstans.name, laserPoint.position, laserPoint.rotation); }
+        #endregion
     }
 }

@@ -11,28 +11,56 @@ using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.ContactJudgment;
 
 using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
+using Takechi.CharacterController.Reference;
+using Takechi.CharacterController.KeyInputStete;
 
 namespace Takechi.CharacterController.DamageJudgment
 {
+    [RequireComponent(typeof(PhotonView))]
     public class CharacterBasicDamageJudgment : ContactJudgmentManagement
     {
         #region SerializeField
         [Header("=== CharacterAddressManagement === ")]
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
         [Header("=== CharacterStatusManagement ===")]
-        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
+        [SerializeField] private CharacterStatusManagement  m_characterStatusManagement;
+        [Header("=== CharacterKeyInputStateManagement ===")]
+        [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
+        [Header("=== Script Setting ===")]
+        [SerializeField] private PhotonView m_thisPhotnView;
         #endregion
 
         #region private variable
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
+        private CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
+        private PhotonView thisPhotonView => m_thisPhotnView;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private Rigidbody  myRb => addressManagement.GetMyRigidbody();
         private GameObject myAvater  => addressManagement.GetMyAvater();
         private GameObject attackHitEffct => addressManagement.GetAttackHitEffct();
         private string     attackHitsEffectFolderName => addressManagement.GetAttackHitsEffectFolderName();
 
+        private bool isStan = false;
+
         #endregion
+
+        private void Reset()
+        {
+            m_thisPhotnView = this.GetComponent<PhotonView>();
+        }
+
+        private void OnEnable()
+        {
+            statusManagement.InitializeCharacterInstanceStateSettings += () => { resetStanState(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetStanState</color>() <color=green>to add.</color>");
+        }
+
+        private void OnDisable()
+        {
+            statusManagement.InitializeCharacterInstanceStateSettings -= () => { resetStanState(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetStanState</color>() <color=green>to remove.</color>");
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -52,7 +80,7 @@ namespace Takechi.CharacterController.DamageJudgment
 
                 StartCoroutine(KnockBack(collision, power));
 
-                EffectInstantiation(collision.contacts[0].point);
+                AttackHitsEffectInstantiation(collision.contacts[0].point);
             }
             else if ( collision.gameObject.tag == DamageFromPlayerToPlayer.ColliderTag.bulletsTagName)
             {
@@ -68,7 +96,7 @@ namespace Takechi.CharacterController.DamageJudgment
 
                 StartCoroutine(KnockBack(collision, power));
 
-                EffectInstantiation(collision.contacts[0].point);
+                AttackHitsEffectInstantiation(collision.contacts[0].point);
             }
 
             foreach (string s in DamageFromObjectToPlayer.objectNameList)
@@ -83,12 +111,14 @@ namespace Takechi.CharacterController.DamageJudgment
 
                     StartCoroutine(KnockBack(collision, power));
 
-                    EffectInstantiation(collision.contacts[0].point);
+                    AttackHitsEffectInstantiation(collision.contacts[0].point);
                 }
             }
         }
         private void OnTriggerEnter( Collider other)
         {
+            if (!myPhotonView.IsMine) return;
+
             if ( other.name == DamageFromPlayerToPlayer.ColliderName.slimeAblityTornadoColliderName)
             {
                 int number =
@@ -106,12 +136,27 @@ namespace Takechi.CharacterController.DamageJudgment
 
             if (other.name == DamageFromPlayerToPlayer.ColliderName.slimeAblityStanColliderName)
             {
+                if (isStan) return;
+
                 int number =
                      other.transform.root.GetComponent<PhotonView>().ControllerActorNr;
 
-                if (checkTeammember(number)) return;
+                if ( checkTeammember(number)) return;
 
-                Debug.Log("stan èàóù");
+                int stanTime = other.transform.root.GetComponent<SlimeStatusManagement>().GetStanDsuration_Seconds();
+
+                isStan = true;
+                keyInputStateManagement.SetIsStan(true);
+                addressManagement.GetStanMenu().SetActive(true);
+                thisPhotonView.RPC(nameof(RPC_StanEffectSync), RpcTarget.AllBufferedViaServer, true);
+
+                StartCoroutine(DelayMethod( stanTime , ()=> 
+                {
+                    isStan = false;
+                    keyInputStateManagement.SetIsStan(false);
+                    addressManagement.GetStanMenu().SetActive(false);
+                    thisPhotonView.RPC(nameof(RPC_StanEffectSync), RpcTarget.AllBufferedViaServer, false);
+                }));
             }
         }
 
@@ -146,13 +191,30 @@ namespace Takechi.CharacterController.DamageJudgment
         }
 
         /// <summary>
-        /// 
+        ///  attack Hits Effect instantiate
         /// </summary>
         /// <param name="collision"></param>
-        private void EffectInstantiation( Vector3 point)
+        private void AttackHitsEffectInstantiation( Vector3 point)
         {
             GameObject effct = PhotonNetwork.Instantiate(attackHitsEffectFolderName + attackHitEffct.name, point, Quaternion.identity);
             StartCoroutine(DelayMethod( 0.1f, () => { PhotonNetwork.Destroy(effct); }));
+        }
+
+        [PunRPC]
+        private void RPC_StanEffectSync(bool flag)
+        {
+            addressManagement.GetStanEffect().SetActive(flag);
+        }
+
+        /// <summary>
+        /// stanState reset
+        /// </summary>
+        private void resetStanState()
+        {
+            isStan = false;
+            keyInputStateManagement.SetIsStan(false);
+            addressManagement.GetStanMenu().SetActive(false);
+            thisPhotonView.RPC(nameof(RPC_StanEffectSync), RpcTarget.AllBufferedViaServer, false);
         }
     }
 }

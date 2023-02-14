@@ -11,6 +11,7 @@ using Takechi.CharacterController.Address;
 using Takechi.CharacterController.AnimationEvent;
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
 using UnityEngine.Rendering;
+using System.Data.SqlClient;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
 {
@@ -45,20 +46,14 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
         private void OnEnable()
         {
-            statusManagement.InitializeEffectSettings += () =>
-            {
-                deathblowAreaEffect.SetActive(false);
-                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCameraSettings deathblowAreaEffect.<color=yellow>SetActive</color>(<blue=color>false</color>)() <color=green>to add.</color>");
-            };
+            statusManagement.InitializeCharacterInstanceStateSettings += () => { resetOfficeWorkerDeathblowState(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetOfficeWorkerDeathblowState</color>() <color=green>to add.</color>");
         }
 
         private void OnDisable()
         {
-            statusManagement.InitializeEffectSettings -= () =>
-            {
-                deathblowAreaEffect.SetActive(false);
-                Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCameraSettings deathblowAreaEffect.<color=yellow>SetActive</color>(<blue=color>false</color>)() <color=green>to remove.</color>");
-            };
+            statusManagement.InitializeCharacterInstanceStateSettings -= () => { resetOfficeWorkerDeathblowState(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetOfficeWorkerDeathblowState</color>() <color=green>to remove.</color>");
         }
 
         #region UnityAnimatorEvent
@@ -175,6 +170,13 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
             // playableDirector
             myAvatarPlayableDirector.Play();
+        }
+        /// <summary>
+        /// ïKéEãZèÛë‘ÇÃèâä˙âª
+        /// </summary>
+        private void resetOfficeWorkerDeathblowState()
+        {
+            deathblowAreaEffect.SetActive(false);
         }
 
         #endregion

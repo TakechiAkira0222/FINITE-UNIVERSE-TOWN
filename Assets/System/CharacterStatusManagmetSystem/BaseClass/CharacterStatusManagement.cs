@@ -146,10 +146,9 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         public event Action InitializeCameraSettings = delegate { };
         /// <summary>
-        /// Initialize effect setting
+        /// initialize character instance settings
         /// </summary>
-        public event Action InitializeEffectSettings = delegate { };
-
+        public event Action InitializeCharacterInstanceStateSettings = delegate { };
         #endregion
 
         #region unity event
@@ -432,7 +431,7 @@ namespace Takechi.CharacterController.Parameters
         public virtual void ResetCharacterInstanceState()
         {
             InitializeCameraSettings();
-            InitializeEffectSettings();
+            InitializeCharacterInstanceStateSettings();
         }
 
         /// <summary>
@@ -441,14 +440,6 @@ namespace Takechi.CharacterController.Parameters
         public void ResetCameraSettings()
         {
             InitializeCameraSettings();
-        }
-
-        /// <summary>
-        /// Character Instans のエフェクトの状態を、初期化します。
-        /// </summary>
-        public void ResetEffectSettings()
-        {
-            InitializeEffectSettings();
         }
 
         #endregion

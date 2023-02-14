@@ -67,6 +67,10 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private GameObject m_handOnlyModelObject;
         /// <summary>
+        /// hand only model material
+        /// </summary>
+        [SerializeField] private Renderer   m_handOnlyModelRenderer;
+        /// <summary>
         /// network model animator
         /// </summary>
         [SerializeField] private Animator   m_networkModelAnimator;
@@ -74,6 +78,10 @@ namespace Takechi.CharacterController.Address
         /// network model object
         /// </summary>
         [SerializeField] private GameObject m_networkModelObject;
+        /// <summary>
+        /// network model material
+        /// </summary>
+        [SerializeField] private Renderer   m_networkModelRenderer;
         /// <summary>
         /// model Outline
         /// </summary>
@@ -87,6 +95,10 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private GameObject m_battleUiMenu;
         /// <summary>
+        /// stan Menu
+        /// </summary>
+        [SerializeField] private GameObject m_stanMenu;
+        /// <summary>
         /// user ui Menu
         /// </summary>
         [SerializeField] private GameObject m_userUiMenu;
@@ -94,6 +106,10 @@ namespace Takechi.CharacterController.Address
         /// reticle Canvas
         /// </summary>
         [SerializeField] private Canvas m_reticleCanvas;
+        /// <summary>
+        /// display to thers cnavas
+        /// </summary>
+        [SerializeField] private Canvas m_displayToOthersCanvas;
         /// <summary>
         /// attackHits effect folder name
         /// </summary>
@@ -110,6 +126,10 @@ namespace Takechi.CharacterController.Address
         /// death Effect
         /// </summary>
         [SerializeField] private GameObject m_deathEffect;
+        /// <summary>
+        /// stan effect
+        /// </summary>
+        [SerializeField] private GameObject m_stanEffect;
 
         #endregion
 
@@ -126,85 +146,34 @@ namespace Takechi.CharacterController.Address
 
         #endregion
 
-        #region protected variable 
-        /// <summary>
-        /// this roomStatus management
-        /// </summary>
-        protected RoomStatusManagement thisRoomStatusManagement => m_thisRoomStatusManagement;
-        /// <summary>
-        /// this photonViwe
-        /// </summary>
-        protected PhotonView thisPhotonView => m_thisPhotonView;
-        /// <summary>
-        /// main avater
-        /// </summary>
-        protected GameObject avater => m_avater;
-        /// <summary>
-        /// main colloder
-        /// </summary>
-        protected Collider mainCollider => m_mainCollider;
-        /// <summary>
-        /// main rb
-        /// </summary>
-        protected Rigidbody rb => m_rb;
-        /// <summary>
-        /// main camera
-        /// </summary>
-        protected Camera mainCamera => m_mainCamera;
-        /// <summary>
-        /// death Camera
-        /// </summary>
-        protected Camera deathCamera => m_deathCamera;
-        /// <summary>
-        /// hand only animetor
-        /// </summary>
-        protected Animator handOnlyModelAnimator => m_handOnlyModelAnimator;
-        /// <summary>
-        /// hand only Model object
-        /// </summary>
-        protected GameObject handOnlyModelObject => m_handOnlyModelObject;
-        /// <summary>
-        /// network model animator
-        /// </summary>
-        protected Animator networkModelAnimator => m_networkModelAnimator;
-        /// <summary>
-        /// network model object
-        /// </summary>
-        protected GameObject networkModelObject => m_networkModelObject;
-        /// <summary>
-        /// model Outline
-        /// </summary>
-        protected Outline modelOutline => m_modelOutline;
-        /// <summary>
-        /// to Fade
-        /// </summary>
-        protected ToFade toFade => m_toFade;
-
-        #endregion
-
         #region Get function
-        public PlayableCharacterParameters GetCharacterParameters() { return characterParameters; }
-        public PlayableCharacterInformation GetCharacterInformation() { return characterInformation; }
-        public RoomStatusManagement GetMyRoomStatusManagement() { return thisRoomStatusManagement;}
-        public PhotonView  GetMyPhotonView() { return thisPhotonView; }
-        public Rigidbody   GetMyRigidbody() { return rb; }
-        public AudioSource GetMyMainAudioSource() { return m_mainAudioSource; }
-        public PlayableDirector GetMyAvatarPlayableDirector() { return m_myAvatarPlayableDirector; }
-        public Collider   GetMyCollider() { return mainCollider; }
-        public GameObject GetMyAvater() { return avater; }
-        public Camera GetMyMainCamera() { return mainCamera; }
-        public Camera GetMyDeathCamera() { return m_deathCamera; }
-        public Animator   GetHandOnlyModelAnimator() { return handOnlyModelAnimator; }
-        public GameObject GetHandOnlyModelObject() { return handOnlyModelObject; }
-        public Animator   GetNetworkModelAnimator() { return networkModelAnimator; }
-        public GameObject GetNetworkModelObject() { return networkModelObject; }
-        public Outline GetMyOuline() { return modelOutline; }
-        public ToFade  GetToFade() { return m_toFade; }
-        public GameObject GetBattleUiMenu() { return m_battleUiMenu; }
-        public GameObject GetUserUiMenu() { return m_userUiMenu;} 
-        public Canvas     GetReticleCanvas() { return m_reticleCanvas;}
-        public GameObject GetDeathEffect() { return m_deathEffect; }
-        public GameObject GetAttackHitEffct() { return m_attackHitEffct; }
+        public PlayableCharacterParameters GetCharacterParameters() => characterParameters; 
+        public PlayableCharacterInformation GetCharacterInformation() => characterInformation; 
+        public RoomStatusManagement GetMyRoomStatusManagement() => m_thisRoomStatusManagement;
+        public PhotonView  GetMyPhotonView() => m_thisPhotonView;
+        public Rigidbody   GetMyRigidbody() => m_rb;
+        public AudioSource GetMyMainAudioSource() => m_mainAudioSource;
+        public PlayableDirector GetMyAvatarPlayableDirector() => m_myAvatarPlayableDirector;
+        public Collider   GetMyCollider() => m_mainCollider;
+        public GameObject GetMyAvater() => m_avater;
+        public Camera     GetMyMainCamera() => m_mainCamera;
+        public Camera     GetMyDeathCamera() => m_deathCamera;
+        public Animator   GetHandOnlyModelAnimator() => m_handOnlyModelAnimator;
+        public GameObject GetHandOnlyModelObject() => m_handOnlyModelObject;
+        public Renderer   GetHandOnlyModelRenderer() => m_handOnlyModelRenderer;
+        public Animator   GetNetworkModelAnimator() => m_networkModelAnimator;
+        public GameObject GetNetworkModelObject () => m_networkModelObject;
+        public Renderer   GetNetworkModelRenderer() => m_handOnlyModelRenderer;
+        public Outline    GetMyOuline() => m_modelOutline; 
+        public ToFade     GetToFade() => m_toFade; 
+        public GameObject GetBattleUiMenu() => m_battleUiMenu;
+        public GameObject GetStanMenu() => m_stanMenu;
+        public GameObject GetUserUiMenu() => m_userUiMenu;
+        public Canvas     GetReticleCanvas() => m_reticleCanvas;
+        public Canvas     GetDisplayToOthersCanvas() => m_displayToOthersCanvas;
+        public GameObject GetDeathEffect() => m_deathEffect;
+        public GameObject GetStanEffect() =>  m_stanEffect;
+        public GameObject GetAttackHitEffct() => m_attackHitEffct; 
         public string GetAttackHitsEffectFolderName()
         {
             string path = "";

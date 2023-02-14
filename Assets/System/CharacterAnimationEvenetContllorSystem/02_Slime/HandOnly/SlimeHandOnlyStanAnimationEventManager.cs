@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Takechi.CharacterController.AnimationEvent
 {
-    public class SlimeHandOnlyStanAnimationEventManager : TakechiPunCallbacks
+    public class SlimeHandOnlyStanAnimationEventManager : AnimationEventManagement
     {
         #region SerializeField
         [Header("=== SlimeAddressManagement === ")]
@@ -35,7 +35,7 @@ namespace Takechi.CharacterController.AnimationEvent
 
         private void Awake()
         {
-            Physics.IgnoreCollision(stanEffect2.GetComponent<Collider>(), myCollider, false);
+           // Physics.IgnoreCollision(stanEffect2.GetComponent<Collider>(), myCollider, false);
         }
 
         public void SlimeStanStart()

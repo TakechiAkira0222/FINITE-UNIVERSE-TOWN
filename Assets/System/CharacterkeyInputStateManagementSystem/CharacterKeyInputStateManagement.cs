@@ -43,6 +43,7 @@ namespace Takechi.CharacterController.KeyInputStete
 
         private bool m_operation = true;
         private bool m_isUserMenu = false;
+        private bool m_isStan = false;
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
      
         #endregion
@@ -83,6 +84,7 @@ namespace Takechi.CharacterController.KeyInputStete
 
             if (m_isUserMenu) return;
             if (!m_operation) return;
+            if (m_isStan) return;
 
             m_gameMain[roomStatusManagement.GetGameState()]();
         }
@@ -90,6 +92,7 @@ namespace Takechi.CharacterController.KeyInputStete
         #region get function
         public bool GetOperation() { return m_operation; }
         public bool GetIsUserMenu() { return m_isUserMenu; }
+        public bool GetIsStan() { return m_isStan; }
 
         #endregion
 
@@ -103,6 +106,11 @@ namespace Takechi.CharacterController.KeyInputStete
         {
             m_isUserMenu = value;
             Debug.Log($" SetIsUserMenu = <color=green>{value}</color>");
+        }
+        public void SetIsStan(bool value)
+        {
+            m_isStan = value;
+            Debug.Log($" SetIsStan = <color=green>{value}</color>");
         }
 
         #endregion

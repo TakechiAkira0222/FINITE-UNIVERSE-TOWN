@@ -46,6 +46,19 @@ namespace Takechi.CharacterController.EnemySearchAnimationEvent
         private float m_handOnlyModelAnimatorWeight = 0;
         #endregion
 
+        private void OnEnable()
+        {
+            statusManagement.InitializeCharacterInstanceStateSettings += () => { resetEnemySearch(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetEnemySearch</color>() <color=green>to add.</color>");
+        }
+
+        private void OnDisable()
+        {
+            statusManagement.InitializeCharacterInstanceStateSettings -= () => { resetEnemySearch(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetEnemySearch</color>() <color=green>to remove.</color>");
+        }
+
+        #region uinty animation event
         /// <summary>
         /// MechanicalWarrior EnemySearch Start
         /// </summary>
@@ -88,6 +101,8 @@ namespace Takechi.CharacterController.EnemySearchAnimationEvent
             // ik weiht
             controllerReferenceManagement.GetIKAnimationController().ResetAllIkWeight();
         }
+
+        #endregion
 
         #region private finction
         private void setAssaultRifleSetActive(bool flag)

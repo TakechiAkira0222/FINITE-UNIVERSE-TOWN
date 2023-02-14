@@ -40,11 +40,11 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
                 /// <summary>
                 /// Player Tornado ColliderName
                 /// </summary>
-                public const string slimeAblityTornadoColliderName = "SliemAblity1TornadoEffect";
+                public const string slimeAblityTornadoColliderName = "SliemAblityTornadoEffect";
                 /// <summary>
                 /// Player Stan ColliderName
                 /// </summary>
-                public const string slimeAblityStanColliderName = "SliemAblity2Stan2Effect";
+                public const string slimeAblityStanColliderName = "SliemAblityStan2Effect";
                 /// <summary>
                 /// DamageFromPlayerToPlayer all ColliderName
                 /// </summary>
