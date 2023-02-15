@@ -120,6 +120,11 @@ MonoBehaviour:
   m_deathEffect: {fileID: 8280659534722550110, guid: 5b5f4febd48ae3943ab6de929ccf0f9b, type: 3}
   m_stanEffect: {fileID: 1393092726140906047}
   m_attackLaserPointTransfrom: {fileID: 581450928056305383}
+  m_deathblowTimeline: {fileID: 11400000, guid: 0695e60f05e7c194687d5b6e5d0218de, type: 2}
+  m_aiSlimeObjectFolderName:
+  - PlayableCharacter
+  - ItemsinstantiationFromCharactersPrefab
+  m_aiSlimeObjectInstans: {fileID: 2931587657849594368, guid: 885ab38a3fa970f46bb479d5adab9d40, type: 3}
   m_attackLaserEffectFolderName:
   - PlayableCharacter
   - ItemsinstantiationFromCharactersPrefab
@@ -550,7 +555,7 @@ PlayableDirector:
   m_GameObject: {fileID: 4453797099278316599}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
+  m_PlayableAsset: {fileID: 11400000, guid: 0695e60f05e7c194687d5b6e5d0218de, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -572,6 +577,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 447582794931539245, guid: bd12ac9b9cdd4204e8a04fd7b30165c3, type: 2}
     value: {fileID: 0}
+  - key: {fileID: 636308007264159410, guid: 0695e60f05e7c194687d5b6e5d0218de, type: 2}
+    value: {fileID: 678745622807444386}
   m_ExposedReferences:
     m_References:
     - d1cc25c985634914a8d07ac5a71b2a98: {fileID: 0}
@@ -745,7 +752,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8553122333343138139}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1295,10 +1302,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4707995739950963785, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5922180347706862704, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7191346536027694782, guid: d5961eeb22b31c94f8995c90e8af4ec3, type: 3}

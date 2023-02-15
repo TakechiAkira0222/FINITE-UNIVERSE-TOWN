@@ -17,6 +17,8 @@ namespace Takechi.CharacterController.Parameters
 
         #region private variable
 
+        private float m_attackLaserEffectDsuration_Seconds;
+        private int m_aiSlimeDsuration_Seconds;
         private int m_trnadoEffectDsuration_Seconds;
         private int m_transparencyDsuration_Seconds;
         private int m_stanDsuration_Seconds;
@@ -41,12 +43,16 @@ namespace Takechi.CharacterController.Parameters
         /// </summary>
         private void SetupSlimeSpecificParameters()
         {
+            SetAttackLaserEffectDsuration_Seconds(m_slimeSpecificParameters.GetAttackLaserEffectDsuration_seconds());
+            SetAiSlimeDsuration_Seconds(m_slimeSpecificParameters.GetAiSlimeDsuration_seconds());
             SetTrnadoEffectDsuration_Seconds( m_slimeSpecificParameters.GetTrnadoEffectDsuration_seconds());
             SetTransparencyDsuration_Seconds( m_slimeSpecificParameters.GetTransparencyDsuration_seconds());
             SetStanDsuration_Seconds( m_slimeSpecificParameters.GetStanDsuration_seconds());
 
             Debug.Log($"<color=green> setupSlimeSpecificParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
+                      $" m_attackLaserEffectDsuration_Seconds : { m_attackLaserEffectDsuration_Seconds} \n"+
+                      $" m_aiSlimeDsuration_Seconds : {m_aiSlimeDsuration_Seconds} \n"+
                       $" m_trnadoEffectDsuration_Seconds : { m_trnadoEffectDsuration_Seconds} \n"+
                       $" m_transparencyDsuration_Seconds : { m_transparencyDsuration_Seconds} \n"+
                       $" m_stanDsuration_Seconds : { m_stanDsuration_Seconds} \n"
@@ -56,7 +62,8 @@ namespace Takechi.CharacterController.Parameters
         #endregion
 
         #region set function
-
+        public void SetAttackLaserEffectDsuration_Seconds(float value) { m_attackLaserEffectDsuration_Seconds = value; }
+        public void SetAiSlimeDsuration_Seconds(int value) { m_aiSlimeDsuration_Seconds = value; }
         public void SetTrnadoEffectDsuration_Seconds(int value) { m_trnadoEffectDsuration_Seconds = value; }
         public void SetTransparencyDsuration_Seconds(int value) { m_transparencyDsuration_Seconds = value; }
         public void SetStanDsuration_Seconds(int value) { m_stanDsuration_Seconds = value; }
@@ -65,9 +72,11 @@ namespace Takechi.CharacterController.Parameters
 
         #region get function
 
-        public int GetTrnadoEffectDsuration_Seconds(){ return m_trnadoEffectDsuration_Seconds; }
-        public int GetTransparencyDsuration_Swconds(){ return m_transparencyDsuration_Seconds; }
-        public int GetStanDsuration_Seconds() { return m_stanDsuration_Seconds; }
+        public float GetAttackLaserEffectDsuration_Seconds() => m_attackLaserEffectDsuration_Seconds;
+        public int GetAiSlimeDsuration_Seconds() => m_aiSlimeDsuration_Seconds;
+        public int GetTrnadoEffectDsuration_Seconds() => m_trnadoEffectDsuration_Seconds; 
+        public int GetTransparencyDsuration_Swconds() => m_transparencyDsuration_Seconds; 
+        public int GetStanDsuration_Seconds() => m_stanDsuration_Seconds; 
 
         #endregion
 

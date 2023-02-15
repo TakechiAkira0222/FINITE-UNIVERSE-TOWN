@@ -9,6 +9,10 @@ namespace Takechi.CharacterController.SpecificParameters.Slime
     [CreateAssetMenu(fileName = "SlimeSpecificParameters", menuName = "SlimeData/SlimeSpecificParameters")]
     public class SlimeSpecificParameters : ScriptableObject
     {
+        [SerializeField, Range(1, 3), Tooltip("レイザー　継続時間")]
+        private float m_attackLaserEffectDsuration_seconds;
+        [SerializeField, Range( 10, 20),Tooltip(" AIスライム　継続時間")]
+        private int m_aiSlimeDsuration_seconds;
         [SerializeField, Range( 5, 15), Tooltip("トルネード　継続時間")] 
         private int trnadoEffectDsuration_seconds = 10;
         [SerializeField, Range( 5, 15), Tooltip(" 透明化　継続時間") ]
@@ -17,9 +21,11 @@ namespace Takechi.CharacterController.SpecificParameters.Slime
         private int stanDsuration_seconds = 15;
 
         #region Get function
-        public int GetTrnadoEffectDsuration_seconds() { return trnadoEffectDsuration_seconds; }
-        public int GetTransparencyDsuration_seconds() { return transparencyDsuration_seconds; }
-        public int GetStanDsuration_seconds() { return stanDsuration_seconds; }
+        public float GetAttackLaserEffectDsuration_seconds() => m_attackLaserEffectDsuration_seconds;
+        public int GetAiSlimeDsuration_seconds() => m_aiSlimeDsuration_seconds;
+        public int GetTrnadoEffectDsuration_seconds() => trnadoEffectDsuration_seconds; 
+        public int GetTransparencyDsuration_seconds() => transparencyDsuration_seconds; 
+        public int GetStanDsuration_seconds() => stanDsuration_seconds; 
 
         #endregion
     }

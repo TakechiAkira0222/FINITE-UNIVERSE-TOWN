@@ -30,14 +30,14 @@ namespace Takechi.CharacterController.AnimationEvent
         private SlimeStatusManagement statusManagement => m_slimeStatusManagement;
         private SlimeSoundEffectsManagement soundEffectsManagement => m_slimeSoundEffectsManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
-        private Collider myCollider => addressManagement.GetMyCollider();
-        private Canvas displayToOthersCanvas => addressManagement.GetDisplayToOthersCanvas();
+        private Collider   myCollider   => addressManagement.GetMyCollider();
+        private Canvas     displayToOthersCanvas => addressManagement.GetDisplayToOthersCanvas();
         private GameObject networkModelObject => addressManagement.GetNetworkModelObject();
         private Animator networkModelAnimator =>  addressManagement.GetNetworkModelAnimator();
         private Animator handOnlyModelAnimator => addressManagement.GetHandOnlyModelAnimator();
         private Renderer handonlyModelRenderer => addressManagement.GetHandOnlyModelRenderer();
         private ParticleSystem transparencyPaticleSystem => addressManagement.GetTransparencyPaticleSystem();
-        private int duration_seconds => statusManagement.GetTransparencyDsuration_Swconds();
+        private int  duration_seconds => statusManagement.GetTransparencyDsuration_Swconds();
         private bool isMine => myPhotonView.IsMine;
 
         private bool isTransparency = false;

@@ -28,27 +28,30 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         private SlimeSoundEffectsManagement soundEffectsManagement => m_slimeSoundEffectsManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private Transform  attackLaserPointTransfrom => addressManagement.GetAttackLaserPointTransfrom();
-        private string     attackEffectPath => addressManagement.GetAttackLaserEffectPath();
         private GameObject attackEffectInstans => addressManagement.GetAttackLaserEffectInstans();
-        private bool isMine => myPhotonView.IsMine;
+        private string     attackEffectPath => addressManagement.GetAttackLaserEffectPath();
+        private float  dsuration => statusManagement.GetAttackLaserEffectDsuration_Seconds();
+        private bool   isMine => myPhotonView.IsMine;
 
-        private GameObject attackLaserGameObject;
         #endregion
 
         public void SlimeAttackStart()
         {
             if (!isMine) return;
-            attackLaserGameObject = Shooting( attackLaserPointTransfrom);
+            Shooting( attackLaserPointTransfrom);
         }
 
         public void SlimeAttackEnd()
         {
-            if (!isMine) return;
-            PhotonNetwork.Destroy(attackLaserGameObject);
+
         }
 
         #region Recursive function
-        private GameObject Shooting(Transform laserPoint) { return PhotonNetwork.Instantiate(attackEffectPath + attackEffectInstans.name, laserPoint.position, laserPoint.rotation); }
+        private void Shooting(Transform laserPoint) 
+        { 
+            GameObject instans = PhotonNetwork.Instantiate(attackEffectPath + attackEffectInstans.name, laserPoint.position, laserPoint.rotation);
+            StartCoroutine( DelayMethod( dsuration,() => { PhotonNetwork.Destroy(instans); }));
+        }
         #endregion
     }
 }

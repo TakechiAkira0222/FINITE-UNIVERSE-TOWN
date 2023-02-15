@@ -13,7 +13,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
         }
 
-        void SlimeDeathblow()
+        void SlimeDeathblowInstantiate()
         {
 
         }

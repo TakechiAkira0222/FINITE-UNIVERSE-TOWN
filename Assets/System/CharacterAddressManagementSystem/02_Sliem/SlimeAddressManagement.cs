@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Takechi.CharacterController.Address;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Takechi.CharacterController.Address
 {
@@ -14,6 +15,18 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private Transform    m_attackLaserPointTransfrom;
         /// <summary>
+        /// deathblow Timeline
+        /// </summary>
+        [SerializeField] private PlayableAsset m_deathblowTimeline;
+        /// <summary>
+        /// aiSlime Path
+        /// </summary>
+        [SerializeField] private List<string> m_aiSlimeObjectFolderName = new List<string>();
+        /// <summary>
+        /// aiSlime Instans
+        /// </summary>
+        [SerializeField] private GameObject   m_aiSlimeObjectInstans;
+        /// <summary>
         /// attack laser Path
         /// </summary>
         [SerializeField] private List<string> m_attackLaserEffectFolderName = new List<string>();
@@ -25,7 +38,7 @@ namespace Takechi.CharacterController.Address
         /// trnado attack effect
         /// </summary>
         /// <returns></returns>
-        [SerializeField] private GameObject m_trnadoEffectObject;
+        [SerializeField] private GameObject   m_trnadoEffectObject;
         /// <summary>
         /// stan effect array
         /// </summary>
@@ -41,11 +54,20 @@ namespace Takechi.CharacterController.Address
         #endregion
 
         #region get function
-        public Transform    GetAttackLaserPointTransfrom() => m_attackLaserPointTransfrom;
-        public GameObject   GetAttackLaserEffectInstans() => m_attackLaserEffectInstans; 
-        public GameObject   GetTrnadoEffectObject() => m_trnadoEffectObject;
-        public GameObject[] GetStanEffectObjectArray() => m_stanEffectObjectArray;
+        public Transform     GetAttackLaserPointTransfrom() => m_attackLaserPointTransfrom;
+        public GameObject    GetAttackLaserEffectInstans() => m_attackLaserEffectInstans; 
+        public PlayableAsset GetDeathblowTimeline() => m_deathblowTimeline;
+        public GameObject    GetAiSlimeObjectInstans() => m_aiSlimeObjectInstans; 
+        public GameObject    GetTrnadoEffectObject() => m_trnadoEffectObject;
+        public GameObject[]  GetStanEffectObjectArray() => m_stanEffectObjectArray;
         public ParticleSystem GetTransparencyPaticleSystem() => m_transparencyPaticleSystem;
+        public string GetAiSlimeObjectFolderPath()
+        {
+            string path = "";
+            foreach (string s in m_aiSlimeObjectFolderName) { path += s + "/"; }
+
+            return path;
+        }
         public string GetAttackLaserEffectPath()
         {
             string path = "";
