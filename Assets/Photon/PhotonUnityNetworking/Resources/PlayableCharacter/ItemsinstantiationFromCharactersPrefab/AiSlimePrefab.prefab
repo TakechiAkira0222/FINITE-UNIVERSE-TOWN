@@ -443,6 +443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2931587657468100412}
+  - component: {fileID: 6853637665231261935}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -465,6 +466,24 @@ Transform:
   m_Father: {fileID: 2931587657849594371}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6853637665231261935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931587657468100413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2931587657849594368
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,8 +498,8 @@ GameObject:
   - component: {fileID: 2931587657849594370}
   - component: {fileID: 2931587657849594374}
   - component: {fileID: 3023618737203097749}
-  - component: {fileID: 2931587657849594372}
-  - component: {fileID: 2931587657849594373}
+  - component: {fileID: 8586617197607359387}
+  - component: {fileID: 1124843486815236233}
   m_Layer: 0
   m_Name: AiSlimePrefab
   m_TagString: Untagged
@@ -562,18 +581,18 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 0
+  m_AutoRepath: 0
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &3023618737203097749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,10 +605,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329c41f2e0226b34488f70cc0e9d2386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_thisPhotonView: {fileID: 8586617197607359387}
   m_navMeshAgent: {fileID: 2931587657849594374}
-  m_thisPhotonView: {fileID: 2931587657849594372}
   m_appearanceAndDisappearanceParticleSystem: {fileID: 5384437336356274140}
---- !u!114 &2931587657849594372
+  m_outline: {fileID: 6853637665231261935}
+  m_setTaggetIntervalTime_Seconds: 3
+--- !u!114 &8586617197607359387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -608,11 +629,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2931587657849594373}
+  - {fileID: 1124843486815236233}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2931587657849594373
+--- !u!114 &1124843486815236233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -6,19 +6,25 @@ using TakechiEngine.PUN;
 using UnityEngine;
 using UnityEngine.AI;
 using static Takechi.ScriptReference.SearchForPrefabs.ReferencingSearchForPrefabs;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.Deathblow.AI
 {
     public class SlimeAiController : TakechiPunCallbacks
     {
-        [SerializeField] private PhotonView   m_thisPhotonView;
-        [SerializeField] private NavMeshAgent m_navMeshAgent;
+        [SerializeField] private PhotonView     m_thisPhotonView;
+        [SerializeField] private NavMeshAgent   m_navMeshAgent;
         [SerializeField] private ParticleSystem m_appearanceAndDisappearanceParticleSystem;
-       
+        [SerializeField] private Outline        m_outline;
+        [SerializeField] private int            m_setTaggetIntervalTime_Seconds = 3;
+
         private ParticleSystem appearanceAndDisappearanceParticleSystem => m_appearanceAndDisappearanceParticleSystem;
-        private NavMeshAgent navMeshAgent => m_navMeshAgent;
-        private PhotonView thisPhotonView => m_thisPhotonView;
+        private NavMeshAgent   navMeshAgent   => m_navMeshAgent;
+        private PhotonView     thisPhotonView => m_thisPhotonView;
+        private Outline        outline => m_outline;
         private bool isMine => m_thisPhotonView.IsMine;
+        private int  setTaggetIntervalTime_Seconds => m_setTaggetIntervalTime_Seconds;
+        private string controllerTeamName => (string)PhotonNetwork.LocalPlayer.Get(thisPhotonView.ControllerActorNr).CustomProperties[CharacterStatusKey.teamNameKey];
 
         private void Reset()
         {
@@ -28,8 +34,12 @@ namespace Takechi.CharacterController.Deathblow.AI
 
         private void Start()
         {
+            if ( controllerTeamName == CharacterTeamStatusName.teamAName) { outline.OutlineColor = Color.red; }
+            else if (controllerTeamName == CharacterTeamStatusName.teamBName) { outline.OutlineColor = Color.blue; }
+            else { Debug.LogError(" Failed to get the controller's team."); };
+
             if (!isMine) return;
-            StartCoroutine(nameof(NavMeshSetsTagget));
+            StartCoroutine( nameof(NavMeshSetsTagget));
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -44,11 +54,11 @@ namespace Takechi.CharacterController.Deathblow.AI
         {
             while (true)
             {
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(setTaggetIntervalTime_Seconds);
 
-                if (serchTag(this.gameObject, SearchForPrefabTag.playerCharacterPrefabTag) != null)
+                if ( serchTag(this.gameObject, SearchForPrefabTag.playerCharacterPrefabTag) != null)
                 {
-                    navMeshAgent.SetDestination( serchTag(this.gameObject, SearchForPrefabTag.playerCharacterPrefabTag).transform.position);
+                    navMeshAgent.SetDestination(serchTag(this.gameObject, SearchForPrefabTag.playerCharacterPrefabTag).transform.position);
                 }
                 else
                 {
@@ -59,7 +69,7 @@ namespace Takechi.CharacterController.Deathblow.AI
 
         private GameObject serchTag(GameObject nowObj, string tagName)
         {
-            float tmpDis = 0;            //距離用一時変数
+            float tmpDis  = 0;           //距離用一時変数
             float nearDis = 0;           //最も近いオブジェクトの距離
             List<GameObject> taggetObjectList = new List<GameObject>(); 
 
@@ -67,18 +77,18 @@ namespace Takechi.CharacterController.Deathblow.AI
             foreach ( GameObject obj in GameObject.FindGameObjectsWithTag(tagName))
             {
                 PhotonView targetPhotonView = obj.transform.root.GetComponent<PhotonView>();
+                string targetTeamName = (string)PhotonNetwork.LocalPlayer.Get(targetPhotonView.ControllerActorNr).CustomProperties[CharacterStatusKey.teamNameKey];
 
-                if ( thisPhotonView.ControllerActorNr == targetPhotonView.ControllerActorNr) continue;
+                // if ( thisPhotonView.ControllerActorNr == targetPhotonView.ControllerActorNr) continue;
+                if ( controllerTeamName == targetTeamName) continue;
 
                 taggetObjectList.Add(obj);
             }
 
             GameObject tagetObject = null;
 
-            //タグ指定されたオブジェクトを配列で取得する
             foreach (GameObject obs in taggetObjectList)
             {
-                //自身と取得したオブジェクトの距離を取得
                 tmpDis = Vector3.Distance( obs.transform.position, nowObj.transform.position);
 
                 //オブジェクトの距離が近いか、距離0であればオブジェクト名を取得

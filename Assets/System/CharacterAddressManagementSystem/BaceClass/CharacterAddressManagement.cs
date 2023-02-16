@@ -50,6 +50,8 @@ namespace Takechi.CharacterController.Address
         /// my avatar playable Director
         /// </summary>
         [SerializeField] private PlayableDirector m_myAvatarPlayableDirector;
+
+        [Header(" === Camera Address ===")]
         /// <summary>
         /// main camera
         /// </summary>
@@ -58,6 +60,8 @@ namespace Takechi.CharacterController.Address
         /// death Camera
         /// </summary>
         [SerializeField] private Camera m_deathCamera;
+
+        [Header(" === Model Address ===")]
         /// <summary>
         /// hand only animetor
         /// </summary>
@@ -86,6 +90,8 @@ namespace Takechi.CharacterController.Address
         /// model Outline
         /// </summary>
         [SerializeField] private Outline m_modelOutline;
+
+        [Header(" === Ui Address ===")]
         /// <summary>
         /// to Fade
         /// </summary>
@@ -110,6 +116,8 @@ namespace Takechi.CharacterController.Address
         /// display to thers cnavas
         /// </summary>
         [SerializeField] private Canvas m_displayToOthersCanvas;
+
+        [Header(" === Effect Address ===")]
         /// <summary>
         /// attackHits effect folder name
         /// </summary>
@@ -130,6 +138,10 @@ namespace Takechi.CharacterController.Address
         /// stan effect
         /// </summary>
         [SerializeField] private GameObject m_stanEffect;
+        /// <summary>
+        /// ai slime hit effect
+        /// </summary>
+        [SerializeField] private GameObject m_aiSlimeHitEffect;
 
         #endregion
 
@@ -173,6 +185,7 @@ namespace Takechi.CharacterController.Address
         public Canvas     GetDisplayToOthersCanvas() => m_displayToOthersCanvas;
         public GameObject GetDeathEffect() => m_deathEffect;
         public GameObject GetStanEffect() =>  m_stanEffect;
+        public GameObject GetAiSlimeHitEffect() => m_aiSlimeHitEffect;
         public GameObject GetAttackHitEffct() => m_attackHitEffct; 
         public string GetAttackHitsEffectFolderName()
         {

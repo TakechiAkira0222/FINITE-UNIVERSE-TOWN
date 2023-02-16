@@ -72,20 +72,12 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         {
             if (!isMine) return;
 
-            for (int i = 0; i < 2; i++)
-            {
-               GameObject instans = PhotonNetwork.Instantiate
-                    ( aiSlimeObjectPath + aiSlimeObjectInstans.name,
-                      myAvater.transform.position + new Vector3( Random.Range( -2, 2), 0, Random.Range( -2, 2)),
-                      Quaternion.identity);
-
-                StartCoroutine( DelayMethod( dsuration, () => { PhotonNetwork.Destroy(instans); }));
-            }
+            AiSliemsInstantiate();
         }
 
         public void SlimeDeathblowEnd()
         {
-            keyInputStateManagement.SetOperation(true);   
+            keyInputStateManagement.SetOperation(true);
 
             // animation weiht
             SetLayerWeight(networkModelAnimator, AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
@@ -111,5 +103,13 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             myAvatarPlayableDirector.Play();
         }
 
+
+        private void AiSliemsInstantiate()
+        {
+            GameObject instans = PhotonNetwork.Instantiate
+                  (aiSlimeObjectPath + aiSlimeObjectInstans.name, myAvater.transform.position, myAvater.transform.rotation);
+
+            StartCoroutine(DelayMethod(dsuration, () => { PhotonNetwork.Destroy(instans);}));
+        }
     }
 }

@@ -117,7 +117,7 @@ namespace Takechi.CharacterController.EnemySearchAnimationEvent
             foreach (GameObject o in GameObject.FindGameObjectsWithTag(playerCharacterPrefabTag))
             {
                 Outline outline = o.transform.Find(characterModelPrefabName).GetComponent<Outline>();
-                outline.OutlineMode = Outline.Mode.SilhouetteOnly;
+                outline.OutlineMode = Outline.Mode.OutlineAll;
             }
         }
         private void resetEnemySearch()

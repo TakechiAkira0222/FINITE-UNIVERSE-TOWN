@@ -46,12 +46,17 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
                 /// </summary>
                 public const string slimeAblityStanColliderName = "SliemAblityStan2Effect";
                 /// <summary>
+                /// ai Slime Collider Name
+                /// </summary>
+                public const string aiSlimeColliderName = "AiSlimePrefab";
+                /// <summary>
                 /// DamageFromPlayerToPlayer all ColliderName
                 /// </summary>
-                public static string[] allName = new string[2]
+                public static string[] allName = new string[3]
                 {
                    slimeAblityTornadoColliderName,
                    slimeAblityStanColliderName,
+                   aiSlimeColliderName,
                 };
             }
         }
@@ -99,7 +104,7 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
             public static readonly List<string> objectNameList =
                 new List<string>()
                 {
-
+                    
                 };
 
             /// <summary>
@@ -108,7 +113,7 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
             public static readonly Dictionary<string, int> objectDamagesDictionary =
                 new Dictionary<string, int>()
                 {
-
+                    //{ "AiSlimePrefab", 10}
                 };
         }
     }

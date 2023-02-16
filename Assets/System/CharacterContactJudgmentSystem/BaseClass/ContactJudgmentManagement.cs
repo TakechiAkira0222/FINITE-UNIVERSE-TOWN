@@ -20,7 +20,7 @@ namespace Takechi.CharacterController.ContactJudgment
         /// check Teammember
         /// </summary>
         /// <param name="number"></param>
-        /// <returns></returns>
+        /// <returns> true == same team </returns>
         protected bool checkTeammember(int number)
         {
             Debug.Log(PhotonNetwork.LocalPlayer.Get(number).CustomProperties[CharacterStatusKey.teamNameKey]);
