@@ -41,9 +41,9 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <summary>
         /// FirstShot Animation Start
         /// </summary>
-        void MechanicalWarriorFirstShot()
+        void MechanicalWarriorFirstShoot()
         {
-            soundEffectsManagement.PlayOneShotNormalShot();
+            soundEffectsManagement.PlayOneShotNormalShoot();
 
             if (!myPhotonView.IsMine) return;
             Shooting(magazineTransfrom, force);
@@ -51,9 +51,9 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <summary>
         /// SecondShot Animation End
         /// </summary>
-        void MechanicalWarriorSecondShot()
+        void MechanicalWarriorSecondShoot()
         {
-            soundEffectsManagement.PlayOneShotNormalShot();
+            soundEffectsManagement.PlayOneShotNormalShoot();
 
             if (!myPhotonView.IsMine) return;
             Shooting(magazineTransfrom, force);
@@ -61,9 +61,9 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <summary>
         /// ThirdShot Animation End
         /// </summary>
-        void MechanicalWarriorThirdShot()
+        void MechanicalWarriorThirdShoot()
         {
-            soundEffectsManagement.PlayOneShotNormalShot();
+            soundEffectsManagement.PlayOneShotNormalShoot();
 
             if (!myPhotonView.IsMine) return;
             Shooting(magazineTransfrom, force);

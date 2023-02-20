@@ -17,6 +17,14 @@ namespace Takechi.CharacterController.EnemySearchAnimationEvent
         }
 
         /// <summary>
+        /// MechanicalWarrior EnemySearch Click Button
+        /// </summary>
+        void MechanicalWarriorEnemySearchClickButton()
+        {
+
+        }
+
+        /// <summary>
         /// MechanicalWarrior EnemySearch End
         /// </summary>
         void MechanicalWarriorEnemySearchEnd()

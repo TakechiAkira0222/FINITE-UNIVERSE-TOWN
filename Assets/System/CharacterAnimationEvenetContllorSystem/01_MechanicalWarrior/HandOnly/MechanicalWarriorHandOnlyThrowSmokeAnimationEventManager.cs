@@ -39,6 +39,7 @@ namespace Takechi.CharacterController.ThrowSmokeAnimationEvent
         private float  smokeDuration_Seconds => statusManagement.GetSmokeDuration_Seconds();
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private bool   isMine => myPhotonView.IsMine;
+
         #endregion
 
         /// <summary>

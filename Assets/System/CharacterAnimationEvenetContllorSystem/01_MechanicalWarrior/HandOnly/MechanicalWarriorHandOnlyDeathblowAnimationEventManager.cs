@@ -9,7 +9,7 @@ using Takechi.CharacterController.AnimationEvent;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.Reference;
-
+using Takechi.CharacterController.SoundEffects;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -24,12 +24,15 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         [SerializeField] private MechanicalWarriorAddressManagement     m_mechanicalWarriorAddressManagement;
         [Header("=== MechanicalWarriorStatusManagement ===")]
         [SerializeField] private MechanicalWarriorStatusManagement      m_mechanicalWarriorStatusManagement;
+        [Header("=== MechanicalWarriorSoundEffectsManagement ===")]
+        [SerializeField] private MechanicalWarriorSoundEffectsManagement m_mechanicalWarriorSoundEffectsManagement;
         
         #endregion
 
         #region private variable
         private MechanicalWarriorAddressManagement addressManagement => m_mechanicalWarriorAddressManagement;
         private MechanicalWarriorStatusManagement  statusManagement => m_mechanicalWarriorStatusManagement;
+        private MechanicalWarriorSoundEffectsManagement soundEffectsManagement => m_mechanicalWarriorSoundEffectsManagement;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private GameObject myAvater     => addressManagement.GetMyAvater();
         private PlayableAsset deathblowTimeline => addressManagement.GetDeathblowTimeline();
@@ -80,16 +83,37 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         }
 
         /// <summary>
-        /// Mechanical Warrior Deathblow Shot
+        /// Mechanical Warrior Deathblow Shoot
         /// </summary>
-        void MechanicalWarriorDeathblowShot()
+        void MechanicalWarriorDeathblowShoot()
         {
+            // sound Effect
+            soundEffectsManagement.PlayOneShotDeathbolwShoot();
+
             // not isMine active
             if (!myPhotonView.IsMine) return;
 
             Shooting( magazineTransfrom, force);
 
             myRb.transform.Translate( 0, 0, -1.5f);
+        }
+
+        /// <summary>
+        /// Mechanical Warrior Deathblow Reload
+        /// </summary>
+        void MechanicalWarriorDeathblowReload()
+        {
+            // sound Effect
+            soundEffectsManagement.PlayOneShotDeathbolwReload();
+        }
+
+        /// <summary>
+        /// Mechanical Warrior Deathblow Cocking
+        /// </summary>
+        void MechanicalWarriorDeathblowCocking()
+        {
+            // sound Effect
+            soundEffectsManagement.PlayOneShotDeathbolwCocking();
         }
 
         /// <summary>

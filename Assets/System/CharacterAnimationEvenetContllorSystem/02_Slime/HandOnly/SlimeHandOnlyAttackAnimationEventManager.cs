@@ -17,7 +17,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         [SerializeField] private SlimeAddressManagement m_slimeAddressManagement;
         [Header("=== SlimeStatusManagement ===")]
         [SerializeField] private SlimeStatusManagement  m_slimeStatusManagement;
-        [Header("=== OfficeWorkerSoundEffectsManagement ===")]
+        [Header("=== SlimeSoundEffectsManagement ===")]
         [SerializeField] private SlimeSoundEffectsManagement m_slimeSoundEffectsManagement;
 
         #endregion
@@ -37,6 +37,8 @@ namespace Takechi.CharacterController.AttackAnimationEvent
 
         public void SlimeAttackStart()
         {
+            soundEffectsManagement.PlayOneShotNormalShot();
+
             if (!isMine) return;
             Shooting( attackLaserPointTransfrom);
         }

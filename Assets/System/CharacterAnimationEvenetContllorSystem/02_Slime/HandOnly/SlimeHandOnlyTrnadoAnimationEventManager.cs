@@ -55,6 +55,7 @@ namespace Takechi.CharacterController.AnimationEvent
         #region unity animation event
         public void SlimeTrnadoStart()
         {
+            soundEffectsManagement.PlayOneShotTrnado();
             if (isTrnad) return;
 
             OnTrnado();

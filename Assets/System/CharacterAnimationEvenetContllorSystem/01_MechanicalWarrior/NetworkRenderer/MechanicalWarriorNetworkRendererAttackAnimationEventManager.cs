@@ -17,7 +17,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <summary>
         /// FirstShot Animation Start
         /// </summary>
-        void MechanicalWarriorFirstShot()
+        void MechanicalWarriorFirstShoot()
         {
 
         }
@@ -25,7 +25,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <summary>
         /// SecondShot Animation End
         /// </summary>
-        void MechanicalWarriorSecondShot()
+        void MechanicalWarriorSecondShoot()
         {
 
         }
@@ -33,7 +33,7 @@ namespace Takechi.CharacterController.AttackAnimationEvent
         /// <summary>
         /// ThirdShot Animation End
         /// </summary>
-        void MechanicalWarriorThirdShot()
+        void MechanicalWarriorThirdShoot()
         {
 
         }

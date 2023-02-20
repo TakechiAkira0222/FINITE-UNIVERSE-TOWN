@@ -49,6 +49,7 @@ namespace Takechi.CharacterController.AnimationEvent
 
         #endregion
 
+        #region unity event
         private void Awake()
         {
 
@@ -64,6 +65,8 @@ namespace Takechi.CharacterController.AnimationEvent
             statusManagement.InitializeCharacterInstanceStateSettings -= () => { resetTransparencyState(); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetTransparencyState</color>() <color=green>to remove.</color>");
         }
+
+        #endregion
 
         #region unity animation event
         void SlimeTransparencyStart()
@@ -89,9 +92,11 @@ namespace Takechi.CharacterController.AnimationEvent
             {
                 networkModelObject.SetActive(false);
                 displayToOthersCanvas.gameObject.SetActive(false);
+                soundEffectsManagement.PlayOneShotTrransparency();
 
                 StartCoroutine(DelayMethod(duration_seconds, () =>
                 {
+                    soundEffectsManagement.PlayOneShotTrransparency();
                     isTransparency = false;
                     networkModelObject.SetActive(true);
                     displayToOthersCanvas.gameObject.SetActive(true);
@@ -101,8 +106,11 @@ namespace Takechi.CharacterController.AnimationEvent
             else
             {
                 handonlyModelRenderer.material.color = Color.black;
+                soundEffectsManagement.PlayOneShotTrransparency();
+
                 StartCoroutine(DelayMethod(duration_seconds, () =>
                 {
+                    soundEffectsManagement.PlayOneShotTrransparency();
                     isTransparency = false;
                     handonlyModelRenderer.material.color = Color.white;
                     transparencyPaticleSystem.Play();

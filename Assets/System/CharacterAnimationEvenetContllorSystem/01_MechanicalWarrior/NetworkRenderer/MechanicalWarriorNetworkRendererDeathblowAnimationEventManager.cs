@@ -19,9 +19,25 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         }
 
         /// <summary>
-        /// Mechanical Warrior Deathblow Shot
+        /// Mechanical Warrior Deathblow Shoot
         /// </summary>
-        void MechanicalWarriorDeathblowShot()
+        void MechanicalWarriorDeathblowShoot()
+        {
+
+        }
+
+        /// <summary>
+        /// Mechanical Warrior Deathblow Reload
+        /// </summary>
+        void MechanicalWarriorDeathblowReload()
+        {
+
+        }
+
+        /// <summary>
+        /// Mechanical Warrior Deathblow Cocking
+        /// </summary>
+        void MechanicalWarriorDeathblowCocking()
         {
 
         }

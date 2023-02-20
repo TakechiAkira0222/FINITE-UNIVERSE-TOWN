@@ -78,16 +78,26 @@ namespace Takechi.CharacterController.EnemySearchAnimationEvent
 
             // ik weiht
             controllerReferenceManagement.GetIKAnimationController().SetAllIkWeight(0);
-
-            // enemySearch
-            onEnemySearch();
-            StartCoroutine(DelayMethod( enemySearch_Seconds, () => { resetEnemySearch(); }));
+           
         }
+
+        /// <summary>
+        /// MechanicalWarrior EnemySearch Click Button
+        /// </summary>
+        void MechanicalWarriorEnemySearchClickButton()
+        {
+            // sound Effect
+            soundEffectsManagement.PlayOneShotEnemySearchClickButton();
+        }
+
         /// <summary>
         /// MechanicalWarrior EnemySearch End
         /// </summary>
         void MechanicalWarriorEnemySearchEnd()
         {
+            // sound Effect
+            soundEffectsManagement.PlayOneShotEnemyOnSearch();
+
             // operation
             keyInputStateManagement.SetOperation(true);
 
@@ -96,10 +106,14 @@ namespace Takechi.CharacterController.EnemySearchAnimationEvent
 
             // animation weiht
             SetLayerWeight(networkModelAnimator,  AnimatorLayers.overrideLayer,  m_networkModelAnimatorWeight);
-            //SetLayerWeight(handOnlyModelAnimator, AnimatorLayers.overrideLayer, m_handOnlyModelAnimatorWeight);
+            // SetLayerWeight(handOnlyModelAnimator, AnimatorLayers.overrideLayer, m_handOnlyModelAnimatorWeight);
 
             // ik weiht
             controllerReferenceManagement.GetIKAnimationController().ResetAllIkWeight();
+
+            // enemySearch
+            onEnemySearch();
+            StartCoroutine(DelayMethod(enemySearch_Seconds, () => { resetEnemySearch(); }));
         }
 
         #endregion

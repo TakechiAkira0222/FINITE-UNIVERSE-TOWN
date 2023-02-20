@@ -70,6 +70,8 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
         public void SlimeDeathblowInstantiate()
         {
+            soundEffectsManagement.PlayOneShotDeathblowInstantiate();
+
             if (!isMine) return;
 
             AiSliemsInstantiate();
