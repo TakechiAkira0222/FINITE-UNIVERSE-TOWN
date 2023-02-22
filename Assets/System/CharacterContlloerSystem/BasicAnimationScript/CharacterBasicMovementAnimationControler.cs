@@ -51,7 +51,7 @@ namespace Takechi.CharacterController.BasicAnimation.Movement
         #endregion
 
         #region private variable
-        private bool m_interfere = false;
+        private bool m_interfere = true;
 
         #endregion
 

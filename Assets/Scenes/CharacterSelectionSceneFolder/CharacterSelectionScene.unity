@@ -264,17 +264,23 @@ MonoBehaviour:
   m_deathCamera: {fileID: 0}
   m_handOnlyModelAnimator: {fileID: 0}
   m_handOnlyModelObject: {fileID: 0}
+  m_handOnlyModelRenderer: {fileID: 0}
   m_networkModelAnimator: {fileID: 0}
   m_networkModelObject: {fileID: 0}
+  m_networkModelRenderer: {fileID: 0}
   m_modelOutline: {fileID: 0}
   m_toFade: {fileID: 1832040361}
   m_battleUiMenu: {fileID: 0}
+  m_stanMenu: {fileID: 0}
   m_userUiMenu: {fileID: 0}
   m_reticleCanvas: {fileID: 0}
+  m_displayToOthersCanvas: {fileID: 0}
   m_attackHitsEffectFolderName: []
   m_attackHitEffct: {fileID: 0}
   m_deathEffectFolderName: []
   m_deathEffect: {fileID: 0}
+  m_stanEffect: {fileID: 0}
+  m_aiSlimeHitEffect: {fileID: 0}
 --- !u!114 &519153465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,10 +998,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 395501691, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 296682425166414268, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1118,7 +1120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
+      value: 0.00024414062
       objectReference: {fileID: 0}
     - target: {fileID: 1852772179807008716, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_IsActive

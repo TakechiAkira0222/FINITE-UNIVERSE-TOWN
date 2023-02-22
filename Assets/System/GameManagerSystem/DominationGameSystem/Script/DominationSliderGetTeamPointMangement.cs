@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
+using Takechi.CharacterController.Parameters;
 
 namespace Takechi.GameManagerSystem.Domination
 {
@@ -22,6 +23,8 @@ namespace Takechi.GameManagerSystem.Domination
         [SerializeField] private DominationGameManagerParameters m_dominationGameManagerParameters;
         [Header("=== CharacterAddressManagement === ")]
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
+        [Header("=== CharacterStatusManagement ===")]
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
 
@@ -37,6 +40,7 @@ namespace Takechi.GameManagerSystem.Domination
 
         [SerializeField] private Text m_percentageOfTeamAPointsText;
         [SerializeField] private Text m_percentageOfTeamBPointsText;
+        [SerializeField] private Text m_gameModeDisplayText;
 
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
 
@@ -45,6 +49,7 @@ namespace Takechi.GameManagerSystem.Domination
         #region private variable
         private DominationGameManagerParameters gameManagerParameters => m_dominationGameManagerParameters;
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private CharacterStatusManagement statusManagement => m_characterStatusManagement;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
 
         private float m_percentageOfTeamAPoints = 0f;
@@ -73,6 +78,10 @@ namespace Takechi.GameManagerSystem.Domination
 
         private void Start()
         {
+            if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName) { m_gameModeDisplayText.color = Color.red; }
+            else if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName) { m_gameModeDisplayText.color = Color.blue; }
+            else { Debug.LogError("team could not be identified"); }
+
             if (PhotonNetwork.IsMasterClient)
             {
                 setValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_domination(), gameManagerParameters.GetVictoryConditionPoints());

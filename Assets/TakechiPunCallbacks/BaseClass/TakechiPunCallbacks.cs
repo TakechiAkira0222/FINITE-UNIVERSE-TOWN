@@ -257,7 +257,7 @@ namespace TakechiEngine.PUN
             Vector3 direction = Vector3.zero;
             float standardValue = 0.05f;
 
-            foreach (ContactPoint point in collision.contacts)
+            foreach ( ContactPoint point in collision.contacts)
             {
                 Vector3 relativePoint = transform.InverseTransformPoint(point.point);
 

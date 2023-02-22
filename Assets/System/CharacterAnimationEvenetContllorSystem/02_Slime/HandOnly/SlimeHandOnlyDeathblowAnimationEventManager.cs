@@ -9,7 +9,6 @@ using Takechi.CharacterController.SoundEffects;
 using UnityEngine.Playables;
 
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
-using UnityEngine.SocialPlatforms;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
 {

@@ -19,11 +19,11 @@ namespace Takechi.CharacterController.Information
             SpeedType,
             HealerType,
         }
-
         public enum TypeOfAttack 
         {
             AttackTypeOfSword,
             AttackTypeOfGun,
+            AttackTypeOfLaser,
         }
 
         #region SerializeField

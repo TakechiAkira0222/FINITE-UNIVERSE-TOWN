@@ -2,6 +2,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading;
 using UnityEngine;
 
 namespace Takechi.ScriptReference.DamagesThePlayerObject
@@ -104,7 +105,7 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
             public static readonly List<string> objectNameList =
                 new List<string>()
                 {
-                    
+                    "Barrel"
                 };
 
             /// <summary>
@@ -113,7 +114,7 @@ namespace Takechi.ScriptReference.DamagesThePlayerObject
             public static readonly Dictionary<string, int> objectDamagesDictionary =
                 new Dictionary<string, int>()
                 {
-                    //{ "AiSlimePrefab", 10}
+                    { "Barrel", 1}
                 };
         }
     }

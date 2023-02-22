@@ -12,6 +12,7 @@ using Takechi.CharacterController.Address;
 
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
+using Takechi.CharacterController.Parameters;
 
 namespace Takechi.GameManagerSystem.Hardpoint
 {
@@ -23,6 +24,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         [SerializeField] private HardpointGameManagerParameters m_hardpointGameManagerParameters;
         [Header("=== CharacterAddressManagement === ")]
         [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
+        [Header("=== CharacterStatusManagement ===")]
+        [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
 
@@ -34,6 +37,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         [SerializeField] private Text m_percentageOfTeamAPointsText;
         [SerializeField] private Text m_percentageOfTeamBPointsText;
+        [SerializeField] private Text m_gameModeDisplayText;
 
         #endregion
 
@@ -41,6 +45,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #region private variable
         private HardpointGameManagerParameters gameManagerParameters => m_hardpointGameManagerParameters;
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
+        private CharacterStatusManagement statusManagement => m_characterStatusManagement;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
 
         private float m_percentageOfTeamAPoints = 0f;
@@ -71,6 +76,10 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void Start()
         {
+            if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName) { m_gameModeDisplayText.color = Color.red; }
+            else if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName) { m_gameModeDisplayText.color = Color.blue; }
+            else { Debug.LogError("team could not be identified"); }
+
             if (PhotonNetwork.IsMasterClient)
             {
                 setValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_hardPoint(), gameManagerParameters.GetVictoryConditionPoints());
