@@ -30,7 +30,11 @@ namespace Takechi.UI.RoomPropertySetting
             StartCoroutine( uiCursorRotation( m_uiCursor));
         }
 
-        public string GetRoomName() { return m_nameSettingField.text; }
+        public string GetRoomName() 
+        {
+            //return m_nameSettingField.text;
+            return Random.Range( 0, 999999).ToString();
+        }
 
         public void OnSelect(int Index)
         {

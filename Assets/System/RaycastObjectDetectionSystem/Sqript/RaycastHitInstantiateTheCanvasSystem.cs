@@ -49,7 +49,6 @@ namespace Takechi.RaycastObjectDetectionSystem
         private Dictionary<string, GameObject> m_theCanvasSuitableForTheHitObjectDictionary = 
             new Dictionary<string, GameObject>();
 
-       
         #endregion
 
         #region unity event
@@ -120,7 +119,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 if (lookingObject.GetComponent<Outline>() != null)
                 {
                     lookingObject.GetComponent<Outline>().OutlineColor = Color.green;
-                    SetActiveUI(true);
+                    setActiveUI(true);
                 }
             };
 
@@ -131,7 +130,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 if (lookingObject.GetComponent<Outline>() != null)
                 {
                     lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
-                    SetActiveUI(false);
+                    setActiveUI(false);
                 }
             };
 
@@ -142,7 +141,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 if (lookingObject.GetComponent<Outline>() != null)
                 {
                     lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
-                    SetActiveUI(false);
+                    setActiveUI(false);
                 }
             };
 
@@ -156,7 +155,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 if (lookingObject.GetComponent<Outline>() != null)
                 {
                     lookingObject.GetComponent<Outline>().OutlineColor = Color.green;
-                    SetActiveUI(true);
+                    setActiveUI(true);
                 }
             };
 
@@ -167,7 +166,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 if (lookingObject.GetComponent<Outline>() != null)
                 {
                     lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
-                    SetActiveUI(false);
+                    setActiveUI(false);
                 }
             };
 
@@ -178,7 +177,7 @@ namespace Takechi.RaycastObjectDetectionSystem
                 if (lookingObject.GetComponent<Outline>() != null)
                 {
                     lookingObject.GetComponent<Outline>().OutlineColor = Color.red;
-                    SetActiveUI(false);
+                    setActiveUI(false);
                 }
             };
 
@@ -196,12 +195,11 @@ namespace Takechi.RaycastObjectDetectionSystem
 
         void setActiveUiDisplayedOnFocusList(bool flag) { foreach (GameObject o in m_uiDisplayedOnFocusList) { o.SetActive(flag); } }
         void setActiveUiHiddenOnFocusList(bool flag) { foreach (GameObject o in m_uiHiddenOnFocusList) { o.SetActive(flag); } }
-        void SetActiveUI(bool flag)
+        void setActiveUI(bool flag)
         {
             setActiveUiDisplayedOnFocusList(flag);
             setActiveUiHiddenOnFocusList(!flag);
         }
-
 
         #endregion
     }

@@ -116,6 +116,10 @@ namespace Takechi.CharacterController.Address
         /// display to thers cnavas
         /// </summary>
         [SerializeField] private Canvas m_displayToOthersCanvas;
+        /// <summary>
+        /// navigation Ui 
+        /// </summary>
+        [SerializeField] private List<GameObject> m_navigationUiList = new List<GameObject>();
 
         [Header(" === Effect Address ===")]
         /// <summary>
@@ -176,17 +180,21 @@ namespace Takechi.CharacterController.Address
         public Animator   GetNetworkModelAnimator() => m_networkModelAnimator;
         public GameObject GetNetworkModelObject () => m_networkModelObject;
         public Renderer   GetNetworkModelRenderer() => m_handOnlyModelRenderer;
-        public Outline    GetMyOuline() => m_modelOutline; 
+        public Outline    GetMyOuline() => m_modelOutline;
+
         public ToFade     GetToFade() => m_toFade; 
         public GameObject GetBattleUiMenu() => m_battleUiMenu;
         public GameObject GetStanMenu() => m_stanMenu;
         public GameObject GetUserUiMenu() => m_userUiMenu;
         public Canvas     GetReticleCanvas() => m_reticleCanvas;
         public Canvas     GetDisplayToOthersCanvas() => m_displayToOthersCanvas;
+        public List<GameObject> GetNavigationUiList() => m_navigationUiList;
+
         public GameObject GetDeathEffect() => m_deathEffect;
         public GameObject GetStanEffect() =>  m_stanEffect;
         public GameObject GetAiSlimeHitEffect() => m_aiSlimeHitEffect;
-        public GameObject GetAttackHitEffct() => m_attackHitEffct; 
+        public GameObject GetAttackHitEffct() => m_attackHitEffct;
+        
         public string GetAttackHitsEffectFolderName()
         {
             string path = "";

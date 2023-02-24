@@ -183,7 +183,7 @@ namespace Takechi.CharacterController.Parameters
             SetCanUseAbility2(false);
             SetCanUseAbility3(false);
 
-            Debug.Log($"<color=green> settingCharacterParameters </color>\n" +
+            Debug.Log($"<color=yellow> settingCharacterParameters </color>\n" +
                       $"<color=blue> info</color>\n" +
                       $" NickName : {PhotonNetwork.LocalPlayer.NickName} \n" +
                       $" movingSpeed = {movingSpeed}\n" +

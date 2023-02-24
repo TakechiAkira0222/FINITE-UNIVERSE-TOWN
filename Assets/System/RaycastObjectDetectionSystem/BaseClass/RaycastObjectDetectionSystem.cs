@@ -5,7 +5,9 @@ using Takechi.CharacterController.Address;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.SoundEffects;
+using UnityEditor;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Takechi.RaycastObjectDetectionSystem
 {
@@ -28,6 +30,9 @@ namespace Takechi.RaycastObjectDetectionSystem
         #endregion
 
         #region srialize fileld
+        [Header(" === CharacterAddressManagement ===")]
+        [SerializeField] private CharacterAddressManagement m_characterAddressManagement;
+
         [Header(" === Script Setting ===")]
         [SerializeField] private BasicUiSoundEffects m_basicUiSound;
         [SerializeField] private AudioSource m_audioSource;
@@ -35,9 +40,13 @@ namespace Takechi.RaycastObjectDetectionSystem
         [SerializeField] private LayerMask m_layerMask;
 
         #endregion
+        #region  protected variable
+        protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
+
+        #endregion
 
         #region get variable
-        public bool GetIsOperation() { return isOperation; }
+        public bool GetIsOperation() => isOperation; 
 
         #endregion
 
@@ -45,7 +54,7 @@ namespace Takechi.RaycastObjectDetectionSystem
         public void SetIsOperation(bool state)
         {
             isOperation = state;
-            Debug.Log($" m_isOperation {isOperation} to set. ");
+            Debug.Log($" m_isOperation <color=green>{isOperation}</color> to set. ");
         }
 
         #endregion
@@ -111,6 +120,18 @@ namespace Takechi.RaycastObjectDetectionSystem
 
                     return false;
                 }
+            }
+        }
+
+        #endregion
+
+        #region protected finuction
+        protected void setSctiveChangeState<T>(List<T> tList)
+        {
+            foreach ( T t  in tList) 
+            {
+                GameObject o  = t as GameObject;
+                o.SetActive( o.activeSelf == true ? false : true); 
             }
         }
 

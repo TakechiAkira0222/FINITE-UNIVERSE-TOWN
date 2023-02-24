@@ -16,10 +16,14 @@ namespace Takechi.UI.BattleUiMenu.LobbyScene
         [Header("=== RaycastHitSystem ===")]
         [SerializeField] private RaycastHitSetActiveTheCanvasSystem m_raycastHitSetActiveTheCanvasSystem;
         [SerializeField] private RaycastHitInstantiateTheCanvasSystem m_raycastHitInstantiateTheCanvasSystem;
+        [Header("=== Script Setting ===")]
+        [SerializeField] private string m_homepageURL = "https://fintieuniversetown.wixsite.com/finiteuniversetown";
 
         #endregion
         private RaycastHitSetActiveTheCanvasSystem   raycastHitSetActiveSystem => m_raycastHitSetActiveTheCanvasSystem;
         private RaycastHitInstantiateTheCanvasSystem raycastHitInstantiateSystem => m_raycastHitInstantiateTheCanvasSystem;
+        private List<GameObject> navigationUiList => addressManagement.GetNavigationUiList();
+        private string homepageURL => m_homepageURL;
 
         #region unity event
 
@@ -29,10 +33,10 @@ namespace Takechi.UI.BattleUiMenu.LobbyScene
 
             if (!isMine) return;
 
-            inputStateManagement.InputUserMenu += (statusManagement, addressManagement) =>
-            {
-                setRaycastHitSystemSetIsOperation(!addressManagement.GetUserUiMenu().activeSelf);
-            };
+            keyInputStateManagement.InputUserMenu += (statusManagement, addressManagement) => { setNavigationUiListState(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputUserMenu function <color=green>to add.</color>");
+
+            keyInputStateManagement.InputUserMenu += (statusManagement, addressManagement) => { setRaycastHitSystemSetIsOperation(!addressManagement.GetUserUiMenu().activeSelf);};
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : CharacterKeyInputStateManagement.InputUserMenu function <color=green>to add.</color>");
         }
 
@@ -42,10 +46,10 @@ namespace Takechi.UI.BattleUiMenu.LobbyScene
 
             if (!isMine) return;
 
-            inputStateManagement.InputUserMenu -= (statusManagement, addressManagement) =>
-            {
-                setRaycastHitSystemSetIsOperation(!addressManagement.GetUserUiMenu().activeSelf);
-            };
+            keyInputStateManagement.InputUserMenu -= (statusManagement, addressManagement) => { setNavigationUiListState(); };
+            Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  characterKeyInputStateManagement.InputUserMenu function <color=green>to remove.</color>");
+
+            keyInputStateManagement.InputUserMenu -= (statusManagement, addressManagement) => { setRaycastHitSystemSetIsOperation(!addressManagement.GetUserUiMenu().activeSelf); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : CharacterKeyInputStateManagement.InputUserMenu function <color=green>to remove.</color>");
         }
 
@@ -68,6 +72,11 @@ namespace Takechi.UI.BattleUiMenu.LobbyScene
             raycastHitInstantiateSystem.SetIsOperation(state);
         }
 
+        private void setNavigationUiListState()
+        {
+            foreach (GameObject o in navigationUiList) { o.SetActive(o.activeSelf == true ? false : true); }
+        } 
+
         #endregion
 
         #region unity evenet system
@@ -82,6 +91,8 @@ namespace Takechi.UI.BattleUiMenu.LobbyScene
                 Debug.Log(" OnDisconnect :<color=green> clear </color>", this.gameObject);
             }));
         }
+
+        public void OnConnectToHomePage() { Application.OpenURL(m_homepageURL); }
 
         #endregion
     }

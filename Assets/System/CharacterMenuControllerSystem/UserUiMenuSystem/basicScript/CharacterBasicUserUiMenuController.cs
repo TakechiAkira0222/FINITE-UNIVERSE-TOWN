@@ -31,7 +31,7 @@ namespace Takechi.UI.BattleUiMenu
         #region private variable
         protected CharacterAddressManagement addressManagement => m_characterAddressManagement;
         protected CharacterStatusManagement  statusManagement => m_characterStatusManagement;
-        protected CharacterKeyInputStateManagement inputStateManagement => m_characterKeyInputStateManagement;
+        protected CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
         protected RoomStatusManagement roomStatusManagement => addressManagement.GetMyRoomStatusManagement();
 
         protected bool   isMine => addressManagement.GetMyPhotonView().IsMine;
@@ -46,13 +46,13 @@ namespace Takechi.UI.BattleUiMenu
 
             base.OnEnable();
 
-            inputStateManagement.InputUserMenu += (statusManagement, addressManagement) =>
+            keyInputStateManagement.InputUserMenu += (statusManagement, addressManagement) =>
             {
                 StateChangeOnMenu(addressManagement.GetUserUiMenu());
                 StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 //StateChangeOnMenu(addressManagement.GetBattleUiMenu());
 
-                inputStateManagement.SetIsUserMenu(addressManagement.GetUserUiMenu().activeSelf);
+                keyInputStateManagement.SetIsUserMenu(addressManagement.GetUserUiMenu().activeSelf);
             };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : CharacterKeyInputStateManagement.InputUserMenu function <color=green>to add.</color>");
         }
@@ -63,13 +63,13 @@ namespace Takechi.UI.BattleUiMenu
 
             base.OnDisable();
 
-            inputStateManagement.InputUserMenu -= ( statusManagement, addressManagement) => 
+            keyInputStateManagement.InputUserMenu -= ( statusManagement, addressManagement) => 
             {
                 StateChangeOnMenu(addressManagement.GetUserUiMenu());
                 StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 // StateChangeOnMenu(addressManagement.GetBattleUiMenu());
 
-                inputStateManagement.SetIsUserMenu(addressManagement.GetUserUiMenu().activeSelf);
+                keyInputStateManagement.SetIsUserMenu(addressManagement.GetUserUiMenu().activeSelf);
             };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} : CharacterKeyInputStateManagement.InputUserMenu function <color=green>to remove.</color>");
         }

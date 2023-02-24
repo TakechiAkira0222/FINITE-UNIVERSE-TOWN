@@ -260,12 +260,9 @@ namespace Takechi.UI.RoomJoinedMenu
             string s
                = $" PlayerSlots : <color=green>{PhotonNetwork.CurrentRoom.PlayerCount} / {PhotonNetwork.CurrentRoom.MaxPlayers}</color> \n" +
                  $" RoomName : <color=green>{PhotonNetwork.CurrentRoom.Name}</color> \n" +
-                 $" HostName : <color=green>{PhotonNetwork.MasterClient.NickName}</color> \n";
-
-            foreach (string propertie in RoomStatusKey.allKeys)
-            {
-                s += $" CurrentRoom {propertie} : <color=green>{PhotonNetwork.CurrentRoom.CustomProperties[propertie]}</color> \n";
-            }
+                 $" HostName : <color=green>{PhotonNetwork.MasterClient.NickName}</color> \n"+
+                 $" MapName  : <color=green>{(string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.mapKey]}</color> \n"+
+                 $" GameType : <color=green>{(string)PhotonNetwork.CurrentRoom.CustomProperties[RoomStatusKey.gameTypeKey]}</color> \n";
 
             return s;
         }

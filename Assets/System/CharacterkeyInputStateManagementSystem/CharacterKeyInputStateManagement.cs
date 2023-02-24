@@ -8,7 +8,7 @@ using Takechi.CharacterController.Address;
 using Takechi.CharacterController.RoomStatus;
 using Takechi.CharacterController.Parameters;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
-
+using UnityEngine.Video;
 
 namespace Takechi.CharacterController.KeyInputStete
 {
@@ -100,17 +100,18 @@ namespace Takechi.CharacterController.KeyInputStete
         public void SetOperation( bool value) 
         {
             m_operation = value;
-            Debug.Log($" SetOperation = <color=green>{value}</color>");
+            Debug.Log($" SetOperation <color=green>{m_operation}</color> to set.");
         }
         public void SetIsUserMenu(bool value)
         {
             m_isUserMenu = value;
-            Debug.Log($" SetIsUserMenu = <color=green>{value}</color>");
+          
+            Debug.Log($" SetIsUserMenu <color=green>{m_isUserMenu}</color> to set.");
         }
         public void SetIsStan(bool value)
         {
             m_isStan = value;
-            Debug.Log($" SetIsStan = <color=green>{value}</color>");
+            Debug.Log($" SetIsStan <color=green>{m_isStan}</color> to set.");
         }
 
         #endregion

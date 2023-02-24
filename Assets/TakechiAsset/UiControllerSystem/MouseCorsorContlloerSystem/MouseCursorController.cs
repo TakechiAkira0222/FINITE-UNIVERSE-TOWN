@@ -15,21 +15,31 @@ namespace Takechi.MouseCursorController
         void Start()
         {
             Cursor.lockState = m_startCursorLockMode;
+            setCursorVisible(m_startCursorLockMode);
         }
 
         void OnEnable()
         {
             Cursor.lockState = m_enableCursorLockMode;
+            setCursorVisible(m_enableCursorLockMode);
         }
 
         void OnDisable()
         {
             Cursor.lockState = m_disableCursorLockMode;
+            setCursorVisible(m_disableCursorLockMode);
         }
 
         void OnDestroy()
         {
             Cursor.lockState = m_destotryCursorLockMode;
+            setCursorVisible(m_destotryCursorLockMode);
+        }
+
+        void setCursorVisible(CursorLockMode mode)
+        {
+            if ( mode == CursorLockMode.Locked) { Cursor.visible = true; }
+            else { Cursor.visible = true; }
         }
     }
 }

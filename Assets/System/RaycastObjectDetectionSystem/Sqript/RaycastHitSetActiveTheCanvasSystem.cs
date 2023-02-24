@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 namespace Takechi.RaycastObjectDetectionSystem
@@ -44,7 +45,6 @@ namespace Takechi.RaycastObjectDetectionSystem
         /// </summary>
         private Dictionary<string, GameObject> m_theCanvasSuitableForTheHitObjectDictionary =
             new Dictionary<string, GameObject>();
-
 
         #endregion
 
