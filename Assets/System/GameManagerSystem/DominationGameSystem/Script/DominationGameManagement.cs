@@ -66,9 +66,9 @@ namespace Takechi.GameManagerSystem.Domination
 
         #region getVariable
         public RoomStatusManagement GetMyRoomStatusManagement() { return roomStatusManagement; }
-        public float  GetGameTimeCunt_Seconds() { return m_gameTimeCunt_Seconds; }
-        public string GetJudgmentTagName() { return judgmentTagName; }
-        public bool   GetLocalGameEnd() { return m_localGameEnd; }
+        public float  GetGameTimeCunt_Seconds() =>  m_gameTimeCunt_Seconds;
+        public string GetJudgmentTagName() => judgmentTagName; 
+        public bool   GetLocalGameEnd() => m_localGameEnd; 
 
         #endregion
 
@@ -95,7 +95,6 @@ namespace Takechi.GameManagerSystem.Domination
 
         private void Update()
         {
-            if (!PhotonNetwork.IsMasterClient) return;
             if (GetLocalGameEnd()) return;
             if (!PhotonNetwork.InRoom) return;
 
@@ -183,6 +182,9 @@ namespace Takechi.GameManagerSystem.Domination
             if (m_gameTimeCunt_Seconds >= synchroTimeBeforeGameStart_Seconds)
             {
                 m_gameTimeCunt_Seconds = 0;
+
+                if (!PhotonNetwork.IsMasterClient) return;
+
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.running);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.running)");
             }
@@ -194,10 +196,15 @@ namespace Takechi.GameManagerSystem.Domination
             if ( m_gameTimeCunt_Seconds >= intervalTime_Second)
             {
                 m_gameTimeCunt_Seconds = 0;
+
+                if (!PhotonNetwork.IsMasterClient) return;
+
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationAPoint_domination());
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationBPoint_domination());
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationCPoint_domination());
             }
+
+            if (!PhotonNetwork.IsMasterClient) return;
 
             if (roomStatusManagement.GetTeamAPoint_domination() >= victoryConditionPoints)
             {

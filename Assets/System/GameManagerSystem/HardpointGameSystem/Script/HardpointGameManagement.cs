@@ -66,10 +66,10 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #endregion
 
         #region getVariable
-        public RoomStatusManagement GetMyRoomStatusManagement() { return roomStatusManagement; }
-        public float  GetGameTimeCunt_Seconds() { return m_gameTimeCunt_Seconds; }
-        public string GetJudgmentTagName() { return judgmentTagName; }
-        public bool   GetLocalGameEnd() { return m_localGameEnd; }
+        public RoomStatusManagement GetMyRoomStatusManagement() => roomStatusManagement;
+        public float  GetGameTimeCunt_Seconds() => m_gameTimeCunt_Seconds; 
+        public string GetJudgmentTagName() => judgmentTagName; 
+        public bool   GetLocalGameEnd() => m_localGameEnd;
 
         #endregion
 
@@ -97,9 +97,10 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         private void Update()
         {
-            if (!PhotonNetwork.IsMasterClient) return;
             if (GetLocalGameEnd()) return;
             if (!PhotonNetwork.InRoom) return;
+
+            Debug.Log(m_pointIocationindex);
 
             m_gameMain[roomStatusManagement.GetGameState()]();
         }
@@ -182,9 +183,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
         {
             m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if (m_gameTimeCunt_Seconds >= synchroTimeBeforeGameStart_Seconds)
+            if ( m_gameTimeCunt_Seconds >= synchroTimeBeforeGameStart_Seconds)
             {
                 m_gameTimeCunt_Seconds = 0;
+
+                if (!PhotonNetwork.IsMasterClient) return;
+
                 ChangePointIocation();
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.running);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.running)");
@@ -195,11 +199,16 @@ namespace Takechi.GameManagerSystem.Hardpoint
         {
             m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if (m_gameTimeCunt_Seconds >= intervalTime_Second)
+            if ( m_gameTimeCunt_Seconds >= intervalTime_Second)
             {
                 m_gameTimeCunt_Seconds = 0;
+
+                if (!PhotonNetwork.IsMasterClient) return;
+
                 ChangePointIocation();
             }
+
+            if (!PhotonNetwork.IsMasterClient) return;
 
             if (roomStatusManagement.GetTeamAPoint_hardPoint() >= victoryConditionPoints)
             {
@@ -257,6 +266,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
             m_areaLocationList[m_pointIocationindex % m_areaLocationList.Count].SetActive(true);
 
             m_pointIocationindex += 1;
+
+            
         }
 
         #endregion
