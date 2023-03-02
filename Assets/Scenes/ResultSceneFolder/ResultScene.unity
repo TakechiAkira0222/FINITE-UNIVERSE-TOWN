@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1399040910}
-  m_IndirectSpecularColor: {r: 0.12384192, g: 0.16471851, b: 0.22617038, a: 1}
+  m_IndirectSpecularColor: {r: 0.099720016, g: 0.13316676, b: 0.18366519, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -897,17 +897,24 @@ MonoBehaviour:
   m_deathCamera: {fileID: 0}
   m_handOnlyModelAnimator: {fileID: 0}
   m_handOnlyModelObject: {fileID: 0}
+  m_handOnlyModelRenderer: {fileID: 0}
   m_networkModelAnimator: {fileID: 0}
   m_networkModelObject: {fileID: 0}
+  m_networkModelRenderer: {fileID: 0}
   m_modelOutline: {fileID: 0}
   m_toFade: {fileID: 0}
   m_battleUiMenu: {fileID: 0}
+  m_stanMenu: {fileID: 0}
   m_userUiMenu: {fileID: 0}
   m_reticleCanvas: {fileID: 0}
+  m_displayToOthersCanvas: {fileID: 0}
+  m_navigationUiList: []
   m_attackHitsEffectFolderName: []
   m_attackHitEffct: {fileID: 0}
   m_deathEffectFolderName: []
   m_deathEffect: {fileID: 0}
+  m_stanEffect: {fileID: 0}
+  m_aiSlimeHitEffect: {fileID: 0}
 --- !u!114 &1817388033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,10 +1238,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 511683044}
     m_Modifications:
-    - target: {fileID: 2095461444473871601, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2382505012179680944, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
       propertyPath: m_toFade
       value: 
@@ -1402,6 +1405,46 @@ PrefabInstance:
     - target: {fileID: 6660112340337333927, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
       propertyPath: m_Name
       value: ResultMenuScreenCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304942674887413243, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304942674887413243, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304942674887413243, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304942674887413243, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304942674887413243, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524959752018163833, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524959752018163833, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524959752018163833, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524959752018163833, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524959752018163833, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0248a3baefb745d4a82e124b1f3ffb10, type: 3}
