@@ -87,7 +87,8 @@ namespace Takechi.CharacterController.ThrowSmokeAnimationEvent
             GameObject instans =
             PhotonNetwork.Instantiate( throwInstansPath + throwInstans.name, throwTransform.position, Quaternion.identity);
 
-            instans.GetComponent<Rigidbody>().AddForce((throwTransform.forward + (throwTransform.up / 10)) * force, ForceMode.Impulse);
+            instans.transform.Rotate( new Vector3( 0, 0, 60f));
+            instans.GetComponent<Rigidbody>().AddForce(( throwTransform.forward + ( throwTransform.up / 10)) * force, ForceMode.Impulse);
 
             StartCoroutine(DelayMethod( smokeDuration_Seconds, () => { PhotonNetwork.Destroy(instans); }));
         }

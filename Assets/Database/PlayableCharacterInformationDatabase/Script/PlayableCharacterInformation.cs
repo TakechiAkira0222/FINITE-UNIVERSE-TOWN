@@ -82,97 +82,97 @@ namespace Takechi.CharacterController.Information
         /// キャラクター　特徴
         /// </summary>
         /// <returns></returns>
-        public FeaturesOfCharacter GetFeaturesOfCharacter() { return m_featuresOfCharacter; }
+        public FeaturesOfCharacter GetFeaturesOfCharacter() => m_featuresOfCharacter;
         /// <summary>
         /// キャラクター 攻撃種類
         /// </summary>
         /// <returns></returns>
-        public TypeOfAttack GetTypeOfAttack() { return m_attackType; }
+        public TypeOfAttack GetTypeOfAttack() => m_attackType; 
         /// <summary>
         /// キャラクター 名前
         /// </summary>
         /// <returns></returns>
-        public string GetCharacterName() { return m_characterName; }
+        public string GetCharacterName() => m_characterName;
         /// <summary>
         /// キャラクター アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetCharacterIcon() { return m_characterIcon; }
+        public Sprite GetCharacterIcon() => m_characterIcon;
         /// <summary>
         /// キャラクター 攻撃種類 アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetCharacterAttackTypeIcon() { return m_characterAttackTypeIcon; }
+        public Sprite GetCharacterAttackTypeIcon() => m_characterAttackTypeIcon;
         /// <summary>
         /// キャラクター 特徴 アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetCharacterFeaturesIcon() { return m_characterFeaturesIcon; }
+        public Sprite GetCharacterFeaturesIcon() => m_characterFeaturesIcon;
         /// <summary>
         /// キャラクター 説明
         /// </summary>
         /// <returns></returns>
-        public string GetCharacterExplanation() { return m_characterExplanation; }
+        public string GetCharacterExplanation() => m_characterExplanation;
         /// <summary>
         /// 必殺技　名前
         /// </summary>
         /// <returns></returns>
-        public string GetdeathblowName() { return m_deathblowName; }
+        public string GetdeathblowName() => m_deathblowName;
         /// <summary>
         /// 必殺技 アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetdeathblowIcon() { return m_deathblowIcon; }
+        public Sprite GetdeathblowIcon() => m_deathblowIcon; 
         /// <summary>
         /// 必殺技 説明
         /// </summary>
         /// <returns></returns>
-        public string GetdeathblowExplanation() { return m_deathblowExplanation; }
+        public string GetdeathblowExplanation() => m_deathblowExplanation;
         /// <summary>
         /// アビリティー1 名前
         /// </summary>
         /// <returns></returns>
-        public string GetAbility1Name() { return m_ability1Name; }
+        public string GetAbility1Name() => m_ability1Name;
         /// <summary>
         /// アビリティー1 アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetAbility1Icon() { return m_ability1Icon; }
+        public Sprite GetAbility1Icon() => m_ability1Icon;
         /// <summary>
         /// アビリティー1 説明
         /// </summary>
         /// <returns></returns>
-        public string GetAbility1Explanation() { return m_ability1Explanation; }
+        public string GetAbility1Explanation() => m_ability1Explanation; 
         /// <summary>
         /// アビリティー2 名前
         /// </summary>
         /// <returns></returns>
-        public string GetAbility2Name() { return m_ability2Name; }
+        public string GetAbility2Name() => m_ability2Name;
         /// <summary>
         /// アビリティー2 アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetAbility2Icon() { return m_ability1Icon; }
+        public Sprite GetAbility2Icon() => m_ability2Icon;
         /// <summary>
         /// アビリティー2 説明
         /// </summary>
         /// <returns></returns>
-        public string GetAbility2Explanation() { return m_ability2Explanation; }
+        public string GetAbility2Explanation() => m_ability2Explanation;
         /// <summary>
         /// アビリティー3 名前
         /// </summary>
         /// <returns></returns>
-        public string GetAbility3Name() { return m_ability3Name; }
+        public string GetAbility3Name() => m_ability3Name;
         /// <summary>
         /// アビリティー3 アイコン
         /// </summary>
         /// <returns></returns>
-        public Sprite GetAbility3Icon() { return m_ability3Icon; }
+        public Sprite GetAbility3Icon() => m_ability3Icon;
         /// <summary>
         /// アビリティー3 説明
         /// </summary>
         /// <returns></returns>
-        public string GetAbility3Explanation() { return m_ability3Explanation; }
+        public string GetAbility3Explanation() => m_ability3Explanation;
 
         #endregion
     }
