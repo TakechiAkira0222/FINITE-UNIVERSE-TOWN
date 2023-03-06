@@ -15,13 +15,25 @@ namespace Takechi.PlayableCharacter.FadingCanvas
     public class ToFade : MonoBehaviour
     {
         /// <summary>
-        ///　キャンバス内のフェイドするtext
+        ///　キャンバス内のFadeIn時に状態が変化するtext
         /// </summary>
-        [SerializeField] private List< UnityEngine.UI.Text> m_canvasTextList;
+        [SerializeField] private List< UnityEngine.UI.Text>  m_changeOnFadeInCanvasTextList;
         /// <summary>
-        ///　キャンバス内のフェイドするImage
+        ///　キャンバス内のFadeOut時に状態が変化するtext
         /// </summary>
-        [SerializeField] private List< UnityEngine.UI.Image> m_canvasImageList;
+        [SerializeField] private List< UnityEngine.UI.Text>  m_changeOnFadeOutCanvasTextList;
+        /// <summary>
+        ///　キャンバス内のFadeIn時に状態が変化するImage
+        /// </summary>
+        [SerializeField] private List<UnityEngine.UI.Image> m_changeOnFadeInCanvasImageList;
+        /// <summary>
+        ///　キャンバス内のFadeOut時に状態が変化するImage
+        /// </summary>
+        [SerializeField] private List<UnityEngine.UI.Image> m_changeOnFadeOutCanvasImageList;
+        /// <summary>
+        /// 変更内容を反映するText
+        /// </summary>
+        [SerializeField] private List<UnityEngine.UI.Text> m_outputTextList;
         /// <summary>
         /// フェイドスピード
         /// </summary>
@@ -38,7 +50,7 @@ namespace Takechi.PlayableCharacter.FadingCanvas
         {
             StartCoroutine( nameof( StartFadeIn));
 
-            ChangeDisplayTextContent( m_canvasTextList, outputText);
+            ChangeDisplayTextContent( m_outputTextList, outputText);
 
             Debug.Log(" OnFadeIn : <color=green>start.</color>");
         }
@@ -51,7 +63,7 @@ namespace Takechi.PlayableCharacter.FadingCanvas
         {
             StartCoroutine( nameof( StartFadeOut));
 
-            ChangeDisplayTextContent( m_canvasTextList, outputText);
+            ChangeDisplayTextContent( m_outputTextList, outputText);
 
             Debug.Log(" OnFadeOut : <color=green>start.</color>");
         }
@@ -64,7 +76,7 @@ namespace Takechi.PlayableCharacter.FadingCanvas
         {
             StartCoroutine( nameof( StartFadeOutAndIn));
 
-            ChangeDisplayTextContent( m_canvasTextList, outputText);
+            ChangeDisplayTextContent( m_outputTextList, outputText);
 
             Debug.Log(" OnFadeInAndOut : <color=green>start.</color>");
         }
@@ -83,13 +95,15 @@ namespace Takechi.PlayableCharacter.FadingCanvas
 
         private IEnumerator StartFadeOut()
         {
-            ChangeDawingState( m_canvasTextList, true);
-            ChangeDawingState( m_canvasImageList, true);
+            ChangeDawingState( m_outputTextList, true);
+            ChangeDawingState( m_changeOnFadeOutCanvasTextList, true);
+            ChangeDawingState( m_changeOnFadeOutCanvasImageList, true);
 
             for (float alpha = 0; alpha <= 1; alpha += m_fadeSpeed)
             {
-                foreach ( UnityEngine.UI.Text text in m_canvasTextList)    { text.color = new Color( 1, 1, 1, alpha);}
-                foreach ( UnityEngine.UI.Image image in m_canvasImageList) { image.color = new Color( 0, 0, 0, alpha);}
+                foreach ( UnityEngine.UI.Text text in m_outputTextList)    { text.color = new Color( 1, 1, 1, alpha);}
+                foreach ( UnityEngine.UI.Text text in m_changeOnFadeOutCanvasTextList)    { text.color = new Color( 1, 1, 1, alpha);}
+                foreach ( UnityEngine.UI.Image image in m_changeOnFadeOutCanvasImageList) { image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);}
 
                 yield return new WaitForSeconds( m_fadeDisplayTime / 2 * m_fadeSpeed);
             }
@@ -99,19 +113,22 @@ namespace Takechi.PlayableCharacter.FadingCanvas
 
         private IEnumerator StartFadeIn()
         {
-            ChangeDawingState(m_canvasTextList, true);
-            ChangeDawingState(m_canvasImageList, true);
+            ChangeDawingState(m_outputTextList, true);
+            ChangeDawingState(m_changeOnFadeInCanvasTextList, true);
+            ChangeDawingState(m_changeOnFadeInCanvasImageList, true);
 
             for ( float alpha = 1; alpha >= 0; alpha -= m_fadeSpeed)
             {
-                foreach (UnityEngine.UI.Text  text in m_canvasTextList)   { text.color = new Color(1, 1, 1, alpha); }
-                foreach (UnityEngine.UI.Image image in m_canvasImageList) { image.color = new Color(0, 0, 0, alpha); }
+                foreach (UnityEngine.UI.Text  text in m_outputTextList)   { text.color = new Color(1, 1, 1, alpha); }
+                foreach (UnityEngine.UI.Text  text in m_changeOnFadeInCanvasTextList)   { text.color = new Color(1, 1, 1, alpha); }
+                foreach (UnityEngine.UI.Image image in m_changeOnFadeInCanvasImageList) { image.color = new Color(image.color.r, image.color.g, image.color.b, alpha); }
 
                 yield return new WaitForSeconds( m_fadeDisplayTime / 2 * m_fadeSpeed);
             }
 
-            ChangeDawingState( m_canvasTextList, false);
-            ChangeDawingState( m_canvasImageList, false);
+            ChangeDawingState(m_outputTextList, false);
+            ChangeDawingState(m_changeOnFadeInCanvasTextList, false);
+            ChangeDawingState(m_changeOnFadeInCanvasImageList, false);
 
             Debug.Log(" OnFadeIn : <color=green>End.</color>");
         }

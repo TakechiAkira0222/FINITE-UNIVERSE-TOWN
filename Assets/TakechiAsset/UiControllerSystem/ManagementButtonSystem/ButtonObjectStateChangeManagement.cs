@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,25 @@ namespace Takechi.ManagmentButton.SrateChange
             obj.SetActive(false);
             Debug.Log($" {obj.name}.<color=yellow>SetActive</color>(<color=blue>false</color>)");
         }
+
+        public void OnChildSetActiveManagment_true(GameObject parentObj)
+        {
+            foreach (Transform c in parentObj.transform)
+            {
+                c.gameObject.SetActive(true);
+                Debug.Log($" {c.gameObject.name}.<color=yellow>SetActive</color>(<color=blue>true</color>)");
+            }
+        }
+
+        public void OnChildSetActiveManagment_false(GameObject parentObj)
+        {
+            foreach (Transform c in parentObj.transform)
+            {
+                c.gameObject.SetActive(false);
+                Debug.Log($" {c.gameObject.name}.<color=yellow>SetActive</color>(<color=blue>false</color>)");
+            }
+        }
+
 
         public void OnIntaractableManagemnt_ture(Button button)
         {
