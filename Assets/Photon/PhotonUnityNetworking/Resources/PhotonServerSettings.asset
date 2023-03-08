@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 5b82f313-0638-4dc2-bddf-abe97f642f64
+    AppIdRealtime: 67e84f46-c982-4553-b316-0b99c4893980
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 5b82f313-0638-4dc2-bddf-abe97f642f64
-    AppVersion: 
+    AppIdVoice: 67e84f46-c982-4553-b316-0b99c4893980
+    AppVersion: 0.1
     UseNameServer: 1
     FixedRegion: jp
     Server: 
@@ -39,27 +39,27 @@ MonoBehaviour:
   - ClickRpc
   - DestroyRpc
   - HeresWhy
-  - RpcOfficeWorkerAttackStart
-  - RpcOfficeWorkerAttackEnd
-  - RpcsetPhysicsIgnoreCollision
   - RPC_AttackAnimationTrigger
   - RPC_DeathblowAnimationTrigger
   - RPC_DumpingAnimationTrigger
   - RPC_JumpingAnimationTrigger
   - RPC_DamageAnimationSetFloat
-  - RPC_SceneSyncChange
   - RPC_Ablity1AnimationTrigger
   - RPC_Ablity2AnimationTrigger
   - RPC_Ablity3AnimationTrigger
-  - RPC_LocationChange
-  - StartOfDeathJudgment
-  - RPC_EndOfDeathJudgment
-  - RPC_StartOfDeathJudgment
   - RPC_ActivationDeathblowAreaEffect
+  - RPC_EndOfDeathJudgment
+  - RPC_LocationChange
+  - RPC_SceneSyncChange
+  - RPC_StanEffectSync
   - RPC_ExitDeathblowAreaEffect
+  - RpcOfficeWorkerAttackStart
+  - RpcOfficeWorkerAttackEnd
+  - RpcsetPhysicsIgnoreCollision
+  - StartOfDeathJudgment
+  - RPC_StartOfDeathJudgment
   - RPC_SetTimeScale
   - RPC_PlayOneShotConcreteFootstepsSound
-  - RPC_StanEffectSync
   - RPC_AiSliemHitEffectSync
   DisableAutoOpenWizard: 1
   ShowSettings: 1

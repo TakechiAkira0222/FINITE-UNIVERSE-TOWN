@@ -47,6 +47,10 @@ namespace Takechi.CharacterController.Parameters
         {
             myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfDeathblowStartClip(), officeWorkerSpecificSoundEffects.GetVoiceOfDeathblowStartVolume());
         }
+        public void PlayOneShotVoiceOfThrowWatermelon()
+        {
+            myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetVoiceOfThrowWatermelonClip(), officeWorkerSpecificSoundEffects.GetVoiceOfThrowWatermelonVolume());
+        }
         public void PlayOneShotPowerUp()
         {
             myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetDeathblowPowerUpClip(), officeWorkerSpecificSoundEffects.GetDeathblowPowerUpVolume());
@@ -62,6 +66,14 @@ namespace Takechi.CharacterController.Parameters
         public void PlayOneShotFlying()
         {
             myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetFlyingClip(), officeWorkerSpecificSoundEffects.GetFlyingVolume());
+        }
+        public void PlayOneShotPraySound()
+        {
+            myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetPraySoundClip(), officeWorkerSpecificSoundEffects.GetPraySoundVolume());
+        }
+        public void PlayOneShotWatermelonBreaking()
+        {
+            myMainAudioSource.PlayOneShot(officeWorkerSpecificSoundEffects.GetWatermelonBreakingClip(), officeWorkerSpecificSoundEffects.GetWatermelonBreakingVolume());
         }
 
         #endregion

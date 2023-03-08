@@ -62,6 +62,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
             if (isMine)
             {
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(false);
                 networkModelObject.SetActive(true);
             };
@@ -86,6 +87,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
 
             if (isMine)
             {
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(true);
                 networkModelObject.SetActive(false);
             };

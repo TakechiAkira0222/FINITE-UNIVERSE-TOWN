@@ -33,7 +33,6 @@ namespace Takechi.UI.BattleUiMenu
         protected CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         protected CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
         protected RoomStatusManagement roomStatusManagement => addressManagement.GetMyRoomStatusManagement();
-
         protected bool   isMine => addressManagement.GetMyPhotonView().IsMine;
         protected ToFade toFade => m_toFade;
 
@@ -75,8 +74,5 @@ namespace Takechi.UI.BattleUiMenu
         }
 
         #endregion
-
-        private void StateChangeOnMenu( GameObject menu) { menu.SetActive(!menu.activeSelf); }
-        private void StateChangeOnCanvas( Canvas canvas) { canvas.gameObject.SetActive(!canvas.gameObject.activeSelf); }
     }
 }

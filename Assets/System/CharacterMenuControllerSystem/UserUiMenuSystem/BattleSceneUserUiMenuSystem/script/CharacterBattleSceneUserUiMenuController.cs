@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.NetworkEnvironment.ReferencingNetworkEnvironmentDetails;
 using static Takechi.ScriptReference.SceneInformation.ReferenceSceneInformation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using System;
 
 namespace Takechi.UI.BattleUiMenu.BattleScene

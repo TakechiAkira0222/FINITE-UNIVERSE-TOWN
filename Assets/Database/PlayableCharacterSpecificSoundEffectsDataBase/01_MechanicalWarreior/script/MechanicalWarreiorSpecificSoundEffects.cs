@@ -10,38 +10,41 @@ namespace Takechi.CharacterController.SpecificSoundEffects.MechanicalWarreior
     public class MechanicalWarreiorSpecificSoundEffects : ScriptableObject
     {
         #region SerializeField
-        [SerializeField, Header("通常射撃")] private AudioClip m_normalShoot;
+        [SerializeField, Header("通常射撃")] private AudioClip m_normalShootClip;
         [SerializeField, Range(0f, 1f)] private float m_normalShootVolume = 0.5f;
 
-        [SerializeField, Header("必殺技　コッキング")] private AudioClip m_deathbolwCocking;
+        [SerializeField, Header("必殺技　コッキング")] private AudioClip m_deathbolwCockingClip;
         [SerializeField, Range(0f, 1f)] private float m_deathbolwCockingVolume = 0.5f;
 
-        [SerializeField, Header("必殺技　リロード")] private AudioClip m_deathbolwReload;
+        [SerializeField, Header("必殺技　リロード")] private AudioClip m_deathbolwReloadClip;
         [SerializeField, Range(0f, 1f)] private float m_deathbolwReloadVolume = 0.5f;
 
-        [SerializeField, Header("必殺技　ショット")] private AudioClip m_deathbolwShoot;
+        [SerializeField, Header("必殺技　ショット")] private AudioClip m_deathbolwShootClip;
         [SerializeField, Range(0f, 1f)] private float m_deathbolwShootVolume = 0.5f;
 
-        [SerializeField, Header(" EnemySearchClickButton ")] private AudioClip m_enemySearchClickButton;
+        [SerializeField, Header(" EnemySearchClickButton ")] private AudioClip m_enemySearchClickButtonClip;
         [SerializeField, Range(0f, 1f)] private float m_enemySearchClickButtonVolume = 0.5f;
 
-        [SerializeField, Header(" EnemyOnSearch ")] private AudioClip m_enemyOnSearch;
+        [SerializeField, Header(" EnemyOnSearch ")] private AudioClip m_enemyOnSearchClip;
         [SerializeField, Range(0f, 1f)] private float m_enemyOnSearchVolume = 0.5f;
 
-        [SerializeField, Header(" SmokeExplosion")] private AudioClip m_smokeExplosion;
+        [SerializeField, Header(" SmokeExplosion")] private AudioClip m_smokeExplosionClip;
         [SerializeField, Range(0f, 1f)] private float m_smokeExplosionVolume = 0.5f;
 
+        [SerializeField, Header(" wallSetting")] private AudioClip m_wallSettingSoundClip;
+        [SerializeField, Range(0f, 1f)] private float m_wallSettingSoundVolume = 0.5f;
 
         #endregion
 
         #region GetAudioClipFunction
-        public AudioClip GetNormalShootClip() => m_normalShoot;
-        public AudioClip GetDeathbolwShootClip()   => m_deathbolwShoot;
-        public AudioClip GetDeathbolwCockingClip() => m_deathbolwCocking;
-        public AudioClip GetDeathbolwReloadClip()  => m_deathbolwReload;
-        public AudioClip GetEnemySearchClickButtonClip() => m_enemySearchClickButton;  
-        public AudioClip GetEnemyOnSearchClip() => m_enemyOnSearch;
-        public AudioClip GetSmokeExplosionClip()    => m_smokeExplosion;
+        public AudioClip GetNormalShootClip() => m_normalShootClip;
+        public AudioClip GetDeathbolwShootClip()   => m_deathbolwShootClip;
+        public AudioClip GetDeathbolwCockingClip() => m_deathbolwCockingClip;
+        public AudioClip GetDeathbolwReloadClip()  => m_deathbolwReloadClip;
+        public AudioClip GetEnemySearchClickButtonClip() => m_enemySearchClickButtonClip;  
+        public AudioClip GetEnemyOnSearchClip() => m_enemyOnSearchClip;
+        public AudioClip GetSmokeExplosionClip()   => m_smokeExplosionClip;
+        public AudioClip GetWallSettingSoundClip() => m_wallSettingSoundClip;  
 
         public float GetNormalShootVolume()    => m_normalShootVolume;
         public float GetDeathbolwShootVolume() => m_deathbolwShootVolume;
@@ -50,7 +53,7 @@ namespace Takechi.CharacterController.SpecificSoundEffects.MechanicalWarreior
         public float GetEnemySearchClickButtonVolume() => m_enemySearchClickButtonVolume;
         public float GetEnemyOnSearchVolume()  => m_enemyOnSearchVolume;
         public float GetSmokeExplosionVolume() => m_smokeExplosionVolume;
-
+        public float GetWallSettingSoundVolume() => m_wallSettingSoundVolume;
 
         #endregion
     }

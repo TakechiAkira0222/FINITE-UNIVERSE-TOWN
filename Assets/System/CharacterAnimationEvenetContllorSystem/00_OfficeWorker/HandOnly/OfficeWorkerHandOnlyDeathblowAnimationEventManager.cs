@@ -39,18 +39,20 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         private Animator   networkModelAnimator =>   addressManagement.GetNetworkModelAnimator();
         private GameObject handOnlyModelObject  =>   addressManagement.GetHandOnlyModelObject();
         private GameObject networkModelObject   =>   addressManagement.GetNetworkModelObject();
+        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private bool       isMine => myPhotonView.IsMine;
         /// <summary>
         /// èdÇ›ÇÃàÍéûï€ä«
         /// </summary>
         private float m_networkModelAnimatorWeight = 0;
 
-        private void OnEnable()
+        public override void OnEnable()
         {
             statusManagement.InitializeCharacterInstanceStateSettings += () => { resetOfficeWorkerDeathblowState(); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetOfficeWorkerDeathblowState</color>() <color=green>to add.</color>");
         }
 
-        private void OnDisable()
+        public override void OnDisable()
         {
             statusManagement.InitializeCharacterInstanceStateSettings -= () => { resetOfficeWorkerDeathblowState(); };
             Debug.Log($"{PhotonNetwork.LocalPlayer.NickName} :  statusManagement.InitializeCharacterInstanceStateSettings <color=yellow>resetOfficeWorkerDeathblowState</color>() <color=green>to remove.</color>");
@@ -82,8 +84,9 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             SetLayerWeight(networkModelAnimator, AnimatorLayers.overrideLayer, 0.1f);
 
             // isMine active
-            if (statusManagement.photonView.IsMine)
+            if (isMine)
             {
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(false);
                 networkModelObject.SetActive(true);
             }
@@ -123,12 +126,13 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             SetLayerWeight(networkModelAnimator, AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
 
             // isMine active
-            if ( statusManagement.photonView.IsMine)
+            if (isMine)
             {
                 // effect 
                 thisPhotonView.RPC(nameof(RPC_ActivationDeathblowAreaEffect), RpcTarget.AllBufferedViaServer);
                 StartCoroutine(DelayMethod( statusManagement.GetDeathblowMoveDuration_Seconds(), () => thisPhotonView.RPC(nameof(RPC_ExitDeathblowAreaEffect), RpcTarget.AllBufferedViaServer)));
 
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(true);
                 networkModelObject.SetActive(false);
             }

@@ -50,6 +50,7 @@ namespace Takechi.CharacterController.BuildWallAnimationEvent
         /// </summary>
         public void MechanicalWarriorBuildWallStart()
         {
+           
             // operation
             keyInputStateManagement.SetOperation(false);
 
@@ -71,6 +72,9 @@ namespace Takechi.CharacterController.BuildWallAnimationEvent
         /// </summary>
         public void MechanicalWarriorBuildWallEnd()
         {
+            //sound
+            soundEffectsManagement.PlayOneShotWallSettingSound();
+
             // operation
             keyInputStateManagement.SetOperation(true);
 

@@ -3040,10 +3040,11 @@ MonoBehaviour:
   m_dashKey: 304
   m_jumpKey: 32
   m_deathblowKey: 113
-  m_ability1: 101
-  m_ability2: 102
-  m_ability3: 99
-  m_userMenu: 27
+  m_displayMapKey: 109
+  m_ability1Key: 101
+  m_ability2Key: 99
+  m_ability3Key: 118
+  m_userMenuKey: 27
 --- !u!114 &2640404583997773107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3358,6 +3359,7 @@ MonoBehaviour:
   m_battleUiMenu: {fileID: 0}
   m_stanMenu: {fileID: 0}
   m_userUiMenu: {fileID: 2110749464}
+  m_mapUiMenu: {fileID: 0}
   m_reticleCanvas: {fileID: 7428346356527058108}
   m_displayToOthersCanvas: {fileID: 0}
   m_navigationUiList:
@@ -3691,6 +3693,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3343302735153968249, guid: 48d74ba9c3f29c247bef7731195e63b0, type: 3}
       propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343302735153968250, guid: 48d74ba9c3f29c247bef7731195e63b0, type: 3}
+      propertyPath: m_offlinemode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3343302735153968251, guid: 48d74ba9c3f29c247bef7731195e63b0, type: 3}
@@ -6475,6 +6481,10 @@ PrefabInstance:
     - target: {fileID: 2148224857208585704, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_Name
       value: LobbyCharacterMenuScreenCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148224857208585704, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2887865904004185544, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_Name

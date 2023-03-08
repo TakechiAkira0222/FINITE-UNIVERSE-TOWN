@@ -109,6 +109,10 @@ namespace Takechi.CharacterController.Address
         /// </summary>
         [SerializeField] private GameObject m_userUiMenu;
         /// <summary>
+        /// map ui Menu
+        /// </summary>
+        [SerializeField] private GameObject m_mapUiMenu;
+        /// <summary>
         /// reticle Canvas
         /// </summary>
         [SerializeField] private Canvas m_reticleCanvas;
@@ -186,6 +190,7 @@ namespace Takechi.CharacterController.Address
         public GameObject GetBattleUiMenu() => m_battleUiMenu;
         public GameObject GetStanMenu() => m_stanMenu;
         public GameObject GetUserUiMenu() => m_userUiMenu;
+        public GameObject GetMapUiMenu() => m_mapUiMenu;
         public Canvas     GetReticleCanvas() => m_reticleCanvas;
         public Canvas     GetDisplayToOthersCanvas() => m_displayToOthersCanvas;
         public List<GameObject> GetNavigationUiList() => m_navigationUiList;

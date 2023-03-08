@@ -49,6 +49,9 @@ namespace Takechi.CharacterController.PrayingAnimationEvent
             // sword setActive
             setSwordSetActive(false);
 
+            // sound
+            soundEffectsManagement.PlayOneShotPraySound();
+
             // set operation
             keyInputStateManagement.SetOperation(false);
 

@@ -41,13 +41,13 @@ namespace Takechi.CharacterController.AnimationEvent
         public void SlimeStanStart()
         {
             stanEffect1.SetActive(true);
-            soundEffectsManagement.PlayOneShotStan();
         }
 
         public void SlimeStan()
         {
             stanEffect1.SetActive(false);
             stanEffect2.SetActive(true);
+            soundEffectsManagement.PlayOneShotStan();
         }
 
         public  void SlimeStanEnd()

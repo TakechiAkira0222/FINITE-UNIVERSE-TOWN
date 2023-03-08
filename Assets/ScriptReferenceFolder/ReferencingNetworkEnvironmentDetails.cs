@@ -13,7 +13,7 @@ namespace Takechi.ScriptReference.NetworkEnvironment
             /// <summary>
             /// fade Production Time_second
             /// </summary>
-            public const int fadeProductionTime_Seconds = 5;
+            public const int fadeProductionTime_Seconds = 7;
 
             /// <summary>
             /// synchro time before game start second

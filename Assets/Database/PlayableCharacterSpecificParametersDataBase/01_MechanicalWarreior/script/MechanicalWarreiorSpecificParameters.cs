@@ -12,7 +12,7 @@ namespace Takechi.CharacterController.SpecificParameters.MechanicalWarreior
         #region serialize field
         [SerializeField, Range( 1.0f, 10.0f),  Header(" ËŒ‚‚ÌˆĞ—Í@’ÊíUŒ‚ ")]
         private float m_normalShootingForce = 3.0f;
-        [SerializeField, Range( 1.0f, 10.0f), Header(" ’e‚Ì‘¶İŠÔ ’Êí ")]
+        [SerializeField, Range( 0.1f, 1.0f), Header(" ’e‚Ì‘¶İŠÔ ’Êí ")]
         private float m_normalDurationOfBullet = 5;
         [SerializeField, Range( 1.0f, 10.0f),  Header(" ËŒ‚‚ÌˆĞ—Í@•KE‹Z ")]
         private float m_deathblowShootingForce = 3.0f;

@@ -28,10 +28,11 @@ namespace Takechi.CharacterController.KeyInputStete
         [SerializeField] private KeyCode m_dashKey = KeyCode.LeftShift;
         [SerializeField] private KeyCode m_jumpKey = KeyCode.Space;
         [SerializeField] private KeyCode m_deathblowKey = KeyCode.Q;
-        [SerializeField] private KeyCode m_ability1 = KeyCode.E;
-        [SerializeField] private KeyCode m_ability2 = KeyCode.F;
-        [SerializeField] private KeyCode m_ability3 = KeyCode.C;
-        [SerializeField] private KeyCode m_userMenu = KeyCode.Escape;
+        [SerializeField] private KeyCode m_displayMapKey= KeyCode.M;
+        [SerializeField] private KeyCode m_ability1Key = KeyCode.E;
+        [SerializeField] private KeyCode m_ability2Key = KeyCode.C;
+        [SerializeField] private KeyCode m_ability3Key = KeyCode.V;
+        [SerializeField] private KeyCode m_userMenuKey = KeyCode.Escape;
 
         #endregion
 
@@ -43,6 +44,7 @@ namespace Takechi.CharacterController.KeyInputStete
 
         private bool m_operation = true;
         private bool m_isUserMenu = false;
+        private bool m_isDisplayMap = false;
         private bool m_isStan = false;
         private Dictionary<string, Action> m_gameMain = new Dictionary<string, Action>();
      
@@ -57,6 +59,7 @@ namespace Takechi.CharacterController.KeyInputStete
         public event Action< CharacterStatusManagement, CharacterAddressManagement> InputToAblity2   = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement> InputToAblity3   = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement> InputUserMenu = delegate { };
+        public event Action< CharacterStatusManagement, CharacterAddressManagement> InputDisplayMapMenu = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement, float , float> InputToMovement  = delegate { };
         public event Action< CharacterStatusManagement, CharacterAddressManagement, float , float> InputToViewpoint = delegate { };
 
@@ -64,6 +67,7 @@ namespace Takechi.CharacterController.KeyInputStete
         {
             m_characterStatusManagement  = this.transform.GetComponent<CharacterStatusManagement>();
             m_characterAddressManagement = this.transform.GetComponent<CharacterAddressManagement>();
+            m_roomStatusManagement = this.transform.GetComponent<RoomStatusManagement>();
         }
 
         void OnEnable()
@@ -80,8 +84,17 @@ namespace Takechi.CharacterController.KeyInputStete
         {
             if (!myPhotonView.IsMine) return;
 
-            if (Input.GetKeyDown( m_userMenu)) { InputUserMenu(statusManagement, addressManagement); }
+            if (!m_isUserMenu)
+            {
+                if (Input.GetKeyDown(m_displayMapKey)) { InputDisplayMapMenu(statusManagement, addressManagement); }
+            }
 
+            if (!m_isDisplayMap)
+            {
+                if (Input.GetKeyDown(m_userMenuKey)) { InputUserMenu(statusManagement, addressManagement); }
+            }
+
+            if (m_isDisplayMap) return;
             if (m_isUserMenu) return;
             if (!m_operation) return;
             if (m_isStan) return;
@@ -90,9 +103,10 @@ namespace Takechi.CharacterController.KeyInputStete
         }
 
         #region get function
-        public bool GetOperation() { return m_operation; }
-        public bool GetIsUserMenu() { return m_isUserMenu; }
-        public bool GetIsStan() { return m_isStan; }
+        public bool GetOperation() => m_operation;
+        public bool GetIsUserMenu() => m_isUserMenu;
+        public bool GetIsStan() => m_isStan;
+        public bool GetIsDisplayMap() => m_isDisplayMap;
 
         #endregion
 
@@ -105,8 +119,12 @@ namespace Takechi.CharacterController.KeyInputStete
         public void SetIsUserMenu(bool value)
         {
             m_isUserMenu = value;
-          
             Debug.Log($" SetIsUserMenu <color=green>{m_isUserMenu}</color> to set.");
+        }
+        public void SetIsDisplayMap(bool value)
+        {
+            m_isDisplayMap = value;
+            Debug.Log($" SetIsUserMenu <color=green>{m_isDisplayMap}</color> to set.");
         }
         public void SetIsStan(bool value)
         {
@@ -161,9 +179,9 @@ namespace Takechi.CharacterController.KeyInputStete
 
             if (Input.GetKeyDown(m_jumpKey) && statusManagement.GetIsGrounded()) { InputToJump(statusManagement, addressManagement); }
             if (Input.GetKeyDown(m_deathblowKey) && statusManagement.GetCanUseDeathblow()) { InputToDeathblow(statusManagement, addressManagement); }
-            if (Input.GetKeyDown(m_ability1) && statusManagement.GetCanUseAbility1()) { InputToAblity1(statusManagement, addressManagement); }
-            if (Input.GetKeyDown(m_ability2) && statusManagement.GetCanUseAbility2()) { InputToAblity2(statusManagement, addressManagement); }
-            if (Input.GetKeyDown(m_ability3) && statusManagement.GetCanUseAbility3()) { InputToAblity3(statusManagement, addressManagement); }
+            if (Input.GetKeyDown(m_ability1Key) && statusManagement.GetCanUseAbility1()) { InputToAblity1(statusManagement, addressManagement); }
+            if (Input.GetKeyDown(m_ability2Key) && statusManagement.GetCanUseAbility2()) { InputToAblity2(statusManagement, addressManagement); }
+            if (Input.GetKeyDown(m_ability3Key) && statusManagement.GetCanUseAbility3()) { InputToAblity3(statusManagement, addressManagement); }
 
             InputToViewpoint(statusManagement, addressManagement, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
             InputToMovement(statusManagement, addressManagement, Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -186,9 +204,9 @@ namespace Takechi.CharacterController.KeyInputStete
 
             if (Input.GetKeyDown(m_jumpKey) && statusManagement.GetIsGrounded()) { InputToJump(statusManagement, addressManagement); }
             if (Input.GetKeyDown(m_deathblowKey) && statusManagement.GetCanUseDeathblow()) { InputToDeathblow(statusManagement, addressManagement); }
-            if (Input.GetKeyDown(m_ability1) && statusManagement.GetCanUseAbility1()) { InputToAblity1(statusManagement, addressManagement); }
-            if (Input.GetKeyDown(m_ability2) && statusManagement.GetCanUseAbility2()) { InputToAblity2(statusManagement, addressManagement); }
-            if (Input.GetKeyDown(m_ability3) && statusManagement.GetCanUseAbility3()) { InputToAblity3(statusManagement, addressManagement); }
+            if (Input.GetKeyDown(m_ability1Key) && statusManagement.GetCanUseAbility1()) { InputToAblity1(statusManagement, addressManagement); }
+            if (Input.GetKeyDown(m_ability2Key) && statusManagement.GetCanUseAbility2()) { InputToAblity2(statusManagement, addressManagement); }
+            if (Input.GetKeyDown(m_ability3Key) && statusManagement.GetCanUseAbility3()) { InputToAblity3(statusManagement, addressManagement); }
 
             InputToViewpoint(statusManagement, addressManagement, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
             InputToMovement(statusManagement, addressManagement, Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

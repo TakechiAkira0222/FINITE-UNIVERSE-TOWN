@@ -60,6 +60,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         {
             // play and set playableDirector
             PlayAndSettingOfPlayableDirector();
+
             // rb
             statusManagement.SetIsKinematic(true);
 
@@ -77,6 +78,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             // isMine active
             if (statusManagement.photonView.IsMine)
             {
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(false);
                 networkModelObject.SetActive(true);
             }
@@ -121,13 +123,6 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         /// </summary>
         void MechanicalWarriorDeathblowEnd()
         {
-            // isMine active
-            if (statusManagement.photonView.IsMine)
-            {
-                handOnlyModelObject.SetActive(true);
-                networkModelObject.SetActive(false);
-            }
-
             // rb
             statusManagement.SetIsKinematic(false);
 
@@ -140,6 +135,14 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             // animation weiht
             SetLayerWeight( networkModelAnimator, AnimatorLayers.overrideLayer, m_networkModelAnimatorWeight);
             controllerReferenceManagement.GetIKAnimationController().ResetAllIkWeight();
+
+            // isMine active
+            if (statusManagement.photonView.IsMine)
+            {
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
+                handOnlyModelObject.SetActive(true);
+                networkModelObject.SetActive(false);
+            }
         }
 
         #endregion

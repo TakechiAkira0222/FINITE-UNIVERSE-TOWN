@@ -24,6 +24,9 @@ namespace Takechi.CharacterController.SpecificSoundEffects.OfficeWorker
         [SerializeField, Header("必殺技　始まりの声")] private AudioClip m_voiceOfDeathblowStartClip;
         [SerializeField, Range( 0f, 1f)] private float m_voiceOfDeathblowStartVolume = 0.5f;
 
+        [SerializeField, Header("スイカを投げる声")] private AudioClip m_voiceOfThrowWatermelonClip;
+        [SerializeField, Range(0f, 1f)] private float m_voiceOfThrowWatermelonVolume = 0.5f;
+
         [SerializeField, Header("必殺技　パワーアップ")] private AudioClip m_deathblowPowerUpClip;
         [SerializeField, Range( 0f, 1f)] private float m_deathblowPowerUpVolume = 0.5f;
 
@@ -36,6 +39,12 @@ namespace Takechi.CharacterController.SpecificSoundEffects.OfficeWorker
         [SerializeField, Header("飛ぶ力")] private AudioClip m_flyingClip;
         [SerializeField, Range(0f, 1f)] private float m_flyingVolume = 0.5f;
 
+        [SerializeField, Header("祈りの効果音")] private AudioClip m_praySoundClip;
+        [SerializeField, Range(0f, 1f)] private float m_praySoundVolume = 0.5f;
+
+        [SerializeField, Header("スイカが割れる音")] private AudioClip m_watermelonBreakingClip;
+        [SerializeField, Range(0f, 1f)] private float m_watermelonBreakingVolume = 0.5f;
+
         #endregion
 
         #region GetAudioClipFunction
@@ -47,6 +56,9 @@ namespace Takechi.CharacterController.SpecificSoundEffects.OfficeWorker
         public AudioClip GetSecondNormalAttackClip() { return m_secondNormalAttackClip; }
         public AudioClip GetDeathblowPowerUpClip() { return m_deathblowPowerUpClip; }
         public AudioClip GetFlyingClip() { return m_flyingClip; }
+        public AudioClip GetPraySoundClip() => m_praySoundClip;
+        public AudioClip GetVoiceOfThrowWatermelonClip() => m_voiceOfThrowWatermelonClip;
+        public AudioClip GetWatermelonBreakingClip() => m_watermelonBreakingClip;
 
         public float GetVoiceOfFirstNormalAttackVolume() { return m_voiceOfFirstNormalAttackVolume; }
         public float GetVoiceOfSecondNormalAttackVolume() { return m_voiceOfSecondNormalAttackVolume; }
@@ -56,6 +68,9 @@ namespace Takechi.CharacterController.SpecificSoundEffects.OfficeWorker
         public float GetSecondNormalAttackVolume() { return m_secondNormalAttackVolume; }
         public float GetDeathblowPowerUpVolume()   { return m_deathblowPowerUpVolume; }
         public float GetFlyingVolume() { return m_flyingVolume; }
+        public float GetPraySoundVolume() => m_praySoundVolume;
+        public float GetVoiceOfThrowWatermelonVolume() => m_voiceOfThrowWatermelonVolume;
+        public float GetWatermelonBreakingVolume() => m_watermelonBreakingVolume;
         #endregion
     }
 }

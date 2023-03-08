@@ -294,6 +294,16 @@ namespace TakechiEngine.PUN
         /// </summary>
         /// <returns></returns>
         protected bool ReturnsTheProbabilityOf1In2() { return UnityEngine.Random.Range(1, 10) % 2 == 0; }
+        /// <summary>
+        /// メニューの状態を変更します。
+        /// </summary>
+        /// <param name="menu"></param>
+        protected void StateChangeOnMenu(GameObject menu) { menu.SetActive(!menu.activeSelf); }
+        /// <summary>
+        /// canvasの状態を変更します。
+        /// </summary>
+        /// <param name="canvas"></param>
+        protected void StateChangeOnCanvas(Canvas canvas) { canvas.gameObject.SetActive(!canvas.gameObject.activeSelf); }
 
         #endregion
 

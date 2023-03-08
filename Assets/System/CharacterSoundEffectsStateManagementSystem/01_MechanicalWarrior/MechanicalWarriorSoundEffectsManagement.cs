@@ -29,7 +29,8 @@ namespace Takechi.CharacterController.SoundEffects
         public void PlayOneShotDeathbolwReload() { myMainAudioSource.PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetDeathbolwReloadClip(), mechanicalWarreiorSpecificSoundEffects.GetDeathbolwReloadVolume()); }
         public void PlayOneShotEnemySearchClickButton() { myMainAudioSource.PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetEnemySearchClickButtonClip(), mechanicalWarreiorSpecificSoundEffects.GetEnemySearchClickButtonVolume()); }
         public void PlayOneShotEnemyOnSearch() { myMainAudioSource.PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetEnemyOnSearchClip(), mechanicalWarreiorSpecificSoundEffects.GetEnemyOnSearchVolume()); }
-        public void PlayOneShotSmokeExplosion() { myMainAudioSource.PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetSmokeExplosionClip(), mechanicalWarreiorSpecificSoundEffects.GetSmokeExplosionVolume()); }
+        // public void PlayOneShotSmokeExplosion() { myMainAudioSource.PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetSmokeExplosionClip(), mechanicalWarreiorSpecificSoundEffects.GetSmokeExplosionVolume()); }
+        public void PlayOneShotWallSettingSound() { myMainAudioSource.PlayOneShot(mechanicalWarreiorSpecificSoundEffects.GetWallSettingSoundClip(), mechanicalWarreiorSpecificSoundEffects.GetWallSettingSoundVolume());}
 
         #endregion
     }

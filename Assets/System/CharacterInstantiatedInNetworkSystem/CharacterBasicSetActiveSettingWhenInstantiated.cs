@@ -26,14 +26,12 @@ namespace Takechi.NetworkInstantiation.CharacterSetActive
 
 #if UNITY_EDITOR
         [Header("=== Debug ===")]
-        [SerializeField] private KeyCode m_debugKey = KeyCode.M;
+        [SerializeField] private KeyCode m_debugKey = KeyCode.L;
 #endif
 
-
         #region private variable
-        private CharacterAddressManagement addressManagement => m_characterAddressManagement;
-
-        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private CharacterAddressManagement  addressManagement => m_characterAddressManagement;
+        private PhotonView myPhotonView =>  addressManagement.GetMyPhotonView();
         private GameObject handOnlyModel => addressManagement.GetHandOnlyModelObject();
 
         #endregion

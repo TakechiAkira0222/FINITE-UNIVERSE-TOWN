@@ -48,6 +48,8 @@ namespace Takechi.CharacterController.ThrowAnimationEvent
         /// </summary>
         void OfficeWorkerThrowTiming()
         {
+            soundEffectsManagement.PlayOneShotVoiceOfThrowWatermelon();
+
             if (!isMine) return;
             throwing( throwTransfrom, force);
         }

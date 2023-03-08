@@ -125,13 +125,13 @@ namespace Takechi.GameManagerSystem.Domination
         private void GameState_BeforeStart()
         {
             m_beforeStartIsntans.SetActive(true);
-            addressManagement.GetReticleCanvas().gameObject.SetActive(false);
+            // addressManagement.GetReticleCanvas().gameObject.SetActive(false);
         }
 
         private void GameState_Running()
         {
             m_beforeStartIsntans.SetActive(false);
-            addressManagement.GetReticleCanvas().gameObject.SetActive(true);
+            // addressManagement.GetReticleCanvas().gameObject.SetActive(true);
         }
 
         private void GameState_End()
@@ -147,7 +147,7 @@ namespace Takechi.GameManagerSystem.Domination
         private void GameState_NULL()
         {
             m_beforeStartIsntans.SetActive(false);
-            addressManagement.GetReticleCanvas().gameObject.SetActive(true);
+            // addressManagement.GetReticleCanvas().gameObject.SetActive(true);
         }
 
         #endregion

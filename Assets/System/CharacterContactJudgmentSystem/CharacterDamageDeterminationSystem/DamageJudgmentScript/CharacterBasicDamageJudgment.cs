@@ -47,8 +47,8 @@ namespace Takechi.CharacterController.DamageJudgment
 
         private struct AdjustmentParameter 
         {
-            public const int knockBackPrameter = 100;
-            public const int tornadoPrameter = 500;
+            public const int knockBackPrameter = 50;
+            public const int tornadoPrameter = 300;
         }
 
         #endregion
@@ -137,7 +137,10 @@ namespace Takechi.CharacterController.DamageJudgment
                     statusManagement.UpdateMass(-power);
                     statusManagement.UpdateLocalPlayerCustomProrerties();
 
-                    StartCoroutine(KnockBack(collision, power));
+                    var impulse = (myRb.transform.position - collision.contacts[0].point).normalized;
+
+                    myRb.AddForce(impulse * (power * AdjustmentParameter.knockBackPrameter), ForceMode.Impulse);
+                    // StartCoroutine(KnockBack(collision, power));
 
                     AttackHitsEffectInstantiation(collision.contacts[0].point);
                 }
@@ -240,7 +243,11 @@ namespace Takechi.CharacterController.DamageJudgment
             statusManagement.UpdateMass(-power);
             statusManagement.UpdateLocalPlayerCustomProrerties();
 
-            StartCoroutine(KnockBack(collision, power));
+            var impulse = (myRb.transform.position - collision.contacts[0].point).normalized;
+
+            myRb.AddForce(impulse * (power * AdjustmentParameter.knockBackPrameter), ForceMode.Impulse);
+
+           // StartCoroutine(KnockBack(collision, power));
 
             AttackHitsEffectInstantiation(collision.contacts[0].point);
         }

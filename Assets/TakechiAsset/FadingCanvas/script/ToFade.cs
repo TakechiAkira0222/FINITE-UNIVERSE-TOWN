@@ -90,7 +90,24 @@ namespace Takechi.PlayableCharacter.FadingCanvas
 
             yield return new WaitForSeconds( m_fadeDisplayTime);
 
-            StartCoroutine( nameof( StartFadeIn));
+            for (float alpha = 1; alpha >= 0; alpha -= m_fadeSpeed)
+            {
+                foreach (UnityEngine.UI.Text text in m_outputTextList) { text.color = new Color(1, 1, 1, alpha); }
+                foreach (UnityEngine.UI.Text text in m_changeOnFadeOutCanvasTextList) { text.color = new Color(1, 1, 1, alpha); }
+                foreach (UnityEngine.UI.Image image in m_changeOnFadeOutCanvasImageList) { image.color = new Color(image.color.r, image.color.g, image.color.b, alpha); }
+                foreach (UnityEngine.UI.Text text in m_changeOnFadeInCanvasTextList) { text.color = new Color(1, 1, 1, alpha); }
+                foreach (UnityEngine.UI.Image image in m_changeOnFadeInCanvasImageList) { image.color = new Color(image.color.r, image.color.g, image.color.b, alpha); }
+
+                yield return new WaitForSeconds(m_fadeDisplayTime / 2 * m_fadeSpeed);
+            }
+
+            ChangeDawingState(m_outputTextList, false);
+            ChangeDawingState(m_changeOnFadeInCanvasTextList, false);
+            ChangeDawingState(m_changeOnFadeInCanvasImageList, false);
+            ChangeDawingState(m_changeOnFadeOutCanvasTextList, false);
+            ChangeDawingState(m_changeOnFadeOutCanvasImageList, false);
+
+            // StartCoroutine( nameof( StartFadeIn));
         }
 
         private IEnumerator StartFadeOut()
@@ -107,7 +124,7 @@ namespace Takechi.PlayableCharacter.FadingCanvas
 
                 yield return new WaitForSeconds( m_fadeDisplayTime / 2 * m_fadeSpeed);
             }
-           
+
             Debug.Log(" OnFadeOut : <color=green>End.</color>");
         }
 

@@ -92,7 +92,7 @@ namespace Takechi.UI.BattleUiMenu.LobbyScene
             }));
         }
 
-        public void OnConnectToHomePage() { Application.OpenURL(m_homepageURL); }
+        public void OnConnectToHomePage() { Application.OpenURL(homepageURL); }
 
         #endregion
     }
