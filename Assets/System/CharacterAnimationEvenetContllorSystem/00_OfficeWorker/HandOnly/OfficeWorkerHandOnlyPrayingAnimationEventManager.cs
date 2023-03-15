@@ -74,6 +74,7 @@ namespace Takechi.CharacterController.PrayingAnimationEvent
             if (statusManagement.photonView.IsMine)
             {
                 changeModelObjectSetActive();
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
             }
         }
 
@@ -102,6 +103,7 @@ namespace Takechi.CharacterController.PrayingAnimationEvent
             if (statusManagement.photonView.IsMine)
             {
                 changeModelObjectSetActive();
+                StateChangeOnCanvas(addressManagement.GetReticleCanvas());
             }
         }
 

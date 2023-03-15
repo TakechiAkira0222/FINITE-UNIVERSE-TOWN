@@ -35,17 +35,22 @@ namespace Takechi.CharacterSelection
         [SerializeField] private ToFade m_toFade;
         [SerializeField] private Text   m_gameStartTimeCuntText;
         [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
+#if UNITY_EDITOR
         [SerializeField] private int    m_nearTimeToStartTheGame_seconds = 5;
-        #endregion
+#else
+        private int    m_nearTimeToStartTheGame_seconds = 60;
+#endif
 
-        #region private variable
+#endregion
+
+#region private variable
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private bool isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
         private Dictionary<string, Action> m_sceneChangeDictionary = new Dictionary<string, Action>();
 
-        #endregion
+#endregion
 
-        #region private async
+#region private async
         /// <summary>
         /// 同期時間経過後に、実行されます。
         /// </summary>
@@ -59,9 +64,9 @@ namespace Takechi.CharacterSelection
             RoomInfoAndJoinedPlayerInfoDisplay( RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
         }
 
-        #endregion
+#endregion
 
-        #region unity event
+#region unity event
         private void Awake()
         {
             m_sceneChangeDictionary.Add( RoomStatusName.Map.futureCity, () => { SceneSyncChange(SceneName.futureCityScene);});
@@ -79,9 +84,9 @@ namespace Takechi.CharacterSelection
             StartAfterSync( NetworkSyncSettings.connectionSynchronizationTime);
         }
 
-        #endregion
+#endregion
 
-        #region IEnumerator Update 
+#region IEnumerator Update 
         private IEnumerator TimeUpdate()
         {
             while (this.gameObject.activeSelf)
@@ -109,10 +114,10 @@ namespace Takechi.CharacterSelection
             }
         }
 
-        #endregion
+#endregion
 
 
-        #region event system finction
+#region event system finction
         public void OnSelected(int num)
         {
             if (!PhotonNetwork.LocalPlayer.IsLocal) return;
@@ -122,7 +127,7 @@ namespace Takechi.CharacterSelection
             RoomInfoAndJoinedPlayerInfoDisplay(RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
         }
 
-        #endregion
+#endregion
 
     }
 }

@@ -32,8 +32,8 @@ namespace Takechi.CharacterController.SoundEffects
 
         #endregion
 
-        public AudioSource GetMainAudioSource() { return myMainAudioSource; }
-        public bool GetIsPlaying() { return myMainAudioSource.isPlaying; }
+        public AudioSource GetMainAudioSource() => myMainAudioSource;
+        public bool GetIsPlaying() => myMainAudioSource.isPlaying;
 
         void Reset()
         {
@@ -56,11 +56,19 @@ namespace Takechi.CharacterController.SoundEffects
         #region PlayOneShotFunction
         public void PlayOneShotJumpSound()
         {
-            myMainAudioSource.PlayOneShot( playableCharacterSoundEffects.GetJumpSoundClip() , playableCharacterSoundEffects.GetJumpSoundClipVolume());
+            myMainAudioSource.PlayOneShot( playableCharacterSoundEffects.GetJumpSoundClip() , playableCharacterSoundEffects.GetJumpSoundVolume());
         }
         public void PlayOneShotConcreteFootstepsSound()
         {
-            myMainAudioSource.PlayOneShot(playableCharacterSoundEffects.GetConcreteFootstepsSoundClip(), playableCharacterSoundEffects.GetConcreteFootstesSoundClipVolume());
+            myMainAudioSource.PlayOneShot(playableCharacterSoundEffects.GetConcreteFootstepsSoundClip(), playableCharacterSoundEffects.GetConcreteFootstesSoundVolume());
+        }
+        public void PlayOneShotTakenDamageSound()
+        {
+            myMainAudioSource.PlayOneShot(playableCharacterSoundEffects.GetTakenDamageSoundClip(), playableCharacterSoundEffects.GetTakenDamageSoundVolume());
+        }
+        public void PlayOneShotDeathSound()
+        {
+            myMainAudioSource.PlayOneShot(playableCharacterSoundEffects.GetDeathSoundClip(), playableCharacterSoundEffects.GetDeathSoundVolume());
         }
 
         #endregion

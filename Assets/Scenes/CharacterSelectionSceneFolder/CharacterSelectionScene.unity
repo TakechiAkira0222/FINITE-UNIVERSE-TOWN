@@ -466,11 +466,12 @@ MonoBehaviour:
   m_battleUiMenu: {fileID: 0}
   m_stanMenu: {fileID: 0}
   m_userUiMenu: {fileID: 0}
+  m_mapUiMenu: {fileID: 0}
   m_reticleCanvas: {fileID: 0}
   m_displayToOthersCanvas: {fileID: 0}
   m_navigationUiList: []
-  m_attackHitsEffectFolderName: []
-  m_attackHitEffct: {fileID: 0}
+  m_takenDamageEffectFolderName: []
+  m_takenDamageEffct: {fileID: 0}
   m_deathEffectFolderName: []
   m_deathEffect: {fileID: 0}
   m_stanEffect: {fileID: 0}
@@ -1487,6 +1488,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1285188740}
+    - target: {fileID: 296682425511124969, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1497,7 +1502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 296682426737370528, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
+      value: 0.0000166893
       objectReference: {fileID: 0}
     - target: {fileID: 1852772179807008716, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_IsActive
@@ -1619,10 +1624,6 @@ PrefabInstance:
       propertyPath: m_characterStatusManagement
       value: 
       objectReference: {fileID: 519153463}
-    - target: {fileID: 8002567054446632526, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
-      propertyPath: m_gameStartTimeCunt_seconds
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8839889301480845742, guid: 95fc6c3454f43894f86efb84a6fa353e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

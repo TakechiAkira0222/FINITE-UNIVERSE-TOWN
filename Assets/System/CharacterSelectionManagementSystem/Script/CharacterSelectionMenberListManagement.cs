@@ -61,7 +61,17 @@ namespace Takechi.CharacterSelection
         {
             if (!statusManagement.GetIsLocal()) return;
 
-            StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
+            }
+            else
+            {
+                StartCoroutine(DelayMethod(NetworkSyncSettings.clientLatencyCountermeasureTime, () =>
+                {
+                    StartAfterSync(NetworkSyncSettings.connectionSynchronizationTime);
+                }));
+            }
         }
 
         #endregion

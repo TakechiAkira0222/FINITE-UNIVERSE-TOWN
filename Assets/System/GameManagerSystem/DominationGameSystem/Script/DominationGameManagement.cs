@@ -23,6 +23,8 @@ namespace Takechi.GameManagerSystem.Domination
         #region serializeField
         [Header("=== DominationGameManagerParameter ===")]
         [SerializeField] private DominationGameManagerParameters m_dominationGameManagerParameters;
+        [Header("=== DominationSoundEffectsManagement ===")]
+        [SerializeField] private DominationSoundEffectsManagement m_dominationSoundEffectsManagement;
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
         [Header("=== Script Setting ===")]
@@ -32,11 +34,12 @@ namespace Takechi.GameManagerSystem.Domination
 
         #region private variable
         private DominationGameManagerParameters gameManagerParameters => m_dominationGameManagerParameters;
+        private DominationSoundEffectsManagement soundEffectsManagement => m_dominationSoundEffectsManagement;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
-        private PhotonView thisPhtonView => m_thisPhtonView;
+        private PhotonView thisPhotonView => m_thisPhtonView;
         private int    victoryConditionPoints     => gameManagerParameters.GetVictoryConditionPoints();
         private int    endPerformanceTime_Seconds => gameManagerParameters.GetEndPerformanceTime_Seconds();
-        private int    intervalTime_Second        => gameManagerParameters.GetIntervalTime_Second();
+        private int    intervalTime_Seconds        => gameManagerParameters.GetIntervalTime_Seconds();
         private int    areaLocationMaxPoints => gameManagerParameters.GetAreaLocationMaxPoints();
         private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
         private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
@@ -65,7 +68,7 @@ namespace Takechi.GameManagerSystem.Domination
         #endregion
 
         #region getVariable
-        public RoomStatusManagement GetMyRoomStatusManagement() { return roomStatusManagement; }
+        public RoomStatusManagement GetMyRoomStatusManagement() => roomStatusManagement;
         public float  GetGameTimeCunt_Seconds() =>  m_gameTimeCunt_Seconds;
         public string GetJudgmentTagName() => judgmentTagName; 
         public bool   GetLocalGameEnd() => m_localGameEnd; 
@@ -193,12 +196,11 @@ namespace Takechi.GameManagerSystem.Domination
         {
             m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if ( m_gameTimeCunt_Seconds >= intervalTime_Second)
+            if (m_gameTimeCunt_Seconds >= intervalTime_Seconds)
             {
                 m_gameTimeCunt_Seconds = 0;
 
                 if (!PhotonNetwork.IsMasterClient) return;
-
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationAPoint_domination());
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationBPoint_domination());
                 JudgmentToAcquirePoints(roomStatusManagement.GetAreaLocationCPoint_domination());
@@ -208,15 +210,21 @@ namespace Takechi.GameManagerSystem.Domination
 
             if (roomStatusManagement.GetTeamAPoint_domination() >= victoryConditionPoints)
             {
+                // sound 
+                thisPhotonView.RPC(nameof(RPC_GameEndSound), RpcTarget.AllBufferedViaServer);
+
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");
 
                 SetLocalGameEnd(true);
 
-                StartCoroutine(DelayMethod( endPerformanceTime_Seconds, TeamAToVictory));
+                StartCoroutine(DelayMethod(endPerformanceTime_Seconds, TeamAToVictory));
             };
             if (roomStatusManagement.GetTeamBPoint_domination() >= victoryConditionPoints)
             {
+                // sound 
+                thisPhotonView.RPC(nameof(RPC_GameEndSound), RpcTarget.AllBufferedViaServer);
+
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");
 
@@ -245,6 +253,15 @@ namespace Takechi.GameManagerSystem.Domination
         {
             if ( areaLocationPoint > roomStatusManagement.GetAreaLocationMaxPoint_domination() / 2) { roomStatusManagement.UpdateTeamAPoint_domination(1); }
             else if (areaLocationPoint < roomStatusManagement.GetAreaLocationMaxPoint_domination() / 2) { roomStatusManagement.UpdateTeamBPoint_domination(1); }
+        }
+
+        #endregion
+
+        #region RPC fuction
+        [PunRPC]
+        private void RPC_GameEndSound()
+        {
+            soundEffectsManagement.PlayOneShotGameEndSound();
         }
 
         #endregion

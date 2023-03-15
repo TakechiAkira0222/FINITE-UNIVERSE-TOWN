@@ -91,7 +91,6 @@ namespace Takechi.CharacterController.RoomStatus
         public bool GetIsHardPoint() { return (string)GetGameType() == (string)RoomStatusName.GameType.hardpoint; }
         public bool GetIsDomination() { return (string)GetGameType() == (string)RoomStatusName.GameType.domination; }
     
-          
         // HardPoint
         public int GetTeamAPoint_hardPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamAPoint]; }
         public int GetTeamBPoint_hardPoint() { return (int)PhotonNetwork.CurrentRoom.CustomProperties[HardPointStatusKey.teamBPoint]; }

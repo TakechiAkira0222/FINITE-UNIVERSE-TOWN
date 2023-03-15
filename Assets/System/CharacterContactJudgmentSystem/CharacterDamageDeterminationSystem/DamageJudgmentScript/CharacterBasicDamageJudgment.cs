@@ -9,9 +9,11 @@ using System.Collections;
 using Takechi.CharacterController.Address;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.ContactJudgment;
+using Takechi.CharacterController.KeyInputStete;
 
 using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
-using Takechi.CharacterController.KeyInputStete;
+using Takechi.CharacterController.SoundEffects;
+using System.Runtime.InteropServices;
 
 namespace Takechi.CharacterController.DamageJudgment
 {
@@ -25,6 +27,8 @@ namespace Takechi.CharacterController.DamageJudgment
         [SerializeField] private CharacterStatusManagement  m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement ===")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterKeyInputStateManagement;
+        [Header("=== CharacterBasicSoundEffectsStateManagement ===")]
+        [SerializeField] private CharacterBasicSoundEffectsStateManagement m_characterBasicSoundEffectsStateManagement;
         [Header("=== Script Setting ===")]
         [SerializeField] private PhotonView m_thisPhotnView;
         #endregion
@@ -33,6 +37,7 @@ namespace Takechi.CharacterController.DamageJudgment
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private CharacterKeyInputStateManagement keyInputStateManagement => m_characterKeyInputStateManagement;
+        private CharacterBasicSoundEffectsStateManagement soundEffectsStateManagement => m_characterBasicSoundEffectsStateManagement;
         private PhotonView thisPhotonView => m_thisPhotnView;
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private Rigidbody  myRb => addressManagement.GetMyRigidbody();
@@ -40,7 +45,7 @@ namespace Takechi.CharacterController.DamageJudgment
         private GameObject attackHitEffct => addressManagement.GetAttackHitEffct();
         private GameObject aiSliemHitEffect => addressManagement.GetAiSlimeHitEffect();
         private GameObject stanEffect =>  addressManagement.GetStanEffect();
-        private string     attackHitsEffectFolderName => addressManagement.GetAttackHitsEffectFolderName();
+        private string takenDamageEffectFolderName => addressManagement.GetTakenDamageEffectFolderName();
 
         private bool isStan = false;
         private bool isAiSlimeHit = false;
@@ -48,11 +53,10 @@ namespace Takechi.CharacterController.DamageJudgment
         private struct AdjustmentParameter 
         {
             public const int knockBackPrameter = 50;
-            public const int tornadoPrameter = 300;
+            public const int tornadoPrameter = 250;
         }
 
         #endregion
-
         private void Reset()
         {
             m_thisPhotnView = this.GetComponent<PhotonView>();
@@ -138,11 +142,15 @@ namespace Takechi.CharacterController.DamageJudgment
                     statusManagement.UpdateLocalPlayerCustomProrerties();
 
                     var impulse = (myRb.transform.position - collision.contacts[0].point).normalized;
-
+                    
+                    // add Force
                     myRb.AddForce(impulse * (power * AdjustmentParameter.knockBackPrameter), ForceMode.Impulse);
-                    // StartCoroutine(KnockBack(collision, power));
 
-                    AttackHitsEffectInstantiation(collision.contacts[0].point);
+                    // sound 
+                    thisPhotonView.RPC(nameof(RPC_TakenDamageSound), RpcTarget.AllBufferedViaServer);
+
+                    // effect 
+                    TakenDamageEffectInstantiation(collision.contacts[0].point);
                 }
             }
         }
@@ -163,6 +171,7 @@ namespace Takechi.CharacterController.DamageJudgment
 
                 statusManagement.UpdateMass(-power);
                 statusManagement.UpdateLocalPlayerCustomProrerties();
+                thisPhotonView.RPC(nameof(RPC_TakenDamageSound), RpcTarget.AllBufferedViaServer);
             }
 
             if (other.name == DamageFromPlayerToPlayer.ColliderName.slimeAblityStanColliderName)
@@ -179,6 +188,10 @@ namespace Takechi.CharacterController.DamageJudgment
                 isStan = true;
                 keyInputStateManagement.SetIsStan(isStan);
                 addressManagement.GetStanMenu().SetActive(isStan);
+
+                // sound 
+                thisPhotonView.RPC(nameof(RPC_TakenDamageSound), RpcTarget.AllBufferedViaServer);
+                // effect
                 thisPhotonView.RPC(nameof(RPC_StanEffectSync), RpcTarget.AllBufferedViaServer, isStan);
 
                 StartCoroutine(DelayMethod( stanTime , ()=> 
@@ -225,9 +238,9 @@ namespace Takechi.CharacterController.DamageJudgment
         ///  attack Hits Effect instantiate
         /// </summary>
         /// <param name="collision"></param>
-        private void AttackHitsEffectInstantiation( Vector3 point)
+        private void TakenDamageEffectInstantiation( Vector3 point)
         {
-            GameObject effct = PhotonNetwork.Instantiate(attackHitsEffectFolderName + attackHitEffct.name, point, Quaternion.identity);
+            GameObject effct = PhotonNetwork.Instantiate(takenDamageEffectFolderName + attackHitEffct.name, point, Quaternion.identity);
             StartCoroutine(DelayMethod( 0.1f, () => { PhotonNetwork.Destroy(effct); }));
         }
 
@@ -245,11 +258,14 @@ namespace Takechi.CharacterController.DamageJudgment
 
             var impulse = (myRb.transform.position - collision.contacts[0].point).normalized;
 
+            // add Force
             myRb.AddForce(impulse * (power * AdjustmentParameter.knockBackPrameter), ForceMode.Impulse);
 
-           // StartCoroutine(KnockBack(collision, power));
+            // sound
+            thisPhotonView.RPC(nameof(RPC_TakenDamageSound), RpcTarget.AllBufferedViaServer);
 
-            AttackHitsEffectInstantiation(collision.contacts[0].point);
+            // effect
+            TakenDamageEffectInstantiation(collision.contacts[0].point);
         }
 
         #region PunRPC function
@@ -262,6 +278,11 @@ namespace Takechi.CharacterController.DamageJudgment
         private void RPC_AiSliemHitEffectSync(bool flag)
         {
             aiSliemHitEffect.SetActive(flag);
+        }
+        [PunRPC]
+        private void RPC_TakenDamageSound()
+        {
+            soundEffectsStateManagement.PlayOneShotTakenDamageSound();
         }
 
         #endregion

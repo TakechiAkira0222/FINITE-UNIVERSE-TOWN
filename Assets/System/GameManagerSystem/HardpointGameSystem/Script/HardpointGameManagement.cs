@@ -23,6 +23,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #region serializeField
         [Header("=== HardpointGameManagerParameter ===")]
         [SerializeField] private HardpointGameManagerParameters m_hardpointGameManagerParameters;
+        [Header("=== HardpointSoundEffectsManagement ===")]
+        [SerializeField] private HardpointSoundEffectsManagement m_hardpointSoundEffectsManagement;
         [Header("=== RoomStatusManagement ===")]
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
         [Header("=== Script Setting ===")]
@@ -33,11 +35,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #region private Variable
         private HardpointGameManagerParameters gameManagerParameters => m_hardpointGameManagerParameters;
+        private HardpointSoundEffectsManagement soundEffectsManagement => m_hardpointSoundEffectsManagement;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
-        private PhotonView thisPhtonView => m_thisPhtonView;
+        private PhotonView thisPhotonView => m_thisPhtonView;
         private int    victoryConditionPoints     => gameManagerParameters.GetVictoryConditionPoints();
         private int    endPerformanceTime_Seconds => gameManagerParameters.GetEndPerformanceTime_Seconds();
-        private int    intervalTime_Second => gameManagerParameters.GetIntervalTime_Second();
+        private int    intervalTime_Seconds => gameManagerParameters.GetIntervalTime_Seconds();
         private int    synchroTimeBeforeGameStart_Seconds => NetworkSyncSettings.synchroTimeBeforeGameStart_Seconds;
         private string judgmentTagName => SearchForPrefabTag.playerCharacterPrefabTag;
        
@@ -67,7 +70,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
         #region getVariable
         public RoomStatusManagement GetMyRoomStatusManagement() => roomStatusManagement;
-        public float  GetGameTimeCunt_Seconds() => m_gameTimeCunt_Seconds; 
+        public float  GetGameTimeCunt_Seconds() => m_gameTimeCunt_Seconds;
+        public int    GetIntervalTime_Seconds() => intervalTime_Seconds;
         public string GetJudgmentTagName() => judgmentTagName; 
         public bool   GetLocalGameEnd() => m_localGameEnd;
 
@@ -199,7 +203,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         {
             m_gameTimeCunt_Seconds += Time.deltaTime;
 
-            if ( m_gameTimeCunt_Seconds >= intervalTime_Second)
+            if ( m_gameTimeCunt_Seconds >= intervalTime_Seconds)
             {
                 m_gameTimeCunt_Seconds = 0;
 
@@ -212,6 +216,9 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
             if (roomStatusManagement.GetTeamAPoint_hardPoint() >= victoryConditionPoints)
             {
+                // sound
+                thisPhotonView.RPC(nameof(RPC_GameEndSound), RpcTarget.AllBufferedViaServer);
+
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");
 
@@ -222,6 +229,9 @@ namespace Takechi.GameManagerSystem.Hardpoint
 
             if (roomStatusManagement.GetTeamBPoint_hardPoint() >= victoryConditionPoints)
             {
+                // sound 
+                thisPhotonView.RPC(nameof(RPC_GameEndSound), RpcTarget.AllBufferedViaServer);
+
                 roomStatusManagement.SetGameState(RoomStatusName.GameState.end);
                 Debug.Log($" <color=yellow>SetGameState</color>(<color=green>RoomStatusName</color>.<color=green>GameState</color>.end)");
 
@@ -251,7 +261,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         #region recursive finction
         private void LocationChange()
         {
-            thisPhtonView.RPC(nameof(RPC_LocationChange), RpcTarget.AllBufferedViaServer);
+            thisPhotonView.RPC(nameof(RPC_LocationChange), RpcTarget.AllBufferedViaServer);
         }
 
         #endregion
@@ -266,8 +276,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
             m_areaLocationList[m_pointIocationindex % m_areaLocationList.Count].SetActive(true);
 
             m_pointIocationindex += 1;
+        }
 
-            
+        [PunRPC]
+        private void RPC_GameEndSound()
+        {
+            soundEffectsManagement.PlayOneShotGameEndSound();
         }
 
         #endregion

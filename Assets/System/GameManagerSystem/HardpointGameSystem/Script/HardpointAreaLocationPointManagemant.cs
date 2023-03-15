@@ -17,6 +17,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
         [SerializeField] private HardpointSoundEffectsManagement m_hardpointSoundEffectsManagement;
         [Header("=== ScriptSetting ===")]
         [SerializeField] private GameObject m_navigationText;
+        [SerializeField] private TextMesh   m_timeLeftText;
+
 
         #endregion
 
@@ -25,6 +27,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         private HardpointSoundEffectsManagement soundEffectsManagement => m_hardpointSoundEffectsManagement;
         private RoomStatusManagement roomStatusManagement => gameManagement.GetMyRoomStatusManagement();
         private GameObject navigationText => m_navigationText;
+        private TextMesh timeLeftText => m_timeLeftText;
         private bool localGameEnd => gameManagement.GetLocalGameEnd();
 
         public event Action RisingTeamPoints = delegate { };
@@ -35,12 +38,15 @@ namespace Takechi.GameManagerSystem.Hardpoint
         private void Reset()
         {
             m_gameManagement = this.transform.root.GetComponent<HardpointGameManagement>();
+            m_hardpointSoundEffectsManagement = this.transform.root.GetComponent<HardpointSoundEffectsManagement>();
             m_navigationText = this.transform.GetChild(0).gameObject;
+            m_timeLeftText   = this.transform.GetChild(1).GetComponent<TextMesh>();
         }
 
         private void OnEnable()
         {
             StartCoroutine( uiRotation(navigationText));
+            StartCoroutine( uiRotation(timeLeftText.gameObject));
             RisingTeamPoints += soundEffectsManagement.RisingPointsSound;
             Debug.Log("RisingTeamPoints += soundEffectsManagement.<color=yellow>RisingPointsSound</color> <color=green> to add</color>.");
         }
@@ -53,6 +59,14 @@ namespace Takechi.GameManagerSystem.Hardpoint
         protected override void OnTriggerStay(Collider other)
         {
             if (roomStatusManagement.IsGameRunning() && !localGameEnd) GameState_Running(other);
+        }
+
+        private void FixedUpdate()
+        {
+            if (roomStatusManagement.IsGameRunning() && !localGameEnd)
+
+            timeLeftText.text =
+             (gameManagement.GetIntervalTime_Seconds() - gameManagement.GetGameTimeCunt_Seconds()).ToString("N1") + "s";
         }
 
         #endregion

@@ -14,7 +14,6 @@ namespace Takechi.GameManagerSystem.Domination
 
         #endregion
 
-
         #region private variable
         private DominationGameManagerParameters gameManagerParameters => m_dominationGameManagerParameters;
 
@@ -24,6 +23,11 @@ namespace Takechi.GameManagerSystem.Domination
         public void PlayOneShotRisingAreaPointsSound()
         {
             myMainAudioSource.PlayOneShot(gameManagerParameters.GetRisingAreaPointsSoundClip(), gameManagerParameters.GetRisingAreaPointsSoundClipVolume());
+        }
+
+        public void PlayOneShotGameEndSound()
+        {
+            myMainAudioSource.PlayOneShot(gameManagerParameters.GetGameEndSoundClip(), gameManagerParameters.GetGameEndSoundVolume());
         }
 
         #endregion

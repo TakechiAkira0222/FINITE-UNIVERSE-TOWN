@@ -10,6 +10,7 @@ using Takechi.CharacterController.ContactJudgment;
 
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
+using Takechi.CharacterController.SoundEffects;
 
 namespace Takechi.CharacterController.DeathJudgment
 {
@@ -22,6 +23,8 @@ namespace Takechi.CharacterController.DeathJudgment
         [SerializeField] private CharacterStatusManagement m_characterStatusManagement;
         [Header("=== CharacterKeyInputStateManagement === ")]
         [SerializeField] private CharacterKeyInputStateManagement m_characterkeyInputStateManagement;
+        [Header("=== CharacterBasicSoundEffectsStateManagement ===")]
+        [SerializeField] private CharacterBasicSoundEffectsStateManagement m_characterBasicSoundEffectsStateManagement;
         [Header("=== ScriptSetting ===")]
         [SerializeField] private PhotonView m_thisPhotonView;
         [SerializeField] private string m_respawnPointAName = "RespawnPointA";
@@ -33,7 +36,8 @@ namespace Takechi.CharacterController.DeathJudgment
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
         private CharacterKeyInputStateManagement keyInputStateManagement => m_characterkeyInputStateManagement;
-        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private CharacterBasicSoundEffectsStateManagement soundEffectsStateManagement => m_characterBasicSoundEffectsStateManagement;
+        private PhotonView myPhotonView  => addressManagement.GetMyPhotonView();
         private PhotonView thisPhotoView => m_thisPhotonView; 
         private Camera     myDeathCamera => addressManagement.GetMyDeathCamera();
         private Camera     myMainCamera  => addressManagement.GetMyMainCamera();
@@ -55,11 +59,13 @@ namespace Takechi.CharacterController.DeathJudgment
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!myPhotonView.IsMine) return;
-
             if (collision.gameObject.tag == antiFieldTagName)
             {
-                if ( statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                soundEffectsStateManagement.PlayOneShotDeathSound();
+
+                if (!myPhotonView.IsMine) return;
+
+                if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     RespawnProcess(collision, m_respawnPointAName);
                 }
@@ -71,18 +77,20 @@ namespace Takechi.CharacterController.DeathJudgment
         }
         private void OnTriggerEnter( Collider other)
         {
-            if (!myPhotonView.IsMine) return;
-
-            if ( other.gameObject.name == mechanicalWarriorDeathblowBulletsColliderName)
+            if (other.gameObject.name == mechanicalWarriorDeathblowBulletsColliderName)
             {
+                soundEffectsStateManagement.PlayOneShotDeathSound();
+
+                if (!myPhotonView.IsMine) return;
+
                 int number =
                   other.transform.GetComponent<PhotonView>().ControllerActorNr;
 
-                if ( checkTeammember(number)) return;
+                if (checkTeammember(number)) return;
 
                 float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
-                if ( statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     RespawnProcess(other, m_respawnPointAName);
                 }

@@ -25,6 +25,11 @@ namespace Takechi.GameManagerSystem.Hardpoint
             myMainAudioSource.PlayOneShot( gameManagerParameters.GetRisingTeamPointsSoundClip(), gameManagerParameters.GetRisingTeamPointsSoundClipVolume());
         }
 
+        public void PlayOneShotGameEndSound()
+        {
+            myMainAudioSource.PlayOneShot(gameManagerParameters.GetGameEndSoundClip(), gameManagerParameters.GetGameEndSoundVolume());
+        }
+
         #endregion
 
         #region public function

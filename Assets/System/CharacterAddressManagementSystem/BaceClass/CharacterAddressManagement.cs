@@ -129,11 +129,11 @@ namespace Takechi.CharacterController.Address
         /// <summary>
         /// attackHits effect folder name
         /// </summary>
-        [SerializeField] private List<string> m_attackHitsEffectFolderName = new List<string>(4);
+        [SerializeField] private List<string> m_takenDamageEffectFolderName = new List<string>(4);
         /// <summary>
         /// attackHit Effct
         /// </summary>
-        [SerializeField] private GameObject m_attackHitEffct;
+        [SerializeField] private GameObject m_takenDamageEffct;
         /// <summary>
         /// death effect folder name
         /// </summary>
@@ -198,12 +198,12 @@ namespace Takechi.CharacterController.Address
         public GameObject GetDeathEffect() => m_deathEffect;
         public GameObject GetStanEffect() =>  m_stanEffect;
         public GameObject GetAiSlimeHitEffect() => m_aiSlimeHitEffect;
-        public GameObject GetAttackHitEffct() => m_attackHitEffct;
+        public GameObject GetAttackHitEffct()   => m_takenDamageEffct;
         
-        public string GetAttackHitsEffectFolderName()
+        public string GetTakenDamageEffectFolderName()
         {
             string path = "";
-            foreach (string s in m_attackHitsEffectFolderName) { path += s + "/"; }
+            foreach (string s in m_takenDamageEffectFolderName) { path += s + "/"; }
 
             return path;
         }

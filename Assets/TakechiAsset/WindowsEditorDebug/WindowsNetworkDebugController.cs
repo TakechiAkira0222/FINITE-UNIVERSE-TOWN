@@ -17,17 +17,17 @@ namespace Takechi.EditorDebug.Windows.NetworkDebug
 
         private void Update()
         {
-            if(PhotonNetwork.IsMasterClient && PhotonNetwork.InRoom)
+            if (PhotonNetwork.IsMasterClient && PhotonNetwork.InRoom)
             {
-                if (Input.GetKeyDown( m_informationButton))
+                if (Input.GetKeyDown(m_informationButton))
                 {
                     RoomInfoAndJoinedPlayerInfoDisplay
-                        ( RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
+                        (RoomStatusKey.allKeys, CharacterStatusKey.allKeys);
                 }
             }
             else
             {
-                if(Input.GetKeyDown(m_informationButton))
+                if (Input.GetKeyDown(m_informationButton))
                 {
                     Debug.Log("<color=yellow> Not in the room </color>");
                 }
