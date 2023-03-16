@@ -34,19 +34,19 @@ namespace Takechi.CharacterSelection
         [Header("=== Ui setting ===")]
         [SerializeField] private ToFade m_toFade;
         [SerializeField] private Text   m_gameStartTimeCuntText;
-        [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
-#if UNITY_EDITOR
         [SerializeField] private int    m_nearTimeToStartTheGame_seconds = 5;
+#if UNITY_EDITOR
+        [SerializeField] private float  m_gameStartTimeCunt_seconds = 30;
 #else
-        private int    m_nearTimeToStartTheGame_seconds = 60;
+        private float m_gameStartTimeCunt_seconds = 60;
 #endif
 
-#endregion
+        #endregion
 
-#region private variable
+        #region private variable
         private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
-        private bool isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
         private Dictionary<string, Action> m_sceneChangeDictionary = new Dictionary<string, Action>();
+        private bool isSelectedTime => m_gameStartTimeCunt_seconds > 0 ? true : false;
 
 #endregion
 

@@ -5,6 +5,7 @@ using Takechi.CharacterController.Information;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.RoomStatus;
 using Takechi.PlayableCharacter.FadingCanvas;
+using Takechi.UI.GameLogTextScrollView;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -124,6 +125,10 @@ namespace Takechi.CharacterController.Address
         /// navigation Ui 
         /// </summary>
         [SerializeField] private List<GameObject> m_navigationUiList = new List<GameObject>();
+        /// <summary>
+        /// gameLog text scrollView controller
+        /// </summary>
+        [SerializeField] private GameLogTextScrollViewController m_gameLogTextScrollView;
 
         [Header(" === Effect Address ===")]
         /// <summary>
@@ -194,6 +199,7 @@ namespace Takechi.CharacterController.Address
         public Canvas     GetReticleCanvas() => m_reticleCanvas;
         public Canvas     GetDisplayToOthersCanvas() => m_displayToOthersCanvas;
         public List<GameObject> GetNavigationUiList() => m_navigationUiList;
+        public GameLogTextScrollViewController GetGameLogTextScrollViewController() => m_gameLogTextScrollView;
 
         public GameObject GetDeathEffect() => m_deathEffect;
         public GameObject GetStanEffect() =>  m_stanEffect;

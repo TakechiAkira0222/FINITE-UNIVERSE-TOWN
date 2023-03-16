@@ -3364,6 +3364,7 @@ MonoBehaviour:
   m_displayToOthersCanvas: {fileID: 0}
   m_navigationUiList:
   - {fileID: 431839126}
+  m_gameLogTextScrollView: {fileID: 0}
   m_takenDamageEffectFolderName: []
   m_takenDamageEffct: {fileID: 0}
   m_deathEffectFolderName: []
@@ -6493,6 +6494,10 @@ PrefabInstance:
     - target: {fileID: 5774328300320511410, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: sceneViewId
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345560957939088704, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6394765486595783627, guid: db7c41eb23f9ee34eaafc7780085a48d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target

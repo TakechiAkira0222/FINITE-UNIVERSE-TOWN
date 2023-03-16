@@ -29,12 +29,12 @@ namespace Takechi.GameManagerSystem.Hardpoint
         [SerializeField] private RoomStatusManagement m_roomStatusManagement;
         [Header("=== Script Setting ===")]
         [SerializeField] private List<GameObject> m_areaLocationList = new List<GameObject>();
-        [SerializeField] private PhotonView m_thisPhtonView;
+        [SerializeField] private PhotonView       m_thisPhtonView;
 
         #endregion
 
         #region private Variable
-        private HardpointGameManagerParameters gameManagerParameters => m_hardpointGameManagerParameters;
+        private HardpointGameManagerParameters  gameManagerParameters  => m_hardpointGameManagerParameters;
         private HardpointSoundEffectsManagement soundEffectsManagement => m_hardpointSoundEffectsManagement;
         private RoomStatusManagement roomStatusManagement => m_roomStatusManagement;
         private PhotonView thisPhotonView => m_thisPhtonView;
@@ -73,7 +73,7 @@ namespace Takechi.GameManagerSystem.Hardpoint
         public float  GetGameTimeCunt_Seconds() => m_gameTimeCunt_Seconds;
         public int    GetIntervalTime_Seconds() => intervalTime_Seconds;
         public string GetJudgmentTagName() => judgmentTagName; 
-        public bool   GetLocalGameEnd() => m_localGameEnd;
+        public bool   GetLocalGameEnd()    => m_localGameEnd;
 
         #endregion
 
@@ -276,6 +276,8 @@ namespace Takechi.GameManagerSystem.Hardpoint
             m_areaLocationList[m_pointIocationindex % m_areaLocationList.Count].SetActive(true);
 
             m_pointIocationindex += 1;
+
+            m_gameTimeCunt_Seconds = 0;
         }
 
         [PunRPC]

@@ -9,6 +9,8 @@ using Takechi.CharacterController.SoundEffects;
 using UnityEngine.Playables;
 
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
+using Takechi.UI.GameLogTextScrollView;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
 {
@@ -28,6 +30,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         private SlimeAddressManagement addressManagement => m_slimeAddressManagement;
         private SlimeStatusManagement  statusManagement => m_slimeStatusManagement;
         private SlimeSoundEffectsManagement soundEffectsManagement => m_slimeSoundEffectsManagement;
+        private GameLogTextScrollViewController logTextScrollViewController => addressManagement.GetGameLogTextScrollViewController();
         private GameObject myAvater => addressManagement.GetMyAvater();
         private PlayableDirector myAvatarPlayableDirector => addressManagement.GetMyAvatarPlayableDirector();
         private PlayableAsset deathblowTimeline => addressManagement.GetDeathblowTimeline();
@@ -65,6 +68,16 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
                 StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(false);
                 networkModelObject.SetActive(true);
+
+                // logText
+                if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                {
+                    logTextScrollViewController.AddTextContent($"<color=red>{PhotonNetwork.LocalPlayer.NickName}</color> •KŽE‹Z”­“®");
+                }
+                else if ((statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName))
+                {
+                    logTextScrollViewController.AddTextContent($"<color=blue>{PhotonNetwork.LocalPlayer.NickName}</color> •KŽE‹Z”­“®");
+                }
             };
         }
 

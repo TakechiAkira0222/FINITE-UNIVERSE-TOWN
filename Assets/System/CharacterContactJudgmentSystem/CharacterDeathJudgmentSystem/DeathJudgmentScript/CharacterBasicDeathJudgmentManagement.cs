@@ -11,6 +11,7 @@ using Takechi.CharacterController.ContactJudgment;
 using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 using static Takechi.ScriptReference.DamagesThePlayerObject.ReferencingObjectWithContactDetectionThePlayer;
 using Takechi.CharacterController.SoundEffects;
+using Takechi.UI.GameLogTextScrollView;
 
 namespace Takechi.CharacterController.DeathJudgment
 {
@@ -34,20 +35,30 @@ namespace Takechi.CharacterController.DeathJudgment
 
         #region private variable
         private CharacterAddressManagement addressManagement => m_characterAddressManagement;
-        private CharacterStatusManagement  statusManagement => m_characterStatusManagement;
+        private CharacterStatusManagement statusManagement => m_characterStatusManagement;
         private CharacterKeyInputStateManagement keyInputStateManagement => m_characterkeyInputStateManagement;
         private CharacterBasicSoundEffectsStateManagement soundEffectsStateManagement => m_characterBasicSoundEffectsStateManagement;
-        private PhotonView myPhotonView  => addressManagement.GetMyPhotonView();
-        private PhotonView thisPhotoView => m_thisPhotonView; 
-        private Camera     myDeathCamera => addressManagement.GetMyDeathCamera();
-        private Camera     myMainCamera  => addressManagement.GetMyMainCamera();
-        private GameObject myAvater  => addressManagement.GetMyAvater();
+        private GameLogTextScrollViewController logTextScrollViewController => addressManagement.GetGameLogTextScrollViewController();
+        private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
+        private PhotonView thisPhotoView => m_thisPhotonView;
+        private Camera myDeathCamera => addressManagement.GetMyDeathCamera();
+        private Camera myMainCamera => addressManagement.GetMyMainCamera();
+        private GameObject myAvater => addressManagement.GetMyAvater();
         private GameObject handOnlyModelObject => addressManagement.GetHandOnlyModelObject();
-        private GameObject networkModelObject  => addressManagement.GetNetworkModelObject();
+        private GameObject networkModelObject => addressManagement.GetNetworkModelObject();
         private GameObject deathEffect => addressManagement.GetDeathEffect();
         private string deathEffectFolderName => addressManagement.GetDeathEffectFolderName();
         private string antiFieldTagName => DeathToPlayer.ColliderTag.antiFieldTagName;
         private string mechanicalWarriorDeathblowBulletsColliderName => DeathToPlayer.ColliderName.mechanicalWarriorDeathblowBulletsColliderName;
+
+        private bool isDead = false;
+        private void setIsDead(bool flag)
+        {
+            isDead = flag;
+            Debug.Log($"isDead <color=red>{flag}</color> to set.");
+        }
+
+        private bool getIsDead() => isDead;
 
         #endregion
 
@@ -64,14 +75,24 @@ namespace Takechi.CharacterController.DeathJudgment
                 soundEffectsStateManagement.PlayOneShotDeathSound();
 
                 if (!myPhotonView.IsMine) return;
+                if (getIsDead()) return;
+
+                // dead process flag
+                setIsDead(true);
 
                 if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     RespawnProcess(collision, m_respawnPointAName);
+                    logTextScrollViewController.AddTextContent($"<color=red>{PhotonNetwork.LocalPlayer.NickName}</color> AntiFieldÇ…ÇÊÇËéÄñSÇµÇ‹ÇµÇΩÅB");
+                }
+                else if((statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName))
+                {
+                    RespawnProcess(collision, m_respawnPointBName);
+                    logTextScrollViewController.AddTextContent($"<color=blue>{PhotonNetwork.LocalPlayer.NickName}</color> AntiFieldÇ…ÇÊÇËéÄñSÇµÇ‹ÇµÇΩÅB");
                 }
                 else
                 {
-                    RespawnProcess(collision, m_respawnPointBName);
+                    Debug.LogError(" There are no places to respawn.");
                 }
             }
         }
@@ -79,24 +100,34 @@ namespace Takechi.CharacterController.DeathJudgment
         {
             if (other.gameObject.name == mechanicalWarriorDeathblowBulletsColliderName)
             {
-                soundEffectsStateManagement.PlayOneShotDeathSound();
-
-                if (!myPhotonView.IsMine) return;
-
                 int number =
                   other.transform.GetComponent<PhotonView>().ControllerActorNr;
 
                 if (checkTeammember(number)) return;
+
+                soundEffectsStateManagement.PlayOneShotDeathSound();
+
+                if (!myPhotonView.IsMine) return;
+                if (getIsDead()) return;
+
+                // dead process flag
+                setIsDead(true);
 
                 float power = statusManagement.GetCustomPropertiesTeamAttackPower(number);
 
                 if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
                 {
                     RespawnProcess(other, m_respawnPointAName);
+                    logTextScrollViewController.AddTextContent($"<color=red>{PhotonNetwork.LocalPlayer.NickName}</color> ïKéEãZÇ…ÇÊÇËéÄñSÇµÇ‹ÇµÇΩÅB");
+                }
+                else if ((statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName))
+                {
+                    RespawnProcess(other, m_respawnPointBName);
+                    logTextScrollViewController.AddTextContent($"<color=blue>{PhotonNetwork.LocalPlayer.NickName}</color> ïKéEãZÇ…ÇÊÇËéÄñSÇµÇ‹ÇµÇΩÅB");
                 }
                 else
                 {
-                    RespawnProcess(other, m_respawnPointBName);
+                    Debug.LogError(" There are no places to respawn.");
                 }
             }
         }
@@ -128,6 +159,7 @@ namespace Takechi.CharacterController.DeathJudgment
                 DrawingCameraSettings(false);
                 CharacterStateChange(false);
                 RespawnPositionMovement(respawnPoint);
+                setIsDead(false);
 
                 addressManagement.GetToFade().OnFadeIn("resumption");
                 Debug.Log(" m_characterStatusManagement.<color=yellow>.GetToFade</color>().<color=yellow>.OnFadeIn</color>(resumption)");
@@ -173,7 +205,7 @@ namespace Takechi.CharacterController.DeathJudgment
             if (!myPhotonView.IsMine) return;
 
             GameObject effct = PhotonNetwork.Instantiate( deathEffectFolderName + deathEffect.name, point, Quaternion.identity);
-            StartCoroutine(DelayMethod( 0.5f, () => { PhotonNetwork.Destroy(effct);}));
+            StartCoroutine(DelayMethod(statusManagement.GetRespawnTime_Seconds() - 0.5f, () => { PhotonNetwork.Destroy(effct);}));
         }
         /// <summary>
         /// instans ÇÃï`âÊèÛë‘ÇÅAïœçXÇµÇ‹Ç∑ÅB

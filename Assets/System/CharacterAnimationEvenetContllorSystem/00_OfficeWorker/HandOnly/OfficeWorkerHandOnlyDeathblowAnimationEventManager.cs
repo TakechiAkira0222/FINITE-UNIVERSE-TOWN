@@ -12,6 +12,8 @@ using Takechi.CharacterController.AnimationEvent;
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
 using UnityEngine.Rendering;
 using System.Data.SqlClient;
+using Takechi.UI.GameLogTextScrollView;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
 {
@@ -31,6 +33,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         private OfficeWorkerAddressManagement addressManagement => m_officeWorkerAddressManagement;
         private OfficeWorkerStatusManagement        statusManagement => m_officeWorkerStatusManagement;
         private OfficeWorkerSoundEffectsManagement  soundEffectsManagement => m_officeWorkerSoundEffectsManagement;
+        private GameLogTextScrollViewController logTextScrollViewController => addressManagement.GetGameLogTextScrollViewController();
         private PhotonView thisPhotonView => m_thisPhotonView;
         private GameObject deathblowAreaEffect => addressManagement.GetDeathblowAuraEffect4();
         private PlayableAsset      deathblowTimeline => addressManagement.GetDeathblowTimeline();
@@ -89,6 +92,16 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
                 StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(false);
                 networkModelObject.SetActive(true);
+
+                // logText
+                if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                {
+                    logTextScrollViewController.AddTextContent($"<color=red>{PhotonNetwork.LocalPlayer.NickName}</color> ïKéEãZî≠ìÆ");
+                }
+                else if ((statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName))
+                {
+                    logTextScrollViewController.AddTextContent($"<color=blue>{PhotonNetwork.LocalPlayer.NickName}</color> ïKéEãZî≠ìÆ");
+                }
             }
         }
 
@@ -130,7 +143,21 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
             {
                 // effect 
                 thisPhotonView.RPC(nameof(RPC_ActivationDeathblowAreaEffect), RpcTarget.AllBufferedViaServer);
-                StartCoroutine(DelayMethod( statusManagement.GetDeathblowMoveDuration_Seconds(), () => thisPhotonView.RPC(nameof(RPC_ExitDeathblowAreaEffect), RpcTarget.AllBufferedViaServer)));
+                StartCoroutine(DelayMethod(statusManagement.GetDeathblowMoveDuration_Seconds(), () =>
+                {
+                    thisPhotonView.RPC(nameof(RPC_ExitDeathblowAreaEffect), RpcTarget.AllBufferedViaServer);
+
+                    // logText
+                    if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                    {
+                        logTextScrollViewController.AddTextContent($"<color=red>{PhotonNetwork.LocalPlayer.NickName}</color> ïKéEãZèIóπ");
+                    }
+                    else if ((statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName))
+                    {
+                        logTextScrollViewController.AddTextContent($"<color=blue>{PhotonNetwork.LocalPlayer.NickName}</color> ïKéEãZèIóπ");
+                    }
+                }
+                ));
 
                 StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(true);

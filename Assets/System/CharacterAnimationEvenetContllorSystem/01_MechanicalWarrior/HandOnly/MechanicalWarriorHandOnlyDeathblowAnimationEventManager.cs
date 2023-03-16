@@ -10,10 +10,12 @@ using Takechi.CharacterController.KeyInputStete;
 using Takechi.CharacterController.Parameters;
 using Takechi.CharacterController.Reference;
 using Takechi.CharacterController.SoundEffects;
+using Takechi.UI.GameLogTextScrollView;
 using UnityEngine;
 using UnityEngine.Playables;
 
 using static Takechi.ScriptReference.AnimatorControlVariables.ReferencingTheAnimatorControlVariablesName;
+using static Takechi.ScriptReference.CustomPropertyKey.CustomPropertyKeyReference;
 
 namespace Takechi.CharacterController.DeathblowAnimationEvent
 {
@@ -33,6 +35,7 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
         private MechanicalWarriorAddressManagement addressManagement => m_mechanicalWarriorAddressManagement;
         private MechanicalWarriorStatusManagement  statusManagement => m_mechanicalWarriorStatusManagement;
         private MechanicalWarriorSoundEffectsManagement soundEffectsManagement => m_mechanicalWarriorSoundEffectsManagement;
+        private GameLogTextScrollViewController logTextScrollViewController => addressManagement.GetGameLogTextScrollViewController();
         private PhotonView myPhotonView => addressManagement.GetMyPhotonView();
         private GameObject myAvater     => addressManagement.GetMyAvater();
         private PlayableAsset deathblowTimeline => addressManagement.GetDeathblowTimeline();
@@ -81,6 +84,16 @@ namespace Takechi.CharacterController.DeathblowAnimationEvent
                 StateChangeOnCanvas(addressManagement.GetReticleCanvas());
                 handOnlyModelObject.SetActive(false);
                 networkModelObject.SetActive(true);
+
+                // logText
+                if (statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamAName)
+                {
+                    logTextScrollViewController.AddTextContent($"<color=red>{PhotonNetwork.LocalPlayer.NickName}</color> •KŽE‹Z”­“®");
+                }
+                else if ((statusManagement.GetCustomPropertiesTeamName() == CharacterTeamStatusName.teamBName))
+                {
+                    logTextScrollViewController.AddTextContent($"<color=blue>{PhotonNetwork.LocalPlayer.NickName}</color> •KŽE‹Z”­“®");
+                }
             }
         }
 
