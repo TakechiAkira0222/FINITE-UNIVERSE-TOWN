@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.047319956, g: 0.077833325, b: 0.14998472, a: 1}
+  m_IndirectSpecularColor: {r: 0.27569526, g: 0.25159955, b: 0.28630033, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -325,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 4115147403292074242, guid: cec554f4895319248adbbf601f99512e, type: 3}
       propertyPath: m_Name
       value: DOMINATIONGameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115147403292074242, guid: cec554f4895319248adbbf601f99512e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4115147403292074243, guid: cec554f4895319248adbbf601f99512e, type: 3}
       propertyPath: m_RootOrder

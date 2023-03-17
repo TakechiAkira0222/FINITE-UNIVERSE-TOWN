@@ -103,19 +103,21 @@ namespace Takechi.GameManagerSystem.Domination
             }
         }
 
-        private void Update()
+
+
+        private void FixedUpdate()
         {
-            m_percentageOfTeamAPoints = Mathf.Ceil( m_aPoint_f / m_victory_f * 1000);
-            m_percentageOfTeamBPoints = Mathf.Ceil( m_bPoint_f / m_victory_f * 1000);
+            m_percentageOfTeamAPoints = Mathf.Ceil(m_aPoint_f / m_victory_f * 1000);
+            m_percentageOfTeamBPoints = Mathf.Ceil(m_bPoint_f / m_victory_f * 1000);
 
-            m_percentageOfTeamAPointsText.text = Mathf.Clamp( m_percentageOfTeamAPoints / 10, 0, 100).ToString() + "%";
-            m_percentageOfTeamBPointsText.text = Mathf.Clamp( m_percentageOfTeamBPoints / 10, 0, 100).ToString() + "%";
+            m_percentageOfTeamAPointsText.text = Mathf.Clamp(m_percentageOfTeamAPoints / 10, 0, 100).ToString() + "%";
+            m_percentageOfTeamBPointsText.text = Mathf.Clamp(m_percentageOfTeamBPoints / 10, 0, 100).ToString() + "%";
 
-            updateValue( m_teamAslider, roomStatusManagement.GetTeamAPoint_domination());
-            updateValue( m_teamBslider, roomStatusManagement.GetTeamBPoint_domination());
-            updateValue( m_areaLocationAPointsSlider, roomStatusManagement.GetAreaLocationAPoint_domination());
-            updateValue( m_areaLocationBPointsSlider, roomStatusManagement.GetAreaLocationBPoint_domination());
-            updateValue( m_areaLocationCPointsSlider, roomStatusManagement.GetAreaLocationCPoint_domination());
+            updateValue(m_areaLocationAPointsSlider, roomStatusManagement.GetAreaLocationAPoint_domination());
+            updateValue(m_areaLocationBPointsSlider, roomStatusManagement.GetAreaLocationBPoint_domination());
+            updateValue(m_areaLocationCPointsSlider, roomStatusManagement.GetAreaLocationCPoint_domination());
+            updateValue(m_teamAslider, roomStatusManagement.GetTeamAPoint_domination());
+            updateValue(m_teamBslider, roomStatusManagement.GetTeamBPoint_domination());
 
             if (!PhotonNetwork.InRoom) return;
             m_gameMain[roomStatusManagement.GetGameState()]();

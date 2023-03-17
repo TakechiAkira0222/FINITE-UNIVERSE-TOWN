@@ -25,8 +25,8 @@ namespace Takechi.ServerConnect.ToJoinRoom
     {
         [SerializeField] private GameTypeSelectionManagement   m_gameTypeSelection;
         [SerializeField] private RoomPropertySettingManagement m_roomPropertySetting;
-        [SerializeField] private MapSelectionManagement        m_mapSelection;
         [SerializeField] private RoomJoinedMenuManagement      m_roomJoinedMune;
+        [SerializeField] private MapSelectionManagement        m_mapSelection;
         [SerializeField] private UserNickNameManagement        m_userNickNameManagement;
 
         #region Event Action
